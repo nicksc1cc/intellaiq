@@ -390,7 +390,7 @@ function bz(t,p0,p1,p2,p3){var u=1-t;return{x:u*u*u*p0.x+3*u*u*t*p1.x+3*u*t*t*p2
 function dr(){x.clearRect(0,0,W,H);CX=W/2;CY=H/2;
 for(var i=0;i<P.length;i++){var p=P[i],p0={x:p.isLeft?0:W,y:p.startY},p1={x:p.isLeft?CX*.5:W-CX*.5,y:p.startY},p2={x:p.isLeft?CX*.8:W-CX*.8,y:CY},p3={x:CX,y:CY};
 var pt=p.pt;pt.t+=pt.sp;if(pt.t>1){pt.t=0;p.startY+=(Math.random()-.5)*8}
-var pos=bz(pt.t,p0,p1,p2,p3);x.fillStyle='rgba(21,94,94,.4)';x.fillRect(pos.x-1,pos.y-1,2,2)}
+var pos=bz(pt.t,p0,p1,p2,p3);x.fillStyle='rgba(21,94,94,.75)';x.fillRect(pos.x-1,pos.y-1,2,2)}
 requestAnimationFrame(dr)}
 dr();window.addEventListener('resize',function(){rz();ip()});
 })();
