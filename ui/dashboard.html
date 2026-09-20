@@ -1,8 +1,8 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>IntellaIQ Dashboard — Page Intelligence</title><style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>IntellaIQ — Decision Intelligence</title><style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 :root{--bg:#F5F5F3;--panel:#FDFDFD;--text:#1A1A1A;--sub:#4A4A4A;--mute:#888888;--line:rgba(26,26,26,.07);--lines:rgba(26,26,26,.12);--signal:#155E5E;--warn:#E88D2A;--crit:#C0392B;--ok:#27A644;--ff:'Space Grotesk',sans-serif;--fm:'JetBrains Mono',monospace}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font:300 14px/1.6 var(--ff);-webkit-font-smoothing:antialiased}
-.w{max-width:1400px;margin:0 auto;padding:0 24px}
+.w{max-width:1200px;margin:0 auto;padding:0 24px}
 .nav{background:var(--text);width:100%}
 .nav .w{display:flex;align-items:center;justify-content:space-between;height:44px}
 .nv-l{font:600 14px/1 var(--ff);color:#F5F5F3;letter-spacing:-.35px}
@@ -15,345 +15,172 @@ body{background:var(--bg);color:var(--text);font:300 14px/1.6 var(--ff);-webkit-
 .dh h1{font:300 28px/1.08 var(--ff);letter-spacing:-.7px}
 .dh .r{font-size:10px;color:var(--mute);font-family:var(--fm)}
 .dh .r span{padding-left:8px;margin-left:8px;border-left:1px solid var(--line)}.dh .r span:first-child{border:none;padding-left:0;margin-left:0}
-.input-row{display:flex;gap:8px;margin:0 0 24px;flex-wrap:wrap}
-.input-row input{flex:1;min-width:220px;padding:10px 14px;border:1px solid var(--lines);border-radius:3px;font-family:var(--ff);font-size:13px;font-weight:400;color:var(--text);background:var(--panel);letter-spacing:-.1px;outline:none}
-.input-row input:focus{border-color:var(--signal)}
-.input-row button{padding:10px 24px;background:var(--signal);border:none;border-radius:3px;color:#F5F5F3;font-family:var(--ff);font-size:12px;font-weight:500;letter-spacing:-.2px;cursor:pointer}
-.input-row button:hover{opacity:.9}.input-row button:disabled{opacity:.4;cursor:default}
-.input-row .clr{padding:10px 18px;background:transparent;border:1px solid var(--lines);border-radius:3px;color:var(--sub);font-family:var(--ff);font-size:12px;font-weight:500;letter-spacing:-.2px;cursor:pointer}
 .status{font-size:11px;color:var(--mute);letter-spacing:-.1px;margin:0 0 16px;font-family:var(--fm)}
+/* Decision state header */
+.ds{margin:0 0 24px}
+.ds-h{display:flex;justify-content:space-between;align-items:center;margin:0 0 16px}
+.ds-h .l{font-size:9px;font-weight:500;color:var(--signal);font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em}
+.ds-h .r{font-size:10px;color:var(--mute);font-family:var(--fm)}
+/* Main intelligence grid */
+.ig{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:0 0 24px}
+@media(max-width:900px){.ig{grid-template-columns:1fr}}
+.ig .p{padding:24px;background:var(--panel)}
+.ig .p .h{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 16px;letter-spacing:.04em}
+.ig .p .h .tag{font-size:6px;padding:1px 5px;border:1px solid var(--signal);border-radius:2px;color:var(--signal);margin-left:8px;vertical-align:middle;letter-spacing:.03em;text-transform:uppercase}
+/* Finding card */
+.fc{background:var(--panel);border:1px solid var(--lines);border-radius:3px;padding:20px;margin:0 0 16px}
+.fc .fl{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 8px;letter-spacing:.03em}
+.fc .fl .conf{color:var(--signal);font-weight:500;margin-left:8px}
+.fc h3{font:300 18px/1.2 var(--ff);letter-spacing:-.4px;margin:0 0 12px}
+.fc p{font-size:13px;color:var(--sub);letter-spacing:-.1px;line-height:1.55;margin:0 0 16px}
+.fc .sg{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border-radius:2px;overflow:hidden;margin:0 0 16px}
+.fc .sg .c{padding:12px;background:var(--panel)}
+.fc .sg .c .cl{font-size:7px;font-weight:500;color:var(--mute);margin:0 0 4px}
+.fc .sg .c .cv{font-size:13px;font-weight:400;letter-spacing:-.15px}
+.fc .sg .c .cv .d{font-size:9px;color:var(--signal);margin-left:6px}
+.fc .sg .c .vn{font-size:8px;color:var(--sub)}
+.fc .st{display:flex;align-items:center;gap:4px;margin:8px 0 0;padding:8px 0 0;border-top:1px solid var(--line)}
+.fc .st .l{font-size:7px;font-weight:500;text-transform:uppercase;color:var(--mute);font-family:var(--fm);letter-spacing:.03em}
+.fc .st .v{font-size:11px;color:var(--sub)}
+.fc .st .t{font-size:7px;padding:1px 5px;border:1px solid;border-radius:2px;text-transform:uppercase;letter-spacing:.03em;font-weight:500}
+.fc .st .t.crit{border-color:var(--crit);color:var(--crit)}
+.fc .st .t.warn{border-color:var(--warn);color:var(--warn)}
+.fc .st .t.info{border-color:var(--signal);color:var(--signal)}
+/* Contradiction card */
+.cc{background:var(--panel);border:1px solid var(--lines);border-radius:3px;padding:20px;margin:0 0 16px}
+.cc .cl{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 12px;letter-spacing:.04em}
+.cc .r{display:flex;align-items:center;gap:8px;margin:0 0 8px;flex-wrap:wrap}
+.cc .r .s{font-size:11px;font-weight:400;color:var(--text);letter-spacing:-.1px}
+.cc .r .v{font-size:10px;color:var(--signal);font-weight:500}
+.cc .r .vs{font-size:7px;padding:1px 5px;border:1px solid var(--signal);border-radius:2px;color:var(--signal);text-transform:uppercase;letter-spacing:.03em}
+/* Loop indicator */
+.lp{display:flex;gap:1px;margin:24px 0;flex-wrap:wrap;justify-content:center}
+.lp .s{padding:6px 16px;background:var(--panel);border:1px solid var(--line);font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em;color:var(--mute)}
+.lp .s.-a{background:var(--signal);border-color:var(--signal);color:#F5F5F3}
+.lp .s.-d{background:var(--text);border-color:var(--text);color:#F5F5F3}
 .mr{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:0 0 24px}
-.mr .c{padding:14px 16px;background:var(--panel)}
-.mr .c .cl{font-size:7px;font-weight:500;text-transform:uppercase;color:var(--mute)}
-.mr .c .cv{font-size:28px;font-weight:300;letter-spacing:-.6px;line-height:1.2;color:var(--text);margin-top:2px}
-.mr .c .cn{font-size:9px;color:var(--sub);margin-top:1px}
-.mr .c .cv .d{font-size:11px;color:var(--signal);margin-left:6px}
-@media(max-width:640px){.mr{grid-template-columns:repeat(2,1fr)}}
-.section{margin:0 0 24px}
-.section .sh{display:flex;justify-content:space-between;align-items:baseline;margin:0 0 12px}
-.section .sh h2{font:300 20px/1.1 var(--ff);letter-spacing:-.5px}
-.section .sh .sl{font-size:9px;font-weight:500;color:var(--mute);font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em}
-.table-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:3px;background:var(--panel)}
-table{width:100%;border-collapse:collapse;font-size:11px}
-table th{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);text-align:left;padding:10px 12px;border-bottom:2px solid var(--text);background:var(--panel);letter-spacing:.04em;white-space:nowrap}
-table td{padding:8px 12px;border-bottom:1px solid var(--line);color:var(--sub);letter-spacing:-.1px;font-size:11px}
-table td:first-child{font-weight:400;color:var(--text)}
-table tr:last-child td{border:none}
-table .s{display:inline-block;width:50px;height:6px;background:var(--line);border-radius:2px;overflow:hidden;vertical-align:middle;margin-right:6px}
-table .s .f{height:100%;background:var(--signal);border-radius:2px}
-table .r{font-size:9px;font-weight:500}
-table .r.ok{color:var(--ok)}table .r.warn{color:var(--warn)}table .r.crit{color:var(--crit)}
-.prob{display:inline-block;font-size:7px;padding:1px 5px;border:1px solid;border-radius:2px;letter-spacing:.03em;text-transform:uppercase;font-weight:500;margin-right:4px;margin-bottom:4px}
-.prob.crit{border-color:var(--crit);color:var(--crit)}
-.prob.warn{border-color:var(--warn);color:var(--warn)}
-.prob.info{border-color:var(--signal);color:var(--signal)}
-.prob.ok{border-color:var(--ok);color:var(--ok)}
-.problems-cell{max-width:320px}
-.problems-cell .p{font-size:10px;color:var(--sub);margin:2px 0;line-height:1.4}
-.problems-cell .p strong{color:var(--text)}
-@media(max-width:900px){table th:nth-child(5),table td:nth-child(5),table th:nth-child(6),table td:nth-child(6),table th:nth-child(7),table td:nth-child(7){display:none}}
-@media(max-width:640px){table th:nth-child(4),table td:nth-child(4){display:none}}
-.detail-panel{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:0 0 24px}
-.detail-panel .cp{padding:20px;background:var(--panel)}
-.detail-panel .cp .cl{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 8px}
-.detail-panel .cp .tn{font-size:10px;color:var(--text);margin:0 0 4px}
-.detail-panel .cp .tb{font-size:10px;color:var(--sub);font-family:var(--fm)}
-.detail-panel .cp .sg{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border-radius:2px;overflow:hidden;margin:8px 0}
-.detail-panel .cp .sg .c{padding:10px 12px;background:var(--bg)}
-.detail-panel .cp .sg .c .cl{font-size:7px;font-weight:500;color:var(--mute);margin:0 0 2px}
-.detail-panel .cp .sg .c .cv{font-size:12px;font-weight:400;letter-spacing:-.15px}
-.detail-panel .cp .sg .c .cv .d{font-size:9px;color:var(--signal);margin-left:6px}
-.detail-panel .cp .sg .c .vn{font-size:8px;color:var(--sub)}
-@media(max-width:900px){.detail-panel{grid-template-columns:1fr}}
+.mr .c{padding:16px;background:var(--panel)}
+.mr .c .cl{font-size:7px;font-weight:500;text-transform:uppercase;color:var(--mute);margin:0 0 4px}
+.mr .c .cv{font-size:28px;font-weight:300;letter-spacing:-.6px;line-height:1;color:var(--text)}
+.mr .c .cn{font-size:10px;color:var(--sub);margin-top:2px;letter-spacing:-.1px}
 .ft{padding:24px 0 48px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:11px;color:var(--mute)}
 .ft a{color:var(--mute);text-decoration:none}.ft a:hover{color:var(--text)}
-.hidden{display:none!important}
+@media(max-width:900px){
+  .ig{grid-template-columns:1fr}
+}
 </style></head><body>
 
 <div class="nav"><div class="w"><div class="nv-l">Intella<em>IQ</em></div><div class="nv-m"><a href="index.html">Home</a><a href="scan.html">Scan</a><a href="dashboard.html" style="color:var(--signal)">Dashboard</a></div></div></div>
 
 <div class="w">
-<div class="dh"><h1>Page Intelligence Dashboard</h1><div class="r"><span id="scanInfo">No scan loaded</span></div></div>
+<div class="dh"><h1>Decision Intelligence</h1><div class="r"><span>IntellaIQ v1.0</span><span>Live model</span><span>20 Sep 2026 · 14:23 UTC</span></div></div>
 
-<div class="input-row">
-<input type="text" id="domainInput" placeholder="Enter domain to analyse (e.g. nicksc1cc.github.io/inflexion-website)" value="nicksc1cc.github.io/inflexion-website">
-<button id="scanBtn" onclick="runScan()">Scan domain &rarr;</button>
-<button class="clr" onclick="clearResults()">Clear</button>
-</div>
-<div id="status" class="status">Enter a domain and click Scan to begin analysis. Results will populate the page table with per-page scores and key problems.</div>
+<div class="ds">
+<div class="ds-h"><span class="l">Decision State</span><span class="r">24 decisions · 7 material changes · 4 opportunities · 3 contradictions</span></div>
 
-<div id="results" class="hidden">
-<div class="mr" id="metricRow">
-<div class="c"><div class="cl">Pages analysed</div><div class="cv" id="mPages">0</div></div>
-<div class="c"><div class="cl">Avg composite score</div><div class="cv" id="mAvgComp">0</div></div>
-<div class="c"><div class="cl">Pages needing attention</div><div class="cv" id="mNeedsAttn">0</div></div>
-<div class="c"><div class="cl">Critical issues found</div><div class="cv" id="mCritical">0</div></div>
-</div>
-
-<div class="section">
-<div class="sh"><h2>All Pages — Scores & Key Problems</h2><div class="sl">Per-page analysis from latest scan</div></div>
-<div class="table-wrap" id="tableWrap"></div>
-</div>
-
-<div class="detail-panel" id="detailPanel" class="hidden">
-<div class="cp">
-<div class="cl">Page detail</div>
-<div class="tn" id="detailUrl"></div>
-<div class="tb" id="detailMeta"></div>
-<div class="sg" id="detailThemeBars"></div>
-<div class="cl" style="margin-top:16px">Key problems for this page</div>
-<div id="detailProblems"></div>
-</div>
-<div class="cp">
-<div class="cl">Theme scores vs site average</div>
-<canvas id="detailRadar" style="max-height:280px"></div>
-</div>
+<div class="mr">
+<div class="c"><div class="cl">Decisions</div><div class="cv">24</div><div class="cn">Requiring attention</div></div>
+<div class="c"><div class="cl">Material changes</div><div class="cv">7</div><div class="cn">Converging signals</div></div>
+<div class="c"><div class="cl">Opportunities</div><div class="cv">4</div><div class="cn">2 high confidence</div></div>
+<div class="c"><div class="cl">Contradictions</div><div class="cv">3</div><div class="cn">Active discrepancies</div></div>
 </div>
 </div>
 
-<div class="ft"><div class="w"><span>IntellaIQ Dashboard</span><span><a href="scan.html">Scan</a> &middot; <a href="index.html">Home</a> &middot; <a href="#">API</a></span></div></div>
+<!-- Primary finding -->
+<div class="fc">
+<div class="fl">Material change · Confidence: 0.82</div>
+<h3>Customers are changing what they value.</h3>
+<p>Four independent signals are moving in the same direction. The evidence suggests a meaningful shift in category expectations rather than an isolated data point.</p>
+<div class="sg">
+<div class="c"><div class="cl">Reviews</div><div class="cv">Ease & convenience mentions <span class="d">+18%</span></div><div class="vn">142 observations</div></div>
+<div class="c"><div class="cl">Search demand</div><div class="cv">"Barrier repair" queries <span class="d">+24%</span></div><div class="vn">3 new clusters</div></div>
+<div class="c"><div class="cl">Competitor activity</div><div class="cv">3 competitors shifted positioning <span class="d">12% shift</span></div><div class="vn">Toward "effortless" frame</div></div>
+<div class="c"><div class="cl">AI responses</div><div class="cv">LLM citations shifting <span class="d">-18%</span></div><div class="vn">Associating category with competitors</div></div>
+</div>
+<div class="st"><span class="l">Judgement</span><span class="v">Converging signals indicate category-level shift. Brand positioning diverging from market.</span><span class="t warn">Investigate</span></div>
+<div class="st"><span class="l">Decision</span><span class="v">Investigate whether proposition reflects emerging category needs.</span><span class="t info">Open</span></div>
+</div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-<script>
-const THEMES = {
-  'content-quality': { label: 'Content Quality', weight: 1.0 },
-  'ai-readability': { label: 'AI Readability', weight: 1.0 },
-  'semantic-depth': { label: 'Semantic Depth', weight: 1.0 },
-  'evidence-specificity': { label: 'Evidence & Specificity', weight: 1.0 },
-  'seo-signal': { label: 'SEO Signal', weight: 0.8 },
-  'commercial-intent': { label: 'Commercial Intent', weight: 0.7 }
-};
-const THEME_KEYS = Object.keys(THEMES);
-var radarChart = null;
+<!-- Intelligence grid -->
+<div class="ig">
+<div class="p">
+<div class="h">Contradictions <span class="tag">3 active</span></div>
 
-function scoreContent(text, url) {
-  var s = text.toLowerCase();
-  var wordCount = s.split(/\s+/).filter(Boolean).length;
-  var charCount = text.length;
-  var sentences = s.split(/[.!?]+/).filter(Boolean).length || 1;
-  var avgSentenceLen = wordCount / sentences;
-  var syllableCount = text.replace(/[^aeiouAEIOU]/g,'').length + (text.match(/[^aeiou\s][aeiou][^aeiou\s]/g)||[]).length;
+<div class="cc">
+<div class="cl">Contradiction</div>
+<div class="r"><span class="s">What we say</span><span class="v">vs</span><span class="s">What customers say</span><span class="vs">Discrepancy</span></div>
+<div class="r"><span class="s">"Suitable for sensitive skin"</span><span class="v">→</span><span class="s">27 reviews mention irritation</span><span class="vs">Contradicts</span></div>
+<div class="r"><span class="s">Claim strength</span><span class="v">≠</span><span class="s">Supporting evidence</span><span class="vs">High confidence</span></div>
+</div>
 
-  var scores = {};
+<div class="cc">
+<div class="cl">Contradiction</div>
+<div class="r"><span class="s">What we intend</span><span class="v">vs</span><span class="s">What AI understands</span><span class="vs">Discrepancy</span></div>
+<div class="r"><span class="s">Product for sensitive skin</span><span class="v">→</span><span class="s">LLMs associate with competitors</span><span class="vs">5 citation gaps</span></div>
+</div>
 
-  var sentScore = Math.max(0, 100 - Math.abs(avgSentenceLen - 18) * 5);
-  var headingRatio = ((s.match(/<h[1-6]/g)||[]).length / Math.max(1, wordCount)) * 1000;
-  var headingScore = Math.min(100, headingRatio * 20);
-  scores['content-quality'] = Math.round((sentScore * 0.5 + headingScore * 0.3 + Math.min(100, wordCount/50) * 0.2));
+<div class="cc">
+<div class="cl">Contradiction</div>
+<div class="r"><span class="s">What we expected</span><span class="v">vs</span><span class="s">What happened</span><span class="vs">Variance</span></div>
+<div class="r"><span class="s">AI understanding +22%</span><span class="v">→</span><span class="s">Observed +18%</span><span class="vs">-4pp variance</span></div>
+</div>
+</div>
 
-  var flesch = 206.835 - 1.015 * avgSentenceLen - 84.6 * (syllableCount / wordCount);
-  var fleschScore = Math.min(100, Math.max(0, (flesch + 20) / 1.2));
-  var semanticElements = ((s.match(/<(article|section|nav|main|header|footer|aside)/g)||[]).length / Math.max(1, wordCount)) * 5000;
-  scores['ai-readability'] = Math.round((fleschScore * 0.6 + Math.min(100, semanticElements * 10) * 0.4));
+<div class="p">
+<div class="h">Opportunities <span class="tag">4 identified</span></div>
 
-  var uniqueWords = new Set(s.match(/\b[a-z]{4,}\b/g)).size;
-  var lexicalDiversity = (uniqueWords / Math.max(1, wordCount)) * 100;
-  var conceptTerms = ['strategy','approach','method','process','solution','platform','system','framework','capability','feature','innovation','technology','performance','quality','value','benefit','outcome','result','impact','effective'];
-  var conceptDensity = conceptTerms.reduce((sum,t) => sum + (s.split(t).length-1), 0) / Math.max(1, wordCount) * 1000;
-  scores['semantic-depth'] = Math.round(Math.min(100, lexicalDiversity * 1.5 + conceptDensity * 5));
+<div class="fc">
+<div class="fl">Opportunity · Confidence: 0.78</div>
+<h3>Category shifting toward "effortless performance".</h3>
+<p>Demand signals, competitor movement and AI responses converge on convenience as emerging category frame. Brand's premium-performance framing losing distinctiveness.</p>
+<div class="sg">
+<div class="c"><div class="cl">Search demand</div><div class="cv">"Barrier repair" <span class="d">+38%</span></div><div class="vn">High commercial proximity</div></div>
+<div class="c"><div class="cl">Competitor shift</div><div class="cv">3 competitors <span class="d">repositioned</span></div><div class="vn">Toward "effortless"</div></div>
+<div class="c"><div class="cl">AI association</div><div class="cv">Category linked to <span class="d">competitors</span></div><div class="vn">Brand losing representation</div></div>
+<div class="c"><div class="cl">Demand gap</div><div class="cv">Brand has <span class="d">no convenience content</span></div><div class="vn">3 opportunity zones</div></div>
+</div>
+<div class="st"><span class="l">Implication</span><span class="v">Current proposition losing distinctiveness. Shift warrants investigation.</span><span class="t warn">Investigate</span></div>
+<div class="st"><span class="l">Decision</span><span class="v">Test whether "effortless performance" is stronger category need.</span><span class="t info">Open</span></div>
+</div>
 
-  var numbers = (text.match(/\b\d+(%|x|\+|pp|[kmbt]?)\b/g)||[]).length;
-  var dataScore = Math.min(100, numbers * 5);
-  var specificTerms = ['research','study','data','evidence','analysis','survey','report','according','source','example','case','test','measure','metric','statistic','benchmark'];
-  var specificDensity = specificTerms.reduce((sum,t) => sum + (s.split(t).length-1), 0) / Math.max(1, wordCount) * 1000;
-  scores['evidence-specificity'] = Math.round((dataScore * 0.5 + Math.min(100, specificDensity * 5) * 0.5));
+<div class="fc">
+<div class="fl">Opportunity · Confidence: 0.71</div>
+<h3>AI representation declining for core claims.</h3>
+<p>LLM citations for brand's core differentiation falling relative to competitors. 5 citation gaps identified across 41 queries.</p>
+<div class="sg">
+<div class="c"><div class="cl">Citation drop</div><div class="cv"><span class="d">-18%</span> brand mentions</div><div class="vn">Across 41 AI queries</div></div>
+<div class="c"><div class="cl">Gap locations</div><div class="cv">Sensitive skin · Barrier repair · Fragrance-free</div><div class="vn">5 citation gaps</div></div>
+</div>
+<div class="st"><span class="l">Decision</span><span class="v">Strengthen AI-traceable evidence for core claims.</span><span class="t info">Open</span></div>
+</div>
 
-  var hasTitle = text.match(/<title>/) ? 20 : 0;
-  var hasMeta = (text.match(/<meta.*description/) ? 15 : 0);
-  var hasH1 = text.match(/<h1/) ? 15 : 0;
-  var hasAlt = (text.match(/alt=/g)||[]).length > 2 ? 20 : 10;
-  var hasSchema = text.match(/schema\.org|itemscope|application\/ld\+json/) ? 15 : 0;
-  var hasOG = text.match(/og:|twitter:/) ? 15 : 0;
-  scores['seo-signal'] = Math.round(hasTitle + hasMeta + hasH1 + Math.min(hasAlt,20) + hasSchema + Math.min(hasOG,15));
+<div class="fc">
+<div class="fl">Opportunity · Confidence: 0.68</div>
+<h3>Competitor content outranking on commercial queries.</h3>
+<p>Three competitors now dominate top AI citations for high-commercial-proximity queries. Brand absent from "dermatologist recommended" cluster.</p>
+<div class="st"><span class="l">Decision</span><span class="v">Build authoritative content for "dermatologist recommended" cluster.</span><span class="t info">Open</span></div>
+</div>
+</div>
 
-  var commercialTerms = ['pricing','price','cost','buy','subscribe','sign up','start free','demo','request','contact','get started','try','enterprise','plan','feature','premium','pro','business'];
-  var commDensity = commercialTerms.reduce((sum,t) => sum + (s.split(t).length-1), 0) / Math.max(1, wordCount) * 1000;
-  var ctaCount = (text.match(/cta|button|submit|call.to.action|learn more|get started|sign up|try now/i)||[]).length;
-  scores['commercial-intent'] = Math.round(Math.min(100, commDensity * 8 + ctaCount * 5));
+<!-- Decision loop -->
+<div class="lp">
+<span class="s -a">Observe</span>
+<span class="s">Model</span>
+<span class="s -a">Decide</span>
+<span class="s -d">Intervene</span>
+<span class="s -a">Measure</span>
+<span class="s">Learn</span>
+</div>
 
-  return scores;
-}
+<!-- Source coverage -->
+<div class="mr">
+<div class="c"><div class="cl">Owned</div><div class="cv">82%</div><div class="cn">Coverage · 14 claims</div></div>
+<div class="c"><div class="cl">Human</div><div class="cv">3,842</div><div class="cn">Observations · 27 themes</div></div>
+<div class="c"><div class="cl">Machine</div><div class="cv">63</div><div class="cn">AI queries · 41 sources</div></div>
+<div class="c"><div class="cl">Demand</div><div class="cv">+31%</div><div class="cn">Growth · 7 clusters</div></div>
+</div>
 
-function compositeScore(scores) {
-  var total = 0, weightSum = 0;
-  THEME_KEYS.forEach(function(k){ total += (scores[k]||0) * THEMES[k].weight; weightSum += THEMES[k].weight; });
-  return Math.round(total / weightSum);
-}
+</div></div>
 
-function detectProblems(scores, text, wordCount) {
-  var problems = [];
-  if (scores['content-quality'] < 50) problems.push({type:'crit', label:'Low content quality', desc:'Sentences too long/short, missing headings, thin content'});
-  else if (scores['content-quality'] < 65) problems.push({type:'warn', label:'Content quality needs work', desc:'Suboptimal sentence structure or heading hierarchy'});
-  if (scores['ai-readability'] < 50) problems.push({type:'crit', label:'Poor AI readability', desc:'Flesch score low, lacks semantic HTML structure'});
-  else if (scores['ai-readability'] < 65) problems.push({type:'warn', label:'AI readability needs improvement', desc:'Consider simpler language and better semantic markup'});
-  if (scores['semantic-depth'] < 40) problems.push({type:'crit', label:'Thin semantic depth', desc:'Low lexical diversity, few concept terms'});
-  else if (scores['semantic-depth'] < 55) problems.push({type:'warn', label:'Shallow semantic coverage', desc:'Limited vocabulary diversity and topic depth'});
-  if (scores['evidence-specificity'] < 35) problems.push({type:'crit', label:'Insufficient evidence', desc:'Few numbers, data points, or concrete citations'});
-  else if (scores['evidence-specificity'] < 55) problems.push({type:'warn', label:'Limited specificity', desc:'Could benefit from more data points and examples'});
-  if (scores['seo-signal'] < 50) problems.push({type:'crit', label:'SEO signals weak', desc:'Missing title, meta description, H1, schema, or OG tags'});
-  else if (scores['seo-signal'] < 70) problems.push({type:'warn', label:'SEO gaps present', desc:'Some technical SEO elements missing or incomplete'});
-  if (scores['commercial-intent'] < 25) problems.push({type:'info', label:'Low commercial intent signals', desc:'Few conversion cues, pricing, or CTA language'});
-  var numbers = (text.match(/\b\d+(%|x|\+|pp|[kmbt]?)\b/g)||[]).length;
-  if (numbers === 0 && wordCount > 200) problems.push({type:'warn', label:'No quantitative data', desc:'Page lacks numbers, metrics, or measurable claims'});
-  var ctaCount = (text.match(/cta|button|submit|call.to.action|learn more|get started|sign up|try now/i)||[]).length;
-  if (ctaCount === 0 && wordCount > 200) problems.push({type:'info', label:'No clear CTA detected', desc:'Page may lack conversion pathways'});
-  return problems;
-}
-
-function compositeScore(scores) {
-  var total = 0, weightSum = 0;
-  THEME_KEYS.forEach(function(k){ total += (scores[k]||0) * THEMES[k].weight; weightSum += THEMES[k].weight; });
-  return Math.round(total / weightSum);
-}
-
-async function runScan() {
-  var btn = document.getElementById('scanBtn');
-  var status = document.getElementById('status');
-  var domain = document.getElementById('domainInput').value.trim();
-  if (!domain) { status.textContent = 'Enter a domain.'; return; }
-  btn.disabled = true;
-  status.textContent = 'Fetching pages from ' + domain + '...';
-  document.getElementById('results').classList.add('hidden');
-  document.getElementById('detailPanel').classList.add('hidden');
-
-  try {
-    var resp = await fetch('https://' + domain);
-    var html = await resp.text();
-    status.textContent = 'Parsing ' + domain + ' and extracting pages...';
-
-    var links = [];
-    var linkRe = /<a\s+(?:[^>]*?\s+)?href="([^"]+)"/gi;
-    var match;
-    while ((match = linkRe.exec(html)) !== null) {
-      var href = match[1];
-      if (href.startsWith('/') || href.startsWith('http')) {
-        if (!href.startsWith('http')) href = 'https://' + domain.replace(/\/.*/,'') + href;
-        if (href.includes(domain.replace(/\/.*/,''))) links.push(href);
-      }
-    }
-    links = [...new Set(links)].slice(0, 40);
-    status.textContent = 'Found ' + links.length + ' pages. Analysing up to 20...';
-
-    var pages = [{url:'https://'+domain, html:html}];
-    var batch = links.slice(0, 19);
-    for (var i = 0; i < batch.length; i++) {
-      try {
-        status.textContent = 'Analysing page ' + (i+2) + ' of ' + Math.min(batch.length+1, 20) + '...';
-        var r2 = await fetch(batch[i]);
-        var h2 = await r2.text();
-        pages.push({url: batch[i], html: h2});
-      } catch(e) { /*skip*/ }
-      if (pages.length >= 20) break;
-    }
-
-    status.textContent = 'Scoring ' + pages.length + ' pages across 6 themes...';
-
-    var scored = pages.map(function(p){
-      var scores = scoreContent(p.html, p.url);
-      var comp = compositeScore(scores);
-      var problems = detectProblems(scores, p.html, p.html.split(/\s+/).filter(Boolean).length);
-      return { url: p.url, scores: scores, composite: comp, problems: problems, wordCount: p.html.split(/\s+/).filter(Boolean).length };
-    });
-    scored.sort(function(a,b){ return b.composite - a.composite; });
-
-    var avgComp = Math.round(scored.reduce(function(s,p){return s+p.composite},0)/scored.length);
-    var needsAttn = scored.filter(function(p){return p.composite < 60 || p.problems.some(function(pr){return pr.type==='crit'})}).length;
-    var critical = scored.reduce(function(s,p){return s + p.problems.filter(function(pr){return pr.type==='crit'}).length},0);
-
-    document.getElementById('mPages').textContent = pages.length;
-    document.getElementById('mAvgComp').textContent = avgComp;
-    document.getElementById('mNeedsAttn').textContent = needsAttn;
-    document.getElementById('mCritical').textContent = critical;
-
-    // Build table
-    var tableHtml = '<table><tr><th>Rank</th><th>Page</th><th>Composite</th><th>Quality</th><th>Readability</th><th>Semantic</th><th>Evidence</th><th>SEO</th><th>Commercial</th><th>Key Problems</th></tr>';
-    scored.forEach(function(p,i){
-      var urlDisplay = p.url.replace(/https?:\/\//,'').substring(0,70);
-      var probHtml = '';
-      if (p.problems.length === 0) {
-        probHtml = '<span style="color:var(--ok);font-size:10px">No significant issues</span>';
-      } else {
-        p.problems.forEach(function(pr){
-          probHtml += '<span class="prob '+pr.type+'">'+pr.label+'</span><div class="p">'+pr.desc+'</div>';
-        });
-      }
-      tableHtml += '<tr data-idx="'+i+'" style="cursor:pointer" onclick="showDetail('+i+')"><td style="width:36px;font-family:var(--fm);color:var(--mute)">#'+(i+1)+'</td><td style="max-width:320px;overflow:hidden;text-overflow:ellipsis"><a href="'+p.url+'" target="_blank" style="color:var(--text);text-decoration:none" onclick="event.stopPropagation()">'+urlDisplay+'</a></td><td><span class="r '+(p.composite>=70?'ok':p.composite>=50?'warn':'crit')+'">'+p.composite+'</span></td>';
-      THEME_KEYS.forEach(function(k){
-        var sc = p.scores[k];
-        tableHtml += '<td><div class="s"><div class="f" style="width:'+sc+'%"></div></div>'+sc+'</td>';
-      });
-      tableHtml += '<td class="problems-cell">'+probHtml+'</td></tr>';
-    });
-    tableHtml += '</table>';
-    document.getElementById('tableWrap').innerHTML = tableHtml;
-
-    // Store for detail view
-    window.scoredData = scored;
-
-    document.getElementById('results').classList.remove('hidden');
-    document.getElementById('scanInfo').textContent = scored.length + ' pages analysed from ' + domain + ' · ' + new Date().toLocaleString();
-    status.textContent = 'Analysed ' + pages.length + ' pages from ' + domain + '. Click any row for detailed view.';
-  } catch(e) {
-    status.textContent = 'Error: ' + e.message + '. CORS may block some domains. Try nicksc1cc.github.io/inflexion-website.';
-    console.error(e);
-  }
-  btn.disabled = false;
-}
-
-function showDetail(idx) {
-  var p = window.scoredData[idx];
-  if (!p) return;
-  document.getElementById('detailPanel').classList.remove('hidden');
-  document.getElementById('detailUrl').textContent = p.url;
-  document.getElementById('detailMeta').textContent = p.wordCount.toLocaleString() + ' words · Composite: ' + p.composite + ' · Rank #' + (idx+1);
-
-  // Theme bars
-  var barsHtml = '';
-  THEME_KEYS.forEach(function(k){
-    var sc = p.scores[k];
-    barsHtml += '<div class="c"><div class="cl">'+THEMES[k].label+'</div><div class="cv">'+sc+'<span class="d"> /100</span></div></div>';
-  });
-  document.getElementById('detailThemeBars').innerHTML = barsHtml;
-
-  // Problems
-  var probHtml = '';
-  if (p.problems.length === 0) {
-    probHtml = '<div style="color:var(--ok);font-size:11px">No significant issues detected</div>';
-  } else {
-    p.problems.forEach(function(pr){
-      probHtml += '<div style="margin:0 0 8px"><span class="prob '+pr.type+'" style="margin-bottom:4px;display:inline-block">'+pr.label+'</span><div class="p" style="font-size:10px;margin-top:2px">'+pr.desc+'</div></div>';
-    });
-  }
-  document.getElementById('detailProblems').innerHTML = probHtml;
-
-  // Radar chart
-  var ctx = document.getElementById('detailRadar').getContext('2d');
-  if (radarChart) radarChart.destroy();
-  radarChart = new Chart(ctx, {
-    type: 'radar',
-    data: {
-      labels: THEME_KEYS.map(function(k){return THEMES[k].label}),
-      datasets: [
-        { label: 'This page', data: THEME_KEYS.map(function(k){return p.scores[k]}), borderColor: '#155E5E', backgroundColor: 'rgba(21,94,94,0.12)', borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#155E5E' },
-        { label: 'Site average', data: THEME_KEYS.map(function(k){
-          var avg = Math.round(window.scoredData.reduce(function(s,pg){return s+pg.scores[k]},0)/window.scoredData.length);
-          return avg;
-        }), borderColor: '#888888', backgroundColor: 'rgba(136,136,136,0.08)', borderWidth: 1.5, borderDash: [4,4], pointRadius: 2, pointBackgroundColor: '#888888' }
-      ]
-    },
-    options: {
-      responsive: true, maintainAspectRatio: true, plugins: {legend: {labels: {font:{family:'JetBrains Mono',size:9},padding:12,color:'#888888'}}},
-      scales: {r: {beginAtZero:true,max:100,ticks:{stepSize:20,font:{family:'JetBrains Mono',size:9},color:'#888888',backdropColor:'transparent'},grid:{color:'rgba(26,26,26,.07)'},angleLines:{color:'rgba(26,26,26,.07)'},pointLabels:{font:{family:'Space Grotesk',size:10},color:'#4A4A4A'}}}
-    }
-  });
-}
-
-function clearResults() {
-  document.getElementById('results').classList.add('hidden');
-  document.getElementById('detailPanel').classList.add('hidden');
-  document.getElementById('scanInfo').textContent = 'No scan loaded';
-  document.getElementById('status').textContent = 'Enter a domain and click Scan to begin analysis.';
-}
-document.addEventListener('DOMContentLoaded', function(){ if(document.getElementById('domainInput').value) setTimeout(runScan,300); });
-</script>
+<div class="ft"><div class="w"><span>IntellaIQ · Decision Intelligence</span><span><a href="scan.html">Scan</a> &middot; <a href="index.html">Home</a> &middot; <a href="#">API</a></span></div></div>
 </body></html>
