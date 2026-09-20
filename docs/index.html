@@ -8,8 +8,25 @@
 <meta property="og:title" content="IntellaIQ — Decision Intelligence">
 <meta property="og:description" content="Unlock decisions hidden in your data.">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:opsz@14&display=swap');
-:root{--bg:#F5F1EC;--panel:#FDFBF9;--text:#161412;--sub:#4C4845;--mute:#8A8580;--line:rgba(22,20,18,.07);--lines:rgba(22,20,18,.12);--signal:#155E5E;--ff:'Inter',system-ui,sans-serif;--fs:'Instrument Serif',Georgia,serif;--w:1100px}
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+/* Aesthetic direction: IntellaIQ
+ * Precision / Intelligence / Restraint / Authority
+ * Type: Space Grotesk (display) + Space Grotesk (body). Free alt: Geist / DM Sans.
+ * Color: cool-neutral. #F5F5F3 bg / #1A1A1A text. Brand: oklch(48% 0.14 200) deep teal.
+ * Density: normal-to-loose. 8px scale, generous sections.
+ * Radius: 3px (utilitarian/editorial). No shadow — borders only.
+ * Components: ghost buttons; filled for primary CTA only.
+ * Imagery: data visualizations, honest placeholders, no photography.
+ * Motion: quiet. 200ms ease, no entrance animations.
+ */
+:root{
+  --bg:#F5F5F3; --panel:#FDFDFD; --text:#1A1A1A; --sub:#4A4A4A;
+  --mute:#888888; --line:rgba(26,26,26,.07); --lines:rgba(26,26,26,.12);
+  --signal:oklch(48% 0.14 200); --signal-weak:rgba(21,94,94,.08);
+  --ff:'Space Grotesk',system-ui,sans-serif;
+  --fs:'Space Grotesk',system-ui,sans-serif;
+  --fm:'JetBrains Mono','SF Mono','Menlo',monospace;
+  --w:1100px}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font:400 14px/1.65 var(--ff);-webkit-font-smoothing:antialiased}
 .w{max-width:var(--w);margin:0 auto;padding:0 24px}
