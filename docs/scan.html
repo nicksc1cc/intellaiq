@@ -1,0 +1,323 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>IntellaIQ — Domain Intelligence Scan</title><style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+:root{--bg:#F5F5F3;--panel:#FDFDFD;--text:#1A1A1A;--sub:#4A4A4A;--mute:#888888;--line:rgba(26,26,26,.07);--lines:rgba(26,26,26,.12);--signal:#155E5E;--ff:'Space Grotesk',sans-serif;--fm:'JetBrains Mono',monospace}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font:300 14px/1.6 var(--ff);-webkit-font-smoothing:antialiased}
+.w{max-width:1200px;margin:0 auto;padding:0 24px}
+.nav{background:var(--text);width:100%}
+.nav .w{display:flex;align-items:center;justify-content:space-between;height:44px}
+.nv-l{font:600 14px/1 var(--ff);color:#F5F5F3;letter-spacing:-.35px}
+.nv-l em{font-style:normal;color:var(--signal)}
+.nv-m{display:flex;align-items:center;gap:20px;font-size:12px;color:rgba(245,245,243,.5)}
+.nv-m a{color:inherit;text-decoration:none}.nv-m a:hover{color:#F5F5F3}
+.nv-b{padding:5px 14px;border:1px solid rgba(245,245,243,.2);border-radius:3px;font-size:11px;font-weight:500;color:#F5F5F3;text-decoration:none;letter-spacing:-.2px}
+@media(max-width:640px){.nv-m{display:none}}
+.dh{display:flex;justify-content:space-between;align-items:baseline;padding:32px 0 24px;flex-wrap:wrap;gap:12px}
+.dh h1{font:300 28px/1.08 var(--ff);letter-spacing:-.7px}
+.dh .r{font-size:10px;color:var(--mute);font-family:var(--fm)}
+.dh .r span{padding-left:8px;margin-left:8px;border-left:1px solid var(--line)}.dh .r span:first-child{border:none;padding-left:0;margin-left:0}
+.input-row{display:flex;gap:8px;margin:0 0 24px;flex-wrap:wrap}
+.input-row input{flex:1;min-width:200px;padding:10px 14px;border:1px solid var(--lines);border-radius:3px;font-family:var(--ff);font-size:13px;font-weight:400;color:var(--text);background:var(--panel);letter-spacing:-.1px;outline:none}
+.input-row input:focus{border-color:var(--signal)}
+.input-row button{padding:10px 24px;background:var(--signal);border:none;border-radius:3px;color:#F5F5F3;font-family:var(--ff);font-size:12px;font-weight:500;letter-spacing:-.2px;cursor:pointer}
+.input-row button:hover{opacity:.9}
+.input-row button:disabled{opacity:.4;cursor:default}
+.status{font-size:11px;color:var(--mute);letter-spacing:-.1px;margin:0 0 16px;font-family:var(--fm)}
+.mr{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:0 0 24px}
+.mr .c{padding:14px 16px;background:var(--panel)}
+.mr .c .cl{font-size:7px;font-weight:500;text-transform:uppercase;color:var(--mute)}
+.mr .c .cv{font-size:28px;font-weight:300;letter-spacing:-.6px;line-height:1.2;color:var(--text);margin-top:2px}
+.mr .c .cn{font-size:9px;color:var(--sub);margin-top:1px}
+.mr .c .cv .d{font-size:11px;color:var(--signal);margin-left:6px}
+@media(max-width:640px){.mr{grid-template-columns:repeat(2,1fr)}}
+.chart-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:0 0 24px}
+.chart-row .cp{padding:16px;background:var(--panel)}
+.chart-row .cp .cl{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 8px}
+@media(max-width:900px){.chart-row{grid-template-columns:1fr}}
+.table-wrap{overflow-x:auto;margin:0 0 24px;border:1px solid var(--line);border-radius:3px}
+table{width:100%;border-collapse:collapse;font-size:12px;background:var(--panel)}
+table th{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);text-align:left;padding:10px 12px;border-bottom:2px solid var(--text);background:var(--panel);letter-spacing:.04em}
+table td{padding:8px 12px;border-bottom:1px solid var(--line);color:var(--sub);letter-spacing:-.1px;font-size:11px}
+table td:first-child{font-weight:400;color:var(--text)}
+table tr:last-child td{border:none}
+table .s{display:inline-block;width:60px;height:6px;background:var(--line);border-radius:2px;overflow:hidden;vertical-align:middle;margin-right:6px}
+table .s .f{height:100%;background:var(--signal);border-radius:2px}
+table .r{font-size:9px;color:var(--signal);font-weight:500}
+.detail-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:0 0 24px}
+.detail-row .cp{padding:20px;background:var(--panel)}
+.detail-row .cp .cl{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 8px}
+.detail-row .cp .tn{font-size:10px;color:var(--text);margin:0 0 4px}
+.detail-row .cp .tb{font-size:10px;color:var(--sub);font-family:var(--fm)}
+@media(max-width:900px){.detail-row{grid-template-columns:1fr}}
+.hidden{display:none!important}
+.theme-tag{display:inline-block;font-size:7px;padding:2px 6px;border:1px solid var(--signal);border-radius:2px;color:var(--signal);margin:2px;font-weight:500;letter-spacing:.04em;text-transform:uppercase}
+.ft{padding:24px 0 48px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:11px;color:var(--mute)}
+.ft a{color:var(--mute);text-decoration:none}.ft a:hover{color:var(--text)}
+</style>
+</head><body>
+
+<div class="nav"><div class="w"><div class="nv-l">Intella<em>IQ</em></div><div class="nv-m"><a href="index.html">Home</a><a href="#">Scan</a><a href="#" class="nv-b">Early access</a></div></div></div>
+
+<div class="w">
+<div class="dh"><h1>Domain Intelligence Scan</h1><div class="r">Analyse any website against key themes</div></div>
+
+<div class="input-row">
+<input type="text" id="domainInput" placeholder="e.g. nicksc1cc.github.io/inflexion-website" value="nicksc1cc.github.io/inflexion-website">
+<button id="scanBtn" onclick="runScan()">Scan domain &rarr;</button>
+</div>
+<div id="status" class="status">Enter a domain and click Scan to begin analysis.</div>
+
+<div id="results" class="hidden">
+<div class="mr" id="metricRow">
+<div class="c"><div class="cl">Pages analysed</div><div class="cv" id="mPages">0</div></div>
+<div class="c"><div class="cl">Avg content quality</div><div class="cv" id="mQuality">0<span class="d">/100</span></div></div>
+<div class="c"><div class="cl">Avg AI readability</div><div class="cv" id="mRead">0<span class="d">/100</span></div></div>
+<div class="c"><div class="cl">Top theme score</div><div class="cv" id="mTopTheme">0<span class="d">/100</span></div></div>
+</div>
+
+<div class="chart-row">
+<div class="cp"><div class="cl">Theme scores across top 10 pages</div><canvas id="radarChart"></canvas></div>
+<div class="cp"><div class="cl">Page ranking by composite score</div><canvas id="barChart"></canvas></div>
+</div>
+
+<div class="detail-row">
+<div class="cp"><div class="cl">Theme distribution</div><div id="themeList"></div></div>
+<div class="cp"><div class="cl">Top themes detected</div><div id="topThemeList"></div></div>
+</div>
+
+<div id="tableWrap" class="table-wrap" style="margin-bottom:24px"></div>
+
+<div class="detail-row">
+<div class="cp"><div class="cl">Top page detail</div><div id="topPageDetail"></div></div>
+<div class="cp"><div class="cl">Score breakdown</div><div id="scoreBreakdown"></div></div>
+</div>
+</div>
+</div>
+
+<div class="ft"><div class="w"><span>IntellaIQ Intelligence Scan</span><span><a href="index.html">Home</a> &middot; <a href="#">Methodology</a></span></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+const THEMES = {
+  'content-quality': { label: 'Content Quality', weight: 1.0 },
+  'ai-readability': { label: 'AI Readability', weight: 1.0 },
+  'semantic-depth': { label: 'Semantic Depth', weight: 1.0 },
+  'evidence-specificity': { label: 'Evidence & Specificity', weight: 1.0 },
+  'seo-signal': { label: 'SEO Signal', weight: 0.8 },
+  'commercial-intent': { label: 'Commercial Intent', weight: 0.7 }
+};
+const THEME_KEYS = Object.keys(THEMES);
+var radarChart = null, barChart = null;
+
+function scoreContent(text, url) {
+  var s = text.toLowerCase();
+  var wordCount = s.split(/\s+/).filter(Boolean).length;
+  var charCount = text.length;
+  var sentences = s.split(/[.!?]+/).filter(Boolean).length || 1;
+  var avgSentenceLen = wordCount / sentences;
+  var syllableCount = text.replace(/[^aeiouAEIOU]/g,'').length + (text.match(/[^aeiou\s][aeiou][^aeiou\s]/g)||[]).length;
+
+  var scores = {};
+
+  // Content Quality: avg sentence length (ideal 15-20), paragraph structure, heading ratio
+  var sentScore = Math.max(0, 100 - Math.abs(avgSentenceLen - 18) * 5);
+  var headingRatio = ((s.match(/<h[1-6]/g)||[]).length / Math.max(1, wordCount)) * 1000;
+  var headingScore = Math.min(100, headingRatio * 20);
+  scores['content-quality'] = Math.round((sentScore * 0.5 + headingScore * 0.3 + Math.min(100, wordCount/50) * 0.2));
+
+  // AI Readability: simple language, clear structure, semantic HTML
+  var flesch = 206.835 - 1.015 * avgSentenceLen - 84.6 * (syllableCount / wordCount);
+  var fleschScore = Math.min(100, Math.max(0, (flesch + 20) / 1.2));
+  var semanticElements = ((s.match(/<(article|section|nav|main|header|footer|aside)/g)||[]).length / Math.max(1, wordCount)) * 5000;
+  scores['ai-readability'] = Math.round((fleschScore * 0.6 + Math.min(100, semanticElements * 10) * 0.4));
+
+  // Semantic Depth: entity density, concept terms, lexical diversity
+  var uniqueWords = new Set(s.match(/\b[a-z]{4,}\b/g)).size;
+  var lexicalDiversity = (uniqueWords / Math.max(1, wordCount)) * 100;
+  var conceptTerms = ['strategy','approach','method','process','solution','platform','system','framework','capability','feature','innovation','technology','performance','quality','value','benefit','outcome','result','impact','effective'];
+  var conceptDensity = conceptTerms.reduce((sum,t) => sum + (s.split(t).length-1), 0) / Math.max(1, wordCount) * 1000;
+  scores['semantic-depth'] = Math.round(Math.min(100, lexicalDiversity * 1.5 + conceptDensity * 5));
+
+  // Evidence & Specificity: numbers, data, citations, concrete claims
+  var numbers = (text.match(/\b\d+(%|x|\+|pp|[kmbt]?)\b/g)||[]).length;
+  var dataScore = Math.min(100, numbers * 5);
+  var specificTerms = ['research','study','data','evidence','analysis','survey','report','according','source','example','case','test','measure','metric','statistic','benchmark'];
+  var specificDensity = specificTerms.reduce((sum,t) => sum + (s.split(t).length-1), 0) / Math.max(1, wordCount) * 1000;
+  scores['evidence-specificity'] = Math.round((dataScore * 0.5 + Math.min(100, specificDensity * 5) * 0.5));
+
+  // SEO Signal: title tag, meta, h1, alt text, structure
+  var hasTitle = text.match(/<title>/) ? 20 : 0;
+  var hasMeta = (text.match(/<meta.*description/) ? 15 : 0);
+  var hasH1 = text.match(/<h1/) ? 15 : 0;
+  var hasAlt = (text.match(/alt=/g)||[]).length > 2 ? 20 : 10;
+  var hasSchema = text.match(/schema\.org|itemscope|application\/ld\+json/) ? 15 : 0;
+  var hasOG = text.match(/og:|twitter:/) ? 15 : 0;
+  scores['seo-signal'] = Math.round(hasTitle + hasMeta + hasH1 + Math.min(hasAlt,20) + hasSchema + Math.min(hasOG,15));
+
+  // Commercial Intent: pricing, CTA, product, conversion language
+  var commercialTerms = ['pricing','price','cost','buy','subscribe','sign up','start free','demo','request','contact','get started','try','enterprise','plan','feature','premium','pro','business'];
+  var commDensity = commercialTerms.reduce((sum,t) => sum + (s.split(t).length-1), 0) / Math.max(1, wordCount) * 1000;
+  var ctaCount = (text.match(/cta|button|submit|call.to.action|learn more|get started|sign up|try now/i)||[]).length;
+  scores['commercial-intent'] = Math.round(Math.min(100, commDensity * 8 + ctaCount * 5));
+
+  return scores;
+}
+
+function compositeScore(scores) {
+  var total = 0, weightSum = 0;
+  THEME_KEYS.forEach(function(k){ total += (scores[k]||0) * THEMES[k].weight; weightSum += THEMES[k].weight; });
+  return Math.round(total / weightSum);
+}
+
+async function runScan() {
+  var btn = document.getElementById('scanBtn');
+  var status = document.getElementById('status');
+  var domain = document.getElementById('domainInput').value.trim();
+  if (!domain) { status.textContent = 'Enter a domain.'; return; }
+  btn.disabled = true;
+  status.textContent = 'Fetching pages from ' + domain + '...';
+  document.getElementById('results').classList.add('hidden');
+
+  try {
+    var resp = await fetch('https://' + domain);
+    var html = await resp.text();
+    status.textContent = 'Parsing ' + domain + ' and extracting pages...';
+
+    // Extract all internal links
+    var links = [];
+    var linkRe = /<a\s+(?:[^>]*?\s+)?href="([^"]+)"/gi;
+    var match;
+    while ((match = linkRe.exec(html)) !== null) {
+      var href = match[1];
+      if (href.startsWith('/') || href.startsWith('http')) {
+        if (!href.startsWith('http')) href = 'https://' + domain.replace(/\/.*/,'') + href;
+        if (href.includes(domain.replace(/\/.*/,''))) links.push(href);
+      }
+    }
+    links = [...new Set(links)].slice(0, 30);
+    status.textContent = 'Found ' + links.length + ' pages. Analysing up to 15...';
+
+    var pages = [{url:'https://'+domain, html:html}];
+    var batch = links.slice(0, 14);
+    for (var i = 0; i < batch.length; i++) {
+      try {
+        status.textContent = 'Analysing page ' + (i+2) + ' of ' + Math.min(batch.length+1, 15) + '...';
+        var r2 = await fetch(batch[i]);
+        var h2 = await r2.text();
+        pages.push({url: batch[i], html: h2});
+      } catch(e) { /*skip*/ }
+      if (pages.length >= 15) break;
+    }
+
+    status.textContent = 'Scoring ' + pages.length + ' pages across 6 themes...';
+
+    var scored = pages.map(function(p){
+      var scores = scoreContent(p.html, p.url);
+      var comp = compositeScore(scores);
+      return { url: p.url, scores: scores, composite: comp, wordCount: p.html.split(/\s+/).filter(Boolean).length };
+    });
+    scored.sort(function(a,b){ return b.composite - a.composite; });
+    var top10 = scored.slice(0, 10);
+
+    var avgQuality = Math.round(top10.reduce(function(s,p){return s+p.scores['content-quality']},0)/top10.length);
+    var avgRead = Math.round(top10.reduce(function(s,p){return s+p.scores['ai-readability']},0)/top10.length);
+    var topTheme = 0;
+    THEME_KEYS.forEach(function(k){
+      var avg = top10.reduce(function(s,p){return s+p.scores[k]},0)/top10.length;
+      if (avg > topTheme) topTheme = Math.round(avg);
+    });
+
+    document.getElementById('mPages').textContent = pages.length;
+    document.getElementById('mQuality').innerHTML = avgQuality + '<span class="d">/100</span>';
+    document.getElementById('mRead').innerHTML = avgRead + '<span class="d">/100</span>';
+    document.getElementById('mTopTheme').innerHTML = topTheme + '<span class="d">/100</span>';
+
+    // Theme distribution
+    var themeHtml = '';
+    THEME_KEYS.forEach(function(k){
+      var avg = Math.round(top10.reduce(function(s,p){return s+p.scores[k]},0)/top10.length);
+      themeHtml += '<div style="margin:0 0 8px"><div style="display:flex;justify-content:space-between;font-size:10px;margin:0 0 2px"><span style="color:var(--sub)">' + THEMES[k].label + '</span><span style="color:var(--signal)">' + avg + '</span></div><div style="height:6px;background:var(--line);border-radius:2px;overflow:hidden"><div style="height:100%;width:'+avg+'%;background:var(--signal);border-radius:2px"></div></div></div>';
+    });
+    document.getElementById('themeList').innerHTML = themeHtml;
+
+    // Top themes
+    var themeAvgs = THEME_KEYS.map(function(k){ return {key:k, avg:Math.round(top10.reduce(function(s,p){return s+p.scores[k]},0)/top10.length)}; });
+    themeAvgs.sort(function(a,b){return b.avg-a.avg});
+    var topThemesHtml = '';
+    themeAvgs.slice(0,4).forEach(function(t){
+      topThemesHtml += '<span class="theme-tag">' + THEMES[t.key].label + ' ' + t.avg + '</span> ';
+    });
+    document.getElementById('topThemeList').innerHTML = topThemesHtml;
+
+    // Table
+    var tableHtml = '<table><tr><th>Rank</th><th>Page</th><th>Composite</th><th>Quality</th><th>Readability</th><th>Semantic</th><th>Evidence</th><th>SEO</th><th>Commercial</th></tr>';
+    top10.forEach(function(p,i){
+      var urlDisplay = p.url.replace(/https?:\/\//,'').substring(0,60);
+      tableHtml += '<tr><td style="width:30px;font-family:var(--fm);color:var(--mute)">#'+(i+1)+'</td><td style="max-width:280px;overflow:hidden;text-overflow:ellipsis"><a href="'+p.url+'" target="_blank" style="color:var(--text);text-decoration:none">'+urlDisplay+'</a></td><td><span class="r">'+p.composite+'</span></td>';
+      THEME_KEYS.forEach(function(k){
+        tableHtml += '<td><div class="s"><div class="f" style="width:'+p.scores[k]+'%"></div></div>'+p.scores[k]+'</td>';
+      });
+      tableHtml += '</tr>';
+    });
+    tableHtml += '</table>';
+    document.getElementById('tableWrap').innerHTML = tableHtml;
+
+    // Top page detail
+    var best = top10[0];
+    document.getElementById('topPageDetail').innerHTML = '<div class="tn">' + best.url.replace(/https?:\/\//,'') + '</div><div class="tb">' + best.wordCount.toLocaleString() + ' words &middot; Composite score: ' + best.composite + '</div>';
+
+    // Score breakdown
+    var bd = '<div class="tn" style="margin-bottom:6px">Score breakdown</div>';
+    THEME_KEYS.forEach(function(k){
+      bd += '<div style="display:flex;justify-content:space-between;font-size:9px;margin:0 0 4px;align-items:center"><span style="color:var(--sub)">'+THEMES[k].label+'</span><span style="font-family:var(--fm);color:var(--signal)">'+best.scores[k]+'</span></div>';
+    });
+    document.getElementById('scoreBreakdown').innerHTML = bd;
+
+    // Radar chart
+    var ctx1 = document.getElementById('radarChart').getContext('2d');
+    if (radarChart) radarChart.destroy();
+    radarChart = new Chart(ctx1, {
+      type: 'radar',
+      data: {
+        labels: THEME_KEYS.map(function(k){return THEMES[k].label}),
+        datasets: [
+          { label: 'Top page', data: THEME_KEYS.map(function(k){return best.scores[k]}), borderColor: '#155E5E', backgroundColor: 'rgba(21,94,94,0.12)', borderWidth: 2, pointRadius: 3, pointBackgroundColor: '#155E5E' },
+          { label: 'Avg top 10', data: THEME_KEYS.map(function(k){return Math.round(top10.reduce(function(s,p){return s+p.scores[k]},0)/top10.length)}), borderColor: '#888888', backgroundColor: 'rgba(136,136,136,0.08)', borderWidth: 1.5, borderDash: [4,4], pointRadius: 2, pointBackgroundColor: '#888888' }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: true, plugins: {legend: {labels: {font:{family:'JetBrains Mono',size:9},padding:12,color:'#888888'}}},
+        scales: {r: {beginAtZero:true,max:100,ticks:{stepSize:20,font:{family:'JetBrains Mono',size:9},color:'#888888',backdropColor:'transparent'},grid:{color:'rgba(26,26,26,.07)'},angleLines:{color:'rgba(26,26,26,.07)'},pointLabels:{font:{family:'Space Grotesk',size:10},color:'#4A4A4A'}}}
+      }
+    });
+
+    // Bar chart
+    var ctx2 = document.getElementById('barChart').getContext('2d');
+    if (barChart) barChart.destroy();
+    var barLabels = top10.map(function(p){return p.url.replace(/https?:\/\//,'').substring(0,30)});
+    barChart = new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: barLabels,
+        datasets: [{ label: 'Composite score', data: top10.map(function(p){return p.composite}), backgroundColor: 'rgba(21,94,94,0.7)', borderColor: '#155E5E', borderWidth: 1, borderRadius: 2 }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: true, indexAxis: 'y',
+        plugins: {legend: {display: false}},
+        scales: {
+          x: {beginAtZero:true,max:100,grid:{color:'rgba(26,26,26,.07)'},ticks:{font:{family:'JetBrains Mono',size:9},color:'#888888'}},
+          y: {grid:{display:false},ticks:{font:{family:'JetBrains Mono',size:8},color:'#4A4A4A'}}
+        }
+      }
+    });
+
+    document.getElementById('results').classList.remove('hidden');
+    status.textContent = 'Analysed ' + pages.length + ' pages from ' + domain + '. Showing top 10.';
+  } catch(e) {
+    status.textContent = 'Error: ' + e.message + '. Try a different domain (e.g. nicksc1cc.github.io/inflexion-website). CORS may need to be enabled for some sites.';
+    console.error(e);
+  }
+  btn.disabled = false;
+}
+document.addEventListener('DOMContentLoaded', function(){ if(document.getElementById('domainInput').value) setTimeout(runScan,300); });
+</script>
+</body></html>
