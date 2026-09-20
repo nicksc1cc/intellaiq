@@ -9,7 +9,7 @@
 <meta property="og:description" content="Unlock decisions hidden in your data.">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Serif:opsz@14&display=swap');
-:root{--bg:#F5F1EC;--panel:#FDFBF9;--text:#161412;--sub:#4C4845;--mute:#8A8580;--line:rgba(22,20,18,.07);--lines:rgba(22,20,18,.12);--signal:#BD4F1E;--ff:'Inter',system-ui,sans-serif;--fs:'Instrument Serif',Georgia,serif;--w:1100px}
+:root{--bg:#F5F1EC;--panel:#FDFBF9;--text:#161412;--sub:#4C4845;--mute:#8A8580;--line:rgba(22,20,18,.07);--lines:rgba(22,20,18,.12);--signal:#155E5E;--ff:'Inter',system-ui,sans-serif;--fs:'Instrument Serif',Georgia,serif;--w:1100px}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font:400 14px/1.65 var(--ff);-webkit-font-smoothing:antialiased}
 .w{max-width:var(--w);margin:0 auto;padding:0 24px}
@@ -375,14 +375,14 @@ function draw() {
     ctx.beginPath();
     ctx.moveTo(p0.x, p0.y);
     ctx.bezierCurveTo(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
-    ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+    ctx.strokeStyle = 'rgba(21,94,94,0.08)';
     ctx.lineWidth = 0.6;
     ctx.stroke();
     p.particles.forEach(function(pt){
       pt.t += pt.speed;
       if(pt.t > 1) { pt.t = 0; p.startY += (Math.random()-0.5)*8; }
       var pos = bezier(pt.t, p0, p1, p2, p3);
-      ctx.fillStyle = 'rgba(255,255,255,0.4)';
+      ctx.fillStyle = 'rgba(21,94,94,0.5)';
       ctx.fillRect(pos.x-1, pos.y-1, 2, 2);
     });
   }
