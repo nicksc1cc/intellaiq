@@ -37,7 +37,7 @@ body{background:var(--bg);color:var(--text);font:400 14px/1.65 var(--ff);-webkit
 .bt-p{background:var(--signal);color:#161412}
 .bt-s{border:1px solid rgba(245,241,236,.25);color:rgba(245,241,236,.7)}
 .bt-s:hover{border-color:rgba(245,241,236,.5);color:#F5F1EC}
-@media(max-width:640px){.hw .hz{padding:64px 24px 56px}.hc{display:none!important}}
+@media(max-width:640px){.hw .hz{padding:64px 24px 56px}.hw{min-height:400px}}
 /* sections */
 .s{padding:72px 0}.s+.s{border-top:1px solid var(--line)}
 /* section header */
@@ -344,11 +344,13 @@ function resize() {
 window.addEventListener('resize', resize);
 resize();
 var paths = [];
-var NUM = 60;
+function getNumPaths() { return window.innerWidth < 640 ? 28 : 60; }
+var NUM = getNumPaths();
 var CX, CY;
 function initPaths() {
   CX = W / 2;
   CY = H / 2;
+  NUM = getNumPaths();
   paths = [];
   for(var i = 0; i < NUM; i++) {
     var isL = i % 2 === 0;
