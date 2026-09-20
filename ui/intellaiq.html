@@ -55,8 +55,8 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 .cv .reveal h3{font:300 24px/1.15 var(--ff);letter-spacing:-.6px;margin:0 0 8px;color:var(--text)}
 .cv .reveal .p{font-size:14px;color:var(--signal);font-weight:500}
 /* Judgement layer */
-.jg{background:var(--text);width:100%;color:#F5F5F3;padding:0 24px;margin:0 -24px;width:calc(100%+48px)}
-.jg .jgw{max-width:1100px;margin:0 auto;padding:56px 0}
+.jg{background:var(--text);color:#F5F5F3;width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;padding:56px 24px}
+.jg .jgw{max-width:1100px;margin:0 auto}
 .jg .jgw .h{font-size:9px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:rgba(245,245,243,.4);margin:0 0 20px;letter-spacing:.06em}
 .jg .jgw h2{font:300 28px/1.1 var(--ff);letter-spacing:-.6px;margin:0 0 20px;color:#F5F5F3;max-width:500px}
 .jg .jgw .sg{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(245,245,243,.08);border-radius:3px;overflow:hidden;margin:0 0 20px}
@@ -160,7 +160,7 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 .cta{text-align:center;padding:72px 0}
 .cta h3{font:300 clamp(24px,3vw,34px)/1.08 var(--ff);letter-spacing:-.8px;margin:0 0 8px}
 .cta p{color:var(--sub);margin:0 auto 28px;max-width:420px;font-size:13px;letter-spacing:-.1px;line-height:1.6}
-.cta .b{display:inline-block;padding:10px 28px;background:var(--signal);font-size:11px;font-weight:500;letter-spacing:-.15px;color:#F5F5F3;text-decoration:none;border-radius:3px}
+.cta .b{display:inline-block;padding:10px 28px;background:var(--signal);font-size:11px;font-weight:500;letter-spacing:-.15px;color:#F5F5F3;text-decoration:none;border-radius:3px;border:none}
 .ft{padding:24px 0 48px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:10px;color:var(--mute)}
 .ft a{color:var(--mute);text-decoration:none}.ft a:hover{color:var(--text)}
 </style></head><body>
@@ -176,12 +176,12 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 </div></div>
 
 <div class="s"><div class="w">
-<div class="it"><div class="il">Your data is full of signals. Your teams are full of decisions.</div><p>Every system produces another view. The problem is not a shortage of information. It is knowing what matters, what changed, what is connected and what to do about it. IntellaIQ interrogates the evidence at scale so you can stop processing and start deciding.</p></div>
+<div class="it"><div class="il">Your data is full of signals. Your teams are full of decisions.</div><p>Every system produces another view. The problem is not a shortage of information. It is knowing what matters, what changed and what to do about it.</p></div>
 </div></div>
 
 <div class="s"><div class="w">
 <div class="sh"><div class="sl">The big idea</div><h2>Don't just analyse the data. Interrogate it.</h2></div>
-<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 20px">An atomic question is a small, bounded judgement applied to a piece of evidence. IntellaIQ asks thousands of them simultaneously across thousands of signals. The sophistication comes from volume, consistency and combination.</p>
+<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 20px">An atomic question is a small, bounded judgement applied to a piece of evidence. IntellaIQ asks thousands of them simultaneously across thousands of signals. Volume and consistency produce reliable judgement.</p>
 <div class="aq">
 <div class="h">What IntellaIQ is asking</div>
 <div class="qs">
@@ -252,7 +252,7 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 
 <div class="s"><div class="w">
 <div class="sh"><div class="sl">Decision Volume</div><h2>Know how much is changing.</h2></div>
-<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 12px">Decision Volume is the amount of decision-relevant change IntellaIQ detects across your business. The interrogation process compresses complexity into attention.</p>
+<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 12px">Decision Volume is the amount of decision-relevant change IntellaIQ detects across your business. The interrogation process compresses signals into attention.</p>
 <div class="comp"><span class="n">72 meaningful signals</span><span class="a">&rarr;</span><span class="n">18 require investigation</span><span class="a">&rarr;</span><span class="n">6 create potential decisions</span><span class="a">&rarr;</span><span class="s">2 require action</span></div>
 </div></div>
 
@@ -296,7 +296,7 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 
 <div class="s"><div class="w">
 <div class="sh"><div class="sl">Prioritisation</div><h2>What deserves attention now?</h2></div>
-<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 12px">IntellaIQ does not rank "interesting" findings. It prioritises based on potential decision relevance.</p>
+<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 12px">IntellaIQ does not rank interesting findings. It prioritises based on decision relevance.</p>
 <div class="pq">
 <div class="p"><span class="rk">01</span><div class="d"><div class="t">Customer expectations shift</div><div class="s">Converging signals across 4 sources</div></div><span class="prob">0.87</span></div>
 <div class="p"><span class="rk">02</span><div class="d"><div class="t">Competitor positioning change</div><div class="s">3 competitors moved toward convenience</div></div><span class="prob w">0.73</span></div>
@@ -311,7 +311,7 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 <div class="b"><div class="l">Expected</div><div class="v">Demand remains stable</div><div class="bar"><div class="f" style="width:55%"></div></div></div>
 <div class="b"><div class="l">Observed</div><div class="v">Demand shifting toward convenience</div><div class="bar"><div class="f s" style="width:82%"></div></div></div>
 <div class="gap"><div class="l">Gap detected</div><div class="v">The observed behaviour challenges the current demand assumption.</div></div>
-<div class="why"><div class="l">Why it matters</div><div class="v">The assumption that demand would remain stable is unsupported by current evidence.</div></div>
+<div class="why"><div class="l">Why it matters</div><div class="v">The assumption that demand would remain stable does not match what the evidence shows.</div></div>
 <div class="dip" style="margin-top:12px;border:none;padding:0">Decision Impact Probability: 0.82</div>
 </div>
 </div></div>
@@ -351,7 +351,7 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 <span style="padding:6px 16px;border:1px solid rgba(245,245,243,.15);font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em;background:rgba(245,245,243,.05);color:rgba(245,245,243,.6)">Observe</span>
 <span style="padding:6px 16px;border:1px solid rgba(245,245,243,.15);font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em;background:rgba(245,245,243,.05);color:rgba(245,245,243,.6)">Judge</span>
 <span style="padding:6px 16px;border:1px solid var(--signal);font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em;background:rgba(21,94,94,.15);color:var(--signal)">Decide</span>
-<span style="padding:6px 16px;border:1px solid rgba(245,245,243,.3);font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em;background:#F5F5F3;color:var(--text)">Act</span>
+<span style="padding:6px 16px;border:1px solid rgba(245,245,243,.3);font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em;background:rgba(245,245,243,.08);color:rgba(245,245,243,.7)">Act</span>
 <span style="padding:6px 16px;border:1px solid var(--signal);font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em;background:rgba(21,94,94,.15);color:var(--signal)">Measure</span>
 <span style="padding:6px 16px;border:1px solid rgba(245,245,243,.15);font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em;background:rgba(245,245,243,.05);color:rgba(245,245,243,.6)">Learn</span>
 </div>
