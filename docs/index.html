@@ -148,18 +148,123 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 .psg .c .v{font-size:11px;color:var(--sub);letter-spacing:-.1px}
 .psg .c.hl{background:var(--signal)}.psg .c.hl .l{color:rgba(245,245,243,.6)}.psg .c.hl .v{color:#F5F5F3}
 @media(max-width:640px){.psg{grid-template-columns:1fr}}
-.cta{text-align:center;padding:72px 0}
-.cta h3{font:300 clamp(24px,3vw,34px)/1.08 var(--ff);letter-spacing:-.8px;margin:0 0 8px}
-.cta p{color:var(--sub);margin:0 auto 28px;max-width:420px;font-size:13px;letter-spacing:-.1px;line-height:1.6}
-.cta .b{display:inline-block;padding:10px 28px;background:var(--signal);font-size:11px;font-weight:500;letter-spacing:-.15px;color:#F5F5F3;text-decoration:none;border-radius:3px;border:none;transition:all var(--dur-fast) var(--ease)}.cta .b:hover{opacity:.85;transform:translateY(-1px)}
-.ft{padding:24px 0 48px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:10px;color:var(--mute)}
-.ft a{color:var(--mute);text-decoration:none;transition:color var(--dur-fast) var(--ease)}.ft a:hover{color:var(--text)}
+/* === KEY VISUAL MOMENTS === */
+
+/* Interrogation visual - canvas field with questions orbiting */
+.intv{position:relative;min-height:50vh;padding:80px 0}
+.intv .intv-h{font:300 24px/1.1 var(--ff);letter-spacing:-.5px;text-align:center;max-width:600px;margin:0 auto 40px}
+.intv .intv-field{position:relative;height:400px;max-width:900px;margin:0 auto}
+.intv .intv-signal{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--signal);opacity:.6;transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.intv .intv-signal:hover{opacity:1;transform:scale(1.5)}
+.intv .intv-signal .lbl{position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);white-space:nowrap;opacity:0;transition:opacity .2s}
+.intv .intv-signal:hover .lbl{opacity:1}
+.intv .intv-q{position:absolute;padding:8px 14px;background:rgba(21,94,94,.08);border:1px solid rgba(21,94,94,.15);border-radius:2px;font-size:10px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);white-space:nowrap;opacity:0;transform:scale(.9);transition:opacity .4s var(--ease),transform .4s var(--ease)}
+.intv .intv-q.active{opacity:1;transform:scale(1)}
+
+/* Compression pinned section */
+.cmp{position:relative;min-height:120vh}
+.cmp .cmp-inner{max-width:800px;margin:0 auto;padding:40px 24px}
+.cmp .cmp-h{font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 8px;letter-spacing:.06em}
+.cmp .cmp-title{font:300 clamp(28px,3.5vw,42px)/1.1 var(--ff);letter-spacing:-.6px;margin:0 0 40px}
+.cmp .cmp-field{position:relative;height:60vh;max-width:700px;margin:0 auto}
+.cmp .signal-dot{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--signal);opacity:.5;border-radius:50%;transform:translate(-50%,-50%);transition:opacity .3s,transform .3s}
+.cmp .signal-dot.active{opacity:1}
+.cmp .signal-dot.connecting{opacity:.8}
+.cmp .signal-line{position:absolute;height:1px;background:rgba(21,94,94,.15);transform-origin:left center;transform:rotate(var(--ang))}
+.cmp .signal-line.active{background:rgba(21,94,94,.4)}
+.cmp .cluster{position:absolute;padding:8px 14px;background:var(--panel);border:1px solid var(--lines);border-radius:3px;font-size:10px;color:var(--sub);opacity:0;transform:scale(.8);transition:opacity .4s,transform .4s}
+.cmp .cluster.active{opacity:1;transform:scale(1)}
+.cmp .cluster.hl{border-color:var(--signal);color:var(--signal)}
+.cmp .cmp-reveal{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity .6s,transform .6s;pointer-events:none}
+.cmp .cmp-reveal.show{opacity:1}
+.cmp .cmp-reveal .tag{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);margin:0 0 8px;letter-spacing:.04em}
+.cmp .cmp-reveal h3{font:300 28px/1.15 var(--ff);letter-spacing:-.6px;margin:0 0 8px}
+.cmp .cmp-reveal .prob{font:300 24px/1 var(--ff);letter-spacing:-.5px;color:var(--signal)}
+.cmp .counter{position:absolute;top:40px;right:24px;font:300 20px/1 var(--ff);letter-spacing:-.4px;color:var(--signal);font-family:var(--fm)}
+.cmp .counter .lbl{display:block;font-size:9px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);letter-spacing:.06em;margin-top:4px}
+
+/* Decision reveal card */
+.dec{background:var(--panel);border:1px solid var(--lines);border-radius:3px;padding:32px;margin:0 0 24px;opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease)}.dec.in{opacity:1;transform:translateY(0)}
+.dec .fl{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 8px;letter-spacing:.04em}
+.dec h3{font:300 20px/1.2 var(--ff);letter-spacing:-.4px;margin:0 0 16px}
+.dec .prob{font:300 28px/1 var(--ff);letter-spacing:-.6px;color:var(--signal);margin:8px 0}
+.dec .prob .lbl{font-size:9px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);letter-spacing:.06em;display:block;margin-bottom:4px}
+
+/* Contradiction split */
+.ctr{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:20px 0}
+.ctr .side{background:var(--panel);border:1px solid var(--lines);border-radius:3px;padding:24px;opacity:0;transform:translateX(var(--tx,0));transition:opacity .5s var(--ease),transform .5s var(--ease)}.ctr .side.in{opacity:1;transform:translateX(0)}
+.ctr .side .hd{font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 12px;letter-spacing:.06em}
+.ctr .side .val{font:300 24px/1 var(--ff);letter-spacing:-.5px;margin:0 0 8px}
+.ctr .side .val.up{color:var(--match)}
+.ctr .side .val.down{color:var(--crit)}
+.ctr .mid{display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--mute);opacity:0;transition:opacity .5s}.ctr .mid.in{opacity:1}
+.ctr .conclusion{margin-top:24px;text-align:center;padding:16px;border:1px solid var(--signal);border-radius:3px;background:rgba(21,94,94,.05);opacity:0;transition:opacity .6s}.ctr .conclusion.in{opacity:1}
+.ctr .conclusion .tag{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);margin:0 0 4px;letter-spacing:.04em}
+.ctr .conclusion .txt{font-size:13px;color:var(--text);letter-spacing:-.1px}
+.ctr .conclusion .dip{font-size:14px;color:var(--signal);font-weight:500;margin-top:4px}
+
+/* Evidence convergence */
+.evc{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-radius:3px;overflow:hidden;margin:20px 0}
+.evc .c{background:var(--panel);padding:16px;text-align:center;opacity:0;transform:scale(.9);transition:opacity .4s,transform .4s}.evc .c.in{opacity:1;transform:scale(1)}
+.evc .c .num{font:300 28px/1 var(--ff);letter-spacing:-.6px;color:var(--signal);margin:0 0 4px}
+.evc .c .lbl{font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);letter-spacing:.04em}
+.evc .c .unit{font-size:10px;color:var(--sub)}
+
+/* Expected vs Observed bars animated */
+.eov{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:20px 0}
+.eov .col{background:var(--panel);border:1px solid var(--lines);border-radius:3px;padding:24px;opacity:0;transform:translateY(12px);transition:opacity .5s,transform .5s}.eov .col.in{opacity:1;transform:translateY(0)}
+.eov .col .hd{font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 12px;letter-spacing:.06em}
+.eov .col .txt{font-size:12px;color:var(--text);letter-spacing:-.1px;margin:0 0 16px}
+.eov .col .bar{height:8px;background:var(--line);border-radius:3px;overflow:hidden}
+.eov .col .bar .f{height:100%;background:var(--mute);border-radius:3px;width:0;transition:width 1s cubic-bezier(.645,.045,.355,1)}
+.eov .col .bar .f.s{background:var(--signal)}
+
+/* Decision card with animated DIP */
+.dc{background:var(--panel);border:1px solid var(--lines);border-radius:3px;padding:32px;text-align:center;margin:20px 0;opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}.dc.in{opacity:1;transform:translateY(0)}
+.dc .tag{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);margin:0 0 8px;letter-spacing:.04em}
+.dc h3{font:300 24px/1.15 var(--ff);letter-spacing:-.6px;margin:0 0 12px}
+.dc .dip-wrap{margin:16px 0}
+.dc .dip-val{font:300 36px/1 var(--ff);letter-spacing:-.8px;color:var(--signal);counter-increment:dip;counter-reset:dip 0}
+.dc .dip-lbl{font-size:9px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);letter-spacing:.06em;display:block;margin-top:4px}
+
+/* Decision object card */
+.dobj{background:var(--panel);border:1px solid var(--lines);border-radius:3px;padding:24px;margin:0 0 16px;opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s}.dobj.in{opacity:1;transform:translateY(0)}
+.dobj .hd{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 8px;letter-spacing:.04em}
+.dobj .id{font:300 16px/1 var(--ff);letter-spacing:-.3px;color:var(--signal);margin:0 0 8px}
+.dobj h3{font:300 18px/1.2 var(--ff);letter-spacing:-.4px;margin:0 0 12px}
+.dobj .ev{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px;padding:12px 0;border-top:1px solid var(--line)}
+.dobj .ev .e{font-size:10px;color:var(--sub)}
+.dobj .ev .e .n{font-size:13px;font-weight:500;color:var(--signal)}
+.dobj .ftr{display:flex;gap:16px;flex-wrap:wrap;padding:12px 0 0;border-top:1px solid var(--line);font-size:10px;color:var(--mute)}
+.dobj .ftr .l{font-family:var(--fm);font-size:7px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);margin-right:4px}
+
+/* Learning loop orbit */
+.lrn{position:relative;min-height:40vh;padding:40px 0}
+.lrn .orbit{position:relative;width:300px;height:300px;margin:0 auto}
+.lrn .node{position:absolute;width:100px;height:100px;border-radius:50%;background:var(--panel);border:1px solid var(--lines);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;text-align:center;opacity:0;transform:scale(.8);transition:opacity .5s,transform .5s}.lrn .node.in{opacity:1;transform:scale(1)}
+.lrn .node .lbl{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);letter-spacing:.04em;margin-bottom:4px}
+.lrn .node .val{font-size:13px;color:var(--text);letter-spacing:-.1px}
+.lrn .node.active{border-color:var(--signal);background:rgba(21,94,94,.05)}
+.lrn .center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);letter-spacing:.06em;opacity:0;transition:opacity .6s}.lrn .center.in{opacity:1}
+@media(max-width:640px){
+  .lrn .orbit{width:240px;height:240px}
+  .lrn .node{width:80px;height:80px;padding:8px}
+}
+
+/* CTA interaction */
+.cta .b{position:relative;overflow:hidden}
+.cta .b::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.1);transform:translateX(-100%);transition:transform .3s var(--ease)}
+.cta .b:hover::after{transform:translateX(100%)}
+
+/* GSAP canvas signal field for hero */
+#hero-signal-field{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:1}
+#hero-signal-field canvas{width:100%!important;height:100%!important;display:block}
 </style>
 </head><body>
 
 <div class="nav"><div class="w"><div class="nv-l">Intella<em>IQ</em></div><div class="nv-m"><a href="#">Model</a><a href="#">Docs</a><a href="#" class="nv-b">Early access</a></div></div></div>
 
-<div class="hw"><div class="hc" id="flow-canvas"></div><div class="hz">
+<div class="hw"><div class="hc" id="flow-canvas"></div><div id="hero-signal-field"></div><div class="hz">
 <div class="eb">INTELLAIQ</div>
 <h1><span class="hl"><span>Unlock</span></span> <span class="hl"><span>decisions</span></span> <span class="hl"><span>hidden</span></span> <span class="hl"><span>in</span></span> <span class="hl"><span>your</span></span> <span class="hl"><span>data.</span></span></h1>
 <p>Your business generates thousands of signals across customers, markets, competitors, search, AI, sales and performance. IntellaIQ interrogates those signals with thousands of atomic questions, testing what is changing, what connects, what contradicts and what could change a decision.</p>
@@ -190,25 +295,24 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 <div class="ctr"><div class="num" id="counter">47,281</div><div class="lb">Atomic judgements</div></div>
 </div></div>
 
-<div class="s"><div class="w reveal">
-<div class="cv">
-<div class="h">Complexity &rarr; Decision</div>
-<div class="step"><span class="n">51,402</span> <span class="l">Atomic questions</span></div>
-<span class="arrow">&darr;</span>
-<div class="step"><span class="n">3,184</span> <span class="l">Meaningful relationships</span></div>
-<span class="arrow">&darr;</span>
-<div class="step"><span class="n">217</span> <span class="l">Material patterns</span></div>
-<span class="arrow">&darr;</span>
-<div class="step"><span class="n">31</span> <span class="l">Potential decisions</span></div>
-<span class="arrow">&darr;</span>
-<div class="step hl"><span class="n" style="color:var(--signal)">4</span> <span class="l" style="color:var(--text)">Decisions worth attention</span></div>
-<div class="reveal">
-<div class="r">Decision detected</div>
+<div class="s intv reveal">
+<div class="intv-h">Questions multiply. Patterns emerge.</div>
+<div class="intv-field" id="interrogation-field"></div>
+</div>
+
+<div class="cmp reveal" id="compression-section">
+<div class="cmp-inner">
+<div class="cmp-h">Signature visual</div>
+<h2 class="cmp-title">Complexity compresses into decision.</h2>
+<div class="cmp-field" id="compression-field"></div>
+<div class="counter" id="compression-counter"><span id="cmp-count">51,402</span><span class="lbl">Signals</span></div>
+<div class="cmp-reveal" id="decision-reveal">
+<div class="tag">Decision detected</div>
 <h3>Customer expectations are shifting toward convenience.</h3>
-<div class="p">Decision Impact Probability: 0.87</div>
+<div class="prob">Decision Impact Probability: <span id="dip-val">0.87</span></div>
 </div>
 </div>
-</div></div>
+</div>
 
 <div class="jg"><div class="jgw reveal">
 <div class="h">Judgement layer</div>
@@ -242,12 +346,11 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 <div class="s"><div class="w reveal">
 <div class="sh"><div class="sl">Contradictions</div><h2>The most useful signal may be the one that disagrees.</h2></div>
 <p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 12px">IntellaIQ looks for contradictions as well as agreement. When different sources tell different stories, that disagreement can reveal an assumption worth investigating.</p>
-<div class="cvx">
-<div class="c"><div class="l">Search</div><div class="dir"><span class="arr u">&uarr;</span><span>Demand rising <span style="color:var(--match);font-weight:500">+18%</span></span></div></div>
-<div class="c"><div class="l">Customer reviews</div><div class="dir"><span class="arr d">&darr;</span><span>Satisfaction falling <span style="color:var(--crit);font-weight:500">-12%</span></span></div></div>
-<div class="c"><div class="l">Competitors</div><div class="dir"><span class="arr u">&uarr;</span><span>Premium positioning <span style="color:var(--match);font-weight:500">+3 entries</span></span></div></div>
-<div class="c"><div class="l">AI responses</div><div class="dir"><span class="arr d">&darr;</span><span>Value perception <span style="color:var(--crit);font-weight:500">weakening</span></span></div></div>
-<div class="conclusion"><div class="l">Contradiction detected</div><div class="v">Demand is growing, but perceived value may be weakening.</div><div class="p">Decision Impact Probability: 0.79</div></div>
+<div class="ctr" id="contradiction-split">
+<div class="side" style="--tx:-30px"><div class="hd">Demand</div><div class="val up">&uarr; +18%</div></div>
+<div class="side" style="--tx:30px"><div class="hd">Customer Reviews</div><div class="val down">&darr; -12%</div></div>
+<div class="mid">&times;</div>
+<div class="conclusion"><div class="tag">Contradiction detected</div><div class="txt">Demand is growing, but perceived value may be weakening.</div><div class="dip">Decision Impact Probability: 0.79</div></div>
 </div>
 </div></div>
 
@@ -301,7 +404,12 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 <div class="ec">
 <div class="fl">Finding</div>
 <h3>Category demand is shifting toward convenience.</h3>
-<div class="ev"><div class="e"><span class="n">42</span> customer observations</div><div class="e"><span class="n">18</span> search clusters</div><div class="e"><span class="n">3</span> competitor changes</div><div class="e"><span class="n">27</span> AI responses</div></div>
+<div class="evc" id="evidence-convergence">
+<div class="c"><div class="num">42</div><div class="lbl">customer observations</div></div>
+<div class="c"><div class="num">18</div><div class="lbl">search clusters</div></div>
+<div class="c"><div class="num">3</div><div class="lbl">competitor changes</div></div>
+<div class="c"><div class="num">27</div><div class="lbl">AI responses</div></div>
+</div>
 <div class="ftr"><span><span class="l">Confidence</span>High</span><span><span class="l">Decision Impact</span>0.87</span></div>
 </div>
 </div></div>
@@ -321,11 +429,16 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 <div class="h">Learning</div>
 <h2>Decisions create evidence too.</h2>
 <p style="font-size:13px;color:rgba(245,245,243,.5);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 16px">IntellaIQ does not stop when a decision is made. Outcomes become new evidence, allowing the system to learn which signals, judgements and interventions actually mattered.</p>
-<div class="sg">
-<div class="c"><div class="cl">Before</div><div class="cv">Model expected AI understanding +22%</div></div>
-<div class="c"><div class="cl">Action</div><div class="cv">Content optimisation for AI readability</div></div>
-<div class="c"><div class="cl">After</div><div class="cv">AI understanding improved +18%</div></div>
-<div class="c"><div class="cl">Learning</div><div class="cv" style="color:var(--signal)">Direction confirmed. Intervention hypothesis supported.</div></div>
+<div class="lrn" id="learning-loop">
+<div class="orbit">
+<div class="node" style="top:0;left:50%;transform:translateX(-50%)"><div class="lbl">Observe</div><div class="val">Signals detected</div></div>
+<div class="node" style="top:20%;right:0;transform:translateX(50%)"><div class="lbl">Judge</div><div class="val">Evidence evaluated</div></div>
+<div class="node" style="bottom:20%;right:0;transform:translateX(50%)"><div class="lbl">Decide</div><div class="val">DIP calculated</div></div>
+<div class="node" style="bottom:0;left:50%;transform:translateX(-50%)"><div class="lbl">Act</div><div class="val">Intervention</div></div>
+<div class="node" style="bottom:20%;left:0;transform:translateX(-50%)"><div class="lbl">Measure</div><div class="val">Outcome tracked</div></div>
+<div class="node" style="top:20%;left:0;transform:translateX(-50%)"><div class="lbl">Learn</div><div class="val">Model updated</div></div>
+<div class="center">IntellaIQ</div>
+</div>
 </div>
 </div></div>
 
@@ -389,6 +502,21 @@ document.addEventListener('DOMContentLoaded', function(){
   tl.to('.hw p',{y:0,opacity:1,duration:.5,stagger:.08},'-=.1');
   tl.to('.hw .b2',{y:0,opacity:1,duration:.5},'-=.1');
 
+  // Hero signal field canvas
+  (function(){
+    var c=document.getElementById('hero-signal-field'),cv=document.createElement('canvas');
+    if(!c)return;
+    cv.style.cssText='position:absolute;top:0;left:0;width:100%;height:100%;display:block;opacity:.15';c.appendChild(cv);
+    var x=cv.getContext('2d'),W,H,S=[];
+    function rz(){var d=window.devicePixelRatio||1,b=c.getBoundingClientRect();W=b.width;H=b.height;cv.width=W*d;cv.height=H*d;x.setTransform(d,0,0,d,0,0)}
+    window.addEventListener('resize',rz);rz();
+    for(var i=0;i<120;i++){S.push({x:Math.random()*W,y:Math.random()*H,r:.5+Math.random()*1.5,sp:(Math.random()-.5)*.3,op:.1+Math.random()*.3})}
+    function dr(){x.clearRect(0,0,W,H);
+      for(var i=0;i<S.length;i++){var s=S[i];s.x+=s.sp;if(s.x<0)s.x=W;if(s.x>W)s.x=0;x.fillStyle='rgba(21,94,94,'+s.op+')';x.fillRect(s.x,s.y,s.r,s.r)}
+      requestAnimationFrame(dr)}dr();
+    window.addEventListener('resize',function(){rz()});
+  })();
+
   // Typography editorial section
   ScrollTrigger.batch('.typo .t',{
     onEnter: function(batch){gsap.to(batch,{opacity:1,y:0,duration:.7,ease:'power3.out',stagger:.15});},
@@ -407,59 +535,161 @@ document.addEventListener('DOMContentLoaded', function(){
     start:'top 88%'
   });
 
-  // Compression steps stagger  
-  ScrollTrigger.batch('.cv .step',{
-    onEnter: function(batch){gsap.to(batch,{opacity:1,y:0,duration:.5,ease:'power2.out',stagger:.12});},
-    start:'top 85%'
-  });
-  ScrollTrigger.batch('.cv .arrow',{
-    onEnter: function(batch){gsap.to(batch,{opacity:.4,duration:.4,ease:'power1.out',stagger:.12});},
-    start:'top 85%'
-  });
-  ScrollTrigger.batch('.cv .reveal',{
-    onEnter: function(batch){gsap.to(batch,{opacity:1,y:0,duration:.7,ease:'power2.out'});},
-    start:'top 60%'
+  // Interrogation visual - questions orbiting signals
+  (function(){
+    var field=document.getElementById('interrogation-field');
+    if(!field)return;
+    var questions=[
+      'IS THIS SIGNAL MEANINGFUL?','IS THE CHANGE PERSISTENT?','IS IT APPEARING ELSEWHERE?',
+      'IS IT ACCELERATING?','IS IT RELATED?','DOES IT CONTRADICT?',
+      'CUSTOMER BEHAVIOUR?','COMPETITOR BEHAVIOUR?','SEARCH BEHAVIOUR?','COULD IT CHANGE A DECISION?'
+    ];
+    var signals=[
+      {x:150,y:120,t:'Search'},{x:400,y:180,t:'Reviews'},{x:650,y:100,t:'Competitors'},
+      {x:200,y:300,t:'AI'},{x:500,y:280,t:'Sales'},{x:700,y:250,t:'Market'}
+    ];
+    signals.forEach(function(s){
+      var el=document.createElement('div');el.className='intv-signal';el.style.left=s.x+'px';el.style.top=s.y+'px';
+      var l=document.createElement('span');l.className='lbl';l.textContent=s.t;el.appendChild(l);field.appendChild(el);
+    });
+    var qEls=[];
+    questions.forEach(function(q,i){
+      var el=document.createElement('div');el.className='intv-q';el.textContent=q;
+      var ang=(i/questions.length)*Math.PI*2,r=180+Math.sin(i)*40;
+      el.style.left=(field.offsetWidth/2+Math.cos(ang)*r)+'px';el.style.top=(field.offsetHeight/2+Math.sin(ang)*r)+'px';
+      qEls.push({el:el,ang:ang,r:r});field.appendChild(el);
+    });
+    var idx=0;
+    function showNext(){
+      if(idx<qEls.length){
+        gsap.to(qEls[idx].el,{opacity:1,scale:1,duration:.4,ease:'back.out(1.5)'});
+        idx++;setTimeout(showNext,800);
+      }else{
+        setTimeout(function(){
+          qEls.forEach(function(q){gsap.to(q.el,{opacity:0,scale:.9,duration:.3})});
+          idx=0;setTimeout(showNext,1500);
+        },3000);
+      }
+    }
+    setTimeout(showNext,500);
+  })();
+
+  // Pinned compression animation
+  (function(){
+    var section=document.getElementById('compression-section'),field=document.getElementById('compression-field');
+    if(!section||!field)return;
+    var countEl=document.getElementById('cmp-count'),dipEl=document.getElementById('dip-val'),revealEl=document.getElementById('decision-reveal');
+    var dots=[],lines=[],clusters=[],stage=0;
+    var W=field.offsetWidth,H=field.offsetHeight;
+    function createDots(){
+      for(var i=0;i<180;i++){
+        var d=document.createElement('div');d.className='signal-dot';
+        d.style.left=(Math.random()*W)+'px';d.style.top=(Math.random()*H)+'px';
+        field.appendChild(d);dots.push(d);
+      }
+    }
+    function stage1(){dots.forEach(function(d){d.classList.add('active')});setTimeout(stage2,1500)}
+    function stage2(){var pairs=[[0,12],[34,56],[78,90],[100,110],[120,130],[140,150],[160,170]];
+      pairs.forEach(function(p,i){
+        var d1=dots[p[0]],d2=dots[p[1]];if(!d1||!d2)return;
+        var r1=d1.getBoundingClientRect(),r2=d2.getBoundingClientRect();
+        var l=document.createElement('div');l.className='signal-line';
+        var dx=r2.left-r1.left,dy=r2.top-r1.top,dist=Math.sqrt(dx*dx+dy*dy);
+        l.style.width=dist+'px';l.style.left=r1.left+'px';l.style.top=r1.top+'px';
+        l.style.setProperty('--ang',Math.atan2(dy,dx)+'rad');
+        field.appendChild(l);lines.push(l);
+        setTimeout(function(){l.classList.add('active')},i*100);
+      });
+      setTimeout(stage3,1200);
+    }
+    function stage3(){
+      var clustersData=[{x:W*.2,y:H*.3,t:'Search cluster',hl:true},{x:W*.6,y:H*.25,t:'Review pattern'},{x:W*.4,y:H*.6,t:'Competitor shift',hl:true},{x:W*.75,y:H*.55,t:'AI signal'}];
+      clustersData.forEach(function(c,i){
+        var cl=document.createElement('div');cl.className='cluster'+(c.hl?' hl':'');cl.textContent=c.t;
+        cl.style.left=c.x+'px';cl.style.top=c.y+'px';field.appendChild(cl);clusters.push(cl);
+        setTimeout(function(){cl.classList.add('active')},i*200);
+      });
+      dots.forEach(function(d,i){if(i%3!==0)gsap.to(d,{opacity:0,duration:.4})});
+      setTimeout(stage4,1500);
+    }
+    function stage4(){
+      lines.forEach(function(l){gsap.to(l,{opacity:0,duration:.3})});
+      clusters.forEach(function(c,i){
+        if(!c.classList.contains('hl'))gsap.to(c,{opacity:0,scale:.8,duration:.4,delay:i*.1});
+      });
+      setTimeout(function(){
+        countEl.textContent='3,184';countEl.nextElementSibling.textContent='Relationships';
+      },500);
+      setTimeout(stage5,1000);
+    }
+    function stage5(){
+      clusters.filter(function(c){return c.classList.contains('hl')}).forEach(function(c,i){
+        gsap.to(c,{opacity:0,scale:.8,duration:.4,delay:i*.15});
+      });
+      setTimeout(function(){
+        countEl.textContent='217';countEl.nextElementSibling.textContent='Patterns';
+      },600);
+      setTimeout(stage6,1200);
+    }
+    function stage6(){
+      setTimeout(function(){
+        countEl.textContent='31';countEl.nextElementSibling.textContent='Potential decisions';
+      },400);
+      setTimeout(stage7,1000);
+    }
+    function stage7(){
+      setTimeout(function(){
+        countEl.textContent='4';countEl.nextElementSibling.textContent='Decisions';
+        gsap.to(revealEl,{opacity:1,duration:.8,ease:'power2.out'});
+        gsap.to({v:0},{v:.87,duration:1.5,ease:'power2.out',onUpdate:function(){dipEl.textContent=this.targets()[0].v.toFixed(2)}});
+      },400);
+    }
+    createDots();
+    ScrollTrigger.create({
+      trigger:section,start:'top 80%',end:'bottom 20%',pin:true,pinSpacing:true,
+      onEnter:function(){setTimeout(stage1,300);},
+      onLeaveBack:function(){stage=0;dots.forEach(function(d){d.remove()});lines.forEach(function(l){l.remove()});clusters.forEach(function(c){c.remove()});dots=[];lines=[];clusters=[];revealEl.style.opacity=0;createDots();},
+      onEnterBack:function(){setTimeout(stage1,300);}
+    });
+  })();
+
+  // Contradiction split animation
+  ScrollTrigger.create({
+    trigger:'#contradiction-split',
+    start:'top 85%',
+    onEnter:function(){
+      gsap.to('#contradiction-split .side',{opacity:1,x:0,duration:.6,ease:'power2.out',stagger:.15});
+      gsap.to('#contradiction-split .mid',{opacity:1,duration:.4,delay:.4});
+      gsap.to('#contradiction-split .conclusion',{opacity:1,duration:.6,delay:.8});
+    },
+    onLeaveBack:function(){
+      gsap.set('#contradiction-split .side',{opacity:0,x:function(i){return i===0?-30:30}});
+      gsap.set('#contradiction-split .mid',{opacity:0});
+      gsap.set('#contradiction-split .conclusion',{opacity:0});
+    }
   });
 
-  // Dark section signal cards  
-  ScrollTrigger.batch('.jg .sg .c',{
-    onEnter: function(batch){gsap.to(batch,{opacity:1,y:0,duration:.5,ease:'power2.out',stagger:.1});},
-    start:'top 85%'
-  });
-  ScrollTrigger.batch('.jg .j',{
-    onEnter: function(batch){gsap.to(batch,{opacity:1,scale:1,duration:.6,ease:'back.out(1.2)'});},
-    start:'top 80%'
-  });
-
-  // Contradiction signals stagger
-  ScrollTrigger.batch('.cvx .dir',{
-    onEnter: function(batch){gsap.to(batch,{opacity:1,x:0,duration:.5,ease:'power2.out',stagger:.1});},
+  // Evidence convergence
+  ScrollTrigger.batch('#evidence-convergence .c',{
+    onEnter: function(batch){gsap.to(batch,{opacity:1,scale:1,duration:.5,ease:'back.out(1.3)',stagger:.1});},
     start:'top 88%'
   });
-  ScrollTrigger.batch('.cvx .conclusion',{
-    onEnter: function(batch){gsap.to(batch,{opacity:1,duration:.6,ease:'power2.out'});},
-    start:'top 70%'
+
+  // Learning loop orbit
+  ScrollTrigger.create({
+    trigger:'#learning-loop',
+    start:'top 85%',
+    onEnter:function(){
+      gsap.to('#learning-loop .node',{opacity:1,scale:1,duration:.5,ease:'back.out(1.3)',stagger:.1});
+      gsap.to('#learning-loop .center',{opacity:1,duration:.6,delay:.6});
+    },
+    onLeaveBack:function(){
+      gsap.set('#learning-loop .node',{opacity:0,scale:.8});
+      gsap.set('#learning-loop .center',{opacity:0});
+    }
   });
 
-  // Sources stagger
-  ScrollTrigger.batch('.sp .r',{
-    onEnter: function(batch){gsap.to(batch,{opacity:1,duration:.4,ease:'power1.out',stagger:.08});},
-    start:'top 88%'
-  });
-
-  // System sees sequence
-  ScrollTrigger.batch('.seq .st',{
-    onEnter: function(batch){gsap.to(batch,{opacity:1,x:0,duration:.5,ease:'power2.out',stagger:.12});},
-    start:'top 85%'
-  });
-
-  // Priority queue stagger
-  ScrollTrigger.batch('.pq .p',{
-    onEnter: function(batch){gsap.fromTo(batch,{opacity:0,x:-20},{opacity:1,x:0,duration:.4,ease:'power2.out',stagger:.08});},
-    start:'top 88%'
-  });
-
-  // Expected vs observed bars
+  // Expected vs observed bars (existing)
   ScrollTrigger.batch('.eo .b',{
     onEnter: function(batch){gsap.to(batch,{opacity:1,y:0,duration:.5,ease:'power2.out',stagger:.15});},
     start:'top 85%'
@@ -471,12 +701,6 @@ document.addEventListener('DOMContentLoaded', function(){
   ScrollTrigger.batch('.eo .gap',{
     onEnter: function(batch){gsap.to(batch,{opacity:1,duration:.6,ease:'power2.out',delay:.3});},
     start:'top 70%'
-  });
-
-  // Evidence items stagger
-  ScrollTrigger.batch('.ec .e',{
-    onEnter: function(batch){gsap.to(batch,{opacity:1,duration:.4,ease:'power1.out',stagger:.08});},
-    start:'top 85%'
   });
 
   // Workflow stagger
