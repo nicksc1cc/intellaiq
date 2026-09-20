@@ -1,5 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>IntellaIQ — Unlock decisions hidden in your data.</title><meta name="description" content="IntellaIQ connects fragmented signals and surfaces the decisions that deserve attention."><style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-:root{--bg:#F5F5F3;--panel:#FDFDFD;--text:#1A1A1A;--sub:#4A4A4A;--mute:#888888;--line:rgba(26,26,26,.07);--lines:rgba(26,26,26,.12);--signal:#155E5E;--ff:'Space Grotesk',sans-serif;--fm:'JetBrains Mono',monospace}
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>IntellaIQ — Unlock decisions hidden in your data.</title><meta name="description" content="IntellaIQ interrogates thousands of signals with thousands of atomic questions, combines the resulting judgements, and surfaces the decisions most likely to have meaningful impact."><style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+:root{--bg:#F5F5F3;--panel:#FDFDFD;--text:#1A1A1A;--sub:#4A4A4A;--mute:#888888;--line:rgba(26,26,26,.07);--lines:rgba(26,26,26,.12);--signal:#155E5E;--match:#27A644;--warn:#E88D2A;--crit:#C0392B;--ff:'Space Grotesk',sans-serif;--fm:'JetBrains Mono',monospace}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-font-smoothing:antialiased}
 .w{max-width:1100px;margin:0 auto;padding:0 24px}
@@ -11,155 +11,369 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 .nv-m a{color:inherit;text-decoration:none}.nv-m a:hover{color:#F5F5F3}
 .nv-b{padding:5px 14px;border:1px solid rgba(245,245,243,.2);border-radius:3px;font-size:11px;font-weight:500;color:#F5F5F3;text-decoration:none;letter-spacing:-.2px}
 @media(max-width:640px){.nv-m{display:none}}
-.hw{background:var(--text);min-height:560px;position:relative;overflow:hidden}
+.hw{background:var(--text);min-height:520px;position:relative;overflow:hidden}
 .hc{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1}
 .hc canvas{width:100%!important;height:100%!important;display:block}
-.hz{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:96px 24px 80px}
-.hz .eb{font-size:11px;font-weight:500;letter-spacing:.04em;color:rgba(245,245,243,.3);margin:0 0 20px;font-family:var(--fm);text-transform:uppercase}
-.hz h1{color:#F5F5F3;font:400 clamp(36px,5vw,56px)/1.04 var(--ff);letter-spacing:-1.4px;margin:0 0 14px;max-width:700px}
-.hz p{color:rgba(245,245,243,.5);margin:0 0 28px;max-width:480px;font-size:16px;line-height:1.55;letter-spacing:-.2px}
-.hz .b2{display:flex;gap:10px;flex-wrap:wrap}
-.bt{display:inline-block;padding:9px 20px;font-size:12px;font-weight:500;letter-spacing:-.2px;border-radius:3px;text-decoration:none}
+.hz{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:88px 24px 72px}
+.hz .eb{font-size:10px;font-weight:500;letter-spacing:.08em;color:rgba(245,245,243,.3);margin:0 0 16px;font-family:var(--fm);text-transform:uppercase}
+.hz h1{color:#F5F5F3;font:400 clamp(34px,5vw,56px)/1.04 var(--ff);letter-spacing:-1.2px;margin:0 0 12px;max-width:680px}
+.hz p{color:rgba(245,245,243,.5);margin:0 0 6px;max-width:520px;font-size:15px;line-height:1.55;letter-spacing:-.15px}
+.hz .b2{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.bt{display:inline-block;padding:9px 20px;font-size:11px;font-weight:500;letter-spacing:-.15px;border-radius:3px;text-decoration:none}
 .bt-p{background:var(--signal);color:#F5F5F3}
 .bt-s{border:1px solid rgba(245,245,243,.2);color:rgba(245,245,243,.7)}
 .bt-s:hover{border-color:rgba(245,245,243,.4);color:#F5F5F3}
 @media(max-width:640px){.hw{min-height:400px}.hz{padding:64px 24px 56px}.hc{display:none!important}}
-.s{padding:80px 0}.s+.s{border-top:1px solid var(--line)}
-.sh h2{font:300 clamp(24px,2.8vw,36px)/1.08 var(--ff);letter-spacing:-.8px;margin:0 0 12px}
-.sh .sl{font-size:10px;font-weight:500;color:var(--mute);letter-spacing:.04em;margin:0 0 4px;font-family:var(--fm);text-transform:uppercase}
-.it{margin:0 0 32px;max-width:620px}
-.it .il{font:300 24px/1.2 var(--ff);letter-spacing:-.6px;color:var(--text);margin:0 0 10px}
-.it p{font-size:14px;color:var(--sub);letter-spacing:-.15px;line-height:1.6}
-.pipe{display:flex;align-items:center;gap:4px;margin:28px 0;flex-wrap:wrap;justify-content:center}
-.pipe .n{padding:6px 18px;background:var(--text);border-radius:3px;font-size:11px;font-weight:500;color:#F5F5F3;letter-spacing:-.2px}
-.pipe .a{color:var(--mute);font-size:12px}
-.pipe .i{font-size:10px;color:var(--mute);font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em}
-.dp{border:1px solid var(--lines);background:var(--panel);border-radius:3px;overflow:hidden;margin:0 0 20px}
-.dp-h{padding:10px 16px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
-.dp-h .l{font-size:9px;font-weight:500;color:var(--signal);font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em}
-.dp-h .r{font-size:7px;color:var(--mute)}
-.dp-m{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
-.dp-m .c{padding:14px 16px;background:var(--panel)}
-.dp-m .c .cl{font-size:7px;font-weight:500;text-transform:uppercase;color:var(--mute);margin:0 0 2px}
-.dp-m .c .cv{font-size:28px;font-weight:300;letter-spacing:-.7px;line-height:1;color:var(--text)}
-.dp-m .c .cn{font-size:10px;color:var(--sub);margin-top:2px;letter-spacing:-.1px}
-.fd{border-top:1px solid var(--line);padding:16px}
-.fd .fl{font-size:9px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 6px;letter-spacing:.03em}
-.fd h4{font:300 18px/1.2 var(--ff);letter-spacing:-.4px;margin:0 0 8px}
-.fd p{font-size:13px;color:var(--sub);letter-spacing:-.1px;line-height:1.55;margin:0 0 8px}
-.fd .sg{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}
-.fd .sg span{font-size:11px;color:var(--sub);letter-spacing:-.1px}
-.fd .sg .v{color:var(--signal);font-weight:500}
-.fd .ev{display:flex;flex-wrap:wrap;gap:4px;margin:10px 0 0;padding:10px 0 0;border-top:1px solid var(--line)}
-.fd .ev span{font-size:7px;padding:1px 5px;border:1px solid;border-radius:2px;text-transform:uppercase;letter-spacing:.03em}
-.gr{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:20px 0}
-.gr .c{padding:16px;background:var(--panel)}
-.gr .c .cl{font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 4px;letter-spacing:.04em}
-.gr .c .ct{font-size:13px;font-weight:400;color:var(--text);letter-spacing:-.15px}
-.gr .c .cv{font-size:11px;color:var(--signal);margin-top:2px;letter-spacing:-.1px}
-.og{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:0}
-.og .c{padding:20px;background:var(--panel)}
-.og .c .cl{font-size:8px;font-weight:500;font-family:var(--fm);color:var(--mute);margin:0 0 2px}
-.og .c .ct{font:300 20px/1.1 var(--ff);letter-spacing:-.5px;margin:0 0 4px}
-.og .c p{font-size:11px;color:var(--sub);letter-spacing:-.1px;margin:0}
-.lp{display:flex;gap:1px;margin:24px 0;flex-wrap:wrap;justify-content:center}
-.lp .l{padding:5px 14px;background:var(--panel);border:1px solid var(--line);font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em;color:var(--mute)}
-.lp .l.-a{background:var(--signal);border-color:var(--signal);color:#F5F5F3}
-.cta{text-align:center;padding:80px 0}
+.s{padding:72px 0}.s+.s{border-top:1px solid var(--line)}
+.sh h2{font:300 clamp(24px,2.8vw,36px)/1.1 var(--ff);letter-spacing:-.8px;margin:0 0 12px}
+.sh .sl{font-size:9px;font-weight:500;color:var(--mute);letter-spacing:.06em;margin:0 0 4px;font-family:var(--fm);text-transform:uppercase}
+.sh p{font-size:14px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6}
+.it{margin:0 0 48px;max-width:580px}
+.it .il{font:300 22px/1.2 var(--ff);letter-spacing:-.5px;color:var(--text);margin:0 0 8px}
+.it p{font-size:13px;color:var(--sub);letter-spacing:-.1px;line-height:1.6}
+@media(max-width:640px){.s{padding:48px 0}}
+/* Atomic questions section */
+.aq{background:var(--panel);border:1px solid var(--lines);border-radius:3px;padding:32px;margin:0 0 24px}
+.aq .h{font-size:9px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 16px;letter-spacing:.06em}
+.aq .qs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:0 0 20px}
+.aq .qs .q{font-size:13px;color:var(--sub);letter-spacing:-.1px;padding:4px 0}
+.aq .qs .q .i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--signal);margin-right:8px;opacity:.6;vertical-align:middle}
+.aq .qs .q .cnt{display:inline-block;width:6px;height:6px;border-radius:50%;background:currentColor;margin-right:8px;opacity:.3;vertical-align:middle}
+.aq .ctr{text-align:center;padding:16px 0 0;border-top:1px solid var(--line)}
+.aq .ctr .num{font:300 64px/1 var(--ff);letter-spacing:-2px;color:var(--signal);margin:0 0 4px}
+.aq .ctr .lb{font-size:9px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);letter-spacing:.06em}
+@media(max-width:640px){.aq .qs{grid-template-columns:1fr}.aq .ctr .num{font-size:48px}}
+/* Compression visual */
+.cv{background:var(--panel);border:1px solid var(--lines);border-radius:3px;padding:32px;margin:0 0 24px;text-align:center}
+.cv .h{font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 24px;letter-spacing:.06em}
+.cv .step{display:flex;align-items:center;justify-content:center;gap:8px;margin:4px auto;flex-wrap:wrap;max-width:500px}
+.cv .step .n{font:300 24px/1 var(--ff);letter-spacing:-.5px;min-width:80px;text-align:right}
+.cv .step .l{font-size:11px;color:var(--sub);letter-spacing:-.1px;text-align:left}
+.cv .arrow{font-size:16px;color:var(--mute);margin:2px 0;display:block}
+.cv .reveal{margin-top:20px;padding:20px 0 0;border-top:1px solid var(--line)}
+.cv .reveal .r{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);margin:0 0 8px;letter-spacing:.04em}
+.cv .reveal h3{font:300 24px/1.15 var(--ff);letter-spacing:-.6px;margin:0 0 8px;color:var(--text)}
+.cv .reveal .p{font-size:14px;color:var(--signal);font-weight:500}
+/* Judgement layer */
+.jg{background:var(--text);width:100%;color:#F5F5F3;padding:0 24px;margin:0 -24px;width:calc(100%+48px)}
+.jg .jgw{max-width:1100px;margin:0 auto;padding:56px 0}
+.jg .jgw .h{font-size:9px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:rgba(245,245,243,.4);margin:0 0 20px;letter-spacing:.06em}
+.jg .jgw h2{font:300 28px/1.1 var(--ff);letter-spacing:-.6px;margin:0 0 20px;color:#F5F5F3;max-width:500px}
+.jg .jgw .sg{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(245,245,243,.08);border-radius:3px;overflow:hidden;margin:0 0 20px}
+.jg .jgw .sg .c{padding:16px;background:var(--text)}
+.jg .jgw .sg .c .cl{font-size:7px;font-weight:500;color:rgba(245,245,243,.4);margin:0 0 4px}
+.jg .jgw .sg .c .cv{font-size:12px;color:rgba(245,245,243,.8);letter-spacing:-.1px}
+.jg .jgw .j{text-align:center;padding:16px;border:1px solid rgba(245,245,243,.12);border-radius:3px;margin:0 0 16px}
+.jg .jgw .j .l{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);margin:0 0 8px;letter-spacing:.04em}
+.jg .jgw .j h3{font:300 20px/1.2 var(--ff);letter-spacing:-.4px;color:#F5F5F3;margin:0 0 8px}
+.jg .jgw .j .p{font-size:16px;font-weight:500;color:var(--signal)}
+/* Decision Impact Probability */
+.dip{display:flex;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:20px 0}
+.dip .c{padding:20px;background:var(--panel);text-align:center}
+.dip .c .l{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 4px}
+.dip .c .v{font-size:36px;font-weight:300;letter-spacing:-.8px;color:var(--text)}
+.dip .c .s{font-size:11px;color:var(--sub);letter-spacing:-.1px}
+.dip .c .v.d{color:var(--signal)}.dip .c .v.w{color:var(--warn)}.dip .c .v.l{color:var(--mute)}
+@media(max-width:640px){.dip .c .v{font-size:28px}}
+/* Compression counter */
+.comp{display:flex;align-items:center;gap:4px;margin:20px 0;flex-wrap:wrap;justify-content:center}
+.comp .n{padding:4px 12px;border-radius:2px;font-size:9px;font-weight:500;font-family:var(--fm);letter-spacing:.04em;color:var(--mute)}
+.comp .a{color:var(--mute);font-size:11px}
+.comp .s{font-size:14px;font-weight:500;color:var(--signal);font-family:var(--ff)}
+/* Contradiction visual */
+.cvx{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:20px 0}
+.cvx .c{padding:16px 20px;background:var(--panel)}
+.cvx .c .l{font-size:7px;font-weight:500;color:var(--mute);margin:0 0 4px}
+.cvx .c .v{font-size:12px;color:var(--text);letter-spacing:-.1px}
+.cvx .c .d{font-size:20px;font-weight:300;color:var(--signal);margin:0 8px}
+.cvx .dir{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.cvx .dir .arr{font-size:18px;color:var(--mute)}
+.cvx .dir .arr.u{color:var(--match)}.cvx .dir .arr.d{color:var(--crit)}
+.cvx .conclusion{border-top:1px solid var(--line);padding:12px 20px;background:var(--panel)}
+.cvx .conclusion .l{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);margin:0 0 4px;letter-spacing:.04em}
+.cvx .conclusion .v{font-size:13px;color:var(--text);letter-spacing:-.1px}
+.cvx .conclusion .p{font-size:13px;color:var(--signal);margin-top:4px}
+@media(max-width:640px){.cvx{grid-template-columns:1fr}}
+/* Sources pipeline */
+.sp{display:flex;flex-direction:column;gap:2px;margin:20px 0;padding:20px;background:var(--panel);border:1px solid var(--lines);border-radius:3px}
+.sp .r{display:flex;align-items:center;gap:4px;flex-wrap:wrap;font-size:12px;color:var(--sub);letter-spacing:-.1px;padding:4px 0}
+.sp .r .l{font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);min-width:70px}
+.sp .r .arr{color:var(--mute);font-size:14px;margin:0 4px}
+.sp .center{text-align:center;padding:8px 0;font-size:14px;font-weight:500;color:var(--signal);letter-spacing:-.2px}
+.sp .center .s{font-size:9px;color:var(--mute);font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em;display:block;margin-top:2px}
+/* Intelligence sequence */
+.seq{margin:20px 0;padding:0}
+.seq .st{margin:0 0 2px;padding:12px 16px;border-left:2px solid var(--line)}
+.seq .st.-a{border-left-color:var(--signal)}
+.seq .st .l{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 2px;letter-spacing:.04em}
+.seq .st .v{font-size:13px;color:var(--text);letter-spacing:-.1px}
+.seq .st .p{font-size:14px;color:var(--signal);font-weight:500;margin-top:4px}
+/* Priority queue */
+.pq{margin:20px 0}
+.pq .p{display:flex;align-items:center;gap:12px;padding:12px 16px;margin:0 0 4px;background:var(--panel);border:1px solid var(--line);border-radius:3px}
+.pq .p .rk{font:300 20px/1 var(--ff);letter-spacing:-.4px;color:var(--mute);min-width:30px}
+.pq .p .d{flex:1}
+.pq .p .d .t{font-size:11px;font-weight:500;color:var(--text);letter-spacing:-.15px}
+.pq .p .d .s{font-size:9px;color:var(--sub);margin-top:2px;letter-spacing:-.1px}
+.pq .p .prob{font:300 20px/1 var(--ff);letter-spacing:-.4px;color:var(--signal)}
+.pq .p .prob.w{color:var(--warn)}.pq .p .prob.l{color:var(--mute)}
+/* Expected vs Observed */
+.eo{margin:20px 0;background:var(--panel);border:1px solid var(--lines);border-radius:3px;padding:24px}
+.eo .h{font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 16px;letter-spacing:.06em}
+.eo .b{margin:0 0 12px}
+.eo .b .l{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 4px;letter-spacing:.04em}
+.eo .b .v{font-size:12px;color:var(--text);letter-spacing:-.1px;margin:0 0 4px}
+.eo .b .bar{height:6px;background:var(--line);border-radius:2px;overflow:hidden}
+.eo .b .bar .f{height:100%;background:var(--mute);border-radius:2px}
+.eo .b .bar .f.s{background:var(--signal)}
+.eo .gap{text-align:center;padding:12px;border:1px solid var(--signal);border-radius:2px;margin:12px 0}
+.eo .gap .l{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);margin:0 0 4px;letter-spacing:.04em}
+.eo .gap .v{font-size:12px;color:var(--text);letter-spacing:-.1px}
+.eo .why{padding:12px 0 0;border-top:1px solid var(--line)}
+.eo .why .l{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 4px;letter-spacing:.04em}
+.eo .why .v{font-size:12px;color:var(--sub);letter-spacing:-.1px}
+.eo .dip{font-size:14px;color:var(--signal);font-weight:500;margin-top:8px}
+/* Evidence card */
+.ec{border:1px solid var(--lines);background:var(--panel);border-radius:3px;padding:24px;margin:0 0 16px}
+.ec .fl{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 8px;letter-spacing:.04em}
+.ec h3{font:300 18px/1.2 var(--ff);letter-spacing:-.4px;margin:0 0 12px}
+.ec .ev{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 12px;padding:12px 0;border-top:1px solid var(--line)}
+.ec .ev .e{font-size:11px;color:var(--sub);letter-spacing:-.1px}
+.ec .ev .e .n{font-size:14px;font-weight:500;color:var(--signal)}
+.ec .ftr{display:flex;gap:16px;flex-wrap:wrap;padding:12px 0 0;border-top:1px solid var(--line);font-size:10px;color:var(--mute)}
+.ec .ftr .l{font-family:var(--fm);font-size:7px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);margin-right:4px}
+/* Vertical workflow */
+.vw{list-style:none;margin:20px 0}
+.vw li{display:flex;align-items:flex-start;gap:16px;padding:16px 0;border-top:1px solid var(--line)}
+.vw li:first-child{border:none;padding-top:0}
+.vw li .rk{font:300 18px/1 var(--ff);letter-spacing:-.4px;color:var(--signal);min-width:24px;padding-top:1px}
+.vw li .d .t{font-size:13px;font-weight:500;color:var(--text);letter-spacing:-.15px}
+.vw li .d .s{font-size:11px;color:var(--sub);margin-top:2px;letter-spacing:-.1px}
+.vw li .a{color:var(--mute);font-size:14px;padding-top:6px}.vw li:last-child .a{display:none}
+/* Positioning */
+.psg{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:20px 0}
+.psg .c{padding:16px;background:var(--panel)}
+.psg .c .l{font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 2px;letter-spacing:.04em}
+.psg .c .v{font-size:11px;color:var(--sub);letter-spacing:-.1px}
+.psg .c.hl{background:var(--signal)}.psg .c.hl .l{color:rgba(245,245,243,.6)}.psg .c.hl .v{color:#F5F5F3}
+@media(max-width:640px){.psg{grid-template-columns:1fr}}
+.cta{text-align:center;padding:72px 0}
 .cta h3{font:300 clamp(24px,3vw,34px)/1.08 var(--ff);letter-spacing:-.8px;margin:0 0 8px}
-.cta p{color:var(--sub);margin:0 auto 28px;max-width:400px;font-size:14px;letter-spacing:-.15px}
-.cta .b{display:inline-block;padding:10px 28px;background:var(--signal);font-size:12px;font-weight:500;letter-spacing:-.2px;color:#F5F5F3;text-decoration:none;border-radius:3px}
-.cta .b-s{display:inline-block;padding:10px 28px;border:1px solid var(--lines);font-size:12px;font-weight:500;letter-spacing:-.2px;color:var(--sub);text-decoration:none;border-radius:3px;margin-left:10px}
-.cta .bs{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
-.ft{padding:24px 0 48px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:11px;color:var(--mute)}
+.cta p{color:var(--sub);margin:0 auto 28px;max-width:420px;font-size:13px;letter-spacing:-.1px;line-height:1.6}
+.cta .b{display:inline-block;padding:10px 28px;background:var(--signal);font-size:11px;font-weight:500;letter-spacing:-.15px;color:#F5F5F3;text-decoration:none;border-radius:3px}
+.ft{padding:24px 0 48px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:10px;color:var(--mute)}
 .ft a{color:var(--mute);text-decoration:none}.ft a:hover{color:var(--text)}
-@media(max-width:640px){
-.s{padding:48px 0}.gr{grid-template-columns:1fr}.og{grid-template-columns:1fr}.dp-m{grid-template-columns:1fr}.cta{padding:48px 0}
-}
 </style></head><body>
 
 <div class="nav"><div class="w"><div class="nv-l">Intella<em>IQ</em></div><div class="nv-m"><a href="#">Model</a><a href="#">Docs</a><a href="#" class="nv-b">Early access</a></div></div></div>
 
-<div class="hw">
-<div class="hc" id="flow-canvas"></div>
-<div class="hz">
+<div class="hw"><div class="hc" id="flow-canvas"></div><div class="hz">
 <div class="eb">INTELLAIQ</div>
 <h1>Unlock decisions hidden in your data.</h1>
-<p>Your business produces thousands of signals across customers, markets, competitors, search and performance. IntellaIQ connects them and surfaces what deserves attention.</p>
+<p>Your business generates thousands of signals across customers, markets, competitors, search, AI, sales and performance. IntellaIQ interrogates those signals with thousands of atomic questions, testing what is changing, what connects, what contradicts and what could change a decision.</p>
+<p>The resulting judgements are combined to surface the decisions with the greatest potential impact.</p>
 <div class="b2"><a href="#" class="bt bt-p">See how it works</a><a href="#" class="bt bt-s">Explore the product</a></div>
 </div></div>
 
 <div class="s"><div class="w">
-<div class="it"><div class="il">Your data is full of signals. Your teams are full of decisions.</div><p>Every system produces another view. The problem is not a shortage of information. It is knowing what matters, what changed and what to do about it.</p></div>
-<div class="pipe"><span class="n">Signal</span><span class="a">&rarr;</span><span class="n">Context</span><span class="a">&rarr;</span><span class="n">Relationship</span><span class="a">&rarr;</span><span class="n">Judgement</span><span class="a">&rarr;</span><span class="n">Decision</span></div>
+<div class="it"><div class="il">Your data is full of signals. Your teams are full of decisions.</div><p>Every system produces another view. The problem is not a shortage of information. It is knowing what matters, what changed, what is connected and what to do about it. IntellaIQ interrogates the evidence at scale so you can stop processing and start deciding.</p></div>
 </div></div>
 
 <div class="s"><div class="w">
-<div class="sh"><div class="sl">Product</div><h2>IntellaIQ turns information into judgement.</h2></div>
-<p style="font-size:14px;color:var(--sub);margin:0 0 28px;letter-spacing:-.15px;max-width:460px">It is not another place to look at your data. It is a system for deciding what your data means.</p>
-<div class="dp">
-<div class="dp-h"><span class="l">Decision State</span><span class="r">Illustrative demo data</span></div>
-<div class="dp-m">
-<div class="c"><div class="cl">Decisions</div><div class="cv">24</div><div class="cn">Across 6 intelligence sources</div></div>
-<div class="c"><div class="cl">Material changes</div><div class="cv">7</div><div class="cn">Multiple signals converging</div></div>
-<div class="c"><div class="cl">Opportunities</div><div class="cv">4</div><div class="cn">Requiring investigation</div></div>
+<div class="sh"><div class="sl">The big idea</div><h2>Don't just analyse the data. Interrogate it.</h2></div>
+<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 20px">An atomic question is a small, bounded judgement applied to a piece of evidence. IntellaIQ asks thousands of them simultaneously across thousands of signals. The sophistication comes from volume, consistency and combination.</p>
+<div class="aq">
+<div class="h">What IntellaIQ is asking</div>
+<div class="qs">
+<div class="q"><span class="i"></span>Is this signal meaningful?</div>
+<div class="q"><span class="cnt"></span>Is the change persistent?</div>
+<div class="q"><span class="i"></span>Is it appearing across multiple sources?</div>
+<div class="q"><span class="cnt"></span>Is it accelerating?</div>
+<div class="q"><span class="i"></span>Is it related to another signal?</div>
+<div class="q"><span class="cnt"></span>Does it contradict existing evidence?</div>
+<div class="q"><span class="i"></span>Does customer behaviour support it?</div>
+<div class="q"><span class="cnt"></span>Does competitor behaviour support it?</div>
+<div class="q"><span class="i"></span>Does search behaviour support it?</div>
+<div class="q"><span class="cnt"></span>Could this change a business decision?</div>
 </div>
-<div class="fd">
-<div class="fl">Material change &middot; High confidence</div>
-<h4>Customers are changing what they value.</h4>
-<p>Four independent signals are moving in the same direction. The evidence suggests a meaningful shift in category expectations.</p>
-<div class="sg"><span><span class="v">Reviews</span> &uarr; 18%</span><span><span class="v">Search</span> &uarr; 24%</span><span><span class="v">Competitors</span> 3 changes</span><span><span class="v">AI</span> 12% shift</span></div>
+<div class="ctr">
+<div class="num" id="counter">47,281</div>
+<div class="lb">Atomic judgements</div>
 </div>
-</div>
-<div class="pipe"><span class="i">Six sources</span><span class="a">&rarr;</span><span class="n">Judgement</span><span class="a">&rarr;</span><span class="n">Decision</span></div>
-</div></div>
-
-<div class="s"><div class="w">
-<div class="it"><div class="il">Most tools show you what happened. IntellaIQ helps you decide what matters.</div></div>
-</div></div>
-
-<div class="s"><div class="w">
-<div class="it"><div class="il">One decision. Multiple realities.</div><p>IntellaIQ connects six perspectives. The value comes from the relationships between them.</p></div>
-<div class="gr">
-<div class="c"><div class="cl">Owned</div><div class="ct">What the organisation says</div></div>
-<div class="c"><div class="cl">Human</div><div class="ct">What people experience</div></div>
-<div class="c"><div class="cl">Market</div><div class="ct">What is changing externally</div></div>
-<div class="c"><div class="cl">Machine</div><div class="ct">How machines understand</div></div>
-<div class="c"><div class="cl">Demand</div><div class="ct">What people are looking for</div></div>
-<div class="c"><div class="cl">Outcomes</div><div class="ct">What actually happened</div></div>
 </div>
 </div></div>
 
 <div class="s"><div class="w">
-<div class="it"><div class="il">The most valuable signal may be the one that does not agree.</div><p>IntellaIQ looks for contradictions. They are not errors. They are where a decision may be required.</p></div>
-<div class="gr">
-<div class="c"><div class="cl">What we say</div><div class="cv">vs what customers say</div></div>
-<div class="c"><div class="cl">What people search for</div><div class="cv">vs what we sell</div></div>
-<div class="c"><div class="cl">What AI understands</div><div class="cv">vs what we intend</div></div>
-<div class="c"><div class="cl">What we expected</div><div class="cv">vs what happened</div></div>
+<div class="cv">
+<div class="h">Complexity &rarr; Decision</div>
+<div class="step"><span class="n">51,402</span><span class="l">Atomic questions</span></div>
+<span class="arrow">&darr;</span>
+<div class="step"><span class="n">3,184</span><span class="l">Meaningful relationships</span></div>
+<span class="arrow">&darr;</span>
+<div class="step"><span class="n">217</span><span class="l">Material patterns</span></div>
+<span class="arrow">&darr;</span>
+<div class="step"><span class="n">31</span><span class="l">Potential decisions</span></div>
+<span class="arrow">&darr;</span>
+<div class="step"><span class="n" style="color:var(--signal)">4</span><span class="l" style="color:var(--text)">Decisions worth attention</span></div>
+<div class="reveal">
+<div class="r">Decision detected</div>
+<h3>Customer expectations are shifting toward convenience.</h3>
+<div class="p">Decision Impact Probability: 0.87</div>
+</div>
+</div>
+</div></div>
+
+<div class="jg"><div class="jgw">
+<div class="h">Judgement layer</div>
+<h2>From evidence to judgement.</h2>
+<div class="sg">
+<div class="c"><div class="cl">Signal</div><div class="cv">Searches for convenience products increased 18%.</div></div>
+<div class="c"><div class="cl">Signal</div><div class="cv">Customer reviews increasingly mention convenience.</div></div>
+<div class="c"><div class="cl">Signal</div><div class="cv">Three competitors introduced convenience-led propositions.</div></div>
+<div class="c"><div class="cl">Signal</div><div class="cv">AI-generated answers associate category with convenience.</div></div>
+</div>
+<div class="j">
+<div class="l">Judgement</div>
+<h3>A persistent shift toward convenience is emerging.</h3>
+<div class="p">Decision Impact Probability: 0.87</div>
+</div>
+<p style="font-size:13px;color:rgba(245,245,243,.5);margin:0;letter-spacing:-.1px">Raw signals are not decisions. IntellaIQ evaluates evidence across sources, tests relationships and contradictions, and turns individual observations into higher-order judgements.</p>
+</div></div>
+
+<div class="s"><div class="w">
+<div class="sh"><div class="sl">Decision Impact Probability</div><h2>Not every change deserves a decision.</h2></div>
+<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 20px">IntellaIQ estimates how likely a finding is to affect a business decision, based on the evidence, relationships, persistence and materiality of the change. This is a model-derived estimate of decision relevance.</p>
+<div class="dip">
+<div class="c"><div class="l">High potential impact</div><div class="v d">0.87</div><div class="s">Converging signals, high confidence</div></div>
+<div class="c"><div class="l">Investigate</div><div class="v w">0.64</div><div class="s">Partial evidence, needs review</div></div>
+<div class="c"><div class="l">Low decision relevance</div><div class="v l">0.21</div><div class="s">Isolated signal, low materiality</div></div>
 </div>
 </div></div>
 
 <div class="s"><div class="w">
-<div class="it"><div class="il">Decisions create evidence too.</div><p>The model records what it believed before an intervention, what happened and what to believe next. It improves with every cycle.</p></div>
-<div class="lp"><span class="l -a">Observe</span><span class="l">Model</span><span class="l -a">Decide</span><span class="l">Act</span><span class="l -a">Measure</span><span class="l">Learn</span></div>
+<div class="sh"><div class="sl">Decision Volume</div><h2>Know how much is changing.</h2></div>
+<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 12px">Decision Volume is the amount of decision-relevant change IntellaIQ detects across your business. The interrogation process compresses complexity into attention.</p>
+<div class="comp"><span class="n">72 meaningful signals</span><span class="a">&rarr;</span><span class="n">18 require investigation</span><span class="a">&rarr;</span><span class="n">6 create potential decisions</span><span class="a">&rarr;</span><span class="s">2 require action</span></div>
 </div></div>
 
 <div class="s"><div class="w">
-<div class="it"><div class="il">Less to process. More decisions you can see.</div></div>
-<div class="og">
-<div class="c"><div class="cl">1</div><div class="ct">Findings</div><p>What changed?</p></div>
-<div class="c"><div class="cl">2</div><div class="ct">Judgements</div><p>What does evidence suggest?</p></div>
-<div class="c"><div class="cl">3</div><div class="ct">Decisions</div><p>What deserves attention?</p></div>
-<div class="c"><div class="cl">4</div><div class="ct">Interventions</div><p>What can be changed?</p></div>
-<div class="c"><div class="cl">5</div><div class="ct">Learning</div><p>What happened next?</p></div>
+<div class="sh"><div class="sl">Contradictions</div><h2>The most useful signal may be the one that disagrees.</h2></div>
+<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 12px">IntellaIQ looks for contradictions as well as agreement. When different sources tell different stories, that disagreement can reveal an assumption worth investigating.</p>
+<div class="cvx">
+<div class="c"><div class="l">Search</div><div class="dir"><span class="arr u">&uarr;</span><span>Demand rising <span style="color:var(--match);font-weight:500">+18%</span></span></div></div>
+<div class="c"><div class="l">Customer reviews</div><div class="dir"><span class="arr d">&darr;</span><span>Satisfaction falling <span style="color:var(--crit);font-weight:500">-12%</span></span></div></div>
+<div class="c"><div class="l">Competitors</div><div class="dir"><span class="arr u">&uarr;</span><span>Premium positioning <span style="color:var(--match);font-weight:500">+3 entries</span></span></div></div>
+<div class="c"><div class="l">AI responses</div><div class="dir"><span class="arr d">&darr;</span><span>Value perception <span style="color:var(--crit);font-weight:500">weakening</span></span></div></div>
+<div class="conclusion"><div class="l">Contradiction detected</div><div class="v">Demand is growing, but perceived value may be weakening.</div><div class="p">Decision Impact Probability: 0.79</div></div>
+</div>
+</div></div>
+
+<div class="s"><div class="w">
+<div class="sh"><div class="sl">Sources</div><h2>Six realities. One interrogation.</h2></div>
+<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 12px">All six perspectives feed into the same intelligence process. The value is not in any single source but in how they connect.</p>
+<div class="sp">
+<div class="r"><span class="l">Owned</span><span>Your data and performance</span><span class="arr">&rarr;</span></div>
+<div class="r"><span class="l">Human</span><span>Reviews, interviews, qualitative evidence</span><span class="arr">&rarr;</span></div>
+<div class="r"><span class="l">Market</span><span>Competitors, categories, external change</span><span class="arr">&rarr;</span></div>
+<div class="r"><span class="l">Machine</span><span>AI-generated answers and interpretation</span><span class="arr">&rarr;</span></div>
+<div class="r"><span class="l">Demand</span><span>Search and behavioural signals</span><span class="arr">&rarr;</span></div>
+<div class="r"><span class="l">Outcomes</span><span>What happened after previous decisions</span><span class="arr">&rarr;</span></div>
+<div class="center">IntellaIQ Interrogation<span class="s">Judgement &rarr; Decision</span></div>
+</div>
+</div></div>
+
+<div class="jg"><div class="jgw">
+<div class="h">What the system sees</div>
+<h2>See what the system sees.</h2>
+<div class="seq">
+<div class="st -a"><div class="l">Signals detected</div><div class="v">Search behaviour &middot; Customer reviews &middot; Competitor activity &middot; AI responses &middot; Sales performance</div></div>
+<div class="st -a"><div class="l">Relationship found</div><div class="v">Five independent sources are moving in the same direction.</div></div>
+<div class="st -a"><div class="l">Judgement</div><div class="v">This is unlikely to be isolated noise.</div></div>
+<div class="st -a"><div class="l">Decision Impact</div><div class="p">0.87</div></div>
+<div class="st -a"><div class="l">Decision</div><div class="v">Investigate whether the current proposition still matches changing customer expectations.</div></div>
+</div>
+</div></div>
+
+<div class="s"><div class="w">
+<div class="sh"><div class="sl">Prioritisation</div><h2>What deserves attention now?</h2></div>
+<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 12px">IntellaIQ does not rank "interesting" findings. It prioritises based on potential decision relevance.</p>
+<div class="pq">
+<div class="p"><span class="rk">01</span><div class="d"><div class="t">Customer expectations shift</div><div class="s">Converging signals across 4 sources</div></div><span class="prob">0.87</span></div>
+<div class="p"><span class="rk">02</span><div class="d"><div class="t">Competitor positioning change</div><div class="s">3 competitors moved toward convenience</div></div><span class="prob w">0.73</span></div>
+<div class="p"><span class="rk">03</span><div class="d"><div class="t">Search demand anomaly</div><div class="s">Unexpected growth in non-core queries</div></div><span class="prob w">0.61</span></div>
+<div class="p"><span class="rk">04</span><div class="d"><div class="t">Review sentiment change</div><div class="s">Value perception declining</div></div><span class="prob l">0.34</span></div>
+</div>
+</div></div>
+
+<div class="s"><div class="w">
+<div class="sh"><div class="sl">Expected vs Observed</div><h2>What changed from what you expected?</h2></div>
+<div class="eo">
+<div class="b"><div class="l">Expected</div><div class="v">Demand remains stable</div><div class="bar"><div class="f" style="width:55%"></div></div></div>
+<div class="b"><div class="l">Observed</div><div class="v">Demand shifting toward convenience</div><div class="bar"><div class="f s" style="width:82%"></div></div></div>
+<div class="gap"><div class="l">Gap detected</div><div class="v">The observed behaviour challenges the current demand assumption.</div></div>
+<div class="why"><div class="l">Why it matters</div><div class="v">The assumption that demand would remain stable is unsupported by current evidence.</div></div>
+<div class="dip" style="margin-top:12px;border:none;padding:0">Decision Impact Probability: 0.82</div>
+</div>
+</div></div>
+
+<div class="s"><div class="w">
+<div class="sh"><div class="sl">Evidence</div><h2>Every judgement should be explainable.</h2></div>
+<div class="ec">
+<div class="fl">Finding</div>
+<h3>Category demand is shifting toward convenience.</h3>
+<div class="ev"><div class="e"><span class="n">42</span> customer observations</div><div class="e"><span class="n">18</span> search clusters</div><div class="e"><span class="n">3</span> competitor changes</div><div class="e"><span class="n">27</span> AI responses</div></div>
+<div class="ftr"><span><span class="l">Confidence</span>High</span><span><span class="l">Decision Impact</span>0.87</span><span><span class="l">Updated</span>20 Sep 2026</span></div>
+</div>
+</div></div>
+
+<div class="s"><div class="w">
+<div class="sh"><div class="sl">What you get</div><h2>Less to process. More decisions you can see.</h2></div>
+<ul class="vw">
+<li><span class="rk">1</span><div class="d"><div class="t">Finding</div><div class="s">What changed?</div></div><span class="a">&rarr;</span></li>
+<li><span class="rk">2</span><div class="d"><div class="t">Judgement</div><div class="s">What does the evidence suggest?</div></div><span class="a">&rarr;</span></li>
+<li><span class="rk">3</span><div class="d"><div class="t">Decision</div><div class="s">What might need to change?</div></div><span class="a">&rarr;</span></li>
+<li><span class="rk">4</span><div class="d"><div class="t">Intervention</div><div class="s">What action could test it?</div></div><span class="a">&rarr;</span></li>
+<li><span class="rk">5</span><div class="d"><div class="t">Learning</div><div class="s">What did the outcome tell us?</div></div></li>
+</ul>
+</div></div>
+
+<div class="jg"><div class="jgw">
+<div class="h">Learning</div>
+<h2>Decisions create evidence too.</h2>
+<p style="font-size:13px;color:rgba(245,245,243,.5);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 16px">IntellaIQ does not stop when a decision is made. Outcomes become new evidence, allowing the system to learn which signals, judgements and interventions actually mattered.</p>
+<div class="sg">
+<div class="c"><div class="cl">Before</div><div class="cv">Model expected AI understanding +22%</div></div>
+<div class="c"><div class="cl">Action</div><div class="cv">Content optimisation for AI readability</div></div>
+<div class="c"><div class="cl">After</div><div class="cv">AI understanding improved +18%</div></div>
+<div class="c"><div class="cl">Learning</div><div class="cv" style="color:var(--signal)">Direction confirmed. Intervention hypothesis supported.</div></div>
+</div>
+<div class="lp" style="display:flex;gap:1px;margin:16px 0;flex-wrap:wrap;justify-content:center">
+<span style="padding:6px 16px;border:1px solid rgba(245,245,243,.15);font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em;background:rgba(245,245,243,.05);color:rgba(245,245,243,.6)">Observe</span>
+<span style="padding:6px 16px;border:1px solid rgba(245,245,243,.15);font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em;background:rgba(245,245,243,.05);color:rgba(245,245,243,.6)">Judge</span>
+<span style="padding:6px 16px;border:1px solid var(--signal);font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em;background:rgba(21,94,94,.15);color:var(--signal)">Decide</span>
+<span style="padding:6px 16px;border:1px solid rgba(245,245,243,.3);font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em;background:#F5F5F3;color:var(--text)">Act</span>
+<span style="padding:6px 16px;border:1px solid var(--signal);font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em;background:rgba(21,94,94,.15);color:var(--signal)">Measure</span>
+<span style="padding:6px 16px;border:1px solid rgba(245,245,243,.15);font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;letter-spacing:.04em;background:rgba(245,245,243,.05);color:rgba(245,245,243,.6)">Learn</span>
+</div>
+</div></div>
+
+<div class="s"><div class="w">
+<div class="sh"><div class="sl">Positioning</div><h2>IntellaIQ is not another dashboard.</h2></div>
+<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 16px">Dashboards show information. IntellaIQ interrogates information. The distinction is functional, not rhetorical.</p>
+<div class="psg">
+<div class="c"><div class="l">Analytics</div><div class="v">What happened?</div></div>
+<div class="c"><div class="l">Research</div><div class="v">What people said.</div></div>
+<div class="c"><div class="l">Search</div><div class="v">What people looked for.</div></div>
+<div class="c"><div class="l">Competitor monitoring</div><div class="v">What competitors changed.</div></div>
+<div class="c"><div class="l">AI monitoring</div><div class="v">How machines describe the market.</div></div>
+<div class="c hl"><div class="l" style="color:rgba(245,245,243,.6)">IntellaIQ</div><div class="v" style="color:#F5F5F3">What could change a decision?</div></div>
 </div>
 </div></div>
 
 <div class="cta"><div class="w">
 <h3>What decisions are hiding in your data?</h3>
-<p>IntellaIQ connects the signals your organisation produces and reveals what deserves attention.</p>
-<div class="bs"><a href="#" class="b">Explore IntellaIQ</a><a href="#" class="b-s">Request a demo</a></div>
+<p>IntellaIQ turns thousands of signals into the handful of decisions worth investigating.</p>
+<a href="#" class="b">Request early access</a>
 </div></div>
 
 <div class="ft"><div class="w"><span>IntellaIQ</span><span><a href="scan.html">Scan</a> &middot; <a href="dashboard.html">Dashboard</a> &middot; <a href="#">Docs</a></span></div></div>
@@ -170,16 +384,22 @@ cv.style.cssText='position:absolute;top:0;left:0;width:100%;height:100%;display:
 var x=cv.getContext('2d'),W,H,P=[],N=function(){return window.innerWidth<640?28:60};
 function rz(){var d=window.devicePixelRatio||1,b=c.getBoundingClientRect();W=b.width;H=b.height;cv.width=W*d;cv.height=H*d;x.setTransform(d,0,0,d,0,0)}
 window.addEventListener('resize',rz);rz();
-function ip(){P=[];var CX=W/2,CY=H/2,n=N();for(var i=0;i<n;i++){var l=i%2===0,sy=(i/n)*H*1.4-H*.2;P.push({isLeft:l,startY:sy,pt:{t:Math.random(),sp:.0015+Math.random()*.0025}})}}
+function ip(){P=[];CX=W/2;CY=H/2;var n=N();for(var i=0;i<n;i++){var l=i%2===0,sy=(i/n)*H*1.4-H*.2;P.push({isLeft:l,startY:sy,pt:{t:Math.random(),sp:.0015+Math.random()*.0025}})}}
 ip();
 function bz(t,p0,p1,p2,p3){var u=1-t;return{x:u*u*u*p0.x+3*u*u*t*p1.x+3*u*t*t*p2.x+t*t*t*p3.x,y:u*u*u*p0.y+3*u*u*t*p1.y+3*u*t*t*p2.y+t*t*t*p3.y}}
-function dr(){x.clearRect(0,0,W,H);var CX=W/2,CY=H/2;
+function dr(){x.clearRect(0,0,W,H);CX=W/2;CY=H/2;
 for(var i=0;i<P.length;i++){var p=P[i],p0={x:p.isLeft?0:W,y:p.startY},p1={x:p.isLeft?CX*.5:W-CX*.5,y:p.startY},p2={x:p.isLeft?CX*.8:W-CX*.8,y:CY},p3={x:CX,y:CY};
 var pt=p.pt;pt.t+=pt.sp;if(pt.t>1){pt.t=0;p.startY+=(Math.random()-.5)*8}
-var pos=bz(pt.t,p0,p1,p2,p3);x.fillStyle='rgba(21,94,94,.5)';x.fillRect(pos.x-1,pos.y-1,2,2)}
+var pos=bz(pt.t,p0,p1,p2,p3);x.fillStyle='rgba(21,94,94,.4)';x.fillRect(pos.x-1,pos.y-1,2,2)}
 requestAnimationFrame(dr)}
-dr();
-window.addEventListener('resize',function(){rz();ip()});
+dr();window.addEventListener('resize',function(){rz();ip()});
+})();
+</script>
+<script>
+(function(){var c=document.getElementById('counter'),v=47281;if(!c)return;
+function update(){v+=Math.round(Math.random()*200+50);c.textContent=v.toLocaleString();}
+setInterval(update,1200);
+for(var i=0;i<6;i++)setTimeout(update,i*100);
 })();
 </script>
 </body></html>
