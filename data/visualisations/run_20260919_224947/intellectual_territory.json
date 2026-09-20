@@ -1,0 +1,22 @@
+{
+  "territories": {
+    "core_territories": [],
+    "emerging_territories": [],
+    "underdeveloped_territories": [],
+    "overlapping_territories": [],
+    "orphaned_territories": [],
+    "overclaimed_territories": [],
+    "unowned_territories": []
+  },
+  "concept_pages": {},
+  "concept_edges": [],
+  "summary": {
+    "core_territories": 0,
+    "emerging_territories": 0,
+    "underdeveloped_territories": 0,
+    "overlapping_territories": 0,
+    "orphaned_territories": 0,
+    "overclaimed_territories": 0,
+    "unowned_territories": 0
+  }
+}

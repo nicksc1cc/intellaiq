@@ -1,0 +1,425 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>IntellaIQ — Brand Intelligence System</title><style>@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..12,400;6..12,600;6..12,700&family=Inter:wght@300;400;500;600&display=swap');
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;transition:none!important;animation:none!important}
+:root{--paper:#F5F0EB;--ink:#1A1714;--stone:#6E6760;--parchment:#E8E3DC;--navy:#1E2A3A;--muted-blue:#8A9BB5;--pale:#D5D0CA;--warm:#D6CEBB;--rust:#C45A2C;--line:rgba(26,23,20,.1);--thin:rgba(26,23,20,.05);--sans:'Inter',system-ui,sans-serif;--serif:'Bodoni Moda',Georgia,serif;--mono:'SF Mono','Menlo','Monaco',monospace}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);line-height:1.5;padding:0}
+.wrap{max-width:1360px;margin:0 auto;padding:0 24px}
+
+/* ── TYPOGRAPHY ── */
+.h1{font-family:var(--serif);font-size:clamp(40px,6vw,72px);font-weight:600;letter-spacing:-.02em;line-height:1.08;margin:0 0 20px}
+.h2{font-family:var(--serif);font-size:clamp(28px,3.6vw,44px);font-weight:600;letter-spacing:-.015em;line-height:1.15;margin:0 0 16px}
+.h3{font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);margin:0 0 8px}
+.h4{font-family:var(--serif);font-size:clamp(20px,2.4vw,30px);font-weight:400;letter-spacing:-.01em;line-height:1.25;margin:0 0 10px}
+.p{font-size:15px;color:var(--stone);line-height:1.7;max-width:680px;margin:0 0 20px}
+.lb{font-size:9px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--stone)}
+.precise{font-family:var(--mono);font-size:12px}
+.small{font-size:11px;color:var(--stone);line-height:1.6}
+.ac{color:var(--rust)}
+
+/* ── SECTIONS ── */
+section{padding:80px 0;border-bottom:1px solid var(--line)}
+section:last-child{border:none}
+.hr{margin:48px 0;border:none;border-top:1px solid var(--line)}
+
+/* ── HERO ── */
+.hero{padding:60px 0 40px;border-bottom:1px solid var(--line)}
+.hero .status{display:flex;gap:24px;font-size:9px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);margin:0 0 32px}
+.hero .status span{border-right:1px solid var(--line);padding-right:24px}
+.hero .status span:last-child{border-right:none}
+.hero .sub{font-size:16px;color:var(--stone);max-width:720px;line-height:1.7;margin:0 0 32px}
+
+/* ── BRAND STATE PANEL ── */
+.panel{border:1px solid var(--line);margin:0 0 24px;background:var(--paper)}
+.panel .ph{padding:10px 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.panel .ph .t{font-size:12px;font-weight:600}
+.panel .ph .s{font-size:8px;text-transform:uppercase;letter-spacing:.08em;color:var(--stone)}
+.panel .body{padding:14px}
+.state-matrix{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;background:var(--line);font-size:11px}
+.state-matrix .cell{padding:10px 12px;background:var(--paper)}
+.state-matrix .cell .l{font-size:8px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--stone);margin-bottom:3px}
+.state-matrix .cell .v{font-family:var(--serif);font-size:20px;font-weight:600}
+.state-matrix .cell .n{font-size:10px;color:var(--stone);margin-top:3px}
+.state-matrix .cell .tag{display:inline-block;font-size:7px;text-transform:uppercase;letter-spacing:.06em;padding:1px 5px;margin:2px 0;border:1px solid var(--line);border-radius:1px}
+.tag-r{border-color:var(--rust)!important;color:var(--rust)}
+.tag-b{border-color:var(--navy)!important;color:var(--navy)}
+.tag-m{border-color:var(--muted-blue)!important;color:var(--muted-blue)}
+.ann{font-size:10px;color:var(--stone);line-height:1.6;padding:10px 14px;background:var(--parchment);margin:0}
+.ann .l{font-size:9px;text-transform:uppercase;letter-spacing:.08em;font-weight:600}
+
+/* ── SYSTEM MAP ── */
+.system-map{width:100%;overflow-x:auto;margin:0 0 20px}
+
+/* ── KNOWLEDGE GRAPH ── */
+.knowledge-graph{width:100%;overflow-x:auto;margin:0 0 24px}
+
+/* ── DEMAND SECTION ── */
+.demand-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);margin:0 0 20px}
+.demand-grid .dc{padding:14px;background:var(--paper)}
+.demand-grid .dc .h{font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;color:var(--stone);margin-bottom:8px}
+.bar-chart{font-size:10px;margin:4px 0}
+.bar-chart .bar-r{display:flex;align-items:center;gap:6px;margin:2px 0}
+.bar-chart .bar-f{height:12px;background:var(--ink);min-width:2px;border-radius:1px}
+.bar-chart .bar-val{font-family:var(--mono);font-size:8px;color:var(--stone)}
+.sparkline{display:inline-block;margin-left:auto}
+
+/* ── PRIORITISATION ── */
+.scatter-wrap{width:100%;overflow-x:auto;margin:0 0 20px}
+
+/* ── IMPACT CHAIN ── */
+.impact-chain{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:16px 0;font-size:9px;text-transform:uppercase;letter-spacing:.06em;flex-wrap:wrap}
+.impact-chain .link{font-family:var(--serif);font-size:13px;font-weight:600;letter-spacing:0;text-transform:none}
+.impact-chain .arrow{color:var(--stone);font-size:12px}
+.impact-table{width:100%;border-collapse:collapse;font-size:11px;margin:16px 0}
+.impact-table th,.impact-table td{padding:6px 10px;text-align:left;border-bottom:1px solid var(--line)}
+.impact-table th{font-size:8px;text-transform:uppercase;letter-spacing:.08em;color:var(--stone);font-weight:600;border-bottom:2px solid var(--ink)}
+.impact-table .sep{color:var(--stone);font-size:9px}
+.impact-table .up{color:var(--navy)}
+.impact-table .down{color:var(--stone)}
+.ann-box{font-size:10px;color:var(--stone);line-height:1.5;padding:8px 12px;background:var(--parchment);margin:8px 0 0}
+
+/* ── CLOSED LOOP ── */
+.loop{display:flex;flex-wrap:wrap;gap:2px;margin:20px 0}
+.loop .step{padding:8px 14px;background:var(--parchment);font-size:9px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;border:1px solid var(--line)}
+.loop .step.ac{background:var(--paper);border-color:var(--rust);color:var(--rust)}
+.loop-arrow{text-align:center;font-size:16px;color:var(--stone);margin:4px 0}
+
+/* ── CTA ── */
+.cta-area{padding:60px 0 80px;text-align:center}
+.cta-area .cta{display:inline-block;padding:12px 32px;border:1px solid var(--ink);font-size:11px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink);cursor:pointer;text-decoration:none;margin:0 12px 12px 0}
+.cta-area .cta:hover{background:var(--ink);color:var(--paper)}
+.cta-area .cta.sec{border-color:var(--stone);color:var(--stone)}
+.cta-area .cta.sec:hover{background:var(--stone);color:var(--paper)}
+.cta-area .p{color:var(--stone);font-size:13px;max-width:580px;margin:0 auto 28px}
+
+/* ── FOOTER ── */
+.footer{padding:32px 0 48px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:9px;color:var(--stone)}
+.footer a{color:var(--stone);text-decoration:none}
+.footer a:hover{color:var(--ink)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .hero .status{flex-wrap:wrap;gap:8px;font-size:7px}
+  .hero .status span{border-right:none;padding-right:0}
+  .state-matrix{grid-template-columns:1fr}
+  .demand-grid{grid-template-columns:1fr}
+  .impact-chain{font-size:7px}
+}
+</style></head><body>
+
+<div class="wrap">
+
+<!-- HERO 01 -->
+<section class="hero">
+<div class="status">
+<span>INTELLAIQ</span>
+<span>BRAND INTELLIGENCE SYSTEM  ·  v1.0</span>
+<span>LIVE MODEL</span>
+<span>MULTI-SOURCE</span>
+<span>EVIDENCE-LED</span>
+</div>
+<h1 class="h1">Know what is happening.<br>Understand why.<br>Know what to change.</h1>
+<p class="sub">An intelligence model for the decisions your brand has to make. A living model of what you say, what people experience, what the market says, what machines understand, what people demand and what ultimately happens.</p>
+
+<div class="panel">
+<div class="ph"><span class="t">Brand State</span><span class="s">ILLUSTRATIVE — EXAMPLE DATA</span></div>
+<div class="body" style="border-bottom:1px solid var(--line)">
+<div style="display:flex;gap:24px;flex-wrap:wrap;font-size:9px;color:var(--stone);padding:0 0 10px">
+<span><span class="precise">BRAND</span>  Example Co.</span>
+<span><span class="precise">CATEGORY</span>  Skincare</span>
+<span><span class="precise">MARKET</span>  UK</span>
+<span><span class="precise">WINDOW</span>  12 months</span>
+<span><span class="precise">UPDATED</span>  Today</span>
+</div>
+</div>
+<div class="state-matrix">
+<div class="cell"><div class="l">Owned</div><div class="v">82%</div><div class="n">concept coverage · 14 unresolved claims</div><div class="tag tag-b">2 inconsistencies</div></div>
+<div class="cell"><div class="l">Human</div><div class="v">3,842</div><div class="n">observations · 27 recurring themes</div><div class="tag tag-m">3 signal clusters</div></div>
+<div class="cell"><div class="l">Market</div><div class="v">214</div><div class="n">external sources · 19 emerging narratives</div><div class="tag tag-m">6 unaddressed</div></div>
+<div class="cell"><div class="l">Machine</div><div class="v">63</div><div class="n">AI queries · 41 cited sources</div><div class="tag tag-r">5 citation gaps</div></div>
+<div class="cell"><div class="l">Demand</div><div class="v">+31%</div><div class="n">category growth · 7 emerging query clusters</div><div class="tag tag-b">3 opportunity zones</div></div>
+<div class="cell"><div class="l">Outcomes</div><div class="v">0.7%</div><div class="n">conversion · 64% consideration · 38% retention</div><div class="tag tag-b">discovery gap</div></div>
+</div>
+</div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);margin:0 0 24px">
+<div style="padding:10px 14px;background:var(--paper)"><span class="ann"><span class="l">Discrepancies</span><br>12 material discrepancies detected between owned claims, human experience and machine interpretation.</span></div>
+<div style="padding:10px 14px;background:var(--paper)"><span class="ann"><span class="l">Opportunities</span><br>4 high-confidence opportunities identified. 3 require additional evidence. 2 interventions underway.</span></div>
+</div>
+</section>
+
+<!-- SECTION 02 - INFORMATION ECOSYSTEM -->
+<section>
+<h2 class="h2">One brand. Multiple realities.</h2>
+<p class="p">A brand exists simultaneously in its own content, in human experience, in the market and inside machine-generated understanding. These realities rarely align. The system brings them into a single model.</p>
+
+<div class="system-map">
+<svg viewBox="0 0 1200 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:1200px">
+<defs><marker id="a" markerWidth="4" markerHeight="4" refX="2" refY="2" orient="auto"><path d="M0,0 L2,2 L0,4" fill="none" stroke="#6E6760" stroke-width=".6"/></marker></defs>
+<rect x="500" y="200" width="200" height="80" rx="2" fill="none" stroke="#1A1714" stroke-width="1.2"/>
+<text x="600" y="240" text-anchor="middle" font-size="12" font-weight="600" font-family="Georgia,serif">Knowledge Graph</text>
+<text x="600" y="256" text-anchor="middle" font-size="7" fill="#6E6760" font-family="'Inter',sans-serif">The system model</text>
+
+<!-- Owned -->
+<rect x="60" y="60" width="180" height="120" rx="2" fill="none" stroke="#D5D0CA" stroke-width=".8"/>
+<text x="150" y="82" text-anchor="middle" font-size="8" font-weight="600" text-transform="uppercase" font-family="'Inter',sans-serif">Owned</text>
+<text x="150" y="96" text-anchor="middle" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">Website · Products · Content</text>
+<text x="150" y="108" text-anchor="middle" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">Claims · Campaigns</text>
+<line x1="240" y1="120" x2="500" y2="240" stroke="#D5D0CA" stroke-width=".7" marker-end="url(#a)"/>
+
+<!-- Human -->
+<rect x="60" y="200" width="180" height="120" rx="2" fill="none" stroke="#D5D0CA" stroke-width=".8"/>
+<text x="150" y="222" text-anchor="middle" font-size="8" font-weight="600" text-transform="uppercase" font-family="'Inter',sans-serif">Human</text>
+<text x="150" y="236" text-anchor="middle" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">Reviews · UGC · Social</text>
+<text x="150" y="248" text-anchor="middle" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">Communities · Customer service</text>
+<line x1="240" y1="260" x2="500" y2="240" stroke="#D5D0CA" stroke-width=".7" marker-end="url(#a)"/>
+
+<!-- Market -->
+<rect x="60" y="340" width="180" height="120" rx="2" fill="none" stroke="#D5D0CA" stroke-width=".8"/>
+<text x="150" y="362" text-anchor="middle" font-size="8" font-weight="600" text-transform="uppercase" font-family="'Inter',sans-serif">Market</text>
+<text x="150" y="376" text-anchor="middle" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">Competitors · Publishers</text>
+<text x="150" y="388" text-anchor="middle" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">Creators · Category narratives</text>
+<line x1="240" y1="400" x2="500" y2="240" stroke="#D5D0CA" stroke-width=".7" marker-end="url(#a)"/>
+
+<!-- Machine -->
+<rect x="960" y="60" width="180" height="120" rx="2" fill="none" stroke="#D5D0CA" stroke-width=".8"/>
+<text x="1050" y="82" text-anchor="middle" font-size="8" font-weight="600" text-transform="uppercase" font-family="'Inter',sans-serif">Machine</text>
+<text x="1050" y="96" text-anchor="middle" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">Search · AI answers</text>
+<text x="1050" y="108" text-anchor="middle" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">Citations · Entity extraction</text>
+<line x1="960" y1="120" x2="700" y2="240" stroke="#D5D0CA" stroke-width=".7" marker-end="url(#a)"/>
+
+<!-- Outcomes -->
+<rect x="960" y="340" width="180" height="120" rx="2" fill="none" stroke="#D5D0CA" stroke-width=".8"/>
+<text x="1050" y="362" text-anchor="middle" font-size="8" font-weight="600" text-transform="uppercase" font-family="'Inter',sans-serif">Outcomes</text>
+<text x="1050" y="376" text-anchor="middle" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">Discovery · Consideration</text>
+<text x="1050" y="388" text-anchor="middle" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">Conversion · Retention · Revenue</text>
+<line x1="960" y1="400" x2="700" y2="240" stroke="#D5D0CA" stroke-width=".7" marker-end="url(#a)"/>
+
+<!-- Demand runs across -->
+<rect x="300" y="460" width="600" height="30" rx="2" fill="none" stroke="#C45A2C" stroke-width=".8" stroke-dasharray="6,3"/>
+<text x="600" y="480" text-anchor="middle" font-size="8" font-weight="600" fill="#C45A2C" text-transform="uppercase" font-family="'Inter',sans-serif">Demand  ·  Query Intent  ·  Category Demand  ·  Trend  ·  Product Demand</text>
+<line x1="600" y1="460" x2="600" y2="280" stroke="#C45A2C" stroke-width=".6" stroke-dasharray="4,4" marker-end="url(#a)"/>
+</svg>
+</div>
+</section>
+
+<!-- SECTION 03 - KNOWLEDGE GRAPH -->
+<section>
+<h2 class="h2">What the intelligence sees.</h2>
+<p class="p">Every relationship is a computational fact, not a decorative connection. The graph stores what each entity means, how it relates to others and what evidence supports each relationship.</p>
+
+<div class="knowledge-graph">
+<svg viewBox="0 0 1100 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:1100px">
+<defs><marker id="m1" markerWidth="4" markerHeight="4" refX="2" refY="2" orient="auto"><path d="M0,0 L2,2 L0,4" fill="none" stroke="#6E6760" stroke-width=".6"/></marker>
+<marker id="m2" markerWidth="4" markerHeight="4" refX="2" refY="2" orient="auto"><path d="M0,0 L2,2 L0,4" fill="none" stroke="#C45A2C" stroke-width=".6"/></marker></defs>
+
+<!-- Brand claim -->
+<rect x="420" y="20" width="200" height="30" rx="2" fill="none" stroke="#1A1714" stroke-width=".8"/>
+<text x="520" y="40" text-anchor="middle" font-size="9" font-family="Georgia,serif">"Suitable for sensitive skin"</text>
+<text x="520" y="56" text-anchor="middle" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">BRAND CLAIM</text>
+
+<line x1="470" y1="50" x2="400" y2="90" stroke="#6E6760" stroke-width=".6" marker-end="url(#m1)"/>
+
+<!-- Product -->
+<rect x="300" y="90" width="120" height="30" rx="2" fill="none" stroke="#1E2A3A" stroke-width=".8"/>
+<text x="360" y="110" text-anchor="middle" font-size="8" font-family="'Inter',sans-serif">Product A</text>
+<line x1="300" y1="120" x2="260" y2="170" stroke="#6E6760" stroke-width=".6" marker-end="url(#m1)"/>
+<line x1="360" y1="120" x2="360" y2="170" stroke="#6E6760" stroke-width=".6" marker-end="url(#m1)"/>
+<line x1="420" y1="120" x2="480" y2="170" stroke="#6E6760" stroke-width=".6" marker-end="url(#m1)"/>
+
+<!-- Human experience -->
+<rect x="150" y="170" width="180" height="40" rx="2" fill="none" stroke="#C45A2C" stroke-width=".8"/>
+<text x="240" y="188" text-anchor="middle" font-size="8" font-family="'Inter',sans-serif">CUSTOMER EXPERIENCE</text>
+<text x="240" y="202" text-anchor="middle" font-size="8" fill="#C45A2C" font-family="'Inter',sans-serif">"irritation"</text>
+
+<!-- AI understanding -->
+<rect x="150" y="220" width="180" height="40" rx="2" fill="none" stroke="#1E2A3A" stroke-width=".8"/>
+<text x="240" y="238" text-anchor="middle" font-size="8" font-family="'Inter',sans-serif">AI UNDERSTANDING</text>
+<text x="240" y="252" text-anchor="middle" font-size="8" fill="#6E6760">"frequently associated with..."</text>
+
+<!-- Demand -->
+<rect x="150" y="270" width="180" height="40" rx="2" fill="none" stroke="#1E2A3A" stroke-width=".8"/>
+<text x="240" y="288" text-anchor="middle" font-size="8" font-family="'Inter',sans-serif">DEMAND</text>
+<text x="240" y="302" text-anchor="middle" font-size="8" fill="#6E6760">"best moisturiser for sensitive skin"</text>
+
+<!-- External evidence -->
+<rect x="420" y="170" width="180" height="40" rx="2" fill="none" stroke="#6E6760" stroke-width=".8"/>
+<text x="510" y="188" text-anchor="middle" font-size="8" font-family="'Inter',sans-serif">EXTERNAL EVIDENCE</text>
+<text x="510" y="202" text-anchor="middle" font-size="8" fill="#6E6760">editorial source · dermatology review</text>
+
+<!-- Competitor -->
+<rect x="420" y="220" width="180" height="40" rx="2" fill="none" stroke="#D5D0CA" stroke-width=".8"/>
+<text x="510" y="238" text-anchor="middle" font-size="8" font-family="'Inter',sans-serif">COMPETITOR</text>
+<text x="510" y="252" text-anchor="middle" font-size="8" fill="#6E6760">Brand B · "sensitive rescue"</text>
+
+<!-- Relationship labels -->
+<text x="220" y="120" text-anchor="end" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">CONTAINS</text>
+<text x="290" y="155" text-anchor="end" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">SUPPORTS</text>
+<text x="330" y="155" text-anchor="end" font-size="6" fill="#C45A2C" font-family="'Inter',sans-serif">CONTRADICTS</text>
+<text x="430" y="155" text-anchor="start" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">DERIVED FROM</text>
+<text x="520" y="140" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">MENTIONS</text>
+<text x="350" y="290" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">CITED BY</text>
+
+<!-- Finding -->
+<rect x="380" y="310" width="280" height="80" rx="2" fill="none" stroke="#C45A2C" stroke-width="1.2"/>
+<text x="520" y="330" text-anchor="middle" font-size="9" font-weight="600" fill="#C45A2C" font-family="'Inter',sans-serif">DISCREPANCY</text>
+<text x="520" y="346" text-anchor="middle" font-size="8" fill="#1A1714" font-family="'Inter',sans-serif">Brand claim  vs  customer experience  vs  AI interpretation</text>
+<text x="520" y="362" text-anchor="middle" font-size="8" font-family="'Inter',sans-serif">OPPORTUNITY</text>
+<text x="520" y="378" text-anchor="middle" font-size="8" fill="#6E6760">"Clarify evidence and product guidance"</text>
+
+<!-- Relationship types legend -->
+<rect x="60" y="400" width="300" height="60" rx="2" fill="none" stroke="#D5D0CA" stroke-width=".6"/>
+<text x="75" y="418" font-size="7" font-weight="600" font-family="'Inter',sans-serif">Relationship types</text>
+<text x="75" y="432" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">SUPPORTS · CONTRADICTS · MENTIONS · DERIVED FROM</text>
+<text x="75" y="446" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">CITED BY · ASSOCIATED WITH · INFLUENCES · DEPENDS ON</text>
+</svg>
+</div>
+</section>
+
+<!-- SECTION 04 - DEMAND -->
+<section>
+<h2 class="h2">Demand tells you what matters outside the organisation.</h2>
+<p class="p">Demand is not keyword volume. The system connects query, intent, trend, category, product, customer need and commercial proximity into a single signal.</p>
+
+<div class="demand-grid">
+<div class="dc">
+<div class="h">Query Clusters</div>
+<div class="bar-chart">
+<div class="bar-r"><span style="width:80px">Sensitive skin</span><span class="bar-f" style="width:240px"></span><span class="bar-val">42%</span></div>
+<div class="bar-r"><span style="width:80px">Barrier repair</span><span class="bar-f" style="width:180px"></span><span class="bar-val">28%</span></div>
+<div class="bar-r"><span style="width:80px">Fragrance-free</span><span class="bar-f" style="width:130px"></span><span class="bar-val">17%</span></div>
+<div class="bar-r"><span style="width:80px">Overnight treatment</span><span class="bar-f" style="width:90px"></span><span class="bar-val">11%</span></div>
+<div class="bar-r"><span style="width:80px">Dermatologist rec.</span><span class="bar-f" style="width:50px"></span><span class="bar-val">6%</span></div>
+</div>
+<div style="font-size:7px;color:var(--stone);margin-top:8px">Query volume · Category: Skincare · 12 months</div>
+</div>
+<div class="dc">
+<div class="h">Opportunity Signals</div>
+<div style="padding:6px 0;border-bottom:1px solid var(--line);font-size:9px;margin-bottom:6px">
+<div><span class="ac" style="font-weight:600">High demand</span> / weak brand knowledge</div>
+<div style="font-size:7px;color:var(--stone)">"barrier repair" · +38% growth · low owned coverage</div>
+</div>
+<div style="padding:6px 0;border-bottom:1px solid var(--line);font-size:9px;margin-bottom:6px">
+<div><span class="ac" style="font-weight:600">High demand</span> / strong existing knowledge</div>
+<div style="font-size:7px;color:var(--stone)">"sensitive skin" · +22% growth · strong owned position</div>
+</div>
+<div style="padding:6px 0;font-size:9px">
+<div><span style="color:var(--stone);font-weight:600">Low demand</span> / strategically important</div>
+<div style="font-size:7px;color:var(--stone)">"dermatologist recommended" · low volume · high conversion · premium</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SECTION 05 - PRIORITISATION -->
+<section>
+<h2 class="h2">Not everything worth doing is equally worth doing.</h2>
+<p class="p">Brands have more potential interventions than resources. The system evaluates each against expected impact, evidence, confidence, effort, risk and commercial relevance — and exposes the reasoning rather than collapsing it into a single number.</p>
+
+<div class="scatter-wrap">
+<svg viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:800px">
+<!-- Axes -->
+<line x1="80" y1="40" x2="80" y2="480" stroke="#1A1714" stroke-width=".8"/>
+<line x1="80" y1="480" x2="760" y2="480" stroke="#1A1714" stroke-width=".8"/>
+<text x="420" y="506" text-anchor="middle" font-size="8" fill="#6E6760" font-family="'Inter',sans-serif">Implementation Effort →</text>
+<text x="24" y="260" dominant-baseline="middle" font-size="8" fill="#6E6760" font-family="'Inter',sans-serif" transform="rotate(-90,24,260)">Expected Impact →</text>
+<!-- Grid -->
+<line x1="80" y1="200" x2="760" y2="200" stroke="#D5D0CA" stroke-width=".5"/>
+<line x1="80" y1="320" x2="760" y2="320" stroke="#D5D0CA" stroke-width=".5"/>
+<line x1="300" y1="40" x2="300" y2="480" stroke="#D5D0CA" stroke-width=".5"/>
+<line x1="540" y1="40" x2="540" y2="480" stroke="#D5D0CA" stroke-width=".5"/>
+<!-- Quadrant labels -->
+<text x="190" y="48" text-anchor="middle" font-size="7" fill="#C45A2C" font-family="'Inter',sans-serif">HIGH IMPACT / LOW EFFORT</text>
+<text x="650" y="48" text-anchor="middle" font-size="7" fill="#6E6760" font-family="'Inter',sans-serif">HIGH IMPACT / HIGH UNCERTAINTY</text>
+<text x="190" y="496" text-anchor="middle" font-size="7" fill="#6E6760" font-family="'Inter',sans-serif">NEEDS EVIDENCE</text>
+<text x="650" y="496" text-anchor="middle" font-size="7" fill="#D5D0CA" font-family="'Inter',sans-serif">LOW IMPACT / HIGH EFFORT</text>
+
+<!-- Points with labels -->
+<circle cx="160" cy="120" r="8" fill="#1E2A3A" opacity=".7"/>
+<text x="160" y="100" text-anchor="middle" font-size="7" font-family="'Inter',sans-serif">Improve product knowledge</text>
+
+<circle cx="240" cy="160" r="5" fill="#1E2A3A" opacity=".5"/>
+<text x="240" y="180" text-anchor="middle" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">AI source correction</text>
+
+<circle cx="340" cy="100" r="6" fill="#C45A2C" opacity=".8"/>
+<text x="370" y="92" text-anchor="start" font-size="7" font-family="'Inter',sans-serif">New category content</text>
+
+<circle cx="500" cy="140" r="4" fill="#1E2A3A" opacity=".4"/>
+<text x="500" y="156" text-anchor="middle" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">PR intervention</text>
+
+<circle cx="180" cy="260" r="5" fill="#C45A2C" opacity=".6"/>
+<text x="180" y="280" text-anchor="middle" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">Customer experience issue</text>
+
+<circle cx="280" cy="200" r="7" fill="#1E2A3A" opacity=".7"/>
+<text x="280" y="220" text-anchor="middle" font-size="6" font-family="'Inter',sans-serif">Product information update</text>
+
+<circle cx="420" cy="300" r="3" fill="#6E6760" opacity=".4"/>
+<text x="420" y="318" text-anchor="middle" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">Creator programme</text>
+
+<circle cx="220" cy="380" r="4" fill="#6E6760" opacity=".4"/>
+<text x="220" y="398" text-anchor="middle" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">Technical remediation</text>
+
+<text x="80" y="40" font-size="6" fill="#6E6760" font-family="'Inter',sans-serif">Circle size = confidence</text>
+</svg>
+</div>
+</section>
+
+<!-- SECTION 06 - IMPACT -->
+<section>
+<h2 class="h2">Impact is a hypothesis until the system observes what happened.</h2>
+<p class="p">Every intervention produces an expected impact and an observed impact. The difference between them is where the system learns.</p>
+
+<div class="impact-chain">
+<span class="link">Intervention</span>
+<span class="arrow">→</span>
+<span class="link">Knowledge change</span>
+<span class="arrow">→</span>
+<span class="link">Human / Machine response</span>
+<span class="arrow">→</span>
+<span class="link">Behaviour</span>
+<span class="arrow">→</span>
+<span class="link">Business outcome</span>
+</div>
+
+<table class="impact-table">
+<tr><th>Dimension</th><th>Expected</th><th>Observed</th><th>Variance</th></tr>
+<tr><td>AI understanding</td><td class="up">+22%</td><td class="up">+18%</td><td class="sep">−4pp · direction confirmed</td></tr>
+<tr><td>Relevant discovery</td><td class="up">+14%</td><td class="up">+11%</td><td class="sep">−3pp · less than predicted</td></tr>
+<tr><td>Product consideration</td><td class="up">+8%</td><td class="up">+9%</td><td class="sep">+1pp · exceeded hypothesis</td></tr>
+</table>
+
+<div class="ann-box"><span style="font-weight:600">Expected impact direction confirmed</span> across all three dimensions. AI response improved less than predicted. Conversion response exceeded initial hypothesis. The system incorporates this variance into future estimates.</div>
+</section>
+
+<!-- SECTION 07 - CLOSED LOOP -->
+<section>
+<h2 class="h2">The intelligence learns.</h2>
+<p class="p">Each cycle makes the system more useful. It learns which interventions create impact, where its estimates were accurate and where uncertainty remains.</p>
+
+<div class="loop">
+<div class="step ac">Observe</div>
+<div class="step">Model</div>
+<div class="step">Understand</div>
+<div class="step">Identify</div>
+<div class="step">Prioritise</div>
+<div class="step ac">Intervene</div>
+<div class="step">Measure</div>
+<div class="step">Learn</div>
+</div>
+
+<p class="small" style="max-width:620px;margin-top:12px">The system becomes more useful as it learns which interventions actually create impact. Each cycle improves future estimates, reduces uncertainty and surfaces increasingly specific opportunities.</p>
+</section>
+
+<!-- CTA -->
+<div class="cta-area">
+<h2 class="h2" style="margin-bottom:16px">Your brand already generates thousands of signals.<br>The problem is knowing which ones matter.</h2>
+<p class="p" style="margin:0 auto 28px">The intelligence layer connects those signals, models their relationships, exposes uncertainty and helps determine where intervention is most likely to create meaningful impact.</p>
+<a href="#" class="cta">Build the model</a>
+<a href="#" class="cta sec">See the system</a>
+</div>
+
+<div class="footer">
+<span>IntellaIQ · Brand Intelligence System</span>
+<span><a href="#">Documentation</a> · <a href="#">Status</a></span>
+</div>
+
+</div>
+</body></html>

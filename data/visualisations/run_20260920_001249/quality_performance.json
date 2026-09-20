@@ -1,0 +1,497 @@
+{
+  "points": [
+    {
+      "page_id": "consultancy",
+      "x": 0.4595895878315233,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.41548387096774186,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "service"
+    },
+    {
+      "page_id": "retail-media",
+      "x": 0.5199504201227666,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.4458421052631576,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "application"
+    },
+    {
+      "page_id": "blog",
+      "x": 0.4923076923076923,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.3,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "editorial"
+    },
+    {
+      "page_id": "shoppable-ai-search",
+      "x": 0.4769230769230769,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.3,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "other"
+    },
+    {
+      "page_id": "index",
+      "x": 0.4615384615384616,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.4,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "foundational"
+    },
+    {
+      "page_id": "technical-geo",
+      "x": 0.7353400755943608,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.6603870967741905,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "service"
+    },
+    {
+      "page_id": "contact",
+      "x": 0.4769230769230769,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.3,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "navigational"
+    },
+    {
+      "page_id": "amazon-rufus-sponsored-prompts",
+      "x": 0.4807692307692308,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.3,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "other"
+    },
+    {
+      "page_id": "amazon-ai-creative-studio",
+      "x": 0.4769230769230769,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.3,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "other"
+    },
+    {
+      "page_id": "aeo",
+      "x": 0.43360826712530887,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.4753548387096765,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "service"
+    },
+    {
+      "page_id": "media",
+      "x": 0.42834614215992445,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.4400000000000003,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "service"
+    },
+    {
+      "page_id": "ai-discovery",
+      "x": 0.29439905812293704,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.5329032258064512,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "service"
+    },
+    {
+      "page_id": "ai-media",
+      "x": 0.36566873675140343,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.4748387096774186,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "service"
+    },
+    {
+      "page_id": "ai-in-retail-media",
+      "x": 0.4846153846153846,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.3,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "other"
+    },
+    {
+      "page_id": "agentic-media-buying",
+      "x": 0.4769230769230769,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.3,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "other"
+    },
+    {
+      "page_id": "measurement",
+      "x": 0.6127148163238301,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.5323870967741943,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "service"
+    },
+    {
+      "page_id": "digital-pr",
+      "x": 0.42590089614186455,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.4477419354838706,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "service"
+    },
+    {
+      "page_id": "amazon",
+      "x": 0.5170599478219614,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.4544736842105262,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "application"
+    },
+    {
+      "page_id": "ai-visibility-analytics",
+      "x": 0.4121652431534489,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.46167741935483797,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "service"
+    },
+    {
+      "page_id": "aeo-rankings-to-citations",
+      "x": 0.4769230769230769,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.3,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "other"
+    },
+    {
+      "page_id": "ecommerce-whitepaper",
+      "x": 0.6733229926653864,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.6210526315789476,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "whitepaper"
+    },
+    {
+      "page_id": "beauty-media-strategy",
+      "x": 0.4923076923076923,
+      "y": 0,
+      "size": 5,
+      "confidence": 0.3,
+      "commercial": 0,
+      "anomaly": false,
+      "anomaly_type": null,
+      "page_type": "application"
+    }
+  ],
+  "anomalies": [],
+  "quadrants": {
+    "high_quality_high_traffic": [],
+    "high_quality_low_traffic": [
+      {
+        "page_id": "technical-geo",
+        "x": 0.7353400755943608,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.6603870967741905,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "service"
+      },
+      {
+        "page_id": "measurement",
+        "x": 0.6127148163238301,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.5323870967741943,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "service"
+      },
+      {
+        "page_id": "ecommerce-whitepaper",
+        "x": 0.6733229926653864,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.6210526315789476,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "whitepaper"
+      }
+    ],
+    "low_quality_high_traffic": [],
+    "low_quality_low_traffic": [
+      {
+        "page_id": "consultancy",
+        "x": 0.4595895878315233,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.41548387096774186,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "service"
+      },
+      {
+        "page_id": "retail-media",
+        "x": 0.5199504201227666,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.4458421052631576,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "application"
+      },
+      {
+        "page_id": "blog",
+        "x": 0.4923076923076923,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.3,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "editorial"
+      },
+      {
+        "page_id": "shoppable-ai-search",
+        "x": 0.4769230769230769,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.3,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "other"
+      },
+      {
+        "page_id": "index",
+        "x": 0.4615384615384616,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.4,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "foundational"
+      },
+      {
+        "page_id": "contact",
+        "x": 0.4769230769230769,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.3,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "navigational"
+      },
+      {
+        "page_id": "amazon-rufus-sponsored-prompts",
+        "x": 0.4807692307692308,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.3,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "other"
+      },
+      {
+        "page_id": "amazon-ai-creative-studio",
+        "x": 0.4769230769230769,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.3,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "other"
+      },
+      {
+        "page_id": "aeo",
+        "x": 0.43360826712530887,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.4753548387096765,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "service"
+      },
+      {
+        "page_id": "media",
+        "x": 0.42834614215992445,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.4400000000000003,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "service"
+      },
+      {
+        "page_id": "ai-discovery",
+        "x": 0.29439905812293704,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.5329032258064512,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "service"
+      },
+      {
+        "page_id": "ai-media",
+        "x": 0.36566873675140343,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.4748387096774186,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "service"
+      },
+      {
+        "page_id": "ai-in-retail-media",
+        "x": 0.4846153846153846,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.3,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "other"
+      },
+      {
+        "page_id": "agentic-media-buying",
+        "x": 0.4769230769230769,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.3,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "other"
+      },
+      {
+        "page_id": "digital-pr",
+        "x": 0.42590089614186455,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.4477419354838706,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "service"
+      },
+      {
+        "page_id": "amazon",
+        "x": 0.5170599478219614,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.4544736842105262,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "application"
+      },
+      {
+        "page_id": "ai-visibility-analytics",
+        "x": 0.4121652431534489,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.46167741935483797,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "service"
+      },
+      {
+        "page_id": "aeo-rankings-to-citations",
+        "x": 0.4769230769230769,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.3,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "other"
+      },
+      {
+        "page_id": "beauty-media-strategy",
+        "x": 0.4923076923076923,
+        "y": 0,
+        "size": 5,
+        "confidence": 0.3,
+        "commercial": 0,
+        "anomaly": false,
+        "anomaly_type": null,
+        "page_type": "application"
+      }
+    ]
+  }
+}

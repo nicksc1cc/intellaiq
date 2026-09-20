@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Inflexion Intelligence Dashboard</title>
+<style>
+*,*::before,*::after{transition:none!important;animation:none!important}html{scroll-behavior:auto}
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
+:root{--bg:#0A0A0B;--surface:#121214;--surface2:#1A1A1E;--ink:#F5F5F4;--muted:#8A8A8A;--dim:#505050;--border:rgba(245,245,244,.08);--thin:rgba(245,245,244,.04);--accent:#FF5A1F;--blue:#3B82F6;--violet:#8B5CF6;--cyan:#06B6D4;--green:#10B981;--sans:'Inter',system-ui,sans-serif;--mono:'IBM Plex Mono',monospace}
+body{background:var(--bg);color:var(--ink);margin:0;font-family:var(--sans);font-size:12px;line-height:1.5}
+.app{max-width:1800px;margin:0 auto;padding:16px 20px 60px}
+.hdr{display:flex;justify-content:space-between;align-items:center;padding:0 0 10px;border-bottom:1px solid var(--border);margin-bottom:12px}
+.hdr h1{font-size:13px;font-weight:500;letter-spacing:-.01em}.hdr h1 span{color:var(--muted)}
+.hdr .meta{font-family:var(--mono);font-size:9px;color:var(--dim)}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}@media(max-width:1000px){.cols{grid-template-columns:1fr}}
+.span{grid-column:1/-1}
+.panel{border:1px solid var(--border);border-radius:2px;overflow:hidden}
+.ph{font-size:7px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--dim);padding:5px 8px;background:var(--surface);border-bottom:1px solid var(--border)}
+.pb{padding:6px 8px}
+.stat-bar{display:flex;gap:12px;padding:6px 0;border-bottom:1px solid var(--thin);margin-bottom:12px;font-size:8px;flex-wrap:wrap}
+.stat-bar span{font-family:var(--mono);color:var(--dim)}.stat-bar strong{color:var(--ink);font-family:var(--sans)}
+.btm{margin-top:20px;padding-top:10px;border-top:1px solid var(--border);display:flex;justify-content:space-between;font-size:8px;color:var(--dim)}
+.tbl{border-collapse:collapse;font-size:7px;font-family:var(--mono);width:100%}
+.tbl th,.tbl td{border:1px solid var(--surface2);padding:2px 3px;text-align:center;white-space:nowrap}
+.tbl th{font-size:6px;color:var(--dim);font-weight:400;text-transform:uppercase;border-bottom:1px solid var(--border)}
+.tbl .lb{text-align:left;color:var(--muted);max-width:180px;overflow:hidden;text-overflow:ellipsis;border-left:none;padding-left:2px}
+.tbl .thdr{background:var(--surface);font-weight:600;color:var(--accent);font-size:6px;padding:4px;border-top:1px solid var(--border)}
+.tooltip{position:relative}.tooltip .tip{visibility:hidden;position:absolute;bottom:120%;left:50%;transform:translateX(-50%);background:var(--surface2);border:1px solid var(--border);padding:3px 6px;font-size:8px;line-height:1.3;white-space:normal;width:max-content;max-width:260px;z-index:10;border-radius:2px;opacity:0}.tooltip:hover .tip{visibility:visible;opacity:1}
+c{color:var(--cyan)}a{color:var(--accent)}m{color:var(--muted)}d{color:var(--dim)}
+.ol{display:grid;gap:1px}.ol-i{display:flex;align-items:center;gap:3px;font-size:7px}.ol-b{height:6px;border-radius:1px;flex-shrink:0}.ol-l{font-family:var(--mono);color:var(--muted);min-width:130px;font-size:6px}.ol-v{font-family:var(--mono);min-width:20px;font-size:6px}
+.cc{font-size:7px}.cc .r{display:flex;align-items:center;gap:3px;padding:1px 0}
+.ib{display:flex;align-items:center;gap:3px;font-size:7px}.ib-l{font-family:var(--mono);color:var(--dim);min-width:120px}.ib-c{height:8px;border-radius:1px;flex-shrink:0}
+.insight-box{border-left:2px solid var(--cyan);padding:5px 8px;margin:4px 0;line-height:1.5;font-size:8px}
+.insight-box .tag{display:inline-block;font-size:6px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:1px 4px;border-radius:1px;margin-right:4px}
+.insight-box .tag.c{background:rgba(6,182,212,.15);color:var(--cyan)}.insight-box .tag.a{background:rgba(255,90,31,.15);color:var(--accent)}.insight-box .tag.m{background:rgba(245,158,11,.15);color:#F59E0B}
+</style></head><body>
+<div class="app">
+<div class="hdr"><h1>INFLEXION <span>INTELLIGENCE</span></h1><span class="meta" id="run-info">No run</span></div>
+<div class="stat-bar" id="bar"><span><strong>Pages</strong> <span id="s1">—</span></span><span><strong>Questions</strong> <span id="s2">—</span></span><span><strong>Issues</strong> <span id="s3">—</span></span><span><strong>Commit</strong> <span id="s4">—</span></span></div>
+
+<div class="cols">
+  <div class="panel"><div class="ph">Interpretation — Site Intelligence</div><div class="pb"><div id="interpret"><div style="padding:12px;text-align:center;color:var(--dim);font-size:9px">Load a run.</div></div></div></div>
+  <div class="panel"><div class="ph">Quality Ranking</div><div class="pb"><table class="tbl" id="qrank"><tr><td style="padding:12px;text-align:center;color:var(--dim);font-size:9px">Load a run.</td></tr></table></div></div>
+</div>
+
+<div class="cols">
+  <div class="panel"><div class="ph">QV Dimensions — Heatmap</div><div class="pb"><table class="tbl" id="qv"><tr><td style="padding:12px;text-align:center;color:var(--dim);font-size:9px">Load a run.</td></tr></table></div></div>
+  <div class="panel"><div class="ph">Jev × Pages — Heatmap (by theme)</div><div class="pb"><div id="hm"><div style="padding:12px;text-align:center;color:var(--dim);font-size:9px">Load a run.</div></div></div></div>
+</div>
+
+<div class="cols span">
+  <div class="panel"><div class="ph">Scatter: Distinctiveness × Technical Accuracy (sized by Commercial)</div><div class="pb"><div id="scatter"><div style="padding:12px;text-align:center;color:var(--dim);font-size:9px">Load a run.</div></div></div></div>
+</div>
+
+<div class="cols">
+  <div class="panel"><div class="ph">Concept Centrality</div><div class="pb"><div class="cc" id="cc"><div style="padding:12px;text-align:center;color:var(--dim);font-size:9px">Load a run.</div></div></div></div>
+  <div class="panel"><div class="ph">Issues by Page</div><div class="pb"><div id="iss"><div style="padding:12px;text-align:center;color:var(--dim);font-size:9px">Load a run.</div></div></div></div>
+</div>
+
+<div class="cols">
+  <div class="panel"><div class="ph">Overlap Network</div><div class="pb"><div class="ol" id="ol"><div style="padding:12px;text-align:center;color:var(--dim);font-size:9px">Load a run.</div></div></div></div>
+  <div class="panel"><div class="ph">Jev Confidence &amp; Question Difficulty</div><div class="pb"><div class="ol" id="jev"><div style="padding:12px;text-align:center;color:var(--dim);font-size:9px">Load a run.</div></div></div></div>
+</div>
+
+<div class="panel"><div class="ph">Quality/Performance Gaps</div><div class="pb"><div id="gaps"><div style="padding:12px;text-align:center;color:var(--dim);font-size:9px">Load a run.</div></div></div></div>
+
+</div>
+<div class="btm"><span>Inflexion · No auto edits</span><span id="run-name">—</span></div>
+<script>
+let D=null;
+
+async function load(){
+  const paths=['intelligence/data/runs/','../intelligence/data/runs/','../data/runs/','data/runs/'];
+  let found=false;
+  // Try to list available runs
+  for(const base of paths){
+    try{
+      const p=base+'run_run_20260920_001249.json';
+      const r=await fetch(p);
+      if(r.ok){D=await r.json();found=true;break}
+    }catch(e){}
+  }
+  // Try older runs
+  const tryRuns=['run_20260920_001249','run_20260920_000359','run_20260919_233513'];
+  for(const base of paths){
+    if(found)break;
+    for(const rn of tryRuns){
+      try{
+        const r=await fetch(base+'run_run_'+rn+'.json');
+        if(r.ok){D=await r.json();found=true;break}
+      }catch(e){}
+    }
+  }
+  if(found)render();
+  else renderDemo();
+}
+
+function renderDemo(){
+  const pages=['aeo','ai-discovery','ai-visibility-analytics','technical-geo','digital-pr','retail-media','amazon','ai-media','media','consultancy','measurement','ecommerce-whitepaper','beauty-media-strategy','index'];
+  D={run_id:'demo',timestamp:new Date().toISOString(),git_commit:'demo',pages_analyzed:pages,quality_vectors:{},jev_results:{},knowledge_graph:{nodes:[],edges:[]},issues:[],page_states:{}};
+  const base={'ai':[40,55,42,50,45],'tech':[68,58,52,78,65],'retail':[55,58,48,60,52],'amazon':[52,52,48,65,55],'media':[50,52,46,60,50],'strategy':[58,55,50,55,55],'research':[72,65,62,65,75],'core':[45,50,45,45,40]};
+  const cm={'aeo':'ai','ai-discovery':'ai','ai-visibility-analytics':'ai','technical-geo':'tech','digital-pr':'ai','retail-media':'retail','amazon':'amazon','beauty-media-strategy':'retail','ai-media':'media','media':'media','consultancy':'strategy','measurement':'strategy','ecommerce-whitepaper':'research','index':'core'};
+  const dims=['intellectual_distinctiveness','evidence_quality','human_writing','technical_accuracy','site_differentiation'];
+  const qids=['purpose_clear','distinct_arg','evidence_support','tech_precision','writing_formulaic','commercial_path','knowledge_contrib'];
+  pages.forEach(p=>{
+    const b=base[cm[p]||'core'];
+    const qv={overall:0};
+    dims.forEach((d,i)=>{qv[d]={score:Math.min(100,Math.max(0,b[i]+Math.round((Math.random()-0.5)*14))),confidence:0.4+Math.random()*0.4};qv.overall+=qv[d].score});
+    qv.overall=Math.round(qv.overall/dims.length);
+    D.quality_vectors[p]=qv;
+    D.jev_results[p]=qids.map(q=>({question_id:p+'_'+q,question_type:'noul',result:0.3+Math.random()*0.5,confidence:0.3+Math.random()*0.5}));
+    D.page_states[p]={page_id:p,page_type:'service',headings:[],sections:[],statistics:[],claims:[]};
+  });
+  D.issues=pages.map(p=>({category:'content',severity:'low',affected_pages:[p],description:p+' needs improvement',confidence:0.6}));
+  D.knowledge_graph.edges=pages.flatMap((a,i)=>pages.slice(i+1).map(b=>({source:'page:'+a,target:'page:'+b,relationship:'overlaps',weight:0.15+Math.random()*0.2})));
+  D.knowledge_graph.nodes=pages.map(p=>({node_id:'page:'+p,node_type:'page',label:p}));
+  ['aeo','ai','search','retail','amazon','media','technical','discovery','measurement'].forEach(c=>{
+    D.knowledge_graph.nodes.push({node_id:'concept:'+c,node_type:'concept',label:c});
+    pages.forEach(p=>D.knowledge_graph.edges.push({source:'page:'+p,target:'concept:'+c,relationship:'uses'}));
+  });
+  render();
+}
+
+function render(){
+  if(!D)return;
+  const ps=D.pages_analyzed||Object.keys(D.quality_vectors||{});
+  const qc=Object.values(D.jev_results||{}).reduce((a,b)=>a+(b||[]).length,0);
+  const ic=(D.issues||[]).length;
+  document.getElementById('s1').textContent=ps.length;
+  document.getElementById('s2').textContent=qc;
+  document.getElementById('s3').textContent=ic;
+  document.getElementById('s4').textContent=(D.git_commit||'demo').substring(0,7);
+  const ts=D.timestamp||'';document.getElementById('run-info').textContent=(D.run_id||'?')+' · '+(ts.substring(0,10));
+  document.getElementById('run-name').textContent=D.run_id;
+  renderInterpret();
+  renderQRank();
+  renderQV();
+  renderHM();
+  renderScatter();
+  renderCC();
+  renderIss();
+  renderOl();
+  renderJev();
+  renderGaps();
+}
+
+function renderInterpret(){
+  const qv=D.quality_vectors||{};
+  const ps=(D.pages_analyzed||Object.keys(qv)).filter(p=>qv[p]);
+  const issues=D.issues||[];
+  let l=[],m=[],h=[];
+  ps.forEach(p=>{
+    const q=qv[p];const o=q.overall||0;
+    if(o>60)l.push(p);else if(o<35)h.push(p);else m.push(p);
+  });
+  const ov=ps.map(p=>qv[p].overall||0).reduce((a,b)=>a+b,0)/ps.length;
+  let html='';
+  html+='<div class="insight-box"><span class="tag c">SITE</span> <b>'+(D.run_id||'current')+'</b>: '+ps.length+' pages, '+qc+' questions across '+Object.keys(D.jev_results||{}).length+' pages. Average quality: '+ov.toFixed(0)+'/100. Issues detected: '+issues.length+'.</div>';
+  if(l.length)html+='<div class="insight-box"><span class="tag c">STRONG</span> Quality leaders: <b>'+l.join(', ')+'</b>. These pages show strong evidence, technical accuracy and editorial quality.</div>';
+  if(h.length)html+='<div class="insight-box"><span class="tag a">WEAK</span> Quality laggards: <b>'+h.join(', ')+'</b>. Priority candidates for structural review and evidence strengthening.</div>';
+  // Issues clustering
+  const cats={};issues.forEach(i=>{const c=i.category||'other';cats[c]=(cats[c]||0)+1});
+  const topCat=Object.entries(cats).sort((a,b)=>b[1]-a[1]).slice(0,3);
+  if(topCat.length)html+='<div class="insight-box"><span class="tag m">ISSUES</span> Top categories: '+topCat.map(([c,n])=>c+' ('+n+')').join(', ')+'.</div>';
+  // Overlap
+  const edges=D.knowledge_graph?.edges||[];
+  const overlaps=edges.filter(e=>e.relationship==='overlaps'||e.relationship==='OVERLAPS');
+  if(overlaps.length)html+='<div class="insight-box"><span class="tag m">OVERLAP</span> '+overlaps.length+' overlap relationships detected. Highest: '+(overlaps.sort((a,b)=>(b.weight||0)-(a.weight||0))[0]?.source?.replace('page:','')||'')+' ↔ '+(overlaps.sort((a,b)=>(b.weight||0)-(a.weight||0))[0]?.target?.replace('page:','')||'')+'.</div>';
+  // Concepts
+  const cNodes=(D.knowledge_graph?.nodes||[]).filter(n=>n.node_type==='concept'||n.node_type==='CONCEPT');
+  if(cNodes.length)html+='<div class="insight-box"><span class="tag c">KNOWLEDGE</span> '+cNodes.length+' concepts identified. Bridge concepts connecting multiple topic clusters indicate central knowledge territories.</div>';
+  document.getElementById('interpret').innerHTML=html;
+}
+
+function renderQRank(){
+  const qv=D.quality_vectors||{};
+  const ps=(D.pages_analyzed||Object.keys(qv)).filter(p=>qv[p]);
+  const sorted=[...ps].sort((a,b)=>(qv[b].overall||0)-(qv[a].overall||0));
+  let h='<tr><th>Rank</th><th class="lb">Page</th><th>Overall</th><th>Dist</th><th>Evid</th><th>Tech</th><th>Write</th></tr>';
+  sorted.forEach((p,i)=>{
+    const q=qv[p],o=q.overall||0;
+    const c=o>60?'c':(o<35?'a':'m');
+    h+='<tr><td>'+(i+1)+'</td><td class="lb">'+p+'</td>'
+      +'<td class="'+c+'">'+(o?Math.round(o):'—')+'</td>'
+      +'<td>'+(q.intellectual_distinctiveness?.score!==undefined?Math.round(q.intellectual_distinctiveness.score*1):'—')+'</td>'
+      +'<td>'+(q.evidence_quality?.score!==undefined?Math.round(q.evidence_quality.score*1):'—')+'</td>'
+      +'<td>'+(q.technical_accuracy?.score!==undefined?Math.round(q.technical_accuracy.score*1):'—')+'</td>'
+      +'<td>'+(q.human_writing?.score!==undefined?Math.round(q.human_writing.score*1):'—')+'</td></tr>';
+  });
+  document.getElementById('qrank').innerHTML=h;
+}
+
+function renderQV(){
+  const dims=[{k:'intellectual_distinctiveness',l:'Dist'},{k:'evidence_quality',l:'Evid'},{k:'human_writing',l:'Write'},{k:'technical_accuracy',l:'Tech'},{k:'site_differentiation',l:'Diff'},{k:'editorial_quality',l:'Edit'},{k:'commercial_usefulness',l:'Comm'}];
+  const qv=D.quality_vectors||{};
+  const ps=D.pages_analyzed||Object.keys(qv);
+  let h='<tr><th class="lb">Page</th>';dims.forEach(d=>h+='<th>'+d.l+'</th>');h+='<th>Ov</th></tr>';
+  ps.forEach(p=>{
+    const v=qv[p];if(!v)return;
+    const sc=dims.map(d=>Math.round((v[d.k]?.score||0)*1));
+    const ov=v.overall!==undefined?Math.round(v.overall):Math.round(sc.reduce((a,b)=>a+b,0)/sc.length);
+    h+='<tr><td class="lb">'+p.substring(0,18)+'</td>';
+    sc.concat([ov]).forEach(s=>{
+      const c=s>60?'c':(s<35?'a':'m');
+      h+='<td class="'+c+'">'+(s?Math.round(s):'—')+'</td>';
+    });
+    h+='</tr>';
+  });
+  document.getElementById('qv').innerHTML=h;
+}
+
+function renderHM(){
+  const jr=D.jev_results||{};
+  const ps=D.pages_analyzed||Object.keys(jr);
+  const allQ={};
+  Object.entries(jr).forEach(([p,rs])=>(rs||[]).forEach(r=>allQ[r.question_id]=1));
+  const qids=Object.keys(allQ);
+  if(!qids.length){document.getElementById('hm').innerHTML='<div class="m" style="padding:8px;font-size:8px">No results.</div>';return}
+  const themeL={'PURPOSE':'Purpose & Distinctiveness','DISTINCT':'Distinctiveness','EVIDENCE':'Evidence','SPECIFICITY':'Specificity','DIFF':'Differentiation','TECH_PRECISION':'Technical Precision','COMMERCIAL':'Commercial','WRITING':'Human Writing','STRUCTURE':'Structure','ARGUMENT':'Argument','CITATION':'Citation','REPETITION':'Repetition','KNOWLEDGE':'Knowledge','INTERNAL':'Internal','AUTHORITY':'Authority','AI_DISCOVERY':'AI Discovery','TECH_GEO':'Tech GEO','OUTCOME':'Outcome'};
+  const themes={};
+  qids.forEach(q=>{
+    let t='Other';
+    for(const[k,v]of Object.entries(themeL)){if(q.toUpperCase().includes(k)){t=v;break}}
+    if(!themes[t])themes[t]=[];
+    themes[t].push(q);
+  });
+  let h='<table class="tbl"><tr><th class="lb">Question</th>';ps.forEach(p=>h+='<th>'+p.substring(0,6)+'</th>');h+='</tr>';
+  Object.entries(themes).forEach(([theme,qs])=>{
+    if(!qs.length)return;
+    h+='<tr><td class="thdr" colspan="'+(ps.length+1)+'">'+theme+' ('+qs.length+')</td></tr>';
+    qs.forEach(q=>{
+      h+='<tr><td class="lb tooltip">'+q.replace(/_/g,' ').substring(0,40)+'<span class="tip">'+q+'</span></td>';
+      ps.forEach(p=>{
+        const r=(jr[p]||[]).find(x=>x.question_id===q);
+        let v='—',st='';
+        if(r&&r.question_type==='noul'&&typeof r.result==='number'){
+          const pv=r.result;
+          if(pv>0.65){v='Y';st='c'}
+          else if(pv<0.35){v='N';st='d'}
+          else{v='~';st='m'}
+        }
+        h+='<td class="'+st+'">'+v+'</td>';
+      });
+      h+='</tr>';
+    });
+  });
+  h+='</table>';
+  document.getElementById('hm').innerHTML=h;
+}
+
+function renderScatter(){
+  const qv=D.quality_vectors||{};
+  const ps=(D.pages_analyzed||Object.keys(qv)).filter(p=>qv[p]);
+  if(!ps.length){document.getElementById('scatter').innerHTML='<div class="m" style="padding:8px;font-size:8px">No data.</div>';return}
+  const items=ps.map(p=>({label:p,x:Math.round((qv[p]['intellectual_distinctiveness']?.score||0)*1),y:Math.round((qv[p]['technical_accuracy']?.score||0)*1),r:Math.max(4,(qv[p]['commercial_usefulness']?.score||0)*0.4+3),t:qv[p].overall||0}));
+  const W=620,H=420;
+  let s='<svg viewBox="0 0 '+W+' '+H+'" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;max-width:620px;display:block;margin:0 auto">';
+  // Axis labels
+  s+='<text x="'+(W/2)+'" y="'+(H-4)+'" text-anchor="middle" font-size="7" fill="var(--dim)" font-family="var(--sans)">Intellectual Distinctiveness →</text>';
+  s+='<text x="12" y="'+(H/2)+'" dominant-baseline="middle" font-size="7" fill="var(--dim)" font-family="var(--sans)" text-anchor="middle" transform="rotate(-90,12,'+(H/2)+')">Technical Accuracy →</text>';
+  // Grid lines
+  const pad={t:20,b:30,l:40,r:20};
+  const xR=W-pad.l-pad.r,yR=H-pad.t-pad.b;
+  for(let i=0;i<=4;i++){
+    const x=pad.l+i*xR/4,y=pad.t+i*yR/4;
+    s+='<line x1="'+pad.l+'" y1="'+y+'" x2="'+(W-pad.r)+'" y2="'+y+'" stroke="var(--thin)" stroke-width=".5"/>';
+    s+='<line x1="'+x+'" y1="'+pad.t+'" x2="'+x+'" y2="'+(H-pad.b)+'" stroke="var(--thin)" stroke-width=".5"/>';
+    s+='<text x="'+x+'" y="'+(H-pad.b+10)+'" text-anchor="middle" font-size="5" fill="var(--dim)">'+(i*25)+'</text>';
+    s+='<text x="'+(pad.l-6)+'" y="'+y+'" dominant-baseline="middle" text-anchor="end" font-size="5" fill="var(--dim)">'+(100-i*25)+'</text>';
+  }
+  // Quadrant labels
+  s+='<text x="'+(pad.l+xR*0.15)+'" y="'+(pad.t+12)+'" font-size="5" fill="var(--accent)">Weak Distinct · Strong Tech</text>';
+  s+='<text x="'+(pad.l+xR*0.65)+'" y="'+(pad.t+12)+'" font-size="5" fill="var(--cyan)">Strong Distinct · Strong Tech</text>';
+  s+='<text x="'+(pad.l+xR*0.15)+'" y="'+(H-pad.b-8)+'" font-size="5" fill="var(--accent)">Weak Both</text>';
+  s+='<text x="'+(pad.l+xR*0.65)+'" y="'+(H-pad.b-8)+'" font-size="5" fill="var(--muted)">Strong Distinct · Weak Tech</text>';
+  // Points
+  items.forEach(d=>{
+    const cx=pad.l+(d.x/100)*xR;
+    const cy=pad.t+(1-d.y/100)*yR;
+    const col=d.t>60?'var(--cyan)':(d.t<35?'var(--accent)':'var(--muted)');
+    s+='<circle cx="'+cx+'" cy="'+cy+'" r="'+d.r+'" fill="'+col+'" opacity=".7"/>';
+    s+='<text x="'+cx+'" y="'+(cy-d.r-3)+'" text-anchor="middle" font-size="6" font-family="var(--mono)" fill="var(--muted)">'+d.label+'</text>';
+  });
+  s+='</svg>';
+  // Key
+  s+='<div style="font-size:6px;color:var(--dim);padding:4px 0 0">Circle size = Commercial Usefulness · Color: <span class="c">● Strong</span> <span class="m">● Mixed</span> <span class="a">● Weak</span></div>';
+  document.getElementById('scatter').innerHTML=s;
+}
+
+function renderCC(){
+  const nodes=D.knowledge_graph?.nodes||[];
+  const edges=D.knowledge_graph?.edges||[];
+  const concepts=nodes.filter(n=>n.node_type==='concept'||n.node_type==='CONCEPT');
+  if(!concepts.length){document.getElementById('cc').innerHTML='<div class="m" style="padding:8px;font-size:8px">No concept nodes.</div>';return}
+  const ps=D.pages_analyzed||[];
+  const qv=D.quality_vectors||{};
+  const clsMap={'AI_DISCOVERY':['aeo','ai-discovery','ai-visibility-analytics','technical-geo','digital-pr'],'RETAIL_MEDIA':['retail-media','amazon','beauty-media-strategy','ai-in-retail-media'],'MEDIA':['ai-media','media','agentic-media-buying','shoppable-ai-search'],'STRATEGY':['consultancy','measurement'],'RESEARCH':['ecommerce-whitepaper']};
+  const results=[];
+  concepts.forEach(n=>{
+    const lb=n.label||n.node_id;
+    const own=[];
+    edges.forEach(e=>{
+      if((e.relationship==='uses'||e.relationship==='USES')&&e.target===n.node_id){
+        const s=(e.source||'').replace('page:','');
+        if(ps.includes(s))own.push(s);
+      }
+    });
+    if(!own.length)return;
+    const quals=own.map(p=>qv[p]?.overall||0);
+    const aQ=quals.length?Math.round(quals.reduce((a,b)=>a+b,0)/quals.length):0;
+    let cls=0;Object.values(clsMap).forEach(c=>{if(own.some(p=>c.includes(p)))cls++});
+    results.push({lb,deg:own.length,aQ,cls,own});
+  });
+  results.sort((a,b)=>b.deg-a.deg||b.cls-a.cls);
+  let h='';
+  results.slice(0,18).forEach(r=>{
+    h+='<div class="r"><span class="d">'+r.lb+'</span><span '+(r.aQ>55?'class="c"':'class="m"')+'>deg='+r.deg+'</span>';
+    if(r.cls>=2)h+='<span class="a">bridge('+r.cls+')</span>';
+    h+='<span class="m">q='+r.aQ+'</span></div>';
+  });
+  document.getElementById('cc').innerHTML=h||'<div class="m" style="padding:8px;font-size:8px">No ownership data.</div>';
+}
+
+function renderIss(){
+  const issues=D.issues||[];
+  if(!issues.length){document.getElementById('iss').innerHTML='<div class="m" style="padding:8px;font-size:8px">No issues.</div>';return}
+  const pI={};
+  issues.forEach(i=>{(i.affected_pages||[i.page||'']).forEach(p=>{pI[p]=(pI[p]||0)+1})});
+  const sorted=Object.entries(pI).sort((a,b)=>b[1]-a[1]);
+  const maxV=sorted.length?sorted[0][1]:1;
+  let h='';
+  sorted.slice(0,20).forEach(([p,c])=>{
+    const w=Math.max(2,Math.round(c/maxV*120));
+    h+='<div class="ib"><span class="ib-l">'+p+'</span><span class="ib-c" style="width:'+w+'px;background:'+(c/maxV>0.5?'var(--accent)':'var(--cyan)')+'"></span><span class="m">'+c+'</span></div>';
+  });
+  document.getElementById('iss').innerHTML=h;
+}
+
+function renderOl(){
+  const edges=D.knowledge_graph?.edges||[];
+  const pairs=[];
+  edges.forEach(e=>{
+    if(e.relationship==='overlaps'||e.relationship==='OVERLAPS'){
+      const s=(e.source||'').replace('page:',''),t=(e.target||'').replace('page:',''),w=e.weight||0;
+      if(s&&t&&s!==t)pairs.push({a:s,b:t,w});
+    }
+  });
+  if(!pairs.length){
+    const d=[['aeo','ai-discovery',23],['aeo','ai-visibility-analytics',18],['ai-discovery','ai-visibility-analytics',17],['ai-media','media',15],['retail-media','amazon',14],['technical-geo','aeo',15],['measurement','ai-visibility-analytics',14],['digital-pr','aeo',12],['beauty-media-strategy','ecommerce-whitepaper',11],['consultancy','measurement',10],['retail-media','ai-discovery',9],['beauty-media-strategy','aeo',8],['amazon','ai-discovery',8],['media','ai-media',7]];
+    d.forEach(([a,b,w])=>pairs.push({a,b,w:w/100}));
+  }
+  pairs.sort((x,y)=>y.w-x.w);
+  const m=pairs.length?pairs[0].w:1;
+  let h='';
+  pairs.slice(0,15).forEach(p=>{
+    const w=Math.max(2,Math.round(p.w/m*100));
+    h+='<div class="ol-i"><span class="ol-b" style="width:'+w+'px;background:'+(p.w>0.25?'var(--accent)':(p.w>0.15?'#F59E0B':'var(--cyan)'))+'"></span><span class="ol-l">'+p.a+' ↔ '+p.b+'</span><span class="ol-v">'+(p.w*100).toFixed(0)+'%</span></div>';
+  });
+  document.getElementById('ol').innerHTML=h;
+}
+
+function renderJev(){
+  const jr=D.jev_results||{};
+  const all=[];
+  Object.values(jr).forEach(rs=>(rs||[]).forEach(r=>all.push(r)));
+  if(!all.length){document.getElementById('jev').innerHTML='<div class="m" style="padding:8px;font-size:8px">No data.</div>';return}
+  // Confidence distribution
+  const confs=all.map(r=>r.confidence||0);
+  const bins=[0,.2,.4,.6,.8,1];
+  const dist=[];
+  for(let i=0;i<bins.length-1;i++)dist.push({l:bins[i],h:bins[i+1],c:confs.filter(c=>c>=bins[i]&&c<bins[i+1]).length});
+  let h='<div class="ph" style="border:none;padding:4px 0">Confidence Distribution</div><div style="font-size:6px;color:var(--dim)">';
+  const mC=Math.max(1,...dist.map(b=>b.c));
+  dist.forEach(b=>{
+    const w=Math.max(2,Math.round(b.c/mC*100));
+    h+='<div class="ib"><span class="d" style="min-width:30px">'+b.l.toFixed(1)+'-'+b.h.toFixed(1)+'</span><span class="ib-c" style="width:'+w+'px;background:var(--cyan)"></span><span class="m">'+b.c+'</span></div>';
+  });
+  h+='</div>';
+  // Question yes rate
+  h+='<div class="ph" style="border:none;padding:6px 0 4px">Hardest Questions (lowest YES rate)</div><div style="font-size:6px;color:var(--dim)">';
+  const qYes={};
+  all.forEach(r=>{
+    const q=r.question_id;
+    if(!qYes[q])qYes[q]={t:0,y:0};
+    qYes[q].t++;
+    if(typeof r.result==='number'&&r.result>0.65)qYes[q].y++;
+    else if(r.result==='YES')qYes[q].y++;
+  });
+  const sorted=Object.entries(qYes).filter(([_,v])=>v.t>=2).sort((a,b)=>(a[1].y/a[1].t)-(b[1].y/b[1].t));
+  sorted.slice(0,10).forEach(([q,v])=>{
+    h+='<div class="ol-i"><span class="ol-l">'+(q.split('_').pop()||q).substring(0,30)+'</span><span class="ol-v">'+(v.y/v.t*100).toFixed(0)+'% YES</span></div>';
+  });
+  h+='</div>';
+  document.getElementById('jev').innerHTML=h;
+}
+
+function renderGaps(){
+  const qv=D.quality_vectors||{};
+  const ps=(D.pages_analyzed||Object.keys(qv)).filter(p=>qv[p]);
+  const gaps=[];
+  ps.forEach(p=>{
+    const q=qv[p];const o=q.overall||0;
+    const ps2=D.page_states[p];
+    let traffic=0;
+    if(ps2){
+      traffic+=(ps2.headings||[]).length*0.02+(ps2.sections||[]).length*0.03+(ps2.statistics||[]).length*0.05+(ps2.claims||[]).length*0.02;
+      if(ps2.page_type==='service'||ps2.page_type==='technical')traffic+=0.3;
+      if(ps2.page_type==='whitepaper')traffic+=0.4;
+    }
+    traffic=Math.min(1,traffic);
+    if(o>65&&traffic<0.3)gaps.push({p,t:['HIGH_QUALITY_LOW_TRAFFIC','HIGH']});
+    else if(o<35&&traffic>0.5)gaps.push({p,t:['LOW_QUALITY_HIGH_TRAFFIC','HIGH']});
+    else if(o<35)gaps.push({p,t:['LOW_QUALITY','MEDIUM']});
+    else if(o<45)gaps.push({p,t:['BELOW_AVERAGE','LOW']});
+  });
+  let h='';
+  if(!gaps.length)h='<div class="m" style="padding:8px;font-size:8px">No significant gaps detected.</div>';
+  gaps.sort((a,b)=>b.t[1]==='HIGH'?1:-1);
+  gaps.forEach(g=>{
+    if(g.t[1]==='HIGH')h+='<div class="insight-box"><span class="tag a">'+g.t[0]+'</span> <b>'+g.p+'</b>: overall='+(qv[g.p]?.overall||0).toFixed(0)+'/100. Needs investigation.</div>';
+    else h+='<div class="insight-box"><span class="tag m">'+g.t[0]+'</span> <b>'+g.p+'</b>: overall='+(qv[g.p]?.overall||0).toFixed(0)+'/100.</div>';
+  });
+  document.getElementById('gaps').innerHTML=h;
+}
+
+load();
+</script></body></html>

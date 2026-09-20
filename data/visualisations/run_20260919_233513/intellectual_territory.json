@@ -1,0 +1,3258 @@
+{
+  "territories": {
+    "core_territories": [
+      {
+        "concept": "ecommerce",
+        "pages": [
+          "ecommerce-whitepaper"
+        ],
+        "avg_quality": 0.8038461538461537
+      },
+      {
+        "concept": "rendering",
+        "pages": [
+          "technical-geo"
+        ],
+        "avg_quality": 0.7586956521739118
+      },
+      {
+        "concept": "crawler",
+        "pages": [
+          "technical-geo"
+        ],
+        "avg_quality": 0.7586956521739118
+      }
+    ],
+    "emerging_territories": [
+      {
+        "concept": "a9",
+        "pages": [
+          "amazon"
+        ],
+        "avg_quality": 0.6080952380952384
+      }
+    ],
+    "underdeveloped_territories": [
+      {
+        "concept": "generative",
+        "pages": [
+          "ai-visibility-analytics"
+        ],
+        "avg_quality": 0.47719298245614017
+      }
+    ],
+    "overlapping_territories": [],
+    "orphaned_territories": [],
+    "overclaimed_territories": [
+      {
+        "concept": "aeo",
+        "pages": [
+          "consultancy",
+          "retail-media",
+          "blog",
+          "shoppable-ai-search",
+          "index",
+          "technical-geo",
+          "contact",
+          "amazon-rufus-sponsored-prompts",
+          "amazon-ai-creative-studio",
+          "aeo",
+          "media",
+          "ai-discovery",
+          "ai-media",
+          "ai-in-retail-media",
+          "agentic-media-buying",
+          "measurement",
+          "digital-pr",
+          "amazon",
+          "ai-visibility-analytics",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5307011089711239
+      },
+      {
+        "concept": "earned media",
+        "pages": [
+          "shoppable-ai-search",
+          "index",
+          "contact",
+          "measurement",
+          "digital-pr",
+          "ai-visibility-analytics",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5462186017152061
+      },
+      {
+        "concept": "whitepaper",
+        "pages": [
+          "consultancy",
+          "retail-media",
+          "blog",
+          "shoppable-ai-search",
+          "index",
+          "technical-geo",
+          "contact",
+          "amazon-rufus-sponsored-prompts",
+          "amazon-ai-creative-studio",
+          "aeo",
+          "media",
+          "ai-discovery",
+          "ai-media",
+          "ai-in-retail-media",
+          "agentic-media-buying",
+          "measurement",
+          "digital-pr",
+          "amazon",
+          "ai-visibility-analytics",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5307011089711239
+      },
+      {
+        "concept": "ai",
+        "pages": [
+          "consultancy",
+          "retail-media",
+          "blog",
+          "shoppable-ai-search",
+          "index",
+          "technical-geo",
+          "contact",
+          "amazon-rufus-sponsored-prompts",
+          "amazon-ai-creative-studio",
+          "aeo",
+          "media",
+          "ai-discovery",
+          "ai-media",
+          "ai-in-retail-media",
+          "agentic-media-buying",
+          "measurement",
+          "digital-pr",
+          "amazon",
+          "ai-visibility-analytics",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5307011089711239
+      },
+      {
+        "concept": "digital pr",
+        "pages": [
+          "consultancy",
+          "retail-media",
+          "blog",
+          "shoppable-ai-search",
+          "index",
+          "technical-geo",
+          "contact",
+          "amazon-rufus-sponsored-prompts",
+          "amazon-ai-creative-studio",
+          "aeo",
+          "media",
+          "ai-discovery",
+          "ai-media",
+          "ai-in-retail-media",
+          "agentic-media-buying",
+          "measurement",
+          "digital-pr",
+          "amazon",
+          "ai-visibility-analytics",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5307011089711239
+      },
+      {
+        "concept": "agentic",
+        "pages": [
+          "blog",
+          "media",
+          "ai-media",
+          "ai-in-retail-media",
+          "agentic-media-buying",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5363086598935656
+      },
+      {
+        "concept": "llm",
+        "pages": [
+          "technical-geo",
+          "digital-pr",
+          "ai-visibility-analytics",
+          "aeo-rankings-to-citations"
+        ],
+        "avg_quality": 0.5561495780123517
+      },
+      {
+        "concept": "schema",
+        "pages": [
+          "shoppable-ai-search",
+          "technical-geo",
+          "aeo",
+          "ai-discovery",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper"
+        ],
+        "avg_quality": 0.5751853389975313
+      },
+      {
+        "concept": "programmatic",
+        "pages": [
+          "media",
+          "ai-media",
+          "agentic-media-buying",
+          "amazon"
+        ],
+        "avg_quality": 0.5146024258760109
+      },
+      {
+        "concept": "rufus",
+        "pages": [
+          "blog",
+          "amazon-rufus-sponsored-prompts",
+          "ai-in-retail-media",
+          "amazon",
+          "ai-visibility-analytics",
+          "ecommerce-whitepaper"
+        ],
+        "avg_quality": 0.5648557290662554
+      },
+      {
+        "concept": "media",
+        "pages": [
+          "consultancy",
+          "retail-media",
+          "blog",
+          "shoppable-ai-search",
+          "index",
+          "technical-geo",
+          "contact",
+          "amazon-rufus-sponsored-prompts",
+          "amazon-ai-creative-studio",
+          "aeo",
+          "media",
+          "ai-discovery",
+          "ai-media",
+          "ai-in-retail-media",
+          "agentic-media-buying",
+          "measurement",
+          "digital-pr",
+          "amazon",
+          "ai-visibility-analytics",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5307011089711239
+      },
+      {
+        "concept": "entity",
+        "pages": [
+          "shoppable-ai-search",
+          "index",
+          "technical-geo",
+          "aeo",
+          "digital-pr",
+          "aeo-rankings-to-citations"
+        ],
+        "avg_quality": 0.5374330520082345
+      },
+      {
+        "concept": "strategy",
+        "pages": [
+          "consultancy",
+          "retail-media",
+          "shoppable-ai-search",
+          "index",
+          "amazon-ai-creative-studio",
+          "media",
+          "ai-discovery",
+          "ai-media",
+          "agentic-media-buying",
+          "digital-pr",
+          "amazon",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5258816271627523
+      },
+      {
+        "concept": "structured",
+        "pages": [
+          "consultancy",
+          "retail-media",
+          "shoppable-ai-search",
+          "index",
+          "technical-geo",
+          "aeo",
+          "ai-discovery",
+          "ai-in-retail-media",
+          "measurement",
+          "digital-pr",
+          "amazon",
+          "ai-visibility-analytics",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5483406621303947
+      },
+      {
+        "concept": "beauty",
+        "pages": [
+          "consultancy",
+          "retail-media",
+          "blog",
+          "shoppable-ai-search",
+          "index",
+          "technical-geo",
+          "contact",
+          "amazon-rufus-sponsored-prompts",
+          "amazon-ai-creative-studio",
+          "aeo",
+          "media",
+          "ai-discovery",
+          "ai-media",
+          "ai-in-retail-media",
+          "agentic-media-buying",
+          "measurement",
+          "digital-pr",
+          "amazon",
+          "ai-visibility-analytics",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5307011089711239
+      },
+      {
+        "concept": "citation",
+        "pages": [
+          "consultancy",
+          "blog",
+          "shoppable-ai-search",
+          "index",
+          "technical-geo",
+          "contact",
+          "aeo",
+          "media",
+          "ai-discovery",
+          "ai-media",
+          "measurement",
+          "digital-pr",
+          "ai-visibility-analytics",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5323330724543429
+      },
+      {
+        "concept": "retail",
+        "pages": [
+          "consultancy",
+          "retail-media",
+          "blog",
+          "shoppable-ai-search",
+          "index",
+          "technical-geo",
+          "contact",
+          "amazon-rufus-sponsored-prompts",
+          "amazon-ai-creative-studio",
+          "aeo",
+          "media",
+          "ai-discovery",
+          "ai-media",
+          "ai-in-retail-media",
+          "agentic-media-buying",
+          "measurement",
+          "digital-pr",
+          "amazon",
+          "ai-visibility-analytics",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5307011089711239
+      },
+      {
+        "concept": "visibility",
+        "pages": [
+          "consultancy",
+          "retail-media",
+          "blog",
+          "shoppable-ai-search",
+          "index",
+          "technical-geo",
+          "contact",
+          "amazon-rufus-sponsored-prompts",
+          "amazon-ai-creative-studio",
+          "aeo",
+          "media",
+          "ai-discovery",
+          "ai-media",
+          "ai-in-retail-media",
+          "agentic-media-buying",
+          "measurement",
+          "digital-pr",
+          "amazon",
+          "ai-visibility-analytics",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5307011089711239
+      },
+      {
+        "concept": "technical",
+        "pages": [
+          "consultancy",
+          "retail-media",
+          "blog",
+          "shoppable-ai-search",
+          "index",
+          "technical-geo",
+          "contact",
+          "amazon-rufus-sponsored-prompts",
+          "amazon-ai-creative-studio",
+          "aeo",
+          "media",
+          "ai-discovery",
+          "ai-media",
+          "ai-in-retail-media",
+          "agentic-media-buying",
+          "measurement",
+          "digital-pr",
+          "amazon",
+          "ai-visibility-analytics",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5307011089711239
+      },
+      {
+        "concept": "search",
+        "pages": [
+          "retail-media",
+          "blog",
+          "shoppable-ai-search",
+          "index",
+          "technical-geo",
+          "contact",
+          "amazon-rufus-sponsored-prompts",
+          "aeo",
+          "ai-discovery",
+          "ai-media",
+          "ai-in-retail-media",
+          "agentic-media-buying",
+          "measurement",
+          "digital-pr",
+          "amazon",
+          "ai-visibility-analytics",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5342245876137012
+      },
+      {
+        "concept": "measurement",
+        "pages": [
+          "consultancy",
+          "retail-media",
+          "blog",
+          "shoppable-ai-search",
+          "index",
+          "technical-geo",
+          "contact",
+          "amazon-rufus-sponsored-prompts",
+          "amazon-ai-creative-studio",
+          "aeo",
+          "media",
+          "ai-discovery",
+          "ai-media",
+          "ai-in-retail-media",
+          "agentic-media-buying",
+          "measurement",
+          "digital-pr",
+          "amazon",
+          "ai-visibility-analytics",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5307011089711239
+      },
+      {
+        "concept": "attribution",
+        "pages": [
+          "index",
+          "media",
+          "ai-media",
+          "ai-in-retail-media",
+          "amazon",
+          "ai-visibility-analytics",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5424311049757922
+      },
+      {
+        "concept": "amazon",
+        "pages": [
+          "consultancy",
+          "retail-media",
+          "blog",
+          "shoppable-ai-search",
+          "index",
+          "technical-geo",
+          "contact",
+          "amazon-rufus-sponsored-prompts",
+          "amazon-ai-creative-studio",
+          "aeo",
+          "media",
+          "ai-discovery",
+          "ai-media",
+          "ai-in-retail-media",
+          "agentic-media-buying",
+          "measurement",
+          "digital-pr",
+          "amazon",
+          "ai-visibility-analytics",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5307011089711239
+      },
+      {
+        "concept": "consultancy",
+        "pages": [
+          "consultancy",
+          "retail-media",
+          "blog",
+          "shoppable-ai-search",
+          "index",
+          "technical-geo",
+          "contact",
+          "amazon-rufus-sponsored-prompts",
+          "amazon-ai-creative-studio",
+          "aeo",
+          "media",
+          "ai-discovery",
+          "ai-media",
+          "ai-in-retail-media",
+          "agentic-media-buying",
+          "measurement",
+          "digital-pr",
+          "amazon",
+          "ai-visibility-analytics",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5307011089711239
+      },
+      {
+        "concept": "discovery",
+        "pages": [
+          "consultancy",
+          "retail-media",
+          "blog",
+          "shoppable-ai-search",
+          "index",
+          "technical-geo",
+          "contact",
+          "amazon-rufus-sponsored-prompts",
+          "amazon-ai-creative-studio",
+          "aeo",
+          "media",
+          "ai-discovery",
+          "ai-media",
+          "ai-in-retail-media",
+          "agentic-media-buying",
+          "measurement",
+          "digital-pr",
+          "amazon",
+          "ai-visibility-analytics",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5307011089711239
+      },
+      {
+        "concept": "geo",
+        "pages": [
+          "consultancy",
+          "retail-media",
+          "blog",
+          "shoppable-ai-search",
+          "index",
+          "technical-geo",
+          "contact",
+          "amazon-rufus-sponsored-prompts",
+          "amazon-ai-creative-studio",
+          "aeo",
+          "media",
+          "ai-discovery",
+          "ai-media",
+          "ai-in-retail-media",
+          "agentic-media-buying",
+          "measurement",
+          "digital-pr",
+          "amazon",
+          "ai-visibility-analytics",
+          "aeo-rankings-to-citations",
+          "ecommerce-whitepaper",
+          "beauty-media-strategy"
+        ],
+        "avg_quality": 0.5307011089711239
+      }
+    ],
+    "unowned_territories": []
+  },
+  "concept_pages": {
+    "generative": [
+      "ai-visibility-analytics"
+    ],
+    "aeo": [
+      "consultancy",
+      "retail-media",
+      "blog",
+      "shoppable-ai-search",
+      "index",
+      "technical-geo",
+      "contact",
+      "amazon-rufus-sponsored-prompts",
+      "amazon-ai-creative-studio",
+      "aeo",
+      "media",
+      "ai-discovery",
+      "ai-media",
+      "ai-in-retail-media",
+      "agentic-media-buying",
+      "measurement",
+      "digital-pr",
+      "amazon",
+      "ai-visibility-analytics",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "earned media": [
+      "shoppable-ai-search",
+      "index",
+      "contact",
+      "measurement",
+      "digital-pr",
+      "ai-visibility-analytics",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "whitepaper": [
+      "consultancy",
+      "retail-media",
+      "blog",
+      "shoppable-ai-search",
+      "index",
+      "technical-geo",
+      "contact",
+      "amazon-rufus-sponsored-prompts",
+      "amazon-ai-creative-studio",
+      "aeo",
+      "media",
+      "ai-discovery",
+      "ai-media",
+      "ai-in-retail-media",
+      "agentic-media-buying",
+      "measurement",
+      "digital-pr",
+      "amazon",
+      "ai-visibility-analytics",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "ai": [
+      "consultancy",
+      "retail-media",
+      "blog",
+      "shoppable-ai-search",
+      "index",
+      "technical-geo",
+      "contact",
+      "amazon-rufus-sponsored-prompts",
+      "amazon-ai-creative-studio",
+      "aeo",
+      "media",
+      "ai-discovery",
+      "ai-media",
+      "ai-in-retail-media",
+      "agentic-media-buying",
+      "measurement",
+      "digital-pr",
+      "amazon",
+      "ai-visibility-analytics",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "digital pr": [
+      "consultancy",
+      "retail-media",
+      "blog",
+      "shoppable-ai-search",
+      "index",
+      "technical-geo",
+      "contact",
+      "amazon-rufus-sponsored-prompts",
+      "amazon-ai-creative-studio",
+      "aeo",
+      "media",
+      "ai-discovery",
+      "ai-media",
+      "ai-in-retail-media",
+      "agentic-media-buying",
+      "measurement",
+      "digital-pr",
+      "amazon",
+      "ai-visibility-analytics",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "agentic": [
+      "blog",
+      "media",
+      "ai-media",
+      "ai-in-retail-media",
+      "agentic-media-buying",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "llm": [
+      "technical-geo",
+      "digital-pr",
+      "ai-visibility-analytics",
+      "aeo-rankings-to-citations"
+    ],
+    "schema": [
+      "shoppable-ai-search",
+      "technical-geo",
+      "aeo",
+      "ai-discovery",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper"
+    ],
+    "ecommerce": [
+      "ecommerce-whitepaper"
+    ],
+    "programmatic": [
+      "media",
+      "ai-media",
+      "agentic-media-buying",
+      "amazon"
+    ],
+    "rufus": [
+      "blog",
+      "amazon-rufus-sponsored-prompts",
+      "ai-in-retail-media",
+      "amazon",
+      "ai-visibility-analytics",
+      "ecommerce-whitepaper"
+    ],
+    "media": [
+      "consultancy",
+      "retail-media",
+      "blog",
+      "shoppable-ai-search",
+      "index",
+      "technical-geo",
+      "contact",
+      "amazon-rufus-sponsored-prompts",
+      "amazon-ai-creative-studio",
+      "aeo",
+      "media",
+      "ai-discovery",
+      "ai-media",
+      "ai-in-retail-media",
+      "agentic-media-buying",
+      "measurement",
+      "digital-pr",
+      "amazon",
+      "ai-visibility-analytics",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "entity": [
+      "shoppable-ai-search",
+      "index",
+      "technical-geo",
+      "aeo",
+      "digital-pr",
+      "aeo-rankings-to-citations"
+    ],
+    "strategy": [
+      "consultancy",
+      "retail-media",
+      "shoppable-ai-search",
+      "index",
+      "amazon-ai-creative-studio",
+      "media",
+      "ai-discovery",
+      "ai-media",
+      "agentic-media-buying",
+      "digital-pr",
+      "amazon",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "rendering": [
+      "technical-geo"
+    ],
+    "structured": [
+      "consultancy",
+      "retail-media",
+      "shoppable-ai-search",
+      "index",
+      "technical-geo",
+      "aeo",
+      "ai-discovery",
+      "ai-in-retail-media",
+      "measurement",
+      "digital-pr",
+      "amazon",
+      "ai-visibility-analytics",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "beauty": [
+      "consultancy",
+      "retail-media",
+      "blog",
+      "shoppable-ai-search",
+      "index",
+      "technical-geo",
+      "contact",
+      "amazon-rufus-sponsored-prompts",
+      "amazon-ai-creative-studio",
+      "aeo",
+      "media",
+      "ai-discovery",
+      "ai-media",
+      "ai-in-retail-media",
+      "agentic-media-buying",
+      "measurement",
+      "digital-pr",
+      "amazon",
+      "ai-visibility-analytics",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "citation": [
+      "consultancy",
+      "blog",
+      "shoppable-ai-search",
+      "index",
+      "technical-geo",
+      "contact",
+      "aeo",
+      "media",
+      "ai-discovery",
+      "ai-media",
+      "measurement",
+      "digital-pr",
+      "ai-visibility-analytics",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "retail": [
+      "consultancy",
+      "retail-media",
+      "blog",
+      "shoppable-ai-search",
+      "index",
+      "technical-geo",
+      "contact",
+      "amazon-rufus-sponsored-prompts",
+      "amazon-ai-creative-studio",
+      "aeo",
+      "media",
+      "ai-discovery",
+      "ai-media",
+      "ai-in-retail-media",
+      "agentic-media-buying",
+      "measurement",
+      "digital-pr",
+      "amazon",
+      "ai-visibility-analytics",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "visibility": [
+      "consultancy",
+      "retail-media",
+      "blog",
+      "shoppable-ai-search",
+      "index",
+      "technical-geo",
+      "contact",
+      "amazon-rufus-sponsored-prompts",
+      "amazon-ai-creative-studio",
+      "aeo",
+      "media",
+      "ai-discovery",
+      "ai-media",
+      "ai-in-retail-media",
+      "agentic-media-buying",
+      "measurement",
+      "digital-pr",
+      "amazon",
+      "ai-visibility-analytics",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "technical": [
+      "consultancy",
+      "retail-media",
+      "blog",
+      "shoppable-ai-search",
+      "index",
+      "technical-geo",
+      "contact",
+      "amazon-rufus-sponsored-prompts",
+      "amazon-ai-creative-studio",
+      "aeo",
+      "media",
+      "ai-discovery",
+      "ai-media",
+      "ai-in-retail-media",
+      "agentic-media-buying",
+      "measurement",
+      "digital-pr",
+      "amazon",
+      "ai-visibility-analytics",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "search": [
+      "retail-media",
+      "blog",
+      "shoppable-ai-search",
+      "index",
+      "technical-geo",
+      "contact",
+      "amazon-rufus-sponsored-prompts",
+      "aeo",
+      "ai-discovery",
+      "ai-media",
+      "ai-in-retail-media",
+      "agentic-media-buying",
+      "measurement",
+      "digital-pr",
+      "amazon",
+      "ai-visibility-analytics",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "measurement": [
+      "consultancy",
+      "retail-media",
+      "blog",
+      "shoppable-ai-search",
+      "index",
+      "technical-geo",
+      "contact",
+      "amazon-rufus-sponsored-prompts",
+      "amazon-ai-creative-studio",
+      "aeo",
+      "media",
+      "ai-discovery",
+      "ai-media",
+      "ai-in-retail-media",
+      "agentic-media-buying",
+      "measurement",
+      "digital-pr",
+      "amazon",
+      "ai-visibility-analytics",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "attribution": [
+      "index",
+      "media",
+      "ai-media",
+      "ai-in-retail-media",
+      "amazon",
+      "ai-visibility-analytics",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "amazon": [
+      "consultancy",
+      "retail-media",
+      "blog",
+      "shoppable-ai-search",
+      "index",
+      "technical-geo",
+      "contact",
+      "amazon-rufus-sponsored-prompts",
+      "amazon-ai-creative-studio",
+      "aeo",
+      "media",
+      "ai-discovery",
+      "ai-media",
+      "ai-in-retail-media",
+      "agentic-media-buying",
+      "measurement",
+      "digital-pr",
+      "amazon",
+      "ai-visibility-analytics",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "a9": [
+      "amazon"
+    ],
+    "consultancy": [
+      "consultancy",
+      "retail-media",
+      "blog",
+      "shoppable-ai-search",
+      "index",
+      "technical-geo",
+      "contact",
+      "amazon-rufus-sponsored-prompts",
+      "amazon-ai-creative-studio",
+      "aeo",
+      "media",
+      "ai-discovery",
+      "ai-media",
+      "ai-in-retail-media",
+      "agentic-media-buying",
+      "measurement",
+      "digital-pr",
+      "amazon",
+      "ai-visibility-analytics",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "crawler": [
+      "technical-geo"
+    ],
+    "discovery": [
+      "consultancy",
+      "retail-media",
+      "blog",
+      "shoppable-ai-search",
+      "index",
+      "technical-geo",
+      "contact",
+      "amazon-rufus-sponsored-prompts",
+      "amazon-ai-creative-studio",
+      "aeo",
+      "media",
+      "ai-discovery",
+      "ai-media",
+      "ai-in-retail-media",
+      "agentic-media-buying",
+      "measurement",
+      "digital-pr",
+      "amazon",
+      "ai-visibility-analytics",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ],
+    "geo": [
+      "consultancy",
+      "retail-media",
+      "blog",
+      "shoppable-ai-search",
+      "index",
+      "technical-geo",
+      "contact",
+      "amazon-rufus-sponsored-prompts",
+      "amazon-ai-creative-studio",
+      "aeo",
+      "media",
+      "ai-discovery",
+      "ai-media",
+      "ai-in-retail-media",
+      "agentic-media-buying",
+      "measurement",
+      "digital-pr",
+      "amazon",
+      "ai-visibility-analytics",
+      "aeo-rankings-to-citations",
+      "ecommerce-whitepaper",
+      "beauty-media-strategy"
+    ]
+  },
+  "concept_edges": [
+    {
+      "source": "ai-visibility-analytics",
+      "target": "generative",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "consultancy",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "retail-media",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "blog",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "contact",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-rufus-sponsored-prompts",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-ai-creative-studio",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "agentic-media-buying",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "measurement",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "aeo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "earned media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "earned media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "contact",
+      "target": "earned media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "measurement",
+      "target": "earned media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "earned media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "earned media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "earned media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "earned media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "consultancy",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "retail-media",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "blog",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "contact",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-rufus-sponsored-prompts",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-ai-creative-studio",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "agentic-media-buying",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "measurement",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "whitepaper",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "consultancy",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "retail-media",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "blog",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "contact",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-rufus-sponsored-prompts",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-ai-creative-studio",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "agentic-media-buying",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "measurement",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "ai",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "consultancy",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "retail-media",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "blog",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "contact",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-rufus-sponsored-prompts",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-ai-creative-studio",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "agentic-media-buying",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "measurement",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "digital pr",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "blog",
+      "target": "agentic",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "agentic",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "agentic",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "agentic",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "agentic-media-buying",
+      "target": "agentic",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "agentic",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "agentic",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "llm",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "llm",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "llm",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "llm",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "schema",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "schema",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "schema",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "schema",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "schema",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "schema",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "ecommerce",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "programmatic",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "programmatic",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "agentic-media-buying",
+      "target": "programmatic",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "programmatic",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "blog",
+      "target": "rufus",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-rufus-sponsored-prompts",
+      "target": "rufus",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "rufus",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "rufus",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "rufus",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "rufus",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "consultancy",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "retail-media",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "blog",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "contact",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-rufus-sponsored-prompts",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-ai-creative-studio",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "agentic-media-buying",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "measurement",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "media",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "entity",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "entity",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "entity",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "entity",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "entity",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "entity",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "consultancy",
+      "target": "strategy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "retail-media",
+      "target": "strategy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "strategy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "strategy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-ai-creative-studio",
+      "target": "strategy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "strategy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "strategy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "strategy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "agentic-media-buying",
+      "target": "strategy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "strategy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "strategy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "strategy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "strategy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "strategy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "rendering",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "consultancy",
+      "target": "structured",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "retail-media",
+      "target": "structured",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "structured",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "structured",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "structured",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "structured",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "structured",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "structured",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "measurement",
+      "target": "structured",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "structured",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "structured",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "structured",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "structured",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "structured",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "structured",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "consultancy",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "retail-media",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "blog",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "contact",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-rufus-sponsored-prompts",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-ai-creative-studio",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "agentic-media-buying",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "measurement",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "beauty",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "consultancy",
+      "target": "citation",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "blog",
+      "target": "citation",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "citation",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "citation",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "citation",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "contact",
+      "target": "citation",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "citation",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "citation",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "citation",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "citation",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "measurement",
+      "target": "citation",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "citation",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "citation",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "citation",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "citation",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "citation",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "consultancy",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "retail-media",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "blog",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "contact",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-rufus-sponsored-prompts",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-ai-creative-studio",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "agentic-media-buying",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "measurement",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "retail",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "consultancy",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "retail-media",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "blog",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "contact",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-rufus-sponsored-prompts",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-ai-creative-studio",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "agentic-media-buying",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "measurement",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "visibility",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "consultancy",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "retail-media",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "blog",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "contact",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-rufus-sponsored-prompts",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-ai-creative-studio",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "agentic-media-buying",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "measurement",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "technical",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "retail-media",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "blog",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "contact",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-rufus-sponsored-prompts",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "agentic-media-buying",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "measurement",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "search",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "consultancy",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "retail-media",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "blog",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "contact",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-rufus-sponsored-prompts",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-ai-creative-studio",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "agentic-media-buying",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "measurement",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "measurement",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "attribution",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "attribution",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "attribution",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "attribution",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "attribution",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "attribution",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "attribution",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "attribution",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "consultancy",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "retail-media",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "blog",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "contact",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-rufus-sponsored-prompts",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-ai-creative-studio",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "agentic-media-buying",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "measurement",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "amazon",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "a9",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "consultancy",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "retail-media",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "blog",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "contact",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-rufus-sponsored-prompts",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-ai-creative-studio",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "agentic-media-buying",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "measurement",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "consultancy",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "crawler",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "consultancy",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "retail-media",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "blog",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "contact",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-rufus-sponsored-prompts",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-ai-creative-studio",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "agentic-media-buying",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "measurement",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "discovery",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "consultancy",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "retail-media",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "blog",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "shoppable-ai-search",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "index",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "technical-geo",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "contact",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-rufus-sponsored-prompts",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon-ai-creative-studio",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "media",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-discovery",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-media",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-in-retail-media",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "agentic-media-buying",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "measurement",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "digital-pr",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "amazon",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ai-visibility-analytics",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "aeo-rankings-to-citations",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "ecommerce-whitepaper",
+      "target": "geo",
+      "relationship": "OWNS"
+    },
+    {
+      "source": "beauty-media-strategy",
+      "target": "geo",
+      "relationship": "OWNS"
+    }
+  ],
+  "summary": {
+    "core_territories": 3,
+    "emerging_territories": 1,
+    "underdeveloped_territories": 1,
+    "overlapping_territories": 0,
+    "orphaned_territories": 0,
+    "overclaimed_territories": 26,
+    "unowned_territories": 0
+  }
+}
