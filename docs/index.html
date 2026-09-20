@@ -25,8 +25,10 @@ body{background:var(--bg);color:var(--text);font:400 14px/1.65 var(--ff);-webkit
 .nv-b:hover{background:#F5F1EC;color:#161412}
 @media(max-width:640px){.nv-m{display:none}}
 /* hero */
-.hw{background:#161412}
-.hw .hz{max-width:var(--w);margin:0 auto;padding:104px 24px 80px}
+.hw{background:#161412;position:relative;overflow:hidden}
+.hc{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1;pointer-events:none}
+.hc canvas{width:100%!important;height:100%!important;display:block}
+.hz{position:relative;z-index:2;max-width:var(--w);margin:0 auto;padding:104px 24px 80px}
 .hw .eb{font-size:8px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(245,241,236,.3);margin:0 0 24px}
 .hw h1{color:#F5F1EC;font:400 clamp(34px,5vw,60px)/1.05 var(--fs);letter-spacing:-.02em;margin:0 0 16px;max-width:700px}
 .hw p{color:rgba(245,241,236,.6);margin:0 0 28px;max-width:520px;font-size:15px;line-height:1.65}
@@ -35,6 +37,7 @@ body{background:var(--bg);color:var(--text);font:400 14px/1.65 var(--ff);-webkit
 .bt-p{background:var(--signal);color:#161412}
 .bt-s{border:1px solid rgba(245,241,236,.25);color:rgba(245,241,236,.7)}
 .bt-s:hover{border-color:rgba(245,241,236,.5);color:#F5F1EC}
+@media(max-width:640px){.hw .hz{padding:64px 24px 56px}.hc{display:none!important}}
 /* sections */
 .s{padding:72px 0}.s+.s{border-top:1px solid var(--line)}
 /* section header */
@@ -124,7 +127,9 @@ body{background:var(--bg);color:var(--text);font:400 14px/1.65 var(--ff);-webkit
 
 <div class="nav"><div class="w"><div class="nv-l">Intella<em>IQ</em></div><div class="nv-m"><a href="#">Product</a><a href="#">Documentation</a><a href="#" class="nv-b">Early access</a></div></div></div>
 
-<div class="hw"><div class="hz">
+<div class="hw">
+<div class="hc" id="flow-canvas-container"></div>
+<div class="hz">
 <div class="eb">INTELLAIQ</div>
 <h1>Unlock decisions hidden in your data.</h1>
 <p>Your business produces thousands of signals across customers, markets, competitors, search, AI, sales and performance. IntellaIQ connects those signals, determines what matters and surfaces the decisions that deserve attention.</p>
@@ -317,5 +322,73 @@ body{background:var(--bg);color:var(--text);font:400 14px/1.65 var(--ff);-webkit
 </div></div>
 
 <div class="ft"><div class="w"><span>IntellaIQ &middot; Decision intelligence</span><span><a href="#">Documentation</a> &middot; <a href="#">Methodology</a> &middot; <a href="#">Status</a></span></div></div>
+
+<script>
+(function(){
+var container = document.getElementById('flow-canvas-container');
+if(!container) return;
+var canvas = document.createElement('canvas');
+canvas.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;display:block';
+container.appendChild(canvas);
+var ctx = canvas.getContext('2d');
+var W,H;
+function resize() {
+  var dpr = window.devicePixelRatio || 1;
+  var rect = container.getBoundingClientRect();
+  W = rect.width;
+  H = rect.height;
+  canvas.width = W * dpr;
+  canvas.height = H * dpr;
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+}
+window.addEventListener('resize', resize);
+resize();
+var paths = [];
+var NUM = 60;
+var CX, CY;
+function initPaths() {
+  CX = W / 2;
+  CY = H / 2;
+  paths = [];
+  for(var i = 0; i < NUM; i++) {
+    var isL = i % 2 === 0;
+    var sy = (i / NUM) * H * 1.6 - H * 0.3;
+    paths.push({isLeft: isL, startY: sy, particles: [{t: Math.random(), speed: 0.0015 + Math.random() * 0.0025}]});
+  }
+}
+initPaths();
+function bezier(t, p0, p1, p2, p3) {
+  var u = 1 - t;
+  return {x: u*u*u*p0.x + 3*u*u*t*p1.x + 3*u*t*t*p2.x + t*t*t*p3.x, y: u*u*u*p0.y + 3*u*u*t*p1.y + 3*u*t*t*p2.y + t*t*t*p3.y};
+}
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  CX = W / 2; CY = H / 2;
+  for(var i = 0; i < paths.length; i++) {
+    var p = paths[i];
+    var p0 = {x: p.isLeft ? 0 : W, y: p.startY};
+    var p1 = {x: p.isLeft ? CX*0.5 : W-CX*0.5, y: p.startY};
+    var p2 = {x: p.isLeft ? CX*0.8 : W-CX*0.8, y: CY};
+    var p3 = {x: CX, y: CY};
+    ctx.beginPath();
+    ctx.moveTo(p0.x, p0.y);
+    ctx.bezierCurveTo(p1.x, p1.y, p2.x, p2.y, p3.x, p3.y);
+    ctx.strokeStyle = 'rgba(255,255,255,0.04)';
+    ctx.lineWidth = 0.6;
+    ctx.stroke();
+    p.particles.forEach(function(pt){
+      pt.t += pt.speed;
+      if(pt.t > 1) { pt.t = 0; p.startY += (Math.random()-0.5)*8; }
+      var pos = bezier(pt.t, p0, p1, p2, p3);
+      ctx.fillStyle = 'rgba(255,255,255,0.4)';
+      ctx.fillRect(pos.x-1, pos.y-1, 2, 2);
+    });
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+window.addEventListener('resize', function(){ resize(); initPaths(); });
+})();
+</script>
 
 </body></html>
