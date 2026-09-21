@@ -477,6 +477,8 @@ document.addEventListener('DOMContentLoaded', function(){
   gsap.set('#learning-loop .center',{opacity:0});
   gsap.set('.eo .b',{opacity:0,y:8});
   gsap.set('.eo .gap',{opacity:0});
+  gsap.set('.intv-h',{opacity:0,y:24});
+  gsap.set('.intv-field',{opacity:0});
   gsap.set('.vw li',{opacity:0,y:8});
   gsap.set('.cta .reveal',{opacity:0,y:24});
   gsap.set('.pq .p',{opacity:0,x:-20});
@@ -541,6 +543,20 @@ document.addEventListener('DOMContentLoaded', function(){
     }
     setTimeout(showNext,500);
   })();
+
+  // Interrogation visual heading + field reveal
+  ScrollTrigger.create({
+    trigger:'.intv',
+    start:'top 85%',
+    onEnter:function(){
+      gsap.to('.intv-h',{opacity:1,y:0,duration:.6,ease:'power2.out'});
+      gsap.to('.intv-field',{opacity:1,duration:.6,ease:'power2.out',delay:.2});
+    },
+    onLeaveBack:function(){
+      gsap.set('.intv-h',{opacity:0,y:24});
+      gsap.set('.intv-field',{opacity:0});
+    }
+  });
 
   // Pinned compression animation
   (function(){
