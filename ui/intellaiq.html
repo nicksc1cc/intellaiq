@@ -1,6 +1,10 @@
 <!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>IntellaIQ — Unlock decisions hidden in your data.</title><meta name="description" content="IntellaIQ interrogates thousands of signals with thousands of atomic questions, combines the resulting judgements, and surfaces the decisions most likely to have meaningful impact.">
-<style>@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-/* motion tokens */
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<style>/* motion tokens */
 :root{--dur-fast:.2s;--dur-med:.5s;--dur-slow:1.2s;--ease:cubic-bezier(.645,.045,.355,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);--bg:#F5F5F3;--panel:#FDFDFD;--text:#1A1A1A;--sub:#4A4A4A;--mute:#888888;--line:rgba(26,26,26,.07);--lines:rgba(26,26,26,.12);--signal:#155E5E;--match:#27A644;--warn:#E88D2A;--crit:#C0392B;--ff:'Space Grotesk',sans-serif;--fm:'JetBrains Mono',monospace}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-font-smoothing:antialiased;overflow-x:hidden}
@@ -152,6 +156,7 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 
 /* Interrogation visual - canvas field with questions orbiting */
 .intv{position:relative;min-height:50vh;padding:80px 0}
+.intv .w{padding:0 24px}
 .intv .intv-h{font:300 24px/1.1 var(--ff);letter-spacing:-.5px;text-align:center;max-width:600px;margin:0 auto 40px}
 .intv .intv-field{position:relative;height:400px;max-width:900px;margin:0 auto}
 .intv .intv-signal{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--signal);opacity:.6;transition:opacity .3s var(--ease),transform .3s var(--ease)}
@@ -160,10 +165,15 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 .intv .intv-signal:hover .lbl{opacity:1}
 .intv .intv-q{position:absolute;padding:8px 14px;background:rgba(21,94,94,.08);border:1px solid rgba(21,94,94,.15);border-radius:2px;font-size:10px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);white-space:nowrap;transform:scale(.9);transition:opacity .4s var(--ease),transform .4s var(--ease)}
 .intv .intv-q.active{opacity:1;transform:scale(1)}
+@media(max-width:640px){
+  .intv .intv-field{height:300px}
+  .intv .intv-signal{width:6px;height:6px}
+  .intv .intv-q{font-size:9px;padding:6px 10px}
+}
 
 /* Compression pinned section */
 .cmp{position:relative;min-height:120vh}
-.cmp .cmp-inner{max-width:800px;margin:0 auto;padding:40px 24px}
+.cmp .cmp-inner{max-width:1100px;margin:0 auto;padding:40px 24px}
 .cmp .cmp-h{font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 8px;letter-spacing:.06em}
 .cmp .cmp-title{font:300 clamp(28px,3.5vw,42px)/1.1 var(--ff);letter-spacing:-.6px;margin:0 0 40px}
 .cmp .cmp-field{position:relative;height:60vh;max-width:700px;margin:0 auto}
@@ -182,6 +192,13 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 .cmp .cmp-reveal .prob{font:300 24px/1 var(--ff);letter-spacing:-.5px;color:var(--signal)}
 .cmp .counter{position:absolute;top:40px;right:24px;font:300 20px/1 var(--ff);letter-spacing:-.4px;color:var(--signal);font-family:var(--fm)}
 .cmp .counter .lbl{display:block;font-size:9px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);letter-spacing:.06em;margin-top:4px}
+@media(max-width:640px){
+  .cmp .cmp-field{height:40vh}
+  .cmp .cmp-title{font-size:clamp(22px,5vw,32px)}
+  .cmp .counter{right:12px;top:20px;font-size:16px}
+  .cmp .cmp-reveal{bottom:40px}
+  .cmp .cmp-reveal h3{font-size:22px}
+}
 
 /* Contradiction split */
 .ctr{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:20px 0}
@@ -195,6 +212,13 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 .ctr .conclusion .tag{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);margin:0 0 4px;letter-spacing:.04em}
 .ctr .conclusion .txt{font-size:13px;color:var(--text);letter-spacing:-.1px}
 .ctr .conclusion .dip{font-size:14px;color:var(--signal);font-weight:500;margin-top:4px}
+@media(max-width:640px){
+  .ctr{grid-template-columns:1fr;gap:16px}
+  .ctr .side{padding:16px}
+  .ctr .side[style*="--tx:-30px"],.ctr .side[style*="--tx:30px"]{transform:none}
+  .ctr .mid{font-size:20px;margin:8px 0}
+  .ctr .conclusion{padding:12px}
+}
 
 /* Evidence convergence */
 .evc{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-radius:3px;overflow:hidden;margin:20px 0}
@@ -202,6 +226,11 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 .evc .c .num{font:300 28px/1 var(--ff);letter-spacing:-.6px;color:var(--signal);margin:0 0 4px}
 .evc .c .lbl{font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);letter-spacing:.04em}
 .evc .c .unit{font-size:10px;color:var(--sub)}
+@media(max-width:640px){
+  .evc{grid-template-columns:1fr 1fr}
+  .evc .c{padding:12px}
+  .evc .c .num{font-size:22px}
+}
 
 /* Learning loop orbit */
 .lrn{position:relative;min-height:40vh;padding:40px 0}
@@ -214,6 +243,8 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 @media(max-width:640px){
   .lrn .orbit{width:240px;height:240px}
   .lrn .node{width:80px;height:80px;padding:8px}
+  .lrn .node .val{font-size:11px}
+  .lrn .center{font-size:7px}
 }
 
 /* CTA interaction */
@@ -261,8 +292,10 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 </div></div>
 
 <div class="s intv reveal">
+<div class="w">
 <div class="intv-h">Questions multiply. Patterns emerge.</div>
 <div class="intv-field" id="interrogation-field"></div>
+</div>
 </div>
 
 <div class="cmp reveal" id="compression-section">
@@ -428,16 +461,16 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 
 <div class="ft"><div class="w"><span>IntellaIQ</span><span><a href="scan.html">Scan</a> &middot; <a href="dashboard.html">Dashboard</a> &middot; <a href="#">Docs</a></span></div></div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer>
 (function(){var c=document.getElementById('counter'),v=47281;if(!c)return;
 function update(){v+=Math.round(Math.random()*200+50);c.textContent=v.toLocaleString();}
 setInterval(update,1200);
 for(var i=0;i<6;i++)setTimeout(update,i*100);
 })();
 </script>
-<script>
+<script defer>
 // GSAP Scroll-driven animations
 document.addEventListener('DOMContentLoaded', function(){
   if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ return; }
