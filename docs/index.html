@@ -269,6 +269,7 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 </div>
 
 <div class="s"><div class="w reveal"><div class="sh reveal-w"><div class="sl ispan">The big idea</div></div><div class="reveal-w"><h2 ispan>Don't just analyse the data. Interrogate it.</h2></div></div>
+<div class="w">
 <p class="reveal" style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 20px">An atomic question is a small, bounded judgement applied to a piece of evidence. IntellaIQ asks thousands simultaneously across thousands of signals. Volume and consistency produce reliable judgement.</p>
 <div class="aq reveal">
 <div class="h">What IntellaIQ is asking</div>
@@ -285,7 +286,7 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 <div class="q"><span class="dot2"></span>Could this change a business decision?</div>
 </div>
 <div class="ctr"><div class="num" id="counter">47,281</div><div class="lb">Atomic judgements</div></div>
-</div></div>
+</div></div></div>
 
 <div class="s intv reveal">
 <div class="w">
@@ -483,9 +484,9 @@ document.addEventListener('DOMContentLoaded', function(){
     var c=document.getElementById('flow-canvas'),cv=document.createElement('canvas');
     if(!c)return;
     cv.style.cssText='position:absolute;top:0;left:0;width:100%;height:100%;display:block';c.appendChild(cv);
-    var x=cv.getContext('2d'),W,H,P=[],N=function(){return window.innerWidth<640?28:60};
+    var x=cv.getContext('2d'),W,H,P=[],N=function(){return window.innerWidth<640?18:36};
     function rz(){var d=window.devicePixelRatio||1,b=c.getBoundingClientRect();W=b.width;H=b.height;cv.width=W*d;cv.height=H*d;x.setTransform(d,0,0,d,0,0)}
-    window.addEventListener('resize',rz);rz();
+    rz();
     function ip(){P=[];CX=W/2;CY=H/2;var n=N();for(var i=0;i<n;i++){var l=i%2===0,sy=(i/n)*H*1.4-H*.2;P.push({isLeft:l,startY:sy,pt:{t:Math.random(),sp:.0015+Math.random()*.0025}})}}
     ip();
     function bz(t,p0,p1,p2,p3){var u=1-t;return{x:u*u*u*p0.x+3*u*u*t*p1.x+3*u*t*t*p2.x+t*t*t*p3.x,y:u*u*u*p0.y+3*u*u*t*p1.y+3*u*t*t*p2.y+t*t*t*p3.y}}
@@ -497,8 +498,8 @@ document.addEventListener('DOMContentLoaded', function(){
     dr();window.addEventListener('resize',function(){rz();ip()});
   })();
 
-  // Set initial states for scroll-revealed elements
-  gsap.set('.reveal',{opacity:0,y:24});
+  // Keep structural reveal wrappers visible; animate their contents instead.
+  // Hiding a wrapper here also hid every section whose animation trigger lived inside it.
   gsap.set('.typo .t',{opacity:0,y:30});
   gsap.set('.aq .q',{opacity:0,x:-8});
   gsap.set('.jg .sg .c',{opacity:0,y:12});
@@ -605,7 +606,7 @@ document.addEventListener('DOMContentLoaded', function(){
     var dots=[],lines=[],clusters=[],stage=0;
     var W=field.offsetWidth,H=field.offsetHeight;
     function createDots(){
-      for(var i=0;i<180;i++){
+      for(var i=0;i<96;i++){
         var d=document.createElement('div');d.className='signal-dot';
         d.style.left=(Math.random()*W)+'px';d.style.top=(Math.random()*H)+'px';
         field.appendChild(d);dots.push(d);
