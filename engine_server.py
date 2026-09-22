@@ -457,6 +457,79 @@ def call_jev(evidence_state, questions):
         return {"error": f"JEV call failed: {e}"}
 
 
+def generate_narrative(decision_question, assessment, question_text_map, pages):
+    """Generate an LLM narrative synthesis of JEV results using OpenAI."""
+    api_key = os.environ.get("OPENAI_API_KEY", "")
+    if not api_key:
+        return {"narrative": "LLM synthesis unavailable (no API key configured).", "available": False}
+
+    # Build a compact summary of the evidence for the LLM
+    signals_summary = []
+    top_sigs = assessment.get("top_signals", [])
+    bot_sigs = assessment.get("bottom_signals", [])
+    for s in top_sigs:
+        qinfo = question_text_map.get(s["id"], {})
+        signals_summary.append(f"STRONG: {qinfo.get('text', s['id'])} (score: {s['score']:.2f})")
+    for s in bot_sigs:
+        qinfo = question_text_map.get(s["id"], {})
+        signals_summary.append(f"WEAK: {qinfo.get('text', s['id'])} (score: {s['score']:.2f})")
+
+    contradictions = assessment.get("contradictions", [])
+    unknowns = assessment.get("critical_unknowns", [])
+    ev_strength = assessment.get("evidence_strength", {})
+    dip = assessment.get("decision_impact_probability", 0.5)
+    challenger = assessment.get("challenger", {})
+
+    prompt = f"""You are an intelligence analyst reviewing a website evidence assessment.
+
+QUESTION: {decision_question['question']}
+CONFIDENCE: {assessment['confidence']:.0%} ({assessment.get('confidence_band', 'MODERATE')})
+VERDICT: {assessment['verdict']}
+EVIDENCE STRENGTH: {ev_strength.get('strong_signals', 0)} strong, {ev_strength.get('weak_signals', 0)} weak out of {ev_strength.get('total_signals', 0)} signals
+DECISION IMPACT PROBABILITY: {dip:.2f}
+
+KEY SIGNALS:
+{chr(10).join(signals_summary)}
+
+CONTRADICTIONS: {len(contradictions)}
+{chr(10).join([f"- Gap {c['gap']:.2f} between '{c.get('signal_a','')}' and '{c.get('signal_b','')}'" for c in contradictions[:2]]) if contradictions else 'None detected'}
+
+CRITICAL UNKNOWNS: {len(unknowns)}
+{chr(10).join([f"- {u['id'].replace('_',' ')} (score: {u['score']:.2f})" for u in unknowns[:2]]) if unknowns else 'None'}
+
+PAGES ANALYSED: {len(pages)}
+
+Write a concise intelligence assessment (3-4 paragraphs) that:
+1. States the bottom-line finding in one sentence
+2. Explains what evidence supports this conclusion
+3. Notes what is uncertain or contradictory
+4. Gives a clear implication for decision-making
+
+Write as an analyst, not a marketer. Use plain language. Do not use bullet points."""
+
+    try:
+        resp = requests.post(
+            "https://api.openai.com/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {api_key}",
+                "Content-Type": "application/json",
+            },
+            json={
+                "model": "gpt-4o-mini",
+                "messages": [{"role": "user", "content": prompt}],
+                "max_tokens": 600,
+                "temperature": 0.3,
+            },
+            timeout=30,
+        )
+        resp.raise_for_status()
+        data = resp.json()
+        narrative = data["choices"][0]["message"]["content"].strip()
+        return {"narrative": narrative, "model": data["model"], "available": True}
+    except Exception as e:
+        return {"narrative": f"Narrative synthesis unavailable: {e}", "available": False}
+
+
 def synthesize_assessment(decision_question, jev_result, pages):
     """Synthesize JEV results into a structured, StickyRice-level assessment.
 
@@ -893,8 +966,12 @@ def run_analysis(question_id, pages):
             "why": q.get("why_it_matters", ""),
         }
 
+    # Generate LLM narrative
+    narrative = generate_narrative(decision_q, assessment, question_text_map, pages)
+
     return {
         "assessment": assessment,
+        "narrative": narrative,
         "questions": question_text_map,
         "meta": {
             "decision_question_id": question_id,

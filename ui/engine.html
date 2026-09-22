@@ -683,8 +683,13 @@ function renderAssessment(question, assessment) {
 
   var assessmentHtml = '';
 
-  // Assessment conclusion (verdict)
-  assessmentHtml += '<div id="report-begin" class="r-section"><div class="rh">Assessment</div><h3>' + (assessment.verdict || 'Analysis complete') + '</h3></div>';
+  // Assessment conclusion (verdict) with narrative
+  var narrative = window.analysisResult && window.analysisResult.narrative ? window.analysisResult.narrative : null;
+  if (narrative && narrative.narrative) {
+    assessmentHtml += '<div id="report-begin" class="r-section"><div class="rh">Assessment</div><h3>' + (assessment.verdict || 'Analysis complete') + '</h3><div style="font-size:14px;line-height:1.65;color:var(--sub);letter-spacing:-.05px;margin-top:12px;padding-top:16px;border-top:1px solid var(--line)">' + narrative.narrative.replace(/\n/g, '<br>') + '</div></div>';
+  } else {
+    assessmentHtml += '<div id="report-begin" class="r-section"><div class="rh">Assessment</div><h3>' + (assessment.verdict || 'Analysis complete') + '</h3></div>';
+  }
 
   // Confidence badge
   assessmentHtml += '<div class="conf-badge" id="confBadge">' +
