@@ -385,7 +385,7 @@ async function startScan() {
     scanData = generateDemoScanData(url);
   }
 
-  assessedPages = scanData.pages || [];
+  assessedPages = scanData.top_pages || scanData.pages || [];
 
   // Animate remaining steps with realistic timing
   for (var i = 1; i < 5; i++) {
