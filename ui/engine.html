@@ -325,11 +325,23 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
   <div class="m-str"><span class="l">Evidence strength</span><span class="v" id="modalStrength"></span></div>
 </div>
 
+<div id="engineError" style="display:none;position:fixed;bottom:24px;right:24px;z-index:300;background:var(--panel);border:1px solid var(--crit);border-radius:3px;padding:16px 20px;max-width:400px;font-size:13px;color:var(--text);box-shadow:0 4px 16px rgba(0,0,0,.1)"><span id="engineErrorMsg"></span><button onclick="document.getElementById('engineError').style.display='none'" style="margin-left:12px;border:none;background:none;cursor:pointer;font-size:16px;color:var(--mute)">×</button></div>
+
 <script>
 /* ===== STATE MACHINE ===== */
 var currentState = 'input';
 var scanData = null;
 var assessedPages = [];
+var evidenceItems = [];
+
+function showError(msg) {
+  var el = document.getElementById('engineError');
+  if (!el) return;
+  document.getElementById('engineErrorMsg').textContent = msg;
+  el.style.display = 'block';
+  setTimeout(function(){ el.style.display = 'none'; }, 10000);
+}
+
 
 function showState(id) {
   closeModal();
@@ -397,7 +409,7 @@ async function startScan() {
   } catch(e) {
         document.getElementById('analyseBtn').disabled = false;
         document.getElementById('analyseBtn').textContent = 'Analyse website';
-        throw e;
+        showError('Scan failed: ' + e.message); throw e;
       }
 
   assessedPages = scanData.top_pages || [];
@@ -641,7 +653,7 @@ function startAnalysis(question) {
     assessmentEl.style.display = 'block';
     setTimeout(function(){ assessmentEl.classList.add('in'); }, 100);
   }).catch(function(err){
-    console.error('Analysis API error:', err);
+    console.error('Analysis API error:', err); showError('Analysis failed: ' + err.message);
     steps[3].querySelector('.av').innerHTML = '<span style="color:var(--crit)">✗ Failed</span>';
     questionItems.forEach(function(item){
       var dot = item.querySelector('.qd');
