@@ -600,6 +600,7 @@ def run_scan(target_url):
                 "source": p["source"],
                 "word_count": len(p.get("clean_text", "").split()),
                 "preview": p.get("clean_text", "")[:500],
+                "content": p.get("clean_text", "")[:3000],
             }
             for p in top_10
         ],
