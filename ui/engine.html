@@ -582,22 +582,13 @@ function renderAssessment(question, assessment) {
   if (!assessment) return;
 
   var confidence = Math.round(assessment.confidence * 100);
-  var band = confidence >= 80 ? 'High confidence' : (confidence >= 60 ? 'Moderate confidence' : 'Low confidence');
-  var bandClass = confidence >= 80 ? 'high' : (confidence >= 60 ? 'med' : '');
+  var band = assessment.confidence_band || (confidence >= 80 ? 'HIGH' : (confidence >= 55 ? 'MODERATE' : (confidence >= 30 ? 'LOW' : 'VERY LOW')));
+  var bandLabel = band.charAt(0) + band.slice(1).toLowerCase();
+  var bandClass = band === 'HIGH' ? 'high' : (band === 'MODERATE' ? 'med' : '');
 
-  // Build evidence list from raw_results
-  var rawResults = assessment.raw_results || {};
-  var resultKeys = Object.keys(rawResults);
-  var evidenceItems = resultKeys.map(function(qid, i){
-    var val = rawResults[qid];
-    // val could be a number or {noul: 0.0}
-    var score = typeof val === 'object' && val !== null ? (val.noul !== undefined ? val.noul : val.answer || 0.5) : (typeof val === 'number' ? val : 0.5);
-    var strength = score >= 0.7 ? 'Strong' : (score >= 0.4 ? 'Moderate' : 'Weak');
-    var label = qid.replace(/_/g, ' ').replace(/\b\w/g, function(c){return c.toUpperCase();});
-    return { text: label + ' — score ' + score.toFixed(2), source: 'JEV analysis', strength: strength, signal: label, score: score };
-  });
-
-  window.evidenceItems = evidenceItems;
+  var evStrength = assessment.evidence_strength || {};
+  var pagesCount = assessment.pages_analysed || (assessedPages || []).length;
+  var pagesList = assessedPages || [];
 
   var assessmentHtml = '';
 
@@ -608,56 +599,130 @@ function renderAssessment(question, assessment) {
   assessmentHtml += '<div class="conf-badge" id="confBadge">' +
     '<span class="pct">' + confidence + '%</span>' +
     '<span class="lb">—</span>' +
-    '<span class="band ' + bandClass + '">' + band + '</span>' +
-    '<div class="tooltip">Confidence is a composite of: evidence volume (' + evidenceItems.length + ' items), source diversity (' + (assessment.pages_analysed || (assessedPages || []).length) + ' pages), and atomic question consistency.</div>' +
+    '<span class="band ' + bandClass + '">' + bandLabel + '</span>' +
+    '<div class="tooltip">Confidence is a composite of: evidence strength ratio (' + evStrength.strong_signals + '/' + evStrength.total_signals + ' strong), source diversity (' + pagesCount + ' pages), and signal consistency (std dev: ' + (evStrength.std_deviation || 'N/A') + '). Lower confidence does not mean the assessment is wrong — it means the available evidence supports it less strongly.</div>' +
   '</div>';
 
-  // Why we believe this
-  assessmentHtml += '<div class="r-section"><div class="rh">Why we believe this</div><ul class="evidence-list">';
-  evidenceItems.forEach(function(e,i){
-    var strClass = e.strength === 'Strong' ? 'strong' : (e.strength === 'Moderate' ? 'mod' : 'weak');
-    assessmentHtml += '<li onclick="openEvidence(' + i + ')" data-idx="' + i + '"><span class="num">' + (i+1) + '</span><div class="ed"><div class="et">' + e.text + '</div><div class="es">' + e.source + '</div></div><span class="e-str ' + strClass + '">' + e.strength + '</span></li>';
+  // Build evidence list from raw_results
+  var rawResults = assessment.raw_results || {};
+  var resultKeys = Object.keys(rawResults);
+  var evidenceItems = resultKeys.map(function(qid, i){
+    var val = rawResults[qid];
+    var score = typeof val === 'object' && val !== null ? (val.noul !== undefined ? val.noul : val.answer || 0.5) : (typeof val === 'number' ? val : 0.5);
+    var strength = score >= 0.85 ? 'VERY STRONG' : (score >= 0.65 ? 'STRONG' : (score >= 0.45 ? 'MODERATE' : (score >= 0.25 ? 'WEAK' : 'UNKNOWN')));
+    var label = qid.replace(/_/g, ' ').replace(/\\b\\w/g, function(c){return c.toUpperCase();});
+    return { text: label + ' — score ' + score.toFixed(2), source: 'JEV analysis', strength: strength, signal: label, score: score, qid: qid };
   });
-  assessmentHtml += '</ul></div>';
+  window.evidenceItems = evidenceItems;
 
-  // Evidence table
+  // Evidence strength breakdown
+  assessmentHtml += '<div class="r-section"><div class="rh">Evidence strength breakdown</div>';
+  assessmentHtml += '<div class="inferred-grid"><div class="c"><div class="cl">Strong signals</div><div class="cv" style="font-size:24px;color:var(--signal)">' + (evStrength.strong_signals || 0) + '/' + (evStrength.total_signals || 0) + '</div></div>';
+  assessmentHtml += '<div class="c"><div class="cl">Weak signals</div><div class="cv" style="font-size:24px;color:var(--sub)">' + (evStrength.weak_signals || 0) + '/' + (evStrength.total_signals || 0) + '</div></div>';
+  assessmentHtml += '<div class="c"><div class="cl">Mean score</div><div class="cv" style="font-size:24px;color:var(--signal)">' + (evStrength.mean_score || '—') + '</div></div>';
+  assessmentHtml += '<div class="c"><div class="cl">Std deviation</div><div class="cv" style="font-size:24px;color:var(--sub)">' + (evStrength.std_deviation || '—') + '</div></div>';
+  assessmentHtml += '</div></div>';
+
+  // Top signals (strongest evidence)
+  var topSignals = assessment.top_signals || [];
+  if (topSignals.length > 0) {
+    assessmentHtml += '<div class="r-section"><div class="rh">Strongest signals</div><ul class="evidence-list">';
+    topSignals.forEach(function(s, i){
+      var strClass = s.strength.label === 'VERY STRONG' || s.strength.label === 'STRONG' ? 'strong' : 'mod';
+      assessmentHtml += '<li><span class="num">' + (i+1) + '</span><div class="ed"><div class="et">' + s.id.replace(/_/g, ' ') + '</div><div class="es">' + s.strength.description + '</div></div><span class="e-str ' + strClass + '">' + s.strength.label + '</span></li>';
+    });
+    assessmentHtml += '</ul></div>';
+  }
+
+  // Bottom signals & contradictions
+  var bottomSignals = assessment.bottom_signals || [];
+  if (bottomSignals.length > 0) {
+    assessmentHtml += '<div class="r-section"><div class="rh">Weakest signals</div><ul class="evidence-list">';
+    bottomSignals.forEach(function(s, i){
+      var strClass = 'weak';
+      assessmentHtml += '<li><span class="num">' + (i+1) + '</span><div class="ed"><div class="et">' + s.id.replace(/_/g, ' ') + '</div><div class="es">' + s.strength.description + '</div></div><span class="e-str ' + strClass + '">' + s.strength.label + '</span></li>';
+    });
+    assessmentHtml += '</ul></div>';
+  }
+
+  // Contradictions
+  var contradictions = assessment.contradictions || [];
+  if (contradictions.length > 0) {
+    assessmentHtml += '<div class="r-section"><div class="rh">Contradictions detected</div>';
+    contradictions.forEach(function(c){
+      assessmentHtml += '<div class="ctr" style="grid-template-columns:1fr;margin:0 0 8px"><div class="conclusion" style="opacity:1;display:block;border-color:var(--crit)"><div class="tag" style="color:var(--crit);border-color:var(--crit)">Signal gap: ' + c.gap + '</div><div class="txt" style="font-size:11px">' + c.signal_a.replace(/_/g, ' ') + ' (' + c.score_a + ') vs ' + c.signal_b.replace(/_/g, ' ') + ' (' + c.score_b + ')</div></div></div>';
+    });
+    assessmentHtml += '</div>';
+  }
+
+  // Critical unknowns
+  var unknowns = assessment.critical_unknowns || [];
+  if (unknowns.length > 0) {
+    assessmentHtml += '<div class="r-section"><div class="rh">Critical unknowns</div><p>' + unknowns.length + ' questions had insufficient evidence to assess. These represent the most important gaps in your understanding: ';
+    unknowns.forEach(function(u, i){
+      assessmentHtml += (i > 0 ? ', ' : '') + u.id.replace(/_/g, ' ').toLowerCase();
+    });
+    assessmentHtml += '.</p></div>';
+  }
+
+  // Decision Impact Probability
+  var dip = assessment.decision_impact_probability;
+  if (dip !== undefined) {
+    var dipColor = dip >= 0.60 ? 'var(--signal)' : (dip >= 0.35 ? 'var(--warn)' : 'var(--mute)');
+    assessmentHtml += '<div class="r-section"><div class="rh">Decision Impact Probability</div><div style="display:flex;align-items:center;gap:16px"><span style="font-size:36px;font-weight:300;color:' + dipColor + ';letter-spacing:-.8px">' + dip.toFixed(2) + '</span><span style="font-size:12px;color:var(--sub)">How likely this finding is to affect a meaningful business decision</span></div></div>';
+  }
+
+  // Evidence summary table
   assessmentHtml += '<div class="r-section"><div class="rh">Evidence summary</div><table class="evidence-table"><tr><th>Signal</th><th>Assessment</th><th>Source</th><th>Strength</th></tr>';
   evidenceItems.forEach(function(e,i){
-    var tagClass = e.strength === 'Strong' ? 's' : (e.strength === 'Moderate' ? 'm' : 'w');
+    var tagClass = e.strength === 'VERY STRONG' || e.strength === 'STRONG' ? 's' : (e.strength === 'MODERATE' ? 'm' : 'w');
     assessmentHtml += '<tr onclick="openEvidence(' + i + ')" style="cursor:pointer"><td style="white-space:nowrap;min-width:80px;max-width:120px;overflow:hidden;text-overflow:ellipsis">' + e.signal + '</td><td style="max-width:240px">' + e.text + '</td><td><span class="src">JEV analysis</span></td><td><span class="tag ' + tagClass + '">' + e.strength + '</span></td></tr>';
   });
   assessmentHtml += '</table></div>';
 
   // What is inferred
-  var meanScore = assessment.mean_score || 0.5;
-  var inferredText = meanScore > 0.6
-    ? 'The overall evidence leans positive, suggesting the question is likely answered in the affirmative across multiple analytical dimensions.'
-    : meanScore > 0.4
-    ? 'The evidence is mixed, with no strong directional signal. This suggests the answer may vary depending on which dimension is prioritised.'
-    : 'The overall evidence leans negative, suggesting the question is unlikely to be answered in the affirmative based on available information.';
-  var directlyObserved = 'JEV analysed ' + (assessment.pages_analysed || (assessedPages || []).length) + ' pages and evaluated ' + assessment.atomic_questions_answered + ' atomic questions. ' + assessment.high_confidence_signals + ' signals reached high confidence.';
+  var meanScore = evStrength.mean_score || 0.5;
+  var directlyObserved = 'JEV analysed ' + pagesCount + ' pages and evaluated ' + (evStrength.total_signals || 0) + ' atomic questions. ' + (evStrength.strong_signals || 0) + ' signals reached strong or very strong confidence.';
+  var inferredText = meanScore > 0.65
+    ? 'The evidence converges clearly, suggesting the answer is affirmative with strong support across multiple analytical dimensions.'
+    : meanScore > 0.55
+    ? 'The evidence leans positive but with notable variation. The overall direction is clear, but individual dimensions vary in strength.'
+    : meanScore > 0.45
+    ? 'The evidence is mixed with no strong directional signal. The answer likely depends on which dimension is prioritised.'
+    : meanScore > 0.35
+    ? 'The evidence leans negative with some supporting signals. The answer is unlikely affirmative in its current form.'
+    : 'The evidence is weak or absent. The available information does not support a confident answer.';
 
   assessmentHtml += '<div class="r-section"><div class="rh">What is inferred</div><div class="inferred-grid"><div class="c"><div class="cl">Directly observed</div><div class="cv">' + directlyObserved + '</div></div><div class="c"><div class="cl">Inferred from evidence</div><div class="cv">' + inferredText + '</div></div></div></div>';
 
   // What remains uncertain
-  var uncertainItems = evidenceItems.filter(function(e){ return e.strength === 'Weak' || e.score < 0.4; });
+  var uncertainItems = evidenceItems.filter(function(e){ return e.score < 0.4; });
   var uncertainText = uncertainItems.length > 0
-    ? uncertainItems.map(function(e){ return e.signal; }).join(', ') + ' — these dimensions had low confidence scores and require further investigation.'
-    : 'All analysed dimensions reached at least moderate confidence. No significant uncertainties were identified at this level of analysis.';
-
+    ? uncertainItems.map(function(e){ return e.signal.toLowerCase().replace(/_/g, ' '); }).join(', ') + ' — these dimensions had low confidence and require further investigation.'
+    : 'No significant uncertainties were identified. All dimensions reached at least moderate confidence.';
   assessmentHtml += '<div class="r-section"><div class="rh">What remains uncertain</div><p>' + uncertainText + '</p></div>';
 
-  // Implications
-  var implicationsText = meanScore > 0.6
-    ? 'The positive assessment suggests the company\'s position on this question is credible. Invest in exploiting these strengths while monitoring for competitive responses.'
-    : meanScore > 0.4
-    ? 'The mixed signals indicate this area warrants deeper investigation before strategic decisions. Consider supplementing web evidence with primary research.'
-    : 'The weak evidence suggests the company\'s position on this question is not well-supported. This represents either a vulnerability or a potential area for differentiation if addressed.';
+  // Challenger / counter-case
+  var challenger = assessment.challenger;
+  if (challenger && challenger.summary) {
+    assessmentHtml += '<div class="r-section" style="border-left:2px solid var(--warn)"><div class="rh">Challenger view</div><p style="font-weight:500;margin-bottom:4px">' + challenger.summary + '</p><p>' + challenger.challenger_assessment + '</p>';
+    if (challenger.would_change_at) {
+      assessmentHtml += '<p style="font-size:11px;color:var(--mute);margin-top:8px;padding-top:8px;border-top:1px solid var(--line)">' + challenger.would_change_at + ' · ' + challenger.cheapest_research + '</p>';
+    }
+    assessmentHtml += '</div>';
+  }
 
+  // Implications
+  var implicationsText = meanScore > 0.65
+    ? 'The strong evidence supports the assessment with confidence. The identified pattern is robust across multiple signals. Invest in exploiting these strengths, but monitor for the challenger conditions that could reverse the assessment.'
+    : meanScore > 0.55
+    ? 'The positive direction is credible but uneven. Prioritise strengthening the weaker signals to build a more robust case. The challenger view should be tested before committing to major decisions.'
+    : meanScore > 0.45
+    ? 'The mixed signals and moderate confidence indicate this area warrants deeper investigation. Supplement web evidence with primary research before strategic commitments.'
+    : 'The weak or negative evidence suggests this is either a vulnerability or a potential area for differentiation if addressed. Further investigation is needed to distinguish between absence of evidence and evidence of absence.';
   assessmentHtml += '<div class="r-section"><div class="rh">Implications</div><p>' + implicationsText + '</p></div>';
 
   // Pages analysed footer
-  var pagesList = assessedPages || [];
   var pageLinks = pagesList.map(function(p,i){
     return '<span class="pill">#' + (i+1) + ' ' + (p.title || p.url.replace(/https?:\/\//,'').substring(0,30)) + '</span>';
   }).join('');

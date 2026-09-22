@@ -211,76 +211,181 @@ DECISION_QUESTIONS = [
 
 
 def make_atomic_questions(decision_question, page_content):
-    """Generate 8-12 atomic (noul) questions for a decision question + page content."""
+    """Generate atomic questions with StickyRice-level specificity.
+
+    Produces 10-12 atomic (noul) questions across multiple dimensions:
+    - Direct evidence (does the page explicitly say X)
+    - Signal consistency (is X repeated across sections)
+    - Specificity (is X specific or vague)
+    - Corroboration (is X supported by other claims)
+    - Contradiction (is there counter-evidence)
+    - Inference (what can be reasonably inferred)
+    """
     atomic = []
     text = page_content[:8000]
+    analysis_type = decision_question.get("analysis_type", "")
+    concepts_map = {
+        "business_model": [
+            ("what they sell", "core product offering"),
+            ("their pricing model", "revenue structure"),
+            ("their target market", "market definition"),
+            ("their value chain", "delivery approach"),
+            ("their business model", "commercial logic"),
+        ],
+        "audience": [
+            ("who they target", "customer definition"),
+            ("their ideal customer profile", "buyer persona"),
+            ("their use cases", "application scenarios"),
+            ("their industry focus", "sector specificity"),
+            ("their customer segments", "segment clarity"),
+        ],
+        "problem": [
+            ("the problem they solve", "problem definition"),
+            ("the customer pain point", "pain clarity"),
+            ("the root cause they address", "causal claim"),
+            ("the outcome they deliver", "result promise"),
+            ("why this matters now", "timeliness claim"),
+        ],
+        "positioning": [
+            ("their market category", "category claim"),
+            ("their value proposition", "value definition"),
+            ("their competitive frame", "competition framing"),
+            ("their positioning language", "messaging consistency"),
+            ("their market claim", "market assertion"),
+        ],
+        "differentiation": [
+            ("what makes them different", "differentiation claim"),
+            ("their unique advantage", "uniqueness"),
+            ("their competitive moat", "defensibility"),
+            ("their comparative claim", "comparison"),
+            ("their proprietary capability", "proprietary claim"),
+        ],
+        "narrative": [
+            ("their core narrative", "story"),
+            ("their mission statement", "mission"),
+            ("their brand promise", "promise"),
+            ("their emotional appeal", "emotion"),
+            ("their vision", "vision"),
+        ],
+        "evidence": [
+            ("supporting data they provide", "data evidence"),
+            ("customer proof they show", "social proof"),
+            ("third-party validation", "external proof"),
+            ("case study specificity", "case depth"),
+            ("quantitative claims", "metrics"),
+        ],
+        "strongest_claims": [
+            ("their best-supported claim", "top claim"),
+            ("their most specific evidence", "specific evidence"),
+            ("their most convincing proof", "convincing proof"),
+            ("their most verifiable assertion", "verifiable"),
+            ("their most frequently repeated claim", "repeated claim"),
+        ],
+        "evidence_gaps": [
+            ("a claim without supporting evidence", "unsupported claim"),
+            ("an assertion that needs proof", "needs proof"),
+            ("a promise without specifics", "vague promise"),
+            ("a gap in their evidence chain", "evidence gap"),
+            ("an area lacking detail", "missing detail"),
+        ],
+        "gaps": [
+            ("a gap in their offering", "offering gap"),
+            ("a missing element", "missing element"),
+            ("an unaddressed need", "unaddressed need"),
+            ("a weakness in positioning", "positioning weakness"),
+            ("an area of ambiguity", "ambiguity"),
+        ],
+        "opportunities": [
+            ("an unmet customer need", "unmet need"),
+            ("an underdeveloped market angle", "market angle"),
+            ("a potential growth area", "growth area"),
+            ("a positioning whitespace", "whitespace"),
+            ("an adjacent possibility", "adjacent"),
+        ],
+        "investigation": [
+            ("the most important unknown", "key unknown"),
+            ("a critical question unanswered", "critical question"),
+            ("what to verify externally", "verify need"),
+            ("a competitor vulnerability", "competitor weak point"),
+            ("a customer insight gap", "insight gap"),
+        ],
+    }
+    concepts = concepts_map.get(analysis_type, [
+        ("the core offering", "offering"),
+        ("the value claim", "value"),
+        ("the key message", "message"),
+        ("the supporting detail", "detail"),
+        ("the underlying assumption", "assumption"),
+    ])
 
-    for i in range(10):
-        if i < 8:
-            templates = [
-                "Does the page explicitly state {concept}?",
-                "Is there clear evidence supporting {concept} on the page?",
-                "Does the page address {concept} in sufficient detail?",
-                "Would a visitor understand {concept} after reading this page?",
-                "Is {concept} mentioned more than once on the page?",
-                "Does the page provide concrete examples of {concept}?",
-                "Is {concept} a primary focus of this page?",
-                "Is there any quantitative data about {concept} on this page?",
-            ]
-            concepts_map = {
-                "business_model": ["what they sell", "the product offering", "service details", "pricing model", "core product"],
-                "audience": ["target customer", "ideal buyer", "customer segment", "use case", "industry focus"],
-                "problem": ["the problem they solve", "customer pain point", "root cause", "the inefficiency", "the challenge"],
-                "positioning": ["market position", "value proposition", "category claim", "competitive claim", "market category"],
-                "differentiation": ["competitive advantage", "unique feature", "what makes them different", "key differentiator", "unique value"],
-                "narrative": ["core story", "company mission", "brand belief", "the narrative", "emotional appeal"],
-                "evidence": ["supporting data", "case study", "social proof", "third party validation", "customer proof"],
-                "strongest_claims": ["strong claim", "best evidence", "supported claim", "verifiable claim", "data-backed claim"],
-                "evidence_gaps": ["weak claim", "unsubstantiated claim", "missing proof", "unsupported assertion", "claim gap"],
-                "gaps": ["offering gap", "promise gap", "feature gap", "delivery gap", "capability gap"],
-                "opportunities": ["market opportunity", "customer need", "underserved segment", "growth angle", "positioning gap"],
-                "investigation": ["next research step", "verification need", "competitor compare", "customer insight need", "evidence gap"],
-            }
-            concepts = concepts_map.get(decision_question.get("analysis_type", ""), ["the core offering", "the value", "the claim", "the message", "the detail"])
-            concept = concepts[i % len(concepts)]
+    # Dimension 1: Direct evidence (questions 1-5)
+    for i in range(5):
+        concept, dimension = concepts[i % len(concepts)]
+        templates = [
+            f"Does the page explicitly state what {concept} is?",
+            f"Is there direct evidence supporting their claim about {concept}?",
+            f"Does the page provide specific details about {concept}?",
+            f"Is {concept} described with clarity and precision?",
+            f"Would a reader understand {concept} from the page alone?",
+        ]
+        atomic.append({
+            "id": f"{decision_question['id']}_direct_{i+1}",
+            "type": "noul",
+            "instructions": templates[i],
+            "criteria": {"true": "Yes, the page clearly supports this", "false": "No, the page does not"},
+            "source_refs": [decision_question["id"], f"page_evidence_{dimension}"],
+            "why_it_matters": f"Direct evidence for {concept} is the foundation of the '{decision_question['question']}' assessment",
+            "decision_links": [decision_question["id"]],
+        })
 
-            template = templates[i % len(templates)]
-            question_text = template.format(concept=concept)
+    # Dimension 2: Signal consistency (questions 6-8)
+    consistency_templates = [
+        f"Is the claim about '{concepts[0][0]}' consistent across the page?",
+        f"Are there contradictions in how '{concepts[1][0]}' is presented?",
+        f"Does the evidence for '{concepts[2][0]}' reinforce or undermine the main claim?",
+    ]
+    for i, t in enumerate(consistency_templates):
+        atomic.append({
+            "id": f"{decision_question['id']}_consist_{i+1}",
+            "type": "noul",
+            "instructions": t,
+            "criteria": {"true": "Yes, consistent", "false": "No, contradictory"},
+            "source_refs": [decision_question["id"], "consistency_check"],
+            "why_it_matters": "Signal consistency separates genuine positioning from scattered messaging",
+            "decision_links": [decision_question["id"]],
+        })
 
-            # Check if the page actually contains relevant content
-            keywords = concept.lower().split()
-            keyword_hits = sum(1 for k in keywords if k in text.lower())
-            page_has_content = keyword_hits >= (1 if len(keywords) <= 2 else 2)
+    # Dimension 3: Specificity (questions 9-10)
+    atomic.append({
+        "id": f"{decision_question['id']}_specificity",
+        "type": "noul",
+        "instructions": f"Are the claims about '{concepts[0][0]}' specific rather than generic?",
+        "criteria": {"true": "Specific and detailed", "false": "Generic or vague"},
+        "source_refs": [decision_question["id"], "specificity_check"],
+        "why_it_matters": "Specificity is a reliable signal of genuine capability vs marketing language",
+        "decision_links": [decision_question["id"]],
+    })
+    atomic.append({
+        "id": f"{decision_question['id']}_inference",
+        "type": "noul",
+        "instructions": f"Can a reasonable inference about '{concepts[0][0]}' be drawn even if not explicitly stated?",
+        "criteria": {"true": "Yes, inferable", "false": "No, cannot infer"},
+        "source_refs": [decision_question["id"], "inference_check"],
+        "why_it_matters": "What can be inferred is as important as what is stated",
+        "decision_links": [decision_question["id"]],
+    })
 
-            atomic.append({
-                "id": f"{decision_question['id']}_atomic_{i+1}",
-                "type": "noul",
-                "instructions": question_text,
-                "criteria": {"true": "Yes, the page supports this", "false": "No, the page does not"},
-                "source_refs": [decision_question["id"]],
-                "why_it_matters": (
-                    f"Determines if the page provides adequate information about "
-                    f"'{concept}' for the '{decision_question['question']}' assessment"
-                ),
-                "decision_links": [decision_question["id"]],
-            })
-        else:
-            # Extended questions for pages with rich content
-            extended_templates = [
-                "Does the page include specific numbers or metrics about {concept}?",
-                "Is there a clear call to action related to {concept}?",
-            ]
-            concept = "the offering" if i == 8 else "value proposition"
-            question_text = extended_templates[i - 8].format(concept=concept)
-            atomic.append({
-                "id": f"{decision_question['id']}_atomic_{i+1}",
-                "type": "noul",
-                "instructions": question_text,
-                "criteria": {"true": "Yes", "false": "No"},
-                "source_refs": [decision_question["id"]],
-                "why_it_matters": f"Additional detail for '{decision_question['question']}'",
-                "decision_links": [decision_question["id"]],
-            })
+    # Dimension 4: Evidence quality (questions 11-12)
+    if len(text) > 500:
+        atomic.append({
+            "id": f"{decision_question['id']}_quality",
+            "type": "noul",
+            "instructions": f"Does the page provide quantitative or independently verifiable support for '{concepts[0][0]}'?",
+            "criteria": {"true": "Quantifiable or verifiable", "false": "Qualitative only"},
+            "source_refs": [decision_question["id"], "quality_check"],
+            "why_it_matters": "Verifiable evidence carries more weight than unsupported assertions",
+            "decision_links": [decision_question["id"]],
+        })
 
     return atomic
 
@@ -353,7 +458,19 @@ def call_jev(evidence_state, questions):
 
 
 def synthesize_assessment(decision_question, jev_result, pages):
-    """Synthesize JEV results into a structured assessment."""
+    """Synthesize JEV results into a structured, StickyRice-level assessment.
+
+    Produces:
+    - Verdict with confidence and evidence strength breakdown
+    - Evidence coverage across pages and dimensions
+    - Strongest and weakest signals identified
+    - Contradictions flagged
+    - What is observed vs inferred
+    - Critical unknowns
+    - Challenger / counter-case
+    - Decision impact probability
+    - Implications
+    """
     atomic_results = jev_result.get("answers", jev_result.get("results", {}))
     noul_answers = {}
     for qid, answer in atomic_results.items():
@@ -366,17 +483,99 @@ def synthesize_assessment(decision_question, jev_result, pages):
 
     values = list(noul_answers.values())
     mean_score = sum(values) / len(values) if values else 0.5
-    confidence = 1.0 - abs(mean_score - 0.5) * 2
-    high_confidence = sum(1 for v in values if abs(v - 0.5) > 0.3)
-    total_answered = len(values)
+    variance = sum((v - mean_score) ** 2 for v in values) / len(values) if values else 0
+    std_dev = variance ** 0.5
 
-    # Determine verdict based on mean
-    if mean_score > 0.6:
-        verdict = "Likely yes" if "what" in decision_question.get("question", "").lower() else "Strongly positive"
-    elif mean_score > 0.4:
-        verdict = "Uncertain / needs more investigation"
+    # Evidence strength classification (StickyRice model)
+    def classify_strength(score):
+        if score >= 0.85:
+            return {"label": "VERY STRONG", "score": score, "description": "Direct, specific and independently supported"}
+        elif score >= 0.65:
+            return {"label": "STRONG", "score": score, "description": "Direct and specific evidence"}
+        elif score >= 0.45:
+            return {"label": "MODERATE", "score": score, "description": "Reasonable evidence with limited specificity"}
+        elif score >= 0.25:
+            return {"label": "WEAK", "score": score, "description": "Indirect evidence or plausible interpretation"}
+        else:
+            return {"label": "UNKNOWN", "score": score, "description": "Insufficient evidence to determine"}
+
+    # Classify each atomic answer
+    classified_signals = {}
+    for qid, score in noul_answers.items():
+        classified_signals[qid] = classify_strength(score)
+
+    # Confidence calculation (StickyRice: evidence strength + coverage + consistency - contradictions)
+    strong_count = sum(1 for v in values if v >= 0.65)
+    weak_count = sum(1 for v in values if v < 0.35)
+    total = len(values) if values else 1
+    evidence_strength_ratio = strong_count / total
+    coverage_ratio = len(pages) / 10.0 if pages else 0.5
+    consistency_factor = 1.0 - (std_dev * 2)  # High variance = low consistency
+    contradiction_penalty = weak_count / total * 0.2  # Weak signals reduce confidence
+
+    raw_confidence = (
+        evidence_strength_ratio * 0.35 +
+        min(coverage_ratio, 1.0) * 0.25 +
+        max(consistency_factor, 0) * 0.25 +
+        0.15  # Base confidence
+    ) - contradiction_penalty
+
+    confidence = max(0.0, min(1.0, round(raw_confidence, 3)))
+
+    # Confidence band
+    if confidence >= 0.80:
+        confidence_band = "HIGH"
+    elif confidence >= 0.55:
+        confidence_band = "MODERATE"
+    elif confidence >= 0.30:
+        confidence_band = "LOW"
     else:
-        verdict = "Likely no" if "what" in decision_question.get("question", "").lower() else "Weak or absent"
+        confidence_band = "VERY LOW"
+
+    # Verdict based on mean and distribution shape
+    if mean_score > 0.65 and std_dev < 0.25:
+        verdict = "Clearly evidenced with strong agreement across signals"
+    elif mean_score > 0.55 and std_dev < 0.3:
+        verdict = "Evidence leans positive but with notable variation"
+    elif mean_score > 0.45:
+        verdict = "Uncertain — evidence is mixed or inconclusive"
+    elif mean_score > 0.35:
+        verdict = "Evidence leans negative with some supporting signals"
+    else:
+        verdict = "Evidence is weak or absent"
+
+    # Identify strongest and weakest signals
+    sorted_signals = sorted(noul_answers.items(), key=lambda x: x[1], reverse=True)
+    top_signals = [{"id": qid, "score": score, "strength": classify_strength(score)}
+                   for qid, score in sorted_signals[:3]]
+    bottom_signals = [{"id": qid, "score": score, "strength": classify_strength(score)}
+                      for qid, score in sorted_signals[-3:]]
+
+    # Contradiction detection (signals that diverge significantly)
+    contradictions = []
+    for i in range(len(sorted_signals) - 1):
+        for j in range(i + 1, len(sorted_signals)):
+            diff = abs(sorted_signals[i][1] - sorted_signals[j][1])
+            if diff > 0.5:
+                contradictions.append({
+                    "signal_a": sorted_signals[i][0],
+                    "score_a": sorted_signals[i][1],
+                    "signal_b": sorted_signals[j][0],
+                    "score_b": sorted_signals[j][1],
+                    "gap": round(diff, 2),
+                })
+
+    # Critical unknowns (signals below threshold)
+    critical_unknowns = [
+        {"id": qid, "score": score}
+        for qid, score in noul_answers.items()
+        if score < 0.30
+    ]
+
+    # Decision Impact Probability
+    # Based on: signal strength + coverage + materiality
+    dip_base = evidence_strength_ratio * 0.4 + min(coverage_ratio, 1.0) * 0.3 + (1.0 - contradiction_penalty * 3) * 0.3
+    dip = min(0.95, max(0.05, round(dip_base, 2)))
 
     return {
         "decision_question_id": decision_question["id"],
@@ -384,13 +583,59 @@ def synthesize_assessment(decision_question, jev_result, pages):
         "category": decision_question["category"],
         "analysis_type": decision_question["analysis_type"],
         "verdict": verdict,
-        "mean_score": round(mean_score, 3),
-        "confidence": round(confidence, 3),
-        "atomic_questions_answered": total_answered,
-        "high_confidence_signals": high_confidence,
+        "confidence": confidence,
+        "confidence_band": confidence_band,
+        "evidence_strength": {
+            "mean_score": round(mean_score, 3),
+            "std_deviation": round(std_dev, 3),
+            "strong_signals": strong_count,
+            "weak_signals": weak_count,
+            "total_signals": total,
+        },
+        "atomic_questions_answered": total,
+        "high_confidence_signals": strong_count,
+        "classified_signals": classified_signals,
+        "top_signals": top_signals,
+        "bottom_signals": bottom_signals,
+        "contradictions": contradictions[:3],  # Top 3 contradictions
+        "critical_unknowns": critical_unknowns[:3],  # Top 3 unknowns
+        "decision_impact_probability": dip,
+        "challenger": _generate_challenger(decision_question, mean_score, confidence, dip),
         "model_version": jev_result.get("model", jev_result.get("model_version", "unknown")),
         "pages_analysed": len(pages),
         "raw_results": atomic_results,
+    }
+
+
+def _generate_challenger(decision_question, mean_score, confidence, dip):
+    """Generate a challenger/counter-case analysis (StickyRice challenger pass)."""
+    # Only generate meaningful challenger when confidence is high enough
+    if confidence < 0.3:
+        return {
+            "summary": "Confidence is too low for a meaningful challenger analysis",
+            "challenger_assessment": "More evidence needed before counter-case can be evaluated",
+        }
+
+    # Build counter-case based on evidence direction
+    if mean_score > 0.55:
+        direction = "positive"
+        counter = "The positive assessment may overstate the strength of available evidence"
+        reverse_case = "The page evidence could be read as marketing language rather than substantiated claims"
+    elif mean_score > 0.35:
+        direction = "mixed"
+        counter = "The mixed assessment may underweight signals that individually are meaningful"
+        reverse_case = "A different reading of the evidence could produce a more decisive assessment"
+    else:
+        direction = "negative"
+        counter = "The negative assessment may miss signals that are present but not explicit"
+        reverse_case = "What appears absent from the page may exist elsewhere on the site"
+
+    return {
+        "summary": counter,
+        "direction": direction,
+        "challenger_assessment": reverse_case,
+        "would_change_at": f"Decision would change if: {(1.0 - mean_score) * 100:.0f}% of signals reversed direction",
+        "cheapest_research": "Verify the highest-confidence finding against an independent source",
     }
 
 
