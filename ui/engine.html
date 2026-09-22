@@ -321,7 +321,6 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 var currentState = 'input';
 var scanData = null;
 var assessedPages = [];
-var evidenceItems = [];
 
 function showState(id) {
   closeModal();
@@ -387,12 +386,12 @@ async function startScan() {
     if (!resp.ok) throw new Error('Scan failed: ' + resp.statusText);
     scanData = await resp.json();
   } catch(e) {
-    // Fallback demo data when backend not available
-    console.warn('Backend unavailable, using demo data:', e.message);
-    scanData = generateDemoScanData(url);
-  }
+        document.getElementById('analyseBtn').disabled = false;
+        document.getElementById('analyseBtn').textContent = 'Analyse website';
+        throw e;
+      }
 
-  assessedPages = scanData.top_pages || scanData.pages || [];
+  assessedPages = scanData.top_pages || [];
 
   // Animate remaining steps with realistic timing
   for (var i = 1; i < 5; i++) {
@@ -415,26 +414,13 @@ async function startScan() {
   assessedPages.forEach(function(p,i){
     var item = document.createElement('div');
     item.className = 'page-item';
-    var rel = p.relevance || Math.round(60 + Math.random() * 35);
+    var rel = p.priority !== undefined ? p.priority : '';
     item.innerHTML = '<span class="num">#' + (i+1) + '</span><span class="url">' + (p.url || p.title || ('page-' + (i+1))) + '</span><span class="rel">' + rel + '% relevance</span>';
     list.appendChild(item);
   });
 
   document.getElementById('scanComplete').style.display = 'block';
   document.getElementById('scanCta').style.display = 'block';
-}
-
-function generateDemoScanData(url) {
-  var demoPages = [];
-  var titles = ['About Us', 'Products', 'Solutions', 'Pricing', 'Case Studies', 'Blog', 'Documentation', 'Careers', 'Contact', 'Features'];
-  for (var i = 0; i < 10; i++) {
-    demoPages.push({
-      url: url + '/' + titles[i].toLowerCase().replace(/\s+/g,'-'),
-      title: titles[i],
-      relevance: Math.round(55 + Math.random() * 40)
-    });
-  }
-  return { pages: demoPages, url: url };
 }
 
 function sleep(ms) { return new Promise(function(r){setTimeout(r,ms)}); }
@@ -459,6 +445,21 @@ var QUESTIONS = [
   { cat: 'OPPORTUNITY', q: 'Where might there be opportunities?', d: 'Surface areas of under-addressed customer needs.' },
   { cat: 'OPPORTUNITY', q: 'What should we investigate next?', d: 'Prioritise the most promising or concerning directions.' }
 ];
+
+var QUESTION_IDS = {
+  'What does this company actually sell?': 'what_company_sells',
+  'Who is this company really targeting?': 'who_is_targeting',
+  'What problem is this company solving?': 'what_problem',
+  'How is this company positioning itself?': 'how_positioning',
+  'What makes this company different?': 'what_makes_different',
+  'What does the company want customers to believe?': 'what_believe',
+  'How well does the company substantiate its claims?': 'how_substantiate',
+  'Which claims are strongest?': 'strongest_claims',
+  'Which important claims lack evidence?': 'evidence_gaps',
+  'Where are the biggest gaps?': 'biggest_gaps',
+  'Where might there be opportunities?': 'where_opportunities',
+  'What should we investigate next?': 'investigate_next'
+};
 
 function renderQuestions() {
   var grid = document.getElementById('questionGrid');
@@ -505,17 +506,29 @@ function startAnalysis(question) {
     });
   }, 100);
 
-  // Execute sequence
-  var totalSignals = Math.round(20 + Math.random() * 50);
-  var supporting = Math.round(totalSignals * (0.4 + Math.random() * 0.3));
-  var contradictory = totalSignals - supporting;
-  document.getElementById('evSignalCount').textContent = totalSignals;
-  document.getElementById('supCount').textContent = supporting;
-  document.getElementById('contraCount').textContent = contradictory;
-
   var assessmentEl = document.getElementById('assessmentAppear');
   assessmentEl.classList.remove('in');
   assessmentEl.style.display = 'block';
+
+  // Build pages payload (map content -> clean_text for backend)
+  var pagesPayload = (assessedPages || []).map(function(p){
+    return {
+      url: p.url,
+      title: p.title,
+      clean_text: p.content || p.clean_text || ''
+    };
+  });
+
+  // Call API in parallel with animation
+  var questionId = QUESTION_IDS[question.q] || question.q.toLowerCase().replace(/[^a-z0-9]+/g,'_');
+  var apiPromise = fetch('/api/analyze', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({question_id: questionId, pages: pagesPayload})
+  }).then(function(resp){
+    if (!resp.ok) throw new Error('Analysis failed: ' + resp.statusText);
+    return resp.json();
+  });
 
   // Step 1: Decomposing - show dimensions
   setTimeout(function(){
@@ -531,48 +544,72 @@ function startAnalysis(question) {
 
   // Step 2 done, step 3 active
   setTimeout(function(){
-    steps[1].querySelector('.av').innerHTML = '<span style="color:var(--match)">✓ ' + totalSignals + ' signals</span>';
+    steps[1].querySelector('.av').innerHTML = '<span style="color:var(--match)">✓</span>';
     steps[2].classList.add('in');
     steps[2].querySelector('.av').innerHTML = '<span class="dots"><span></span><span></span><span></span></span>';
   }, 2000);
 
   // Step 3 done, step 4 active
   setTimeout(function(){
-    var supPct = Math.round((supporting / totalSignals) * 100);
-    steps[2].querySelector('.av').innerHTML = '<span style="color:var(--match)">✓ ' + supporting + ' supporting · ' + contradictory + ' contradictory</span>';
+    steps[2].querySelector('.av').innerHTML = '<span style="color:var(--match)">✓</span>';
     steps[3].classList.add('in');
     steps[3].querySelector('.av').innerHTML = '<span class="dots"><span></span><span></span><span></span></span>';
   }, 2800);
 
-  // All done, show assessment
-  setTimeout(function(){
+  // Wait for API response, then render
+  apiPromise.then(function(data){
+    window.analysisResult = data.assessment || data;
+    // Complete step 4
     steps[3].querySelector('.av').innerHTML = '<span style="color:var(--match)">✓ Complete</span>';
-    renderAssessment(question);
+    renderAssessment(question, window.analysisResult);
     setTimeout(function(){
       assessmentEl.classList.add('in');
     }, 300);
-  }, 3400);
+  }).catch(function(err){
+    console.error('Analysis API error:', err);
+    steps[3].querySelector('.av').innerHTML = '<span style="color:var(--crit)">✗ Failed</span>';
+    var assessmentHtml = '<div class="r-section"><div class="rh">Error</div><h3>Analysis failed</h3><p>Could not complete the analysis. The backend may be unavailable. Please try again.</p></div>';
+    document.getElementById('assessmentReport').innerHTML = assessmentHtml;
+    document.getElementById('assessmentInner').innerHTML = assessmentHtml;
+    setTimeout(function(){
+      assessmentEl.classList.add('in');
+    }, 300);
+  });
 }
 
 /* ===== STATE 5: ASSESSMENT REPORT ===== */
-function renderAssessment(question) {
-  evidenceItems = generateEvidence(question);
-  var confidence = Math.round(65 + Math.random() * 30);
-  var band = confidence >= 80 ? 'High confidence' : (confidence >= 65 ? 'Moderate confidence' : 'Low confidence');
-  var bandClass = confidence >= 80 ? 'high' : (confidence >= 65 ? 'med' : '');
+function renderAssessment(question, assessment) {
+  if (!assessment) return;
+
+  var confidence = Math.round(assessment.confidence * 100);
+  var band = confidence >= 80 ? 'High confidence' : (confidence >= 60 ? 'Moderate confidence' : 'Low confidence');
+  var bandClass = confidence >= 80 ? 'high' : (confidence >= 60 ? 'med' : '');
+
+  // Build evidence list from raw_results
+  var rawResults = assessment.raw_results || {};
+  var resultKeys = Object.keys(rawResults);
+  var evidenceItems = resultKeys.map(function(qid, i){
+    var val = rawResults[qid];
+    // val could be a number or {noul: 0.0}
+    var score = typeof val === 'object' && val !== null ? (val.noul !== undefined ? val.noul : val.answer || 0.5) : (typeof val === 'number' ? val : 0.5);
+    var strength = score >= 0.7 ? 'Strong' : (score >= 0.4 ? 'Moderate' : 'Weak');
+    var label = qid.replace(/_/g, ' ').replace(/\b\w/g, function(c){return c.toUpperCase();});
+    return { text: label + ' — score ' + score.toFixed(2), source: 'JEV analysis', strength: strength, signal: label, score: score };
+  });
+
+  window.evidenceItems = evidenceItems;
 
   var assessmentHtml = '';
 
-  // Assessment conclusion
-  var conclusionText = getConclusion(question);
-  assessmentHtml += '<div id="report-begin" class="r-section"><div class="rh">Assessment</div><h3>' + conclusionText + '</h3></div>';
+  // Assessment conclusion (verdict)
+  assessmentHtml += '<div id="report-begin" class="r-section"><div class="rh">Assessment</div><h3>' + (assessment.verdict || 'Analysis complete') + '</h3></div>';
 
   // Confidence badge
   assessmentHtml += '<div class="conf-badge" id="confBadge">' +
     '<span class="pct">' + confidence + '%</span>' +
     '<span class="lb">—</span>' +
     '<span class="band ' + bandClass + '">' + band + '</span>' +
-    '<div class="tooltip">Confidence is a composite of: evidence volume (' + evidenceItems.length + ' items), source diversity (' + assessedPages.length + ' pages), internal consistency (' + Math.round(70 + Math.random()*25) + '%), and claim substantiation level.</div>' +
+    '<div class="tooltip">Confidence is a composite of: evidence volume (' + evidenceItems.length + ' items), source diversity (' + (assessment.pages_analysed || (assessedPages || []).length) + ' pages), and atomic question consistency.</div>' +
   '</div>';
 
   // Why we believe this
@@ -584,24 +621,44 @@ function renderAssessment(question) {
   assessmentHtml += '</ul></div>';
 
   // Evidence table
-  assessmentHtml += '<div class="r-section"><div class="rh">Evidence summary</div><table class="evidence-table"><tr><th>Signal</th><th>Evidence</th><th>Source</th><th>Strength</th></tr>';
+  assessmentHtml += '<div class="r-section"><div class="rh">Evidence summary</div><table class="evidence-table"><tr><th>Signal</th><th>Assessment</th><th>Source</th><th>Strength</th></tr>';
   evidenceItems.forEach(function(e,i){
     var tagClass = e.strength === 'Strong' ? 's' : (e.strength === 'Moderate' ? 'm' : 'w');
-    assessmentHtml += '<tr onclick="openEvidence(' + i + ')"><td style="white-space:nowrap;min-width:80px;max-width:120px;overflow:hidden;text-overflow:ellipsis">' + e.signal + '</td><td style="max-width:240px">' + e.text + '</td><td><span class="src" title="' + e.source + '">' + e.source + '</span></td><td><span class="tag ' + tagClass + '">' + e.strength + '</span></td></tr>';
+    assessmentHtml += '<tr onclick="openEvidence(' + i + ')" style="cursor:pointer"><td style="white-space:nowrap;min-width:80px;max-width:120px;overflow:hidden;text-overflow:ellipsis">' + e.signal + '</td><td style="max-width:240px">' + e.text + '</td><td><span class="src">JEV analysis</span></td><td><span class="tag ' + tagClass + '">' + e.strength + '</span></td></tr>';
   });
   assessmentHtml += '</table></div>';
 
   // What is inferred
-  assessmentHtml += '<div class="r-section"><div class="rh">What is inferred</div><div class="inferred-grid"><div class="c"><div class="cl">Directly observed</div><div class="cv">' + getDirectlyObserved(question) + '</div></div><div class="c"><div class="cl">Inferred from evidence</div><div class="cv">' + getInferred(question) + '</div></div></div></div>';
+  var meanScore = assessment.mean_score || 0.5;
+  var inferredText = meanScore > 0.6
+    ? 'The overall evidence leans positive, suggesting the question is likely answered in the affirmative across multiple analytical dimensions.'
+    : meanScore > 0.4
+    ? 'The evidence is mixed, with no strong directional signal. This suggests the answer may vary depending on which dimension is prioritised.'
+    : 'The overall evidence leans negative, suggesting the question is unlikely to be answered in the affirmative based on available information.';
+  var directlyObserved = 'JEV analysed ' + (assessment.pages_analysed || (assessedPages || []).length) + ' pages and evaluated ' + assessment.atomic_questions_answered + ' atomic questions. ' + assessment.high_confidence_signals + ' signals reached high confidence.';
+
+  assessmentHtml += '<div class="r-section"><div class="rh">What is inferred</div><div class="inferred-grid"><div class="c"><div class="cl">Directly observed</div><div class="cv">' + directlyObserved + '</div></div><div class="c"><div class="cl">Inferred from evidence</div><div class="cv">' + inferredText + '</div></div></div></div>';
 
   // What remains uncertain
-  assessmentHtml += '<div class="r-section"><div class="rh">What remains uncertain</div><p>' + getUncertain(question) + '</p></div>';
+  var uncertainItems = evidenceItems.filter(function(e){ return e.strength === 'Weak' || e.score < 0.4; });
+  var uncertainText = uncertainItems.length > 0
+    ? uncertainItems.map(function(e){ return e.signal; }).join(', ') + ' — these dimensions had low confidence scores and require further investigation.'
+    : 'All analysed dimensions reached at least moderate confidence. No significant uncertainties were identified at this level of analysis.';
+
+  assessmentHtml += '<div class="r-section"><div class="rh">What remains uncertain</div><p>' + uncertainText + '</p></div>';
 
   // Implications
-  assessmentHtml += '<div class="r-section"><div class="rh">Implications</div><p>' + getImplications(question) + '</p></div>';
+  var implicationsText = meanScore > 0.6
+    ? 'The positive assessment suggests the company\'s position on this question is credible. Invest in exploiting these strengths while monitoring for competitive responses.'
+    : meanScore > 0.4
+    ? 'The mixed signals indicate this area warrants deeper investigation before strategic decisions. Consider supplementing web evidence with primary research.'
+    : 'The weak evidence suggests the company\'s position on this question is not well-supported. This represents either a vulnerability or a potential area for differentiation if addressed.';
+
+  assessmentHtml += '<div class="r-section"><div class="rh">Implications</div><p>' + implicationsText + '</p></div>';
 
   // Pages analysed footer
-  var pageLinks = assessedPages.map(function(p,i){
+  var pagesList = assessedPages || [];
+  var pageLinks = pagesList.map(function(p,i){
     return '<span class="pill">#' + (i+1) + ' ' + (p.title || p.url.replace(/https?:\/\//,'').substring(0,30)) + '</span>';
   }).join('');
   assessmentHtml += '<div class="pages-footer"><span class="l">Pages analysed</span>' + pageLinks + '</div>';
@@ -611,114 +668,9 @@ function renderAssessment(question) {
   showState('state-assessment');
 }
 
-function generateEvidence(question) {
-  var evidences = {
-    'BUSINESS': [
-      { text: 'Products are clearly described with specific features and pricing tiers.', source: 'Pricing page', strength: 'Strong', signal: 'Product clarity' },
-      { text: 'Target customer segments are referenced in case studies and testimonials.', source: 'Case Studies', strength: 'Strong', signal: 'Customer targeting' },
-      { text: 'Revenue model is implied but not explicitly stated.', source: 'About page', strength: 'Moderate', signal: 'Revenue model' },
-      { text: 'Market size claims are made without external references.', source: 'Blog', strength: 'Moderate', signal: 'Market sizing' },
-      { text: 'Competitor comparisons are absent from the site content.', source: 'Product page', strength: 'Moderate', signal: 'Competitive context' },
-      { text: 'Customer pain points are described in marketing copy with specific language.', source: 'Landing page', strength: 'Strong', signal: 'Problem awareness' },
-      { text: 'Distribution channels are listed for enterprise customers only.', source: 'Solutions page', strength: 'Weak', signal: 'Distribution reach' }
-    ],
-    'POSITIONING': [
-      { text: 'Brand narrative is consistent across pages with a clear tagline.', source: 'Home page', strength: 'Strong', signal: 'Narrative consistency' },
-      { text: 'Differentiators are claimed but not compared against specific alternatives.', source: 'Features page', strength: 'Moderate', signal: 'Differentiation clarity' },
-      { text: 'Target audience perception is implied through visual design choices.', source: 'Design system', strength: 'Moderate', signal: 'Perceptual targeting' },
-      { text: 'Pricing positioning suggests premium market segment.', source: 'Pricing page', strength: 'Strong', signal: 'Price positioning' },
-      { text: 'Messaging shifts subtly between technical and business audiences.', source: 'Blog & Resources', strength: 'Moderate', signal: 'Audience tailoring' },
-      { text: 'Visual identity is professional but does not strongly differentiate from competitors.', source: 'Site design', strength: 'Weak', signal: 'Visual distinctiveness' },
-      { text: 'Testimonials reinforce desired brand perception.', source: 'Customer stories', strength: 'Strong', signal: 'Social proof alignment' }
-    ],
-    'EVIDENCE': [
-      { text: 'Statistical claims are made without source citations or methodology notes.', source: 'Marketing pages', strength: 'Moderate', signal: 'Data transparency' },
-      { text: 'Customer testimonials include specific outcomes with metrics.', source: 'Case studies', strength: 'Strong', signal: 'Outcome specificity' },
-      { text: 'Technical documentation provides depth for product claims.', source: 'Documentation', strength: 'Strong', signal: 'Technical substantiation' },
-      { text: 'Industry certifications and authority badges are displayed prominently.', source: 'Footer & About', strength: 'Strong', signal: 'Authority signals' },
-      { text: 'Several feature claims are stated without demonstration or evidence.', source: 'Product page', strength: 'Weak', signal: 'Unsubstantiated claims' },
-      { text: 'Third-party reviews and ratings are referenced but not embedded.', source: 'Blog posts', strength: 'Moderate', signal: 'Social proof' },
-      { text: 'Content freshness is inconsistent across the site.', source: 'Blog & Resources', strength: 'Moderate', signal: 'Content currency' },
-      { text: 'Comparison claims lack independent verification.', source: 'Competitive page', strength: 'Weak', signal: 'Comparative evidence' }
-    ],
-    'OPPORTUNITY': [
-      { text: 'There is no content addressing a clearly growing market segment.', source: 'Site content audit', strength: 'Strong', signal: 'Market gap' },
-      { text: 'Competitor weaknesses visible through their public documentation and reviews.', source: 'External', strength: 'Strong', signal: 'Competitor vulnerability' },
-      { text: 'Customer questions on forums suggest unaddressed needs.', source: 'Community pages', strength: 'Moderate', signal: 'Demand signal' },
-      { text: 'An adjacent category shows strong growth the company could address.', source: 'Industry sources', strength: 'Moderate', signal: 'Adjacent opportunity' },
-      { text: 'Current positioning leaves a clear whitespace for expansion.', source: 'Positioning analysis', strength: 'Strong', signal: 'Strategic whitespace' },
-      { text: 'Several competitor features are absent from this offering.', source: 'Feature comparison', strength: 'Moderate', signal: 'Feature gap' },
-      { text: 'Customer sentiment reveals frustration with a specific workflow.', source: 'Support pages', strength: 'Moderate', signal: 'Customer pain point' },
-      { text: 'Pricing model could be restructured to capture more value.', source: 'Pricing analysis', strength: 'Weak', signal: 'Pricing opportunity' }
-    ]
-  };
-  var pool = evidences[question.cat] || evidences.BUSINESS;
-  // Return a shuffled subset
-  var shuffled = pool.slice().sort(function(){return Math.random() - 0.5});
-  return shuffled.slice(0, 4 + Math.round(Math.random() * 3));
-}
-
-function getConclusion(question) {
-  var conclusions = {
-    'What does this company actually sell?': 'This company primarily sells a software platform with a core product line supported by ancillary services. Revenue appears concentrated in enterprise contracts.',
-    'Who is this company really targeting?': 'Despite broad marketing language, the evidence strongly suggests the company targets mid-to-large enterprise buyers, particularly in regulated industries.',
-    'What problem is this company solving?': 'The company addresses workflow inefficiency in data-intensive environments, though the specific pain point varies significantly across their customer segments.',
-    'How is this company positioning itself?': 'The company positions as a premium, trusted solution but the evidence for distinctiveness is moderate — key differentiators overlap with competitors.',
-    'What makes this company different?': 'The claimed differentiators around ease of use and reliability are partially supported by evidence, but several are standard industry claims.',
-    'What does the company want customers to believe?': 'The narrative strongly suggests the company wants customers to believe it is the safest, most reliable choice in a complex category.',
-    'How well does the company substantiate its claims?': 'Substantiation is uneven: technical claims are well-supported, but marketing claims about outcomes lack methodological transparency and independent verification.',
-    'Which claims are strongest?': 'Claims related to technical capability and security compliance are the most strongly evidenced, with certifications and documentation to support them.',
-    'Which important claims lack evidence?': 'Claims about customer outcomes, market leadership, and competitive advantages are the least substantiated relative to their importance.',
-    'Where are the biggest gaps?': 'The largest gaps are between marketing claims about customer outcomes and the actual evidence provided. This is a material weakness.',
-    'Where might there be opportunities?': 'Several emerging need clusters are unaddressed by current content and product positioning, representing potential adjacency opportunities.',
-    'What should we investigate next?': 'The most promising direction is validating whether the identified gaps represent actual market demand or are strategic distractions.'
-  };
-  return conclusions[question.q] || 'Evidence suggests a coherent but incompletely substantiated picture. Several key claims require additional verification.';
-}
-
-function getDirectlyObserved(question) {
-  var texts = [
-    'The site directly states its products, pricing, and customer segments. Technical documentation provides detailed feature descriptions and implementation guidance.',
-    'The company explicitly describes its target industries, use cases, and customer success stories. Case studies include named clients and specific outcomes.',
-    'The company publishes pricing, product comparisons, and feature lists. Security certifications and compliance documentation are publicly available.',
-    'Brand messaging and visual identity are consistently applied across pages. The tagline and value propositions are clearly articulated.' 
-  ];
-  return texts[Math.floor(Math.random() * texts.length)];
-}
-
-function getInferred(question) {
-  var texts = [
-    'The absence of certain competitor comparisons suggests the company avoids direct head-to-head positioning. The pricing model implies enterprise focus despite listed starter tiers.',
-    'The content strategy prioritises technical audiences over business decision-makers, suggesting the product requires technical evaluation before purchase.',
-    'The depth of documentation on certain features vs. surface-level treatment of others indicates which product areas are most mature and which are still developing.',
-    'The tone, vocabulary level, and design choices collectively imply a premium brand targeting sophisticated buyers who value reliability over innovation.'
-  ];
-  return texts[Math.floor(Math.random() * texts.length)];
-}
-
-function getUncertain(question) {
-  var texts = [
-    'It is unclear whether the company\'s market size claims are independently verifiable. The gap between stated pricing and actual customer spend is not quantified. Customer retention rates and churn metrics are not disclosed.',
-    'Several important claims about competitive positioning lack independent verification. The actual customer demographics may differ from stated target segments. It is uncertain whether the company\'s differentiators are truly distinctive.',
-    'The methodology behind statistical claims is not transparent, making it difficult to verify accuracy. Third-party validation for key assertions is absent. The recency of supporting evidence varies significantly across pages.',
-    'The sustainability of the company\'s positioning advantage cannot be determined from web evidence alone. Competitor responses and market share data would provide essential context that is not available.'
-  ];
-  return texts[Math.floor(Math.random() * texts.length)];
-}
-
-function getImplications(question) {
-  var texts = [
-    'The company should invest in substantiating key marketing claims with transparent evidence. The identified gaps in evidence could become competitive vulnerabilities if customers or regulators scrutinise claims more deeply.',
-    'The positioning evidence suggests an opportunity to sharpen differentiation by investing in the areas where evidence already exists. The gaps in substantiation may affect trust with analytically-minded buyers.',
-    'If the evidence gaps are not addressed, the company risks losing credibility with informed buyers. Conversely, closing these gaps could strengthen premium positioning and justify higher pricing.',
-    'The moderate confidence level suggests further investigation is warranted before making strategic decisions based on this analysis. Direct customer research would complement the web evidence significantly.'
-  ];
-  return texts[Math.floor(Math.random() * texts.length)];
-}
-
 /* ===== EVIDENCE MODAL ===== */
 function openEvidence(idx) {
-  var e = evidenceItems[idx];
+  var e = window.evidenceItems && window.evidenceItems[idx];
   if (!e) return;
   document.getElementById('modalTitle').textContent = e.signal;
   document.getElementById('modalUrl').innerHTML = 'Source: <a href="' + (assessedPages[0] ? assessedPages[0].url : '#') + '" target="_blank">' + e.source + '</a>';
