@@ -885,8 +885,17 @@ def run_analysis(question_id, pages):
     # Synthesize assessment
     assessment = synthesize_assessment(decision_q, jev_result, pages)
 
+    # Build question text map for rich display
+    question_text_map = {}
+    for q in atomic_questions:
+        question_text_map[q["id"]] = {
+            "text": q["instructions"],
+            "why": q.get("why_it_matters", ""),
+        }
+
     return {
         "assessment": assessment,
+        "questions": question_text_map,
         "meta": {
             "decision_question_id": question_id,
             "atomic_questions_count": len(atomic_questions),

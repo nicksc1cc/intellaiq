@@ -603,15 +603,19 @@ function renderAssessment(question, assessment) {
     '<div class="tooltip">Confidence is a composite of: evidence strength ratio (' + evStrength.strong_signals + '/' + evStrength.total_signals + ' strong), source diversity (' + pagesCount + ' pages), and signal consistency (std dev: ' + (evStrength.std_deviation || 'N/A') + '). Lower confidence does not mean the assessment is wrong — it means the available evidence supports it less strongly.</div>' +
   '</div>';
 
-  // Build evidence list from raw_results
+  // Build evidence list from raw_results using question text map
   var rawResults = assessment.raw_results || {};
+  var questionMap = assessment.questions || {};
   var resultKeys = Object.keys(rawResults);
   var evidenceItems = resultKeys.map(function(qid, i){
     var val = rawResults[qid];
     var score = typeof val === 'object' && val !== null ? (val.noul !== undefined ? val.noul : val.answer || 0.5) : (typeof val === 'number' ? val : 0.5);
     var strength = score >= 0.85 ? 'VERY STRONG' : (score >= 0.65 ? 'STRONG' : (score >= 0.45 ? 'MODERATE' : (score >= 0.25 ? 'WEAK' : 'UNKNOWN')));
-    var label = qid.replace(/_/g, ' ').replace(/\\b\\w/g, function(c){return c.toUpperCase();});
-    return { text: label + ' — score ' + score.toFixed(2), source: 'JEV analysis', strength: strength, signal: label, score: score, qid: qid };
+    var qInfo = questionMap[qid] || {};
+    // Use actual question text if available, otherwise derive from ID
+    var displayText = qInfo.text || qid.replace(/_/g, ' ').replace(/\\b\\w/g, function(c){return c.toUpperCase();});
+    var displayWhy = qInfo.why || '';
+    return { text: displayText, source: 'JEV analysis', strength: strength, signal: displayText, score: score, qid: qid, why: displayWhy };
   });
   window.evidenceItems = evidenceItems;
 
@@ -628,8 +632,10 @@ function renderAssessment(question, assessment) {
   if (topSignals.length > 0) {
     assessmentHtml += '<div class="r-section"><div class="rh">Strongest signals</div><ul class="evidence-list">';
     topSignals.forEach(function(s, i){
+      var qInfo = assessment.questions && assessment.questions[s.id] || {};
+      var displayText = qInfo.text || s.id.replace(/_/g, ' ');
       var strClass = s.strength.label === 'VERY STRONG' || s.strength.label === 'STRONG' ? 'strong' : 'mod';
-      assessmentHtml += '<li><span class="num">' + (i+1) + '</span><div class="ed"><div class="et">' + s.id.replace(/_/g, ' ') + '</div><div class="es">' + s.strength.description + '</div></div><span class="e-str ' + strClass + '">' + s.strength.label + '</span></li>';
+      assessmentHtml += '<li><span class="num">' + (i+1) + '</span><div class="ed"><div class="et">' + displayText + '</div><div class="es">' + s.strength.description + '</div></div><span class="e-str ' + strClass + '">' + s.strength.label + '</span></li>';
     });
     assessmentHtml += '</ul></div>';
   }
@@ -639,8 +645,10 @@ function renderAssessment(question, assessment) {
   if (bottomSignals.length > 0) {
     assessmentHtml += '<div class="r-section"><div class="rh">Weakest signals</div><ul class="evidence-list">';
     bottomSignals.forEach(function(s, i){
+      var qInfo = assessment.questions && assessment.questions[s.id] || {};
+      var displayText = qInfo.text || s.id.replace(/_/g, ' ');
       var strClass = 'weak';
-      assessmentHtml += '<li><span class="num">' + (i+1) + '</span><div class="ed"><div class="et">' + s.id.replace(/_/g, ' ') + '</div><div class="es">' + s.strength.description + '</div></div><span class="e-str ' + strClass + '">' + s.strength.label + '</span></li>';
+      assessmentHtml += '<li><span class="num">' + (i+1) + '</span><div class="ed"><div class="et">' + displayText + '</div><div class="es">' + s.strength.description + '</div></div><span class="e-str ' + strClass + '">' + s.strength.label + '</span></li>';
     });
     assessmentHtml += '</ul></div>';
   }
@@ -676,7 +684,7 @@ function renderAssessment(question, assessment) {
   assessmentHtml += '<div class="r-section"><div class="rh">Evidence summary</div><table class="evidence-table"><tr><th>Signal</th><th>Assessment</th><th>Source</th><th>Strength</th></tr>';
   evidenceItems.forEach(function(e,i){
     var tagClass = e.strength === 'VERY STRONG' || e.strength === 'STRONG' ? 's' : (e.strength === 'MODERATE' ? 'm' : 'w');
-    assessmentHtml += '<tr onclick="openEvidence(' + i + ')" style="cursor:pointer"><td style="white-space:nowrap;min-width:80px;max-width:120px;overflow:hidden;text-overflow:ellipsis">' + e.signal + '</td><td style="max-width:240px">' + e.text + '</td><td><span class="src">JEV analysis</span></td><td><span class="tag ' + tagClass + '">' + e.strength + '</span></td></tr>';
+    assessmentHtml += '<tr onclick="openEvidence(' + i + ')" style="cursor:pointer"><td style="white-space:nowrap;min-width:80px;max-width:120px;overflow:hidden;text-overflow:ellipsis">' + e.signal.substring(0, 60) + '</td><td style="max-width:240px">' + e.text.substring(0, 80) + '</td><td><span class="src">JEV analysis</span></td><td><span class="tag ' + tagClass + '">' + e.strength + '</span></td></tr>';
   });
   assessmentHtml += '</table></div>';
 
@@ -738,9 +746,9 @@ function openEvidence(idx) {
   var e = window.evidenceItems && window.evidenceItems[idx];
   if (!e) return;
   document.getElementById('modalTitle').textContent = e.signal;
-  document.getElementById('modalUrl').innerHTML = 'Source: <a href="' + (assessedPages[0] ? assessedPages[0].url : '#') + '" target="_blank">' + e.source + '</a>';
-  document.getElementById('modalPassage').textContent = e.text;
-  document.getElementById('modalStrength').textContent = e.strength;
+  document.getElementById('modalUrl').innerHTML = 'Source: <span style="color:var(--sub)">JEV atomic question analysis</span>';
+  document.getElementById('modalPassage').innerHTML = '<p style="margin-bottom:8px">' + e.text + '</p>' + (e.why ? '<p style="font-size:11px;color:var(--mute);padding-top:8px;border-top:1px solid var(--line)"><strong>Why this matters:</strong> ' + e.why + '</p>' : '');
+  document.getElementById('modalStrength').textContent = e.strength + ' (score: ' + e.score.toFixed(2) + ')';
   document.getElementById('modalOverlay').classList.add('show');
   document.getElementById('evidenceModal').classList.add('show');
 }
