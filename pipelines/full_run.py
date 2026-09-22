@@ -57,7 +57,7 @@ class IntelligencePipeline:
     ):
         self.site_root = Path(site_root)
         self.typesafe_api_key = typesafe_api_key or os.environ.get("TYPESAFE_API_KEY")
-        self.openai_api_key = openai_api_key or os.environ.get("OPENAI_API_KEY")
+        self.openai_api_key = openai_api_key or os.environ.get("OPENROUTER_API_KEY") or os.environ.get("OPENAI_API_KEY")
         self.progress_callback = progress_callback
 
         self.ingestion = PageIngestion(self.site_root)

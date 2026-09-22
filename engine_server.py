@@ -30,17 +30,14 @@ from bs4 import BeautifulSoup
 # Configuration
 # ──────────────────────────────────────────────
 
-SERVER_PORT = int(os.environ.get("ENGINE_PORT", "8338"))
+SERVER_PORT = int(os.environ.get("PORT", os.environ.get("ENGINE_PORT", "8338")))
 UI_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "ui")
 ENGINE_HTML = os.path.join(UI_DIR, "engine.html")
 
-# JEV adapter paths
-PYTHON_BIN = "/Volumes/My Passport/sloptotal/venv/bin/python"
-JEV_ADAPTER = os.path.join(
-    os.path.dirname(os.path.abspath(__file__)),
-    "..", "stickyrice", "scripts", "typesafe_jev_adapter.py"
-)
-JEV_ADAPTER = os.path.abspath(JEV_ADAPTER)
+# JEV adapter paths (use sys.executable for cross-platform)
+PYTHON_BIN = sys.executable
+ADAPTER_DIR = os.path.dirname(os.path.abspath(__file__))
+JEV_ADAPTER = os.path.join(ADAPTER_DIR, "typesafe_jev_adapter.py")
 
 # Priority scoring for URLs
 URL_PRIORITY_KEYWORDS = {

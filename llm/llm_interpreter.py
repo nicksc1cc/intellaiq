@@ -31,15 +31,22 @@ class InterpretationResult:
 
 
 class LLMInterpreter:
-    def __init__(self, api_key: str | None = None, model: str = "gpt-4o-mini"):
-        self.api_key = api_key or os.environ.get("OPENAI_API_KEY")
-        self.model = model
+    def __init__(self, api_key: str | None = None, model: str | None = None):
+        # OpenRouter exposes an OpenAI-compatible API. Prefer its credentials when
+        # present, while preserving direct OpenAI compatibility for existing runs.
+        self.openrouter = bool(os.environ.get("OPENROUTER_API_KEY"))
+        self.api_key = api_key or os.environ.get("OPENROUTER_API_KEY") or os.environ.get("OPENAI_API_KEY")
+        self.model = model or os.environ.get("OPENROUTER_MODEL") or os.environ.get("OPENAI_MODEL") or "openai/gpt-4o-mini"
         self.client = None
 
         if self.api_key:
             try:
                 from openai import OpenAI
-                self.client = OpenAI(api_key=self.api_key)
+                base_url = os.environ.get("OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1") if self.openrouter else os.environ.get("OPENAI_BASE_URL")
+                client_kwargs = {"api_key": self.api_key}
+                if base_url:
+                    client_kwargs["base_url"] = base_url
+                self.client = OpenAI(**client_kwargs)
             except ImportError:
                 pass
 
@@ -422,5 +429,5 @@ POSSIBLE ACTIONS:
 4. Connect performance data sources for quality/performance analysis"""
 
 
-def create_interpreter(api_key: str | None = None, model: str = "gpt-4o-mini") -> LLMInterpreter:
+def create_interpreter(api_key: str | None = None, model: str | None = None) -> LLMInterpreter:
     return LLMInterpreter(api_key=api_key, model=model)

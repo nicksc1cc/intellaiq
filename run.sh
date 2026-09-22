@@ -13,23 +13,38 @@ echo "  Manual run: $INTELLIGENCE_DIR/run.sh"
 echo "============================================"
 echo ""
 
-# Check for API keys
-if [ -z "$TYPESAFE_API_KEY" ]; then
+# Load Hermes/OpenRouter credentials when the project is run outside a Hermes process.
+if [ -n "${HERMES_HOME:-}" ] && [ -f "$HERMES_HOME/.env" ]; then
+    set -a
+    # shellcheck disable=SC1090
+    source "$HERMES_HOME/.env"
+    set +a
+fi
+
+# Load project .env if present
+if [ -f "$INTELLIGENCE_DIR/.env" ]; then
+    echo "Loading .env..."
+    set -a
+    # shellcheck disable=SC2046
+    source "$INTELLIGENCE_DIR/.env"
+    set +a
+fi
+
+if [ -z "${TYPESAFE_API_KEY:-}" ]; then
     echo "⚠️  TYPESAFE_API_KEY not set — using fallback evaluation"
     echo "   Set TYPESAFE_API_KEY for real Jev atomic judgements"
     echo ""
 fi
 
-if [ -z "$OPENAI_API_KEY" ]; then
-    echo "⚠️  OPENAI_API_KEY not set — LLM interpretation disabled"
-    echo "   Set OPENAI_API_KEY for strategic interpretation layer"
+if [ -z "${OPENROUTER_API_KEY:-}" ] && [ -z "${OPENAI_API_KEY:-}" ]; then
+    echo "⚠️  No OpenRouter/OpenAI key set — LLM interpretation disabled"
+    echo "   OpenRouter is supported via OPENROUTER_API_KEY"
     echo ""
 fi
 
-# Load .env if present
-if [ -f "$INTELLIGENCE_DIR/.env" ]; then
-    echo "Loading .env..."
-    export $(grep -v '^#' "$INTELLIGENCE_DIR/.env" | xargs)
+if [ -n "${OPENROUTER_API_KEY:-}" ]; then
+    export OPENROUTER_BASE_URL="${OPENROUTER_BASE_URL:-https://openrouter.ai/api/v1}"
+    export OPENROUTER_MODEL="${OPENROUTER_MODEL:-deepseek/deepseek-v4-flash}"
 fi
 
 # Run the pipeline
