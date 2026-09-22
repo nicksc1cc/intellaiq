@@ -196,7 +196,16 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
 .ft{padding:24px 0 48px;border-top:1px solid var(--line);display:flex;justify-content:space-between;font-size:11px;color:var(--mute)}
 .ft a{color:var(--mute);text-decoration:none}.ft a:hover{color:var(--text)}
 
-/* Utility */
+/* Question feed */
+.qfeed{margin:16px 0}
+.qfeed-item{display:flex;align-items:flex-start;gap:10px;padding:6px 0;opacity:0;transform:translateX(-8px);transition:opacity .35s var(--ease),transform .35s var(--ease)}
+.qfeed-item.in{opacity:1;transform:translateX(0)}
+.qfeed-item .qd{width:10px;height:10px;border-radius:50%;border:2px solid var(--line);flex-shrink:0;margin-top:3px;transition:all .3s}
+.qfeed-item .qd.ask{border-color:var(--signal);background:var(--signal);opacity:.5}
+.qfeed-item .qd.done{border-color:var(--match);background:var(--match)}
+.qfeed-item .qt{font-size:13px;color:var(--sub);letter-spacing:-.1px;line-height:1.4;flex:1}
+.qfeed-item .qt .sc{display:inline-block;font-size:10px;font-family:var(--fm);color:var(--signal);margin-left:6px;font-weight:500}
+.qfeed-item .qt .sc.done{color:var(--match)}
 .hidden{display:none!important}
 </style>
 </head>
@@ -479,18 +488,62 @@ function startAnalysis(question) {
   showState('state-analysis');
   document.getElementById('analysisQuestion').textContent = question.q;
 
-  // Set up analysis dims based on question category
-  var dims = {
-    BUSINESS: ['Revenue model','Value proposition','Customer segments','Market sizing','Competitive landscape','Distribution channels','Pricing strategy','Product roadmap'],
-    POSITIONING: ['Brand narrative','Differentiators','Target perception','Market frame','Messaging consistency','Visual identity','Tone of voice','Competitive positioning'],
-    EVIDENCE: ['Claim verification','Source quality','Data currency','Evidence depth','Authority signals','Citation density','Factual accuracy','Logical consistency'],
-    OPPORTUNITY: ['Market gaps','Customer pain','Competitor weakness','Demand signals','Innovation headroom','Underserved needs','Category shifts','Adjacent opportunities']
+  // Generate atomic question previews matching backend's question generation
+  var questionTemplates = {
+    BUSINESS: [
+      'Does the page explicitly state what their core products are?',
+      'Is there direct evidence supporting their revenue model?',
+      'Does the page provide specific details about their offerings?',
+      'Is their target market described with clarity?',
+      'Would a reader understand what they sell from the page alone?',
+      'Is the commercial proposition consistent across the site?',
+      'Are there contradictions in how their value is presented?',
+      'Are the claims specific rather than generic?',
+      'Can a reasonable inference be drawn about their business model?',
+      'Does the page provide quantitative support for their claims?'
+    ],
+    POSITIONING: [
+      'Does the page explicitly state their market category?',
+      'Is there direct evidence supporting their positioning claim?',
+      'Does the page provide specific details about their value proposition?',
+      'Is their competitive frame described with clarity?',
+      'Would a reader understand their positioning from the page alone?',
+      'Is the positioning consistent across the site?',
+      'Are there contradictions in how their position is presented?',
+      'Are their claims specific rather than generic?',
+      'Can a reasonable inference be drawn about their positioning?',
+      'Does the page provide verifiable support for their market claim?'
+    ],
+    EVIDENCE: [
+      'Does the page provide direct evidence for their key claims?',
+      'Is customer proof explicitly shown with outcomes?',
+      'Are third-party validations referenced?',
+      'Are case studies presented with sufficient detail?',
+      'Would a sceptical reader find the evidence convincing?',
+      'Is the evidence quality consistent across pages?',
+      'Are there contradictions in the evidence presented?',
+      'Are the evidence claims specific rather than general?',
+      'Can a reasonable inference be drawn from available evidence?',
+      'Does the page provide independently verifiable support?'
+    ],
+    OPPORTUNITY: [
+      'Is there an observable gap in the current offering?',
+      'Is a customer need implied but not addressed?',
+      'Does competitive positioning leave whitespace?',
+      'Is there a growth angle not fully exploited?',
+      'Would a reader identify an unmet need from the page?',
+      'Are there inconsistencies that suggest opportunity?',
+      'Do different pages suggest different strategic directions?',
+      'Is the opportunity claim specific or general?',
+      'Can a reasonable opportunity be inferred from gaps?',
+      'Is there evidence supporting the opportunity?'
+    ]
   };
-  var selectedDims = dims[question.cat] || dims.BUSINESS;
+  var questions = questionTemplates[question.cat] || questionTemplates.BUSINESS;
 
   var steps = document.querySelectorAll('.analysis-step');
   var dimText = steps[0].querySelector('.dim');
-  dimText.textContent = selectedDims.length + ' analytical dimensions';
+  dimText.textContent = questions.length + ' atomic questions';
 
   // Reset all steps
   steps.forEach(function(s){
@@ -499,7 +552,18 @@ function startAnalysis(question) {
     s.style.transitionDelay = '0s';
   });
 
-  // Animate in
+  // Add question feed container after step 1 / before step 2 area
+  var seq = document.getElementById('analysisSeq');
+  var feedDiv = document.getElementById('qfeed');
+  if (!feedDiv) {
+    feedDiv = document.createElement('div');
+    feedDiv.id = 'qfeed';
+    feedDiv.className = 'qfeed';
+    seq.parentNode.insertBefore(feedDiv, seq.nextSibling);
+  }
+  feedDiv.innerHTML = '';
+
+  // Animate step 1 in
   setTimeout(function(){
     steps.forEach(function(s,i){
       setTimeout(function(){ s.classList.add('in'); }, i * 180);
@@ -508,18 +572,15 @@ function startAnalysis(question) {
 
   var assessmentEl = document.getElementById('assessmentAppear');
   assessmentEl.classList.remove('in');
-  assessmentEl.style.display = 'block';
+  assessmentEl.style.display = 'none';
+  if (document.getElementById('qfeed')) document.getElementById('qfeed').style.display = 'block';
 
-  // Build pages payload (map content -> clean_text for backend)
+  // Build pages payload
   var pagesPayload = (assessedPages || []).map(function(p){
-    return {
-      url: p.url,
-      title: p.title,
-      clean_text: p.content || p.clean_text || ''
-    };
+    return { url: p.url, title: p.title, clean_text: p.content || p.clean_text || '' };
   });
 
-  // Call API in parallel with animation
+  // Call API
   var questionId = QUESTION_IDS[question.q] || question.q.toLowerCase().replace(/[^a-z0-9]+/g,'_');
   var apiPromise = fetch('/api/analyze', {
     method: 'POST',
@@ -530,50 +591,68 @@ function startAnalysis(question) {
     return resp.json();
   });
 
-  // Step 1: Decomposing - show dimensions
-  setTimeout(function(){
-    var s1 = steps[0]; s1.querySelector('.av').innerHTML = '<span style="font-size:10px;color:var(--sub)">' + selectedDims.slice(0,4).join(' · ') + '</span>';
-  }, 400);
-
-  // Step 1 done, step 2 active
+  // Step 1 done quickly
   setTimeout(function(){
     steps[0].querySelector('.av').innerHTML = '<span style="color:var(--match)">✓</span>';
     steps[1].classList.add('in');
     steps[1].querySelector('.av').innerHTML = '<span class="dots"><span></span><span></span><span></span></span>';
-  }, 1000);
+  }, 600);
 
-  // Step 2 done, step 3 active
+  // Show atomic questions one by one (staggered)
+  var questionItems = [];
+  questions.forEach(function(q, i){
+    setTimeout(function(){
+      var item = document.createElement('div');
+      item.className = 'qfeed-item';
+      item.innerHTML = '<div class="qd ask"></div><div class="qt"><span>' + q + '</span></div>';
+      feedDiv.appendChild(item);
+      setTimeout(function(){ item.classList.add('in'); }, 30);
+      questionItems.push(item);
+    }, 300 + i * 250);
+  });
+
+  // After all questions shown, mark step 1-2 done and step 3 active
   setTimeout(function(){
-    steps[1].querySelector('.av').innerHTML = '<span style="color:var(--match)">✓</span>';
+    steps[1].querySelector('.av').innerHTML = '<span style="color:var(--match)">✓ ' + questions.length + ' questions</span>';
     steps[2].classList.add('in');
     steps[2].querySelector('.av').innerHTML = '<span class="dots"><span></span><span></span><span></span></span>';
-  }, 2000);
+  }, 300 + questions.length * 250 + 300);
 
   // Step 3 done, step 4 active
   setTimeout(function(){
     steps[2].querySelector('.av').innerHTML = '<span style="color:var(--match)">✓</span>';
     steps[3].classList.add('in');
     steps[3].querySelector('.av').innerHTML = '<span class="dots"><span></span><span></span><span></span></span>';
-  }, 2800);
+  }, 300 + questions.length * 250 + 1200);
 
-  // Wait for API response, then render
+  // Wait for API, then render
   apiPromise.then(function(data){
     window.analysisResult = data.assessment || data;
-    // Complete step 4
     steps[3].querySelector('.av').innerHTML = '<span style="color:var(--match)">✓ Complete</span>';
+
+    // Mark all question dots as done
+    questionItems.forEach(function(item, i){
+      var dot = item.querySelector('.qd');
+      if (dot) { dot.classList.remove('ask'); dot.classList.add('done'); }
+    });
+
     renderAssessment(question, window.analysisResult);
-    setTimeout(function(){
-      assessmentEl.classList.add('in');
-    }, 300);
+    if (document.getElementById('qfeed')) document.getElementById('qfeed').style.display = 'none';
+    assessmentEl.style.display = 'block';
+    setTimeout(function(){ assessmentEl.classList.add('in'); }, 100);
   }).catch(function(err){
     console.error('Analysis API error:', err);
     steps[3].querySelector('.av').innerHTML = '<span style="color:var(--crit)">✗ Failed</span>';
-    var assessmentHtml = '<div class="r-section"><div class="rh">Error</div><h3>Analysis failed</h3><p>Could not complete the analysis. The backend may be unavailable. Please try again.</p></div>';
-    document.getElementById('assessmentReport').innerHTML = assessmentHtml;
-    document.getElementById('assessmentInner').innerHTML = assessmentHtml;
-    setTimeout(function(){
-      assessmentEl.classList.add('in');
-    }, 300);
+    questionItems.forEach(function(item){
+      var dot = item.querySelector('.qd');
+      if (dot) dot.style.borderColor = 'var(--crit)';
+    });
+    var html = '<div class="r-section"><div class="rh">Error</div><h3>Analysis failed</h3><p>Could not complete the analysis. Please try again.</p></div>';
+    document.getElementById('assessmentReport').innerHTML = html;
+    document.getElementById('assessmentInner').innerHTML = html;
+    if (document.getElementById('qfeed')) document.getElementById('qfeed').style.display = 'none';
+    assessmentEl.style.display = 'block';
+    setTimeout(function(){ assessmentEl.classList.add('in'); }, 100);
   });
 }
 
