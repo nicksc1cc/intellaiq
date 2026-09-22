@@ -715,13 +715,57 @@ function renderAssessment(question, assessment) {
   });
   window.evidenceItems = evidenceItems;
 
-  // Evidence strength breakdown
-  assessmentHtml += '<div class="r-section"><div class="rh">Evidence strength breakdown</div>';
-  assessmentHtml += '<div class="inferred-grid"><div class="c"><div class="cl">Strong signals</div><div class="cv" style="font-size:24px;color:var(--signal)">' + (evStrength.strong_signals || 0) + '/' + (evStrength.total_signals || 0) + '</div></div>';
-  assessmentHtml += '<div class="c"><div class="cl">Weak signals</div><div class="cv" style="font-size:24px;color:var(--sub)">' + (evStrength.weak_signals || 0) + '/' + (evStrength.total_signals || 0) + '</div></div>';
-  assessmentHtml += '<div class="c"><div class="cl">Mean score</div><div class="cv" style="font-size:24px;color:var(--signal)">' + (evStrength.mean_score || '—') + '</div></div>';
-  assessmentHtml += '<div class="c"><div class="cl">Std deviation</div><div class="cv" style="font-size:24px;color:var(--sub)">' + (evStrength.std_deviation || '—') + '</div></div>';
-  assessmentHtml += '</div></div>';
+  // Evidence strength breakdown - Tufte-style visual
+  var totalSig = evStrength.total_signals || 0;
+  var strongPct = totalSig > 0 ? Math.round((evStrength.strong_signals || 0) / totalSig * 100) : 0;
+  var weakPct = totalSig > 0 ? Math.round((evStrength.weak_signals || 0) / totalSig * 100) : 0;
+  var modPct = 100 - strongPct - weakPct;
+
+  assessmentHtml += '<div class="r-section"><div class="rh">Evidence strength</div>' +
+    '<div style="display:flex;gap:4px;height:6px;margin:0 0 16px;border-radius:1px;overflow:hidden">' +
+    '<div style="flex:' + strongPct + ';background:var(--signal);min-width:' + (strongPct > 0 ? '2px' : '0') + '"></div>' +
+    '<div style="flex:' + modPct + ';background:var(--warn);opacity:.5;min-width:' + (modPct > 0 ? '2px' : '0') + '"></div>' +
+    '<div style="flex:' + weakPct + ';background:var(--mute);opacity:.3;min-width:' + (weakPct > 0 ? '2px' : '0') + '"></div>' +
+    '</div>' +
+    '<div style="display:flex;gap:24px;font-size:10px;color:var(--sub);font-family:var(--fm)">' +
+    '<span><span style="color:var(--signal)">▬</span> Strong ' + (evStrength.strong_signals || 0) + '/' + totalSig + '</span>' +
+    '<span><span style="color:var(--warn);opacity:.5">▬</span> Moderate ' + (totalSig - (evStrength.strong_signals||0) - (evStrength.weak_signals||0)) + '/' + totalSig + '</span>' +
+    '<span><span style="color:var(--mute);opacity:.3">▬</span> Weak ' + (evStrength.weak_signals || 0) + '/' + totalSig + '</span>' +
+    '</div>' +
+    '<div style="margin-top:12px;display:flex;gap:24px;font-size:10px;color:var(--mute);font-family:var(--fm)">' +
+    '<span>Mean: <span style="color:var(--signal)">' + (evStrength.mean_score || '—') + '</span></span>' +
+    '<span>Std dev: ' + (evStrength.std_deviation || '—') + '</span>' +
+    '</div></div>';
+
+  // Dot plot of all atomic question scores
+  var rawResults = assessment.raw_results || {};
+  var resultList = Object.keys(rawResults).map(function(qid){
+    var val = rawResults[qid];
+    var score = typeof val === 'object' && val !== null ? (val.noul !== undefined ? val.noul : val.answer || 0.5) : (typeof val === 'number' ? val : 0.5);
+    var qInfo = (assessment.questions || {})[qid] || {};
+    return { id: qid, score: score, text: qInfo.text || qid.replace(/_/g, ' ') };
+  });
+  resultList.sort(function(a,b){ return a.score - b.score; });
+
+  assessmentHtml += '<div class="r-section"><div class="rh">Question scores</div>' +
+    '<div style="position:relative;height:' + Math.max(120, resultList.length * 28) + 'px;margin:8px 0 0">' +
+    // Y-axis labels (question text) + dots
+    resultList.map(function(q, i){
+      var y = i * 28 + 14;
+      var xPos = 60 + (q.score * 320);
+      var scoreColor = q.score >= 0.65 ? 'var(--signal)' : (q.score >= 0.4 ? 'var(--warn)' : 'var(--crit)');
+      return '<div style="position:absolute;left:0;top:' + (y-9) + 'px;font-size:10px;color:var(--mute);width:56px;text-align:right;font-family:var(--fm);padding-right:8px">' + q.score.toFixed(2) + '</div>' +
+        '<div style="position:absolute;left:60px;top:' + y + 'px;right:40px;height:1px;background:var(--line)"></div>' +
+        '<div style="position:absolute;left:' + xPos + 'px;top:' + (y-4) + 'px;width:8px;height:8px;border-radius:50%;background:' + scoreColor + ';opacity:.7;border:none"></div>' +
+        '<div style="position:absolute;left:390px;top:' + (y-8) + 'px;font-size:10px;color:var(--sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:300px">' + q.text.substring(0, 60) + '</div>';
+    }).join('') +
+    // Reference lines
+    '<div style="position:absolute;left:60px;top:0;bottom:0;width:1px;background:var(--line);opacity:.5"></div>' +
+    '<div style="position:absolute;left:268px;top:0;bottom:0;width:1px;border-left:1px dashed var(--line);opacity:.3"></div>' +
+    '<div style="position:absolute;left:60px;bottom:-18px;font-size:8px;color:var(--mute);font-family:var(--fm)">0</div>' +
+    '<div style="position:absolute;left:268px;bottom:-18px;font-size:8px;color:var(--mute);font-family:var(--fm)">0.5</div>' +
+    '<div style="position:absolute;left:380px;bottom:-18px;font-size:8px;color:var(--mute);font-family:var(--fm)">1.0</div>' +
+    '</div></div>';
 
   // Top signals (strongest evidence)
   var topSignals = assessment.top_signals || [];
