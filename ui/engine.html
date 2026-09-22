@@ -254,7 +254,7 @@ body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-
       <div class="page-list" id="pageList"></div>
     </div>
     <div id="scanCta" class="scan-cta" style="display:none">
-      <button onclick="showQuestions()">Continue to interrogation →</button>
+      <button id="scanContinueBtn">Continue to interrogation →</button>
     </div>
   </div>
 </div>
@@ -324,6 +324,7 @@ var assessedPages = [];
 var evidenceItems = [];
 
 function showState(id) {
+  closeModal();
   ['state-input','state-scanning','state-questions','state-analysis','state-assessment'].forEach(function(s){
     document.getElementById(s).style.display = (s === id) ? 'flex' : 'none';
   });
@@ -331,6 +332,12 @@ function showState(id) {
   var ft = document.getElementById('engineFooter');
   ft.style.display = (currentState === 'input') ? 'none' : 'block';
 }
+
+// Wire up continue button (reliable addEventListener, not inline onclick)
+document.addEventListener('DOMContentLoaded', function() {
+  var btn = document.getElementById('scanContinueBtn');
+  if (btn) btn.addEventListener('click', showQuestions);
+});
 
 /* ===== STATE 1 → 2: SCAN ===== */
 async function startScan() {
