@@ -207,6 +207,38 @@ DECISION_QUESTIONS = [
             "compare, or customers to interview. Prioritise by decision impact."
         ),
     },
+    # ── PRODUCT ──
+    {
+        "id": "product_work",
+        "category": "product",
+        "analysis_type": "product",
+        "question": "How does the product actually work?",
+        "instructions": "Assess how clearly the product or service is described, what features are shown, and whether a visitor can understand what they would receive.",
+    },
+    # ── CUSTOMER ──
+    {
+        "id": "customer_evidence",
+        "category": "customer",
+        "analysis_type": "customer",
+        "question": "Who is this for and what do customers say?",
+        "instructions": "Evaluate how clearly the target customer is defined and whether social proof, testimonials, or case studies support the claims.",
+    },
+    # ── COMPETITIVE ──
+    {
+        "id": "competitive_position",
+        "category": "competitive",
+        "analysis_type": "competitive",
+        "question": "How do they compare to alternatives?",
+        "instructions": "Identify competitive comparisons, differentiation claims, and evidence of market position vs alternatives.",
+    },
+    # ── STRATEGIC ──
+    {
+        "id": "strategic_risks",
+        "category": "strategic",
+        "analysis_type": "strategic",
+        "question": "What are the risks and unanswered questions?",
+        "instructions": "Identify risks, weaknesses, omissions, and strategic concerns a savvy buyer would want answered before committing.",
+    },
 ]
 
 
@@ -308,6 +340,34 @@ def make_atomic_questions(decision_question, page_content):
             ("what to verify externally", "verify need"),
             ("a competitor vulnerability", "competitor weak point"),
             ("a customer insight gap", "insight gap"),
+        ],
+        "product": [
+            ("the product itself", "product clarity"),
+            ("how the product works", "product mechanics"),
+            ("the feature set", "features"),
+            ("the user experience", "ux"),
+            ("product quality signals", "quality"),
+        ],
+        "customer": [
+            ("the customer profile", "customer identity"),
+            ("customer pain points", "pain"),
+            ("customer outcomes", "outcomes"),
+            ("social proof", "social proof"),
+            ("customer fit", "fit"),
+        ],
+        "competitive": [
+            ("who they compete with", "competitors"),
+            ("their competitive advantage", "advantage"),
+            ("their positioning vs alternatives", "positioning"),
+            ("their market share evidence", "market share"),
+            ("their defensibility", "moat"),
+        ],
+        "strategic": [
+            ("their biggest risk", "risk"),
+            ("their strategic weakness", "weakness"),
+            ("what they avoid mentioning", "omission"),
+            ("their strategic direction", "direction"),
+            ("their vulnerability", "vulnerability"),
         ],
     }
     concepts = concepts_map.get(analysis_type, [
