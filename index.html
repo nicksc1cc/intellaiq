@@ -1,0 +1,794 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>IntellaIQ — Unlock decisions hidden in your data.</title><meta name="description" content="IntellaIQ interrogates thousands of signals with thousands of atomic questions, combines the resulting judgements, and surfaces the decisions most likely to have meaningful impact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<style>/* motion tokens */
+:root{--dur-fast:.2s;--dur-med:.5s;--dur-slow:1.2s;--ease:cubic-bezier(.645,.045,.355,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);--bg:#F5F5F3;--panel:#FDFDFD;--text:#1A1A1A;--sub:#4A4A4A;--mute:#888888;--line:rgba(26,26,26,.07);--lines:rgba(26,26,26,.12);--signal:#155E5E;--match:#27A644;--warn:#E88D2A;--crit:#C0392B;--ff:'Space Grotesk',sans-serif;--fm:'JetBrains Mono',monospace}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font:300 15px/1.6 var(--ff);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+.w{max-width:1100px;margin:0 auto;padding:0 24px}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0s!important;transition-duration:0s!important;scroll-behavior:auto}}
+.nav{position:sticky;top:0;z-index:100;background:var(--text);width:100%;transition:background var(--dur-fast) var(--ease)}
+.nav .w{display:flex;align-items:center;justify-content:space-between;height:44px}
+.nv-l{font:600 14px/1 var(--ff);color:#F5F5F3;letter-spacing:-.35px}
+.nv-l em{font-style:normal;color:var(--signal)}
+.nv-m{display:flex;align-items:center;gap:20px;font-size:12px;color:rgba(245,245,243,.5)}
+.nv-m a{color:inherit;text-decoration:none;position:relative;transition:color var(--dur-fast) var(--ease)}.nv-m a:after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:currentColor;transition:width var(--dur-fast) var(--ease)}.nv-m a:hover{color:#F5F5F3}.nv-m a:hover:after{width:100%}
+.nv-b{padding:5px 14px;border:1px solid rgba(245,245,243,.2);border-radius:3px;font-size:11px;font-weight:500;color:#F5F5F3;text-decoration:none;letter-spacing:-.2px;transition:all var(--dur-fast) var(--ease)}.nv-b:hover{background:#F5F5F3;color:#161412}
+@media(max-width:640px){.nv-m{display:none}}
+.hw{background:var(--text);min-height:520px;position:relative;overflow:hidden}
+.hc{position:absolute;top:0;left:0;width:100%;height:100%;z-index:1}
+.hc canvas{width:100%!important;height:100%!important;display:block}
+.hz{position:relative;z-index:2;max-width:1100px;margin:0 auto;padding:88px 24px 72px}
+.hz .eb{font-size:10px;font-weight:500;letter-spacing:.08em;color:rgba(245,245,243,.3);margin:0 0 16px;font-family:var(--fm);text-transform:uppercase}
+.hz h1{color:#F5F5F3;font:400 clamp(34px,5vw,56px)/1.04 var(--ff);letter-spacing:-1.2px;margin:0 0 12px;max-width:680px}
+.hz .hl{display:inline-block;overflow:hidden}.hz .hl span{display:inline-block}
+.hz p{color:rgba(245,245,243,.5);margin:0 0 6px;max-width:520px;font-size:15px;line-height:1.55;letter-spacing:-.15px}
+.hz .b2{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.bt{display:inline-block;padding:9px 20px;font-size:11px;font-weight:500;letter-spacing:-.15px;border-radius:3px;text-decoration:none;transition:all var(--dur-fast) var(--ease);position:relative}
+.bt-p{background:var(--signal);color:#F5F5F3}.bt-p:hover{opacity:.85}
+.bt-s{border:1px solid rgba(245,245,243,.2);color:rgba(245,245,243,.7)}.bt-s:hover{border-color:rgba(245,245,243,.4);color:#F5F5F3}
+@media(max-width:640px){.hw{min-height:400px}.hz{padding:64px 24px 56px}.hc{display:none!important}}
+.reveal{transform:translateY(24px);transition:opacity .7s var(--ease),transform .7s var(--ease)}.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-w{overflow:hidden}.reveal-w>span{display:inline-block;transform:translateY(100%);opacity:0;transition:transform .6s var(--ease),opacity .6s var(--ease)}.reveal-w.in>span{transform:translateY(0);opacity:1}
+.s{padding:72px 0}.s+.s{border-top:1px solid var(--line)}
+.sh h2{font:300 clamp(24px,2.8vw,36px)/1.1 var(--ff);letter-spacing:-.8px;margin:0 0 12px}
+.sh .sl{font-size:9px;font-weight:500;color:var(--mute);letter-spacing:.06em;margin:0 0 4px;font-family:var(--fm);text-transform:uppercase}
+.it{margin:0 0 48px;max-width:580px}
+.it .il{font:300 22px/1.2 var(--ff);letter-spacing:-.5px;color:var(--text);margin:0 0 8px}
+@media(max-width:640px){.s{padding:48px 0}}
+/* typography editorial */
+.typo{min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:80px 0}
+.typo h2{font:300 clamp(28px,4vw,48px)/1.08 var(--ff);letter-spacing:-1px;max-width:700px;margin:0 auto}
+.typo .t{display:block;transform:translateY(30px);transition:opacity .7s var(--ease),transform .7s var(--ease)}.typo .t.in{opacity:1;transform:translateY(0)}
+.typo .t2{transition-delay:.3s}.typo .t3{transition-delay:.6s}
+/* atomic questions */
+.aq{background:var(--panel);border:1px solid var(--lines);border-radius:3px;padding:32px;margin:0 0 24px}
+.aq .h{font-size:9px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 16px;letter-spacing:.06em}
+.aq .qs{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:0 0 20px}
+.aq .qs .q{font-size:13px;color:var(--sub);letter-spacing:-.1px;padding:4px 0;transform:translateX(-8px);transition:opacity .4s var(--ease),transform .4s var(--ease)}.aq .qs .q.in{opacity:1;transform:translateX(0)}
+.aq .qs .q .dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--signal);margin-right:8px;opacity:.6;vertical-align:middle}
+.aq .qs .q .dot2{background:currentColor;opacity:.3}
+.aq .ctr{text-align:center;padding:16px 0 0;border-top:1px solid var(--line)}
+.aq .ctr .num{font:300 64px/1 var(--ff);letter-spacing:-2px;color:var(--signal);margin:0 0 4px}
+.aq .ctr .lb{font-size:9px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);letter-spacing:.06em}
+@media(max-width:640px){.aq .qs{grid-template-columns:1fr}.aq .ctr .num{font-size:48px}}
+/* compression visual */
+.cv{background:var(--panel);border:1px solid var(--lines);border-radius:3px;padding:32px;margin:0 0 24px;text-align:center}
+.cv .h{font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 24px;letter-spacing:.06em}
+.cv .step{margin:6px 0;opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease),transform .5s var(--ease)}.cv .step.in{opacity:1;transform:translateY(0)}
+.cv .step .n{font:300 24px/1 var(--ff);letter-spacing:-.5px;color:var(--mute);transition:color .5s var(--ease)}
+.cv .step .l{font-size:11px;color:var(--sub);letter-spacing:-.1px}
+.cv .step.hl .n{color:var(--signal)}
+.cv .arrow{font-size:14px;color:var(--mute);opacity:.4;margin:2px 0;display:block;opacity:0;transition:opacity .4s var(--ease)}.cv .arrow.in{opacity:.4}
+.cv .reveal{margin-top:20px;padding:20px 0 0;border-top:1px solid var(--line);opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease)}.cv .reveal.in{opacity:1;transform:translateY(0)}
+.cv .reveal .r{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);margin:0 0 8px;letter-spacing:.04em}
+.cv .reveal h3{font:300 24px/1.15 var(--ff);letter-spacing:-.6px;margin:0 0 8px;color:var(--text)}
+.cv .reveal .p{font-size:14px;color:var(--signal);font-weight:500}
+/* judgement layer dark */
+.jg{background:var(--text);color:#F5F5F3;width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw;padding:56px 24px}
+.jg .jgw{max-width:1100px;margin:0 auto}
+.jg .jgw .h{font-size:9px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:rgba(245,245,243,.4);margin:0 0 20px;letter-spacing:.06em}
+.jg .jgw h2{font:300 28px/1.1 var(--ff);letter-spacing:-.6px;margin:0 0 20px;color:#F5F5F3;max-width:500px}
+.jg .jgw .sg{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(245,245,243,.08);border-radius:3px;overflow:hidden;margin:0 0 20px}
+.jg .jgw .sg .c{padding:16px;background:var(--text);opacity:0;transform:translateY(12px);transition:opacity .5s var(--ease),transform .5s var(--ease)}.jg .jgw .sg .c.in{opacity:1;transform:translateY(0)}
+.jg .jgw .sg .c .cl{font-size:7px;font-weight:500;color:rgba(245,245,243,.4);margin:0 0 4px}
+.jg .jgw .sg .c .cv{font-size:12px;color:rgba(245,245,243,.8);letter-spacing:-.1px}
+.jg .jgw .j{text-align:center;padding:16px;border:1px solid rgba(245,245,243,.12);border-radius:3px;margin:0 0 16px;opacity:0;transform:scale(.96);transition:opacity .6s var(--ease),transform .6s var(--ease)}.jg .jgw .j.in{opacity:1;transform:scale(1)}
+.jg .jgw .j .l{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);margin:0 0 8px;letter-spacing:.04em}
+.jg .jgw .j h3{font:300 20px/1.2 var(--ff);letter-spacing:-.4px;color:#F5F5F3;margin:0 0 8px}
+.jg .jgw .j .p{font-size:16px;font-weight:500;color:var(--signal)}
+.dip{display:flex;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:20px 0}
+.dip .c{padding:20px;background:var(--panel);text-align:center;flex:1}
+.dip .c .l{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 4px}
+.dip .c .v{font-size:36px;font-weight:300;letter-spacing:-.8px}
+.dip .c .s{font-size:11px;color:var(--sub);letter-spacing:-.1px}
+.dip .c .v.d{color:var(--signal)}.dip .c .v.w{color:var(--warn)}.dip .c .v.l{color:var(--mute)}
+@media(max-width:640px){.dip .c .v{font-size:28px}}
+.comp{display:flex;align-items:center;gap:4px;margin:20px 0;flex-wrap:wrap;justify-content:center}
+.comp .n{padding:4px 12px;border-radius:2px;font-size:9px;font-weight:500;font-family:var(--fm);letter-spacing:.04em;color:var(--mute);border:1px solid var(--line);transition:all var(--dur-med) var(--ease)}
+.comp .a{color:var(--mute);font-size:11px}
+.comp .s{font-size:14px;font-weight:500;color:var(--signal);font-family:var(--ff)}
+.cvx{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:20px 0}
+.cvx .c{padding:16px 20px;background:var(--panel)}
+.cvx .c .l{font-size:7px;font-weight:500;color:var(--mute);margin:0 0 4px}
+.cvx .dir{display:flex;align-items:center;gap:8px;flex-wrap:wrap;opacity:0;transform:translateX(-8px);transition:opacity .5s var(--ease),transform .5s var(--ease)}.cvx .dir.in{opacity:1;transform:translateX(0)}
+.cvx .dir .arr{font-size:18px;color:var(--mute)}
+.cvx .dir .arr.u{color:var(--match)}.cvx .dir .arr.d{color:var(--crit)}
+.cvx .dir .arr.dd{color:var(--crit);transform:rotate(180deg)}
+.cvx .conclusion{border-top:1px solid var(--line);padding:12px 20px;background:var(--panel);opacity:0;transition:opacity .6s var(--ease)}.cvx .conclusion.in{opacity:1}
+.cvx .conclusion .l{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);margin:0 0 4px;letter-spacing:.04em}
+.cvx .conclusion .v{font-size:13px;color:var(--text);letter-spacing:-.1px}
+.cvx .conclusion .p{font-size:13px;color:var(--signal);margin-top:4px}
+@media(max-width:640px){.cvx{grid-template-columns:1fr}}
+.sp{display:flex;flex-direction:column;gap:2px;margin:20px 0;padding:20px;background:var(--panel);border:1px solid var(--lines);border-radius:3px}
+.sp .r{display:flex;align-items:center;gap:4px;flex-wrap:wrap;font-size:12px;color:var(--sub);letter-spacing:-.1px;padding:4px 0;opacity:0;transition:opacity .4s var(--ease)}.sp .r.in{opacity:1}
+.sp .r .l{font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);min-width:70px}
+.sp .r .arr{color:var(--mute);font-size:14px;margin:0 4px}
+.seq{margin:20px 0;padding:0}
+.seq .st{margin:0 0 2px;padding:12px 16px;border-left:2px solid var(--line);opacity:0;transform:translateX(-8px);transition:opacity .5s var(--ease),transform .5s var(--ease)}.seq .st.in{opacity:1;transform:translateX(0)}
+.seq .st.-a{border-left-color:var(--signal)}
+.seq .st .l{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 2px;letter-spacing:.04em}
+.seq .st .v{font-size:13px;color:var(--text);letter-spacing:-.1px}
+.seq .st .p{font-size:14px;color:var(--signal);font-weight:500;margin-top:4px}
+.pq{margin:20px 0}
+.pq .p{display:flex;align-items:center;gap:12px;padding:12px 16px;margin:0 0 4px;background:var(--panel);border:1px solid var(--line);border-radius:3px;opacity:0;transform:translateY(8px);transition:opacity .4s var(--ease),transform .4s var(--ease)}.pq .p.in{opacity:1;transform:translateY(0)}
+.pq .p .rk{font:300 20px/1 var(--ff);letter-spacing:-.4px;color:var(--mute);min-width:30px}
+.pq .p .d{flex:1}
+.pq .p .d .t{font-size:11px;font-weight:500;color:var(--text);letter-spacing:-.15px}
+.pq .p .d .s{font-size:9px;color:var(--sub);margin-top:2px;letter-spacing:-.1px}
+.pq .p .prob{font:300 20px/1 var(--ff);letter-spacing:-.4px;color:var(--signal)}
+.pq .p .prob.w{color:var(--warn)}.pq .p .prob.l{color:var(--mute)}
+.eo{margin:20px 0;background:var(--panel);border:1px solid var(--lines);border-radius:3px;padding:24px}
+.eo .h{font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 16px;letter-spacing:.06em}
+.eo .b{margin:0 0 12px;opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease),transform .5s var(--ease)}.eo .b.in{opacity:1;transform:translateY(0)}
+.eo .b .l{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 4px;letter-spacing:.04em}
+.eo .b .v{font-size:12px;color:var(--text);letter-spacing:-.1px;margin:0 0 4px}
+.eo .b .bar{height:6px;background:var(--line);border-radius:2px;overflow:hidden}
+.eo .b .bar .f{height:100%;background:var(--mute);border-radius:2px;width:0;transition:width 1s var(--ease)}.eo .b .bar .f.g{background:var(--signal)}
+.eo .gap{text-align:center;padding:12px;border:1px solid var(--signal);border-radius:2px;margin:12px 0;opacity:0;transition:opacity .6s var(--ease)}.eo .gap.in{opacity:1}
+.eo .gap .l{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);margin:0 0 4px;letter-spacing:.04em}
+.eo .gap .v{font-size:12px;color:var(--text);letter-spacing:-.1px}
+.ec{border:1px solid var(--lines);background:var(--panel);border-radius:3px;padding:24px;margin:0 0 16px}
+.ec .fl{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 8px;letter-spacing:.04em}
+.ec h3{font:300 18px/1.2 var(--ff);letter-spacing:-.4px;margin:0 0 12px}
+.ec .ev{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 12px;padding:12px 0;border-top:1px solid var(--line)}
+.ec .ev .e{font-size:11px;color:var(--sub);letter-spacing:-.1px;opacity:0;transition:opacity .4s var(--ease)}.ec .ev .e.in{opacity:1}
+.ec .ev .e .n{font-size:14px;font-weight:500;color:var(--signal)}
+.ec .ftr{display:flex;gap:16px;flex-wrap:wrap;padding:12px 0 0;border-top:1px solid var(--line);font-size:10px;color:var(--mute)}
+.ec .ftr .l{font-family:var(--fm);font-size:7px;text-transform:uppercase;letter-spacing:.04em;color:var(--mute);margin-right:4px}
+.vw{list-style:none;margin:20px 0}
+.vw li{display:flex;align-items:flex-start;gap:16px;padding:16px 0;border-top:1px solid var(--line);opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease),transform .5s var(--ease)}.vw li.in{opacity:1;transform:translateY(0)}
+.vw li:first-child{border:none;padding-top:0}
+.vw li .rk{font:300 18px/1 var(--ff);letter-spacing:-.4px;color:var(--signal);min-width:24px;padding-top:1px}
+.vw li .d .t{font-size:13px;font-weight:500;color:var(--text);letter-spacing:-.15px}
+.vw li .d .s{font-size:11px;color:var(--sub);margin-top:2px;letter-spacing:-.1px}
+.vw li .a{color:var(--mute);font-size:14px;padding-top:6px}.vw li:last-child .a{display:none}
+.psg{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden;margin:20px 0}
+.psg .c{padding:16px;background:var(--panel)}
+.psg .c .l{font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 2px;letter-spacing:.04em}
+.psg .c .v{font-size:11px;color:var(--sub);letter-spacing:-.1px}
+.psg .c.hl{background:var(--signal)}.psg .c.hl .l{color:rgba(245,245,243,.6)}.psg .c.hl .v{color:#F5F5F3}
+@media(max-width:640px){.psg{grid-template-columns:1fr}}
+/* === KEY VISUAL MOMENTS === */
+
+/* Interrogation visual - canvas field with questions orbiting */
+.intv{position:relative;min-height:50vh;padding:80px 0}
+.intv .w{padding:0 24px}
+.intv .intv-h{font:300 24px/1.1 var(--ff);letter-spacing:-.5px;text-align:center;max-width:600px;margin:0 auto 40px}
+.intv .intv-field{position:relative;height:400px;width:100%;max-width:900px;margin:0 auto;overflow:hidden}
+.intv .intv-signal{position:absolute;width:8px;height:8px;border-radius:50%;background:var(--signal);opacity:.6;transition:opacity .3s var(--ease),transform .3s var(--ease)}
+.intv .intv-signal:hover{opacity:1;transform:scale(1.5)}
+.intv .intv-signal .lbl{position:absolute;top:-20px;left:50%;transform:translateX(-50%);font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);white-space:nowrap;opacity:0;transition:opacity .2s}
+.intv .intv-signal:hover .lbl{opacity:1}
+.intv .intv-q{position:absolute;padding:8px 14px;background:rgba(21,94,94,.08);border:1px solid rgba(21,94,94,.15);border-radius:2px;font-size:10px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);white-space:nowrap;transform:scale(.9);transition:opacity .4s var(--ease),transform .4s var(--ease)}
+.intv .intv-q.active{opacity:1;transform:scale(1)}
+@media(max-width:640px){
+  .intv .intv-field{height:300px}
+  .intv .intv-signal{width:6px;height:6px}
+  .intv .intv-q{font-size:9px;padding:6px 10px}
+}
+
+/* Compression pinned section */
+.cmp{position:relative;min-height:120vh}
+.cmp .cmp-inner{max-width:1100px;margin:0 auto;padding:40px 24px}
+.cmp .cmp-h{font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 8px;letter-spacing:.06em}
+.cmp .cmp-title{font:300 clamp(28px,3.5vw,42px)/1.1 var(--ff);letter-spacing:-.6px;margin:0 0 40px}
+.cmp .cmp-field{position:relative;height:60vh;max-width:700px;margin:0 auto}
+.cmp .signal-dot{position:absolute;width:6px;height:6px;border-radius:50%;background:var(--signal);opacity:0;transform:translate(-50%,-50%);transition:opacity .3s,transform .3s}
+.cmp .signal-dot.active{opacity:1}
+.cmp .signal-dot.connecting{opacity:.8}
+.cmp .signal-line{position:absolute;height:1px;background:rgba(21,94,94,.15);transform-origin:left center;transform:rotate(var(--ang));opacity:0}
+.cmp .signal-line.active{background:rgba(21,94,94,.4);opacity:1}
+.cmp .cluster{position:absolute;padding:8px 14px;background:var(--panel);border:1px solid var(--lines);border-radius:3px;font-size:10px;color:var(--sub);opacity:0;transform:scale(.8);transition:opacity .4s,transform .4s}
+.cmp .cluster.active{opacity:1;transform:scale(1)}
+.cmp .cluster.hl{border-color:var(--signal);color:var(--signal)}
+.cmp .cmp-reveal{position:absolute;bottom:80px;left:50%;transform:translateX(-50%);text-align:center;opacity:0;transition:opacity .6s,transform .6s;pointer-events:none}
+.cmp .cmp-reveal.show{opacity:1}
+.cmp .cmp-reveal .tag{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);margin:0 0 8px;letter-spacing:.04em}
+.cmp .cmp-reveal h3{font:300 28px/1.15 var(--ff);letter-spacing:-.6px;margin:0 0 8px}
+.cmp .cmp-reveal .prob{font:300 24px/1 var(--ff);letter-spacing:-.5px;color:var(--signal)}
+.cmp .counter{position:absolute;top:40px;right:24px;font:300 20px/1 var(--ff);letter-spacing:-.4px;color:var(--signal);font-family:var(--fm)}
+.cmp .counter .lbl{display:block;font-size:9px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);letter-spacing:.06em;margin-top:4px}
+@media(max-width:640px){
+  .cmp .cmp-field{height:40vh}
+  .cmp .cmp-title{font-size:clamp(22px,5vw,32px)}
+  .cmp .counter{right:12px;top:20px;font-size:16px}
+  .cmp .cmp-reveal{bottom:40px}
+  .cmp .cmp-reveal h3{font-size:22px}
+}
+
+/* Contradiction split */
+.ctr{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin:20px 0}
+.ctr .side{background:var(--panel);border:1px solid var(--lines);border-radius:3px;padding:24px;transform:translateX(var(--tx,0));transition:opacity .5s var(--ease),transform .5s var(--ease)}.ctr .side.in{opacity:1;transform:translateX(0)}
+.ctr .side .hd{font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);margin:0 0 12px;letter-spacing:.06em}
+.ctr .side .val{font:300 24px/1 var(--ff);letter-spacing:-.5px;margin:0 0 8px}
+.ctr .side .val.up{color:var(--match)}
+.ctr .side .val.down{color:var(--crit)}
+.ctr .mid{display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--mute);opacity:0;transition:opacity .5s}.ctr .mid.in{opacity:1}
+.ctr .conclusion{margin-top:24px;text-align:center;padding:16px;border:1px solid var(--signal);border-radius:3px;background:rgba(21,94,94,.05);opacity:0;transition:opacity .6s}.ctr .conclusion.in{opacity:1}
+.ctr .conclusion .tag{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);margin:0 0 4px;letter-spacing:.04em}
+.ctr .conclusion .txt{font-size:13px;color:var(--text);letter-spacing:-.1px}
+.ctr .conclusion .dip{font-size:14px;color:var(--signal);font-weight:500;margin-top:4px}
+@media(max-width:640px){
+  .ctr{grid-template-columns:1fr;gap:16px}
+  .ctr .side{padding:16px}
+  .ctr .side[style*="--tx:-30px"],.ctr .side[style*="--tx:30px"]{transform:none}
+  .ctr .mid{font-size:20px;margin:8px 0}
+  .ctr .conclusion{padding:12px}
+}
+
+/* Evidence convergence */
+.evc{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border-radius:3px;overflow:hidden;margin:20px 0}
+.evc .c{background:var(--panel);padding:16px;text-align:center;transform:scale(.9);transition:opacity .4s,transform .4s}.evc .c.in{opacity:1;transform:scale(1)}
+.evc .c .num{font:300 28px/1 var(--ff);letter-spacing:-.6px;color:var(--signal);margin:0 0 4px}
+.evc .c .lbl{font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);letter-spacing:.04em}
+.evc .c .unit{font-size:10px;color:var(--sub)}
+@media(max-width:640px){
+  .evc{grid-template-columns:1fr 1fr}
+  .evc .c{padding:12px}
+  .evc .c .num{font-size:22px}
+}
+
+/* Learning loop orbit */
+.lrn{position:relative;min-height:40vh;padding:40px 0}
+.lrn .orbit{position:relative;width:300px;height:300px;margin:0 auto}
+.lrn .node{position:absolute;width:100px;height:100px;border-radius:50%;background:var(--panel);border:1px solid var(--lines);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;text-align:center;transform:scale(.8);transition:opacity .5s,transform .5s}.lrn .node.in{opacity:1;transform:scale(1)}
+.lrn .node .lbl{font-size:7px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--mute);letter-spacing:.04em;margin-bottom:4px}
+.lrn .node .val{font-size:13px;color:var(--text);letter-spacing:-.1px}
+.lrn .node.active{border-color:var(--signal);background:rgba(21,94,94,.05)}
+.lrn .center{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:8px;font-weight:500;font-family:var(--fm);text-transform:uppercase;color:var(--signal);letter-spacing:.06em;opacity:0;transition:opacity .6s}.lrn .center.in{opacity:1}
+@media(max-width:640px){
+  .lrn .orbit{width:240px;height:240px}
+  .lrn .node{width:80px;height:80px;padding:8px}
+  .lrn .node .val{font-size:11px}
+  .lrn .center{font-size:7px}
+}
+
+/* CTA interaction */
+.cta .b{position:relative;overflow:hidden}
+.cta .b::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.1);transform:translateX(-100%);transition:transform .3s var(--ease)}
+.cta .b:hover::after{transform:translateX(100%)}
+
+/* === JS Fallback: visible content when scripts don't load === */
+.hc{background:radial-gradient(ellipse at 30% 50%,rgba(21,94,94,.12) 0%,transparent 60%),radial-gradient(ellipse at 70% 40%,rgba(21,94,94,.08) 0%,transparent 50%),var(--text)}
+.intv-field{min-height:280px;background:var(--panel);border:1px solid var(--lines);border-radius:3px;display:flex;align-items:center;justify-content:center;font:11px var(--fm);color:var(--mute)}
+.intv-field::after{content:'Signal interrogation requires JavaScript';text-align:center;padding:40px;opacity:.6}
+#compression-field{min-height:280px;background:var(--panel);border:1px solid var(--lines);border-radius:3px;display:flex;align-items:center;justify-content:center;font:11px var(--fm);color:var(--mute)}
+#compression-field::after{content:'Compression visualisation requires JavaScript';text-align:center;padding:40px;opacity:.6}
+#learning-loop .orbit{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;position:relative;width:100%;max-width:300px;margin:0 auto}
+#learning-loop .node{position:static!important;transform:none!important;width:auto;height:auto;padding:14px;border:1px solid var(--lines)!important;background:var(--panel)!important;border-radius:3px;opacity:1!important}
+#learning-loop .center{display:none}
+/* Force all GSAP elements visible when no JS */
+.reveal,.typo .t,.aq .q,.jg .sg .c,.jg .j,.ctr .side,.ctr .mid,.ctr .conclusion,.dip .c,.comp .n,.pq .p,.seq .st,.sp .r,.vw li,.eo .b,.eo .gap,#evidence-convergence .c,#learning-loop .node{opacity:1!important;transform:none!important}
+</style>
+</head><body>
+
+<div class="nav"><div class="w"><div class="nv-l">Intella<em>IQ</em></div><div class="nv-m"><a href="engine.html">Engine</a><a href="scan.html">Scan</a><a href="dashboard.html">Dashboard</a><a href="#" class="nv-b">Early access</a></div></div></div>
+
+<div class="hw"><div class="hc" id="flow-canvas"></div><div class="hz">
+<div class="eb">INTELLAIQ</div>
+<h1><span class="hl"><span>Unlock</span></span> <span class="hl"><span>decisions</span></span> <span class="hl"><span>hidden</span></span> <span class="hl"><span>in</span></span> <span class="hl"><span>your</span></span> <span class="hl"><span>data.</span></span></h1>
+<p>Your business generates thousands of signals across customers, markets, competitors, search, AI, sales and performance. IntellaIQ interrogates those signals with thousands of atomic questions, testing what is changing, what connects, what contradicts and what could change a decision.</p>
+<p>The resulting judgements are combined to surface the decisions with the greatest potential impact.</p>
+<div class="b2"><a href="#" class="bt bt-p">See how it works</a><a href="#" class="bt bt-s">Explore the product</a></div>
+</div></div>
+
+<div class="s typo">
+<div><div class="t">Your data is full of signals.</div><div class="t t2">Your teams are full of decisions.</div><div class="t t3">The gap is judgement.</div></div>
+</div>
+
+<div class="s"><div class="w reveal"><div class="sh reveal-w"><div class="sl ispan">The big idea</div></div><div class="reveal-w"><h2 ispan>Don't just analyse the data. Interrogate it.</h2></div></div>
+<p class="reveal" style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 20px">An atomic question is a small, bounded judgement applied to a piece of evidence. IntellaIQ asks thousands simultaneously across thousands of signals. Volume and consistency produce reliable judgement.</p>
+<div class="aq reveal">
+<div class="h">What IntellaIQ is asking</div>
+<div class="qs">
+<div class="q"><span class="dot"></span>Is this signal meaningful?</div>
+<div class="q"><span class="dot2"></span>Is the change persistent?</div>
+<div class="q"><span class="dot"></span>Is it appearing across multiple sources?</div>
+<div class="q"><span class="dot2"></span>Is it accelerating?</div>
+<div class="q"><span class="dot"></span>Is it related to another signal?</div>
+<div class="q"><span class="dot2"></span>Does it contradict existing evidence?</div>
+<div class="q"><span class="dot"></span>Does customer behaviour support it?</div>
+<div class="q"><span class="dot2"></span>Does competitor behaviour support it?</div>
+<div class="q"><span class="dot"></span>Does search behaviour support it?</div>
+<div class="q"><span class="dot2"></span>Could this change a business decision?</div>
+</div>
+<div class="ctr"><div class="num" id="counter">47,281</div><div class="lb">Atomic judgements</div></div>
+</div></div>
+
+<div class="s intv reveal">
+<div class="w">
+<div class="intv-h">Questions multiply. Patterns emerge.</div>
+<div class="intv-field" id="interrogation-field"></div>
+</div>
+</div>
+
+<div class="cmp reveal" id="compression-section">
+<div class="cmp-inner">
+<div class="cmp-h">Signature visual</div>
+<h2 class="cmp-title">Complexity compresses into decision.</h2>
+<div class="cmp-field" id="compression-field"></div>
+<div class="counter" id="compression-counter"><span id="cmp-count">51,402</span><span class="lbl">Signals</span></div>
+<div class="cmp-reveal" id="decision-reveal">
+<div class="tag">Decision detected</div>
+<h3>Customer expectations are shifting toward convenience.</h3>
+<div class="prob">Decision Impact Probability: <span id="dip-val">0.87</span></div>
+</div>
+</div>
+</div>
+
+<div class="jg"><div class="jgw reveal">
+<div class="h">Judgement layer</div>
+<h2>From evidence to judgement.</h2>
+<div class="sg">
+<div class="c"><div class="cl">Signal</div><div class="cv">Searches for convenience products increased 18%.</div></div>
+<div class="c"><div class="cl">Signal</div><div class="cv">Customer reviews increasingly mention convenience.</div></div>
+<div class="c"><div class="cl">Signal</div><div class="cv">Three competitors introduced convenience-led propositions.</div></div>
+<div class="c"><div class="cl">Signal</div><div class="cv">AI-generated answers associate category with convenience.</div></div>
+</div>
+<div class="j"><div class="l">Judgement</div><h3>A persistent shift toward convenience is emerging.</h3><div class="p">Decision Impact Probability: 0.87</div></div>
+<p style="font-size:13px;color:rgba(245,245,243,.5);margin:0;letter-spacing:-.1px">Raw signals are not decisions. IntellaIQ evaluates evidence across sources, tests relationships and contradictions, and turns individual observations into higher-order judgements.</p>
+</div></div>
+
+<div class="s"><div class="w reveal">
+<div class="sh"><div class="sl">Decision Impact Probability</div><h2>Not every change deserves a decision.</h2></div>
+<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6">IntellaIQ estimates how likely a finding is to affect a business decision, based on evidence, relationships, persistence and materiality. This is a model-derived estimate of decision relevance.</p>
+<div class="dip">
+<div class="c"><div class="l">High potential impact</div><div class="v d">0.87</div><div class="s">Converging signals, high confidence</div></div>
+<div class="c"><div class="l">Investigate</div><div class="v w">0.64</div><div class="s">Partial evidence, needs review</div></div>
+<div class="c"><div class="l">Low decision relevance</div><div class="v l">0.21</div><div class="s">Isolated signal, low materiality</div></div>
+</div>
+</div></div>
+
+<div class="s"><div class="w reveal">
+<div class="sh"><div class="sl">Decision Volume</div><h2>Know how much is changing.</h2></div>
+<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 12px">Decision Volume is the amount of decision-relevant change IntellaIQ detects. The interrogation process compresses signals into attention.</p>
+<div class="comp"><span class="n">72 meaningful signals</span><span class="a">&rarr;</span><span class="n">18 require investigation</span><span class="a">&rarr;</span><span class="n">6 create potential decisions</span><span class="a">&rarr;</span><span class="s">2 require action</span></div>
+</div></div>
+
+<div class="s"><div class="w reveal">
+<div class="sh"><div class="sl">Contradictions</div><h2>The most useful signal may be the one that disagrees.</h2></div>
+<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 12px">IntellaIQ looks for contradictions as well as agreement. When different sources tell different stories, that disagreement can reveal an assumption worth investigating.</p>
+<div class="ctr" id="contradiction-split">
+<div class="side" style="--tx:-30px"><div class="hd">Demand</div><div class="val up">&uarr; +18%</div></div>
+<div class="side" style="--tx:30px"><div class="hd">Customer Reviews</div><div class="val down">&darr; -12%</div></div>
+<div class="mid">&times;</div>
+<div class="conclusion"><div class="tag">Contradiction detected</div><div class="txt">Demand is growing, but perceived value may be weakening.</div><div class="dip">Decision Impact Probability: 0.79</div></div>
+</div>
+</div></div>
+
+<div class="s"><div class="w reveal">
+<div class="sh"><div class="sl">Sources</div><h2>Six realities. One interrogation.</h2></div>
+<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 12px">All six perspectives feed into the same intelligence process. The value is not in any single source but in how they connect.</p>
+<div class="sp">
+<div class="r"><span class="l">Owned</span><span>Your data and performance</span><span class="arr">&rarr;</span></div>
+<div class="r"><span class="l">Human</span><span>Reviews, interviews, qualitative evidence</span><span class="arr">&rarr;</span></div>
+<div class="r"><span class="l">Market</span><span>Competitors, categories, external change</span><span class="arr">&rarr;</span></div>
+<div class="r"><span class="l">Machine</span><span>AI-generated answers and interpretation</span><span class="arr">&rarr;</span></div>
+<div class="r"><span class="l">Demand</span><span>Search and behavioural signals</span><span class="arr">&rarr;</span></div>
+<div class="r"><span class="l">Outcomes</span><span>What happened after previous decisions</span><span class="arr">&rarr;</span></div>
+</div>
+</div></div>
+
+<div class="jg"><div class="jgw reveal">
+<div class="h">What the system sees</div>
+<h2>See what the system sees.</h2>
+<div class="seq">
+<div class="st -a"><div class="l">Signals detected</div><div class="v">Search behaviour &middot; Customer reviews &middot; Competitor activity &middot; AI responses &middot; Sales performance</div></div>
+<div class="st -a"><div class="l">Relationship found</div><div class="v">Five independent sources are moving in the same direction.</div></div>
+<div class="st -a"><div class="l">Judgement</div><div class="v">This is unlikely to be isolated noise.</div></div>
+<div class="st -a"><div class="l">Decision Impact</div><div class="p">0.87</div></div>
+<div class="st -a"><div class="l">Decision</div><div class="v">Investigate whether the current proposition still matches changing customer expectations.</div></div>
+</div>
+</div></div>
+
+<div class="s"><div class="w reveal">
+<div class="sh"><div class="sl">Prioritisation</div><h2>What deserves attention now?</h2></div>
+<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 12px">IntellaIQ does not rank interesting findings. It prioritises based on decision relevance.</p>
+<div class="pq">
+<div class="p"><span class="rk">01</span><div class="d"><div class="t">Customer expectations shift</div><div class="s">Converging signals across 4 sources</div></div><span class="prob">0.87</span></div>
+<div class="p"><span class="rk">02</span><div class="d"><div class="t">Competitor positioning change</div><div class="s">3 competitors moved toward convenience</div></div><span class="prob w">0.73</span></div>
+<div class="p"><span class="rk">03</span><div class="d"><div class="t">Search demand anomaly</div><div class="s">Unexpected growth in non-core queries</div></div><span class="prob w">0.61</span></div>
+<div class="p"><span class="rk">04</span><div class="d"><div class="t">Review sentiment change</div><div class="s">Value perception declining</div></div><span class="prob l">0.34</span></div>
+</div>
+</div></div>
+
+<div class="s"><div class="w reveal">
+<div class="sh"><div class="sl">Expected vs Observed</div><h2>What changed from what you expected?</h2></div>
+<div class="eo">
+<div class="b"><div class="l">Expected</div><div class="v">Demand remains stable</div><div class="bar"><div class="f" data-w="55"></div></div></div>
+<div class="b"><div class="l">Observed</div><div class="v">Demand shifting toward convenience</div><div class="bar"><div class="f g" data-w="82"></div></div></div>
+<div class="gap"><div class="l">Gap detected</div><div class="v">The observed behaviour challenges the current demand assumption.</div></div>
+</div>
+</div></div>
+
+<div class="s"><div class="w reveal">
+<div class="sh"><div class="sl">Evidence</div><h2>Every judgement should be explainable.</h2></div>
+<div class="ec">
+<div class="fl">Finding</div>
+<h3>Category demand is shifting toward convenience.</h3>
+<div class="evc" id="evidence-convergence">
+<div class="c"><div class="num">42</div><div class="lbl">customer observations</div></div>
+<div class="c"><div class="num">18</div><div class="lbl">search clusters</div></div>
+<div class="c"><div class="num">3</div><div class="lbl">competitor changes</div></div>
+<div class="c"><div class="num">27</div><div class="lbl">AI responses</div></div>
+</div>
+<div class="ftr"><span><span class="l">Confidence</span>High</span><span><span class="l">Decision Impact</span>0.87</span></div>
+</div>
+</div></div>
+
+<div class="s"><div class="w reveal">
+<div class="sh"><div class="sl">What you get</div><h2>Less to process. More decisions you can see.</h2></div>
+<ul class="vw">
+<li><span class="rk">1</span><div class="d"><div class="t">Finding</div><div class="s">What changed?</div></div><span class="a">&rarr;</span></li>
+<li><span class="rk">2</span><div class="d"><div class="t">Judgement</div><div class="s">What does the evidence suggest?</div></div><span class="a">&rarr;</span></li>
+<li><span class="rk">3</span><div class="d"><div class="t">Decision</div><div class="s">What might need to change?</div></div><span class="a">&rarr;</span></li>
+<li><span class="rk">4</span><div class="d"><div class="t">Intervention</div><div class="s">What action could test it?</div></div><span class="a">&rarr;</span></li>
+<li><span class="rk">5</span><div class="d"><div class="t">Learning</div><div class="s">What did the outcome tell us?</div></div></li>
+</ul>
+</div></div>
+
+<div class="jg"><div class="jgw reveal">
+<div class="h">Learning</div>
+<h2>Decisions create evidence too.</h2>
+<p style="font-size:13px;color:rgba(245,245,243,.5);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 16px">IntellaIQ does not stop when a decision is made. Outcomes become new evidence, allowing the system to learn which signals, judgements and interventions actually mattered.</p>
+<div class="lrn" id="learning-loop">
+<div class="orbit">
+<div class="node" style="top:0;left:50%;transform:translateX(-50%)"><div class="lbl">Observe</div><div class="val">Signals detected</div></div>
+<div class="node" style="top:20%;right:0;transform:translateX(50%)"><div class="lbl">Judge</div><div class="val">Evidence evaluated</div></div>
+<div class="node" style="bottom:20%;right:0;transform:translateX(50%)"><div class="lbl">Decide</div><div class="val">DIP calculated</div></div>
+<div class="node" style="bottom:0;left:50%;transform:translateX(-50%)"><div class="lbl">Act</div><div class="val">Intervention</div></div>
+<div class="node" style="bottom:20%;left:0;transform:translateX(-50%)"><div class="lbl">Measure</div><div class="val">Outcome tracked</div></div>
+<div class="node" style="top:20%;left:0;transform:translateX(-50%)"><div class="lbl">Learn</div><div class="val">Model updated</div></div>
+<div class="center">IntellaIQ</div>
+</div>
+</div>
+</div></div>
+
+<div class="s"><div class="w reveal">
+<div class="sh"><div class="sl">Positioning</div><h2>IntellaIQ is not another dashboard.</h2></div>
+<p style="font-size:13px;color:var(--sub);max-width:500px;letter-spacing:-.1px;line-height:1.6;margin:0 0 16px">Dashboards show information. IntellaIQ interrogates information. The distinction is functional, not rhetorical.</p>
+<div class="psg">
+<div class="c"><div class="l">Analytics</div><div class="v">What happened?</div></div>
+<div class="c"><div class="l">Research</div><div class="v">What people said.</div></div>
+<div class="c"><div class="l">Search</div><div class="v">What people looked for.</div></div>
+<div class="c"><div class="l">Competitor monitoring</div><div class="v">What competitors changed.</div></div>
+<div class="c"><div class="l">AI monitoring</div><div class="v">How machines describe the market.</div></div>
+<div class="c hl"><div class="l" style="color:rgba(245,245,243,.6)">IntellaIQ</div><div class="v" style="color:#F5F5F3">What could change a decision?</div></div>
+</div>
+</div></div>
+
+<div class="cta"><div class="w reveal">
+<h3>What decisions are hiding in your data?</h3>
+<p>IntellaIQ turns thousands of signals into the handful of decisions worth investigating.</p>
+<a href="#" class="b">Request early access</a>
+</div></div>
+
+<div class="ft"><div class="w"><span>IntellaIQ</span><span><a href="scan.html">Scan</a> &middot; <a href="dashboard.html">Dashboard</a> &middot; <a href="#">Docs</a></span></div></div>
+
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer>
+(function(){var c=document.getElementById('counter'),v=47281;if(!c)return;
+function update(){v+=Math.round(Math.random()*200+50);c.textContent=v.toLocaleString();}
+setInterval(update,1200);
+for(var i=0;i<6;i++)setTimeout(update,i*100);
+})();
+</script>
+<script defer>
+// GSAP Scroll-driven animations
+document.addEventListener('DOMContentLoaded', function(){
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ return; }
+
+  // Hero reveal - use .from() so content is visible immediately
+  var tl = gsap.timeline({defaults:{ease:'power3.out'}});
+  tl.from('.hw .eb',{y:8,opacity:0,duration:.6});
+  tl.from('.hz .hl span',{y:'100%',opacity:0,duration:.7,stagger:.04},'-=.3');
+  tl.from('.hw p',{y:12,opacity:0,duration:.5,stagger:.08},'-=.1');
+  tl.from('.hw .b2',{y:12,opacity:0,duration:.5},'-=.1');
+
+  // Hero Gateway Flow canvas (ThreeUI constellation-field bezier paths)
+  (function(){
+    var c=document.getElementById('flow-canvas'),cv=document.createElement('canvas');
+    if(!c)return;
+    cv.style.cssText='position:absolute;top:0;left:0;width:100%;height:100%;display:block';c.appendChild(cv);
+    var x=cv.getContext('2d'),W,H,P=[],N=function(){return window.innerWidth<640?28:60};
+    function rz(){var d=window.devicePixelRatio||1,b=c.getBoundingClientRect();W=b.width;H=b.height;cv.width=W*d;cv.height=H*d;x.setTransform(d,0,0,d,0,0)}
+    window.addEventListener('resize',rz);rz();
+    function ip(){P=[];CX=W/2;CY=H/2;var n=N();for(var i=0;i<n;i++){var l=i%2===0,sy=(i/n)*H*1.4-H*.2;P.push({isLeft:l,startY:sy,pt:{t:Math.random(),sp:.0015+Math.random()*.0025}})}}
+    ip();
+    function bz(t,p0,p1,p2,p3){var u=1-t;return{x:u*u*u*p0.x+3*u*u*t*p1.x+3*u*t*t*p2.x+t*t*t*p3.x,y:u*u*u*p0.y+3*u*u*t*p1.y+3*u*t*t*p2.y+t*t*t*p3.y}}
+    function dr(){x.clearRect(0,0,W,H);CX=W/2;CY=H/2;
+    for(var i=0;i<P.length;i++){var p=P[i],p0={x:p.isLeft?0:W,y:p.startY},p1={x:p.isLeft?CX*.5:W-CX*.5,y:p.startY},p2={x:p.isLeft?CX*.8:W-CX*.8,y:CY},p3={x:CX,y:CY};
+    var pt=p.pt;pt.t+=pt.sp;if(pt.t>1){pt.t=0;p.startY+=(Math.random()-.5)*8}
+    var pos=bz(pt.t,p0,p1,p2,p3);x.fillStyle='rgba(21,94,94,.75)';x.fillRect(pos.x-1,pos.y-1,2,2)}
+    requestAnimationFrame(dr)}
+    dr();window.addEventListener('resize',function(){rz();ip()});
+  })();
+
+  // Set initial states for scroll-revealed elements
+  gsap.set('.reveal',{opacity:0,y:24});
+  gsap.set('.typo .t',{opacity:0,y:30});
+  gsap.set('.aq .q',{opacity:0,x:-8});
+  gsap.set('.jg .sg .c',{opacity:0,y:12});
+  gsap.set('.jg .j',{opacity:0,scale:.96});
+  gsap.set('#contradiction-split .side',{opacity:0,x:function(i){return i===0?-30:30}});
+  gsap.set('#contradiction-split .mid',{opacity:0});
+  gsap.set('#contradiction-split .conclusion',{opacity:0});
+  gsap.set('#evidence-convergence .c',{opacity:0,scale:.9});
+  gsap.set('#learning-loop .node',{opacity:0,scale:.8});
+  gsap.set('#learning-loop .center',{opacity:0});
+  gsap.set('.eo .b',{opacity:0,y:8});
+  gsap.set('.eo .gap',{opacity:0});
+  gsap.set('.intv-h',{opacity:0,y:24});
+  gsap.set('.intv-field',{opacity:0});
+  gsap.set('.vw li',{opacity:0,y:8});
+  gsap.set('.cta .reveal',{opacity:0,y:24});
+  gsap.set('.pq .p',{opacity:0,x:-20});
+  gsap.set('.seq .st',{opacity:0,x:-8});
+  gsap.set('.sp .r',{opacity:0});
+  gsap.set('.dip .c',{opacity:0,y:12});
+  gsap.set('.comp .n',{opacity:0,y:8});
+
+  // Reveal elements on scroll
+  ScrollTrigger.batch('.reveal',{
+    onEnter: function(batch){gsap.to(batch,{opacity:1,y:0,duration:.6,ease:'power2.out',stagger:.08});},
+    start:'top 92%'
+  });
+
+  // Typography editorial section
+  ScrollTrigger.batch('.typo .t',{
+    onEnter: function(batch){gsap.to(batch,{opacity:1,y:0,duration:.7,ease:'power3.out',stagger:.15});},
+    start:'top 85%'
+  });
+
+  // Atomic questions stagger
+  ScrollTrigger.batch('.aq .q',{
+    onEnter: function(batch){gsap.to(batch,{opacity:1,x:0,duration:.4,ease:'power2.out',stagger:.06});},
+    start:'top 88%'
+  });
+
+  // Interrogation visual - questions orbiting signals
+  (function(){
+    var field=document.getElementById('interrogation-field');
+    if(!field)return;
+    var questions=[
+      'IS THIS SIGNAL MEANINGFUL?','IS THE CHANGE PERSISTENT?','IS IT APPEARING ELSEWHERE?',
+      'IS IT ACCELERATING?','IS IT RELATED?','DOES IT CONTRADICT?',
+      'CUSTOMER BEHAVIOUR?','COMPETITOR BEHAVIOUR?','SEARCH BEHAVIOUR?','COULD IT CHANGE A DECISION?'
+    ];
+    var signals=[
+      {x:150,y:120,t:'Search'},{x:400,y:180,t:'Reviews'},{x:650,y:100,t:'Competitors'},
+      {x:200,y:300,t:'AI'},{x:500,y:280,t:'Sales'},{x:700,y:250,t:'Market'}
+    ];
+    var isMobile=window.innerWidth<640;
+    signals.forEach(function(s){
+      var el=document.createElement('div');el.className='intv-signal';
+      var sx=isMobile?Math.min(s.x,field.offsetWidth-20):s.x;
+      var sy=isMobile?Math.min(s.y,field.offsetHeight-20):s.y;
+      el.style.left=sx+'px';el.style.top=sy+'px';
+      var l=document.createElement('span');l.className='lbl';l.textContent=s.t;el.appendChild(l);field.appendChild(el);
+    });
+    var qEls=[];
+    questions.forEach(function(q,i){
+      var el=document.createElement('div');el.className='intv-q';el.textContent=q;
+      var ang=(i/questions.length)*Math.PI*2;
+      var r=isMobile?Math.min(120,field.offsetWidth/2-60):180+Math.sin(i)*40;
+      el.style.left=(field.offsetWidth/2+Math.cos(ang)*r)+'px';el.style.top=(field.offsetHeight/2+Math.sin(ang)*r)+'px';
+      qEls.push({el:el,ang:ang,r:r});field.appendChild(el);
+    });
+    var idx=0;
+    function showNext(){
+      if(idx<qEls.length){
+        gsap.to(qEls[idx].el,{opacity:1,scale:1,duration:.4,ease:'back.out(1.5)'});
+        idx++;setTimeout(showNext,800);
+      }else{
+        setTimeout(function(){
+          qEls.forEach(function(q){gsap.to(q.el,{opacity:0,scale:.9,duration:.3})});
+          idx=0;setTimeout(showNext,1500);
+        },3000);
+      }
+    }
+    setTimeout(showNext,500);
+  })();
+
+  // Interrogation visual heading + field reveal
+  ScrollTrigger.create({
+    trigger:'.intv',
+    start:'top 85%',
+    onEnter:function(){
+      gsap.to('.intv-h',{opacity:1,y:0,duration:.6,ease:'power2.out'});
+      gsap.to('.intv-field',{opacity:1,duration:.6,ease:'power2.out',delay:.2});
+    },
+    onLeaveBack:function(){
+      gsap.set('.intv-h',{opacity:0,y:24});
+      gsap.set('.intv-field',{opacity:0});
+    }
+  });
+
+  // Pinned compression animation
+  (function(){
+    var section=document.getElementById('compression-section'),field=document.getElementById('compression-field');
+    if(!section||!field)return;
+    var countEl=document.getElementById('cmp-count'),dipEl=document.getElementById('dip-val'),revealEl=document.getElementById('decision-reveal');
+    var dots=[],lines=[],clusters=[],stage=0;
+    var W=field.offsetWidth,H=field.offsetHeight;
+    function createDots(){
+      for(var i=0;i<180;i++){
+        var d=document.createElement('div');d.className='signal-dot';
+        d.style.left=(Math.random()*W)+'px';d.style.top=(Math.random()*H)+'px';
+        field.appendChild(d);dots.push(d);
+      }
+    }
+    function stage1(){dots.forEach(function(d){d.classList.add('active')});setTimeout(stage2,1500)}
+    function stage2(){var pairs=[[0,12],[34,56],[78,90],[100,110],[120,130],[140,150],[160,170]];
+      pairs.forEach(function(p,i){
+        var d1=dots[p[0]],d2=dots[p[1]];if(!d1||!d2)return;
+        var r1=d1.getBoundingClientRect(),r2=d2.getBoundingClientRect();
+        var l=document.createElement('div');l.className='signal-line';
+        var dx=r2.left-r1.left,dy=r2.top-r1.top,dist=Math.sqrt(dx*dx+dy*dy);
+        l.style.width=dist+'px';l.style.left=r1.left+'px';l.style.top=r1.top+'px';
+        l.style.setProperty('--ang',Math.atan2(dy,dx)+'rad');
+        field.appendChild(l);lines.push(l);
+        setTimeout(function(){l.classList.add('active')},i*100);
+      });
+      setTimeout(stage3,1200);
+    }
+    function stage3(){
+      var clustersData=[{x:W*.2,y:H*.3,t:'Search cluster',hl:true},{x:W*.6,y:H*.25,t:'Review pattern'},{x:W*.4,y:H*.6,t:'Competitor shift',hl:true},{x:W*.75,y:H*.55,t:'AI signal'}];
+      clustersData.forEach(function(c,i){
+        var cl=document.createElement('div');cl.className='cluster'+(c.hl?' hl':'');cl.textContent=c.t;
+        cl.style.left=c.x+'px';cl.style.top=c.y+'px';field.appendChild(cl);clusters.push(cl);
+        setTimeout(function(){cl.classList.add('active')},i*200);
+      });
+      dots.forEach(function(d,i){if(i%3!==0)gsap.to(d,{opacity:0,duration:.4})});
+      setTimeout(stage4,1500);
+    }
+    function stage4(){
+      lines.forEach(function(l){gsap.to(l,{opacity:0,duration:.3})});
+      clusters.forEach(function(c,i){
+        if(!c.classList.contains('hl'))gsap.to(c,{opacity:0,scale:.8,duration:.4,delay:i*.1});
+      });
+      setTimeout(function(){
+        countEl.textContent='3,184';countEl.nextElementSibling.textContent='Relationships';
+      },500);
+      setTimeout(stage5,1000);
+    }
+    function stage5(){
+      clusters.filter(function(c){return c.classList.contains('hl')}).forEach(function(c,i){
+        gsap.to(c,{opacity:0,scale:.8,duration:.4,delay:i*.15});
+      });
+      setTimeout(function(){
+        countEl.textContent='217';countEl.nextElementSibling.textContent='Patterns';
+      },600);
+      setTimeout(stage6,1200);
+    }
+    function stage6(){
+      setTimeout(function(){
+        countEl.textContent='31';countEl.nextElementSibling.textContent='Potential decisions';
+      },400);
+      setTimeout(stage7,1000);
+    }
+    function stage7(){
+      setTimeout(function(){
+        countEl.textContent='4';countEl.nextElementSibling.textContent='Decisions';
+        gsap.to(revealEl,{opacity:1,duration:.8,ease:'power2.out'});
+        gsap.to({v:0},{v:.87,duration:1.5,ease:'power2.out',onUpdate:function(){dipEl.textContent=this.targets()[0].v.toFixed(2)}});
+      },400);
+    }
+    createDots();
+    ScrollTrigger.create({
+      trigger:section,start:'top 80%',end:'bottom 20%',pin:true,pinSpacing:true,
+      onEnter:function(){setTimeout(stage1,300);},
+      onLeaveBack:function(){stage=0;dots.forEach(function(d){d.remove()});lines.forEach(function(l){l.remove()});clusters.forEach(function(c){c.remove()});dots=[];lines=[];clusters=[];revealEl.style.opacity=0;createDots();},
+      onEnterBack:function(){setTimeout(stage1,300);}
+    });
+  })();
+
+  // Dark section signal cards
+  ScrollTrigger.batch('.jg .sg .c',{
+    onEnter: function(batch){gsap.to(batch,{opacity:1,y:0,duration:.5,ease:'power2.out',stagger:.1});},
+    start:'top 85%'
+  });
+  ScrollTrigger.batch('.jg .j',{
+    onEnter: function(batch){gsap.to(batch,{opacity:1,scale:1,duration:.6,ease:'back.out(1.2)'});},
+    start:'top 80%'
+  });
+
+  // Contradiction split animation
+  ScrollTrigger.create({
+    trigger:'#contradiction-split',
+    start:'top 85%',
+    onEnter:function(){
+      gsap.to('#contradiction-split .side',{opacity:1,x:0,duration:.6,ease:'power2.out',stagger:.15});
+      gsap.to('#contradiction-split .mid',{opacity:1,duration:.4,delay:.4});
+      gsap.to('#contradiction-split .conclusion',{opacity:1,duration:.6,delay:.8});
+    },
+    onLeaveBack:function(){
+      gsap.set('#contradiction-split .side',{opacity:0,x:function(i){return i===0?-30:30}});
+      gsap.set('#contradiction-split .mid',{opacity:0});
+      gsap.set('#contradiction-split .conclusion',{opacity:0});
+    }
+  });
+
+  // Evidence convergence
+  ScrollTrigger.batch('#evidence-convergence .c',{
+    onEnter: function(batch){gsap.to(batch,{opacity:1,scale:1,duration:.5,ease:'back.out(1.3)',stagger:.1});},
+    start:'top 88%'
+  });
+
+  // Learning loop orbit
+  ScrollTrigger.create({
+    trigger:'#learning-loop',
+    start:'top 85%',
+    onEnter:function(){
+      gsap.to('#learning-loop .node',{opacity:1,scale:1,duration:.5,ease:'back.out(1.3)',stagger:.1});
+      gsap.to('#learning-loop .center',{opacity:1,duration:.6,delay:.6});
+    },
+    onLeaveBack:function(){
+      gsap.set('#learning-loop .node',{opacity:0,scale:.8});
+      gsap.set('#learning-loop .center',{opacity:0});
+    }
+  });
+
+  // Expected vs observed bars
+  ScrollTrigger.batch('.eo .b',{
+    onEnter: function(batch){gsap.to(batch,{opacity:1,y:0,duration:.5,ease:'power2.out',stagger:.15});},
+    start:'top 85%'
+  });
+  ScrollTrigger.batch('.eo .b .f',{
+    onEnter: function(batch){gsap.to(batch,{width:function(i,t){return t.dataset.w+'%'},duration:.8,ease:'power2.out',stagger:.15});},
+    start:'top 80%'
+  });
+  ScrollTrigger.batch('.eo .gap',{
+    onEnter: function(batch){gsap.to(batch,{opacity:1,duration:.6,ease:'power2.out',delay:.3});},
+    start:'top 70%'
+  });
+
+  // Workflow stagger
+  ScrollTrigger.batch('.vw li',{
+    onEnter: function(batch){gsap.to(batch,{opacity:1,y:0,duration:.5,ease:'power2.out',stagger:.1});},
+    start:'top 88%'
+  });
+
+  // Priority queue
+  ScrollTrigger.batch('.pq .p',{
+    onEnter: function(batch){gsap.to(batch,{opacity:1,x:0,duration:.4,ease:'power2.out',stagger:.08});},
+    start:'top 88%'
+  });
+
+  // System sees sequence
+  ScrollTrigger.batch('.seq .st',{
+    onEnter: function(batch){gsap.to(batch,{opacity:1,x:0,duration:.5,ease:'power2.out',stagger:.12});},
+    start:'top 85%'
+  });
+
+  // Sources stagger
+  ScrollTrigger.batch('.sp .r',{
+    onEnter: function(batch){gsap.to(batch,{opacity:1,duration:.4,ease:'power1.out',stagger:.08});},
+    start:'top 88%'
+  });
+
+  // DIP tiles
+  ScrollTrigger.batch('.dip .c',{
+    onEnter: function(batch){gsap.to(batch,{opacity:1,y:0,duration:.5,ease:'power2.out',stagger:.1});},
+    start:'top 85%'
+  });
+
+  // Decision Volume chain
+  ScrollTrigger.batch('.comp .n',{
+    onEnter: function(batch){gsap.to(batch,{opacity:1,y:0,duration:.4,ease:'power2.out',stagger:.1});},
+    start:'top 88%'
+  });
+
+  // CTA
+  ScrollTrigger.batch('.cta .reveal',{
+    onEnter: function(batch){gsap.to(batch,{opacity:1,y:0,duration:.7,ease:'power2.out'});},
+    start:'top 88%'
+  });
+});
+</script>
+</body></html>
