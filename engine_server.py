@@ -2,8 +2,10 @@
 """IntellaIQ Engine - Website Intelligence Analysis Server.
 
 A lightweight HTTP server that provides:
-  - POST /api/scan    - Crawl a URL, extract pages, return top 10 decision-relevant pages
-  - POST /api/analyze - Run JEV atomic question analysis on page data
+  - POST /api/scan      - Crawl a URL, extract pages, return top 10 decision-relevant pages
+  - POST /api/analyze   - Run JEV atomic question analysis on page data
+  - POST /api/deep-analyze - Two-pass StickyRice decision analysis (requires page data)
+  - POST /api/scan-deep - Scan URL then auto-run StickyRice deep analysis
   - GET  /            - Serve the engine.html frontend
 
 Usage:
@@ -22,6 +24,11 @@ import subprocess
 import traceback
 from urllib.parse import urlparse, urljoin
 from datetime import datetime
+
+# Import StickyRice decision engine
+import sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from core.sticky_decision import run_sticky_analysis
 
 import requests
 from bs4 import BeautifulSoup
@@ -1094,6 +1101,10 @@ class EngineHandler(BaseHTTPRequestHandler):
             self._handle_scan(data)
         elif parsed_path.path == "/api/analyze":
             self._handle_analyze(data)
+        elif parsed_path.path == "/api/deep-analyze":
+            self._handle_deep_analyze(data)
+        elif parsed_path.path == "/api/scan-deep":
+            self._handle_scan_deep(data)
         else:
             self._send_error(404, f"Not found: {self.path}")
 
@@ -1139,6 +1150,106 @@ class EngineHandler(BaseHTTPRequestHandler):
         except Exception as e:
             self._send_error(500, f"Analysis failed: {e}\n{traceback.format_exc()}")
 
+    def _handle_deep_analyze(self, data):
+        """Handle POST /api/deep-analyze — two-pass StickyRice decision analysis."""
+        question_id = data.get("question_id", "").strip()
+        pages = data.get("pages", data.get("page_data", []))
+
+        if not question_id:
+            self._send_error(400, "Missing required field: 'question_id'")
+            return
+        if not pages:
+            self._send_error(400, "Missing required field: 'pages'")
+            return
+        if isinstance(pages, dict):
+            pages = [pages]
+
+        decision_q = None
+        for q in DECISION_QUESTIONS:
+            if q["id"] == question_id:
+                decision_q = q
+                break
+        if not decision_q:
+            self._send_error(400, f"Unknown question_id: {question_id}")
+            return
+
+        try:
+            import time
+            start = time.time()
+            result = run_sticky_analysis(decision_q, pages)
+            elapsed = time.time() - start
+            if "error" in result:
+                self._send_error(400, result["error"])
+            else:
+                result["meta"]["elapsed_seconds"] = round(elapsed, 1)
+                self._send_json(result)
+        except Exception as e:
+            self._send_error(500, f"Deep analysis failed: {e}\n{traceback.format_exc()}")
+
+    def _handle_scan_deep(self, data):
+        """Handle POST /api/scan-deep — scan then auto-deep-analyze."""
+        url = data.get("url", "").strip()
+        question_id = data.get("question_id", "what_company_sells")
+
+        if not url:
+            self._send_error(400, "Missing required field: 'url'")
+            return
+
+        try:
+            import time
+            start = time.time()
+
+            # Step 1: Scan
+            scan_result = run_scan(url)
+            if "error" in scan_result:
+                self._send_error(400, scan_result["error"])
+                return
+
+            pages = scan_result.get("top_pages", [])[:10]
+            if not pages:
+                self._send_error(400, "No pages found to analyse")
+                return
+
+            scan_time = time.time()
+
+            # Step 2: Find decision question
+            decision_q = None
+            for q in DECISION_QUESTIONS:
+                if q["id"] == question_id:
+                    decision_q = q
+                    break
+            if not decision_q:
+                decision_q = DECISION_QUESTIONS[0]
+
+            # Step 3: Run deep analysis
+            analysis_result = run_sticky_analysis(decision_q, pages)
+
+            if "error" in analysis_result:
+                self._send_json({
+                    "error": analysis_result["error"],
+                    "scan_result": scan_result,
+                })
+                return
+
+            total_time = time.time() - start
+            analysis_result["meta"]["elapsed_seconds"] = round(total_time, 1)
+            analysis_result["meta"]["scan_time"] = round(scan_time - start, 1)
+
+            self._send_json({
+                "url": url,
+                "question_id": question_id,
+                "scan": {
+                    "pages_scanned": len(pages),
+                    "total_pages_found": scan_result.get("total", 0),
+                    "top_pages": pages,
+                },
+                "report": analysis_result["report"],
+                "challenger": analysis_result["challenger"],
+                "meta": analysis_result["meta"],
+            })
+        except Exception as e:
+            self._send_error(500, f"Scan-deep failed: {e}\n{traceback.format_exc()}")
+
     def log_message(self, format, *args):
         """Override to use stderr for cleaner output."""
         sys.stderr.write(f"[{datetime.now().isoformat()}] {format % args}\n")
@@ -1161,6 +1272,7 @@ def main():
     print(f"  API endpoints:", flush=True)
     print(f"    POST /api/scan    - Analyse a website", flush=True)
     print(f"    POST /api/analyze - Run atomic question analysis", flush=True)
+    print(f"    POST /api/scan-deep - Scan + StickyRice decision analysis", flush=True)
     print(f"    GET  /health      - Health check", flush=True)
     print(f"    GET  /            - Frontend (if engine.html exists)", flush=True)
     print(f"  JEV adapter: {JEV_ADAPTER}", flush=True)
