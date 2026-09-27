@@ -724,86 +724,92 @@ body {
   .panel { box-shadow: none; border-color: #ccc; }
 }
 
-/* Searchable-inspired product reskin: warm terracotta, plum ink, editorial type. */
+/* IntellaIQ brand: deep navy + teal, editorial sans, premium SaaS. */
 :root {
-  --bg: #f9efed;
-  --bg-elevated: #fffaf8;
-  --bg-subtle: #f5e3df;
-  --bg-hover: #ecc6bd;
-  --fg: #2b1b24;
-  --fg-muted: #765d65;
-  --fg-subtle: #a98e94;
-  --border: rgba(43, 27, 36, 0.16);
-  --border-subtle: rgba(43, 27, 36, 0.09);
-  --border-strong: rgba(43, 27, 36, 0.3);
-  --accent: #c15f3c;
-  --accent-hover: #a64e2a;
-  --accent-soft: #f5e3df;
-  --accent-muted: #da8c79;
-  --success: #2e5a0e;
-  --success-soft: #e4f0d5;
-  --warning: #a64e2a;
-  --warning-soft: #f5e3df;
-  --danger: #a64e2a;
-  --danger-soft: #f5e3df;
-  --shadow-sm: none;
-  --shadow: 0 1px 0 rgba(43, 27, 36, 0.1);
-  --shadow-md: 0 12px 30px rgba(43, 27, 36, 0.08);
-  --shadow-lg: 0 18px 50px rgba(43, 27, 36, 0.12);
-  --radius-sm: 2px;
-  --radius: 4px;
-  --radius-lg: 8px;
+  --bg: #F5F5F3;
+  --bg-elevated: #FDFDFD;
+  --bg-subtle: #ECEDEA;
+  --bg-hover: #E2E3DF;
+  --fg: #1A1A1A;
+  --fg-muted: #4A4A4A;
+  --fg-subtle: #888888;
+  --border: rgba(26, 26, 26, 0.07);
+  --border-subtle: rgba(26, 26, 26, 0.04);
+  --border-strong: rgba(26, 26, 26, 0.12);
+  --accent: #155E5E;
+  --accent-hover: #0F4A4A;
+  --accent-soft: rgba(21, 94, 94, 0.08);
+  --accent-muted: rgba(21, 94, 94, 0.15);
+  --success: #27A644;
+  --success-soft: rgba(39, 166, 68, 0.08);
+  --warning: #E88D2A;
+  --warning-soft: rgba(232, 141, 42, 0.08);
+  --danger: #C0392B;
+  --danger-soft: rgba(192, 57, 43, 0.08);
+  --shadow-sm: 0 1px 2px rgba(26,26,26,.03), 0 1px 1px rgba(26,26,26,.02);
+  --shadow: 0 1px 3px rgba(26,26,26,.04), 0 1px 2px rgba(26,26,26,.02);
+  --shadow-md: 0 4px 8px rgba(26,26,26,.05), 0 2px 4px rgba(26,26,26,.03);
+  --shadow-lg: 0 10px 20px rgba(26,26,26,.06), 0 4px 6px rgba(26,26,26,.04);
+  --radius-sm: 3px;
+  --radius: 6px;
+  --radius-lg: 10px;
 }
 
 .dark {
-  --bg: #1d1b1b;
-  --bg-elevated: #2b1b24;
-  --bg-subtle: #30242a;
-  --bg-hover: #4a3038;
-  --fg: #f9efed;
-  --fg-muted: #e3a99b;
-  --fg-subtle: #bc82f3;
-  --border: rgba(249, 239, 237, 0.18);
-  --border-subtle: rgba(249, 239, 237, 0.1);
-  --border-strong: rgba(249, 239, 237, 0.32);
-  --accent: #e3a99b;
-  --accent-hover: #f5b9ea;
-  --accent-soft: #4a3038;
-  --accent-muted: #da8c79;
+  --bg: #111312;
+  --bg-elevated: #1A1D1B;
+  --bg-subtle: #1E2120;
+  --bg-hover: #282B29;
+  --fg: #EDEDEB;
+  --fg-muted: #9B9B95;
+  --fg-subtle: #6B6B66;
+  --border: rgba(237, 237, 235, 0.08);
+  --border-subtle: rgba(237, 237, 235, 0.04);
+  --border-strong: rgba(237, 237, 235, 0.14);
+  --accent: #1A8A8A;
+  --accent-hover: #2AA0A0;
+  --accent-soft: rgba(26, 138, 138, 0.12);
+  --accent-muted: rgba(26, 138, 138, 0.2);
+  --success: #34D399;
+  --success-soft: rgba(52, 211, 153, 0.12);
+  --warning: #FBBF24;
+  --warning-soft: rgba(251, 191, 36, 0.12);
+  --danger: #F87171;
+  --danger-soft: rgba(248, 113, 113, 0.12);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,.2), 0 1px 1px rgba(0,0,0,.1);
+  --shadow: 0 1px 3px rgba(0,0,0,.3), 0 1px 2px rgba(0,0,0,.15);
+  --shadow-md: 0 4px 8px rgba(0,0,0,.35), 0 2px 4px rgba(0,0,0,.2);
+  --shadow-lg: 0 10px 20px rgba(0,0,0,.4), 0 4px 6px rgba(0,0,0,.25);
 }
 
 html, body { background: var(--bg); color: var(--fg); }
-body { font-family: var(--font-inter), Geist, Inter, system-ui, sans-serif; }
-h1, h2, h3, h4 { font-family: Georgia, 'Times New Roman', serif; letter-spacing: -0.025em; }
+body { font-family: var(--font-inter), 'Space Grotesk', system-ui, sans-serif; }
+h1, h2, h3, h4 { font-family: var(--font-inter), 'Space Grotesk', sans-serif; letter-spacing: -0.02em; font-weight: 500; }
 
-/* Make the product shell feel like a Searchable-style command centre. */
+/* IntellaIQ shell — clean, editorial, premium */
 main.bg-th-bg { background: var(--bg) !important; }
-header.bg-th-card { background: var(--bg-elevated) !important; border-color: var(--border) !important; }
+header.bg-th-card { background: var(--bg-elevated) !important; border-color: var(--border) !important; border-bottom: 1px solid var(--border) !important; }
 aside.bg-th-sidebar,
-aside { background: #2b1b24 !important; border-color: rgba(249,239,237,.18) !important; color: #f9efed; }
+aside { background: #1A1D1B !important; border-color: rgba(237,237,235,.08) !important; color: #EDEDEB; }
 aside .text-th-text,
-aside .text-th-text-secondary { color: #f9efed !important; }
-aside .text-th-text-muted { color: #e3a99b !important; }
-aside .text-th-text-accent { color: #e3a99b !important; }
-aside button { border-radius: 2px !important; }
-aside button:hover { background: rgba(249,239,237,.1) !important; color: #fffaf8 !important; }
-aside .bg-th-accent-soft { background: rgba(193,95,60,.26) !important; }
-aside a { border-radius: 4px !important; }
+aside .text-th-text-secondary { color: #EDEDEB !important; }
+aside .text-th-text-muted { color: #9B9B95 !important; }
+aside .text-th-text-accent { color: #1A8A8A !important; }
+aside button { border-radius: 4px !important; }
+aside button:hover { background: rgba(237,237,235,.06) !important; color: #EDEDEB !important; }
+aside .bg-th-accent-soft { background: rgba(26,138,138,.15) !important; }
 
-/* Replace soft SaaS cards with thin editorial panels. */
-.rounded-xl, .rounded-lg, .rounded-md { border-radius: 4px !important; }
-.shadow-sm, .shadow, .shadow-md, .shadow-lg { box-shadow: none !important; }
+/* Thin borders, clean radius, purposeful shadows */
+.rounded-xl, .rounded-lg, .rounded-md { border-radius: 6px !important; }
 .border-th-border { border-color: var(--border) !important; }
 .bg-th-card, .bg-th-card-alt { background: var(--bg-elevated) !important; }
-.bg-th-card-alt { background: rgba(255,250,248,.52) !important; }
 .bg-th-accent { background: var(--accent) !important; }
 .text-th-text-accent, .text-th-accent { color: var(--accent) !important; }
 .bg-th-accent-soft { background: var(--accent-soft) !important; }
 
-/* Editorial section markers and active controls. */
-.uppercase { letter-spacing: .14em; }
-button, input, select, textarea { border-radius: 3px !important; }
-button.bg-th-accent, .bd-btn-primary { background: var(--accent) !important; color: #fffaf8 !important; }
+/* Buttons — clean, minimal */
+button, input, select, textarea { border-radius: 4px !important; }
+button.bg-th-accent, .bd-btn-primary { background: var(--accent) !important; color: #EDEDEB !important; }
 button.bg-th-accent:hover, .bd-btn-primary:hover { background: var(--accent-hover) !important; }
 
 @media (max-width: 768px) {

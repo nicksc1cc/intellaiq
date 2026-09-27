@@ -15,8 +15,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "GEO/AEO Tracker",
-  description: "BYOK AEO/GEO intelligence dashboard with local-first persistence",
+  title: "IntellaIQ — AI Visibility Intelligence",
+  description:
+    "Track your brand's AI visibility across ChatGPT, Perplexity, Gemini, Copilot and Google AI Mode.",
 };
 
 /** Inline script to apply theme before first paint — prevents flash */
@@ -31,6 +32,16 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link
+          rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossOrigin="anonymous"
+        />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+          rel="stylesheet"
+        />
       </head>
       <body
         suppressHydrationWarning
