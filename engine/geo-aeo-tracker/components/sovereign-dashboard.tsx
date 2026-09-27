@@ -1639,7 +1639,11 @@ ${exampleJson}`,
   }
 
   function renderActiveTab() {
-    if (activeTab === "Project Settings") {
+    // Resolve new tab names to legacy component names
+    const resolved = resolveComponent(activeTab);
+    const tab = resolved;
+
+    if (tab === "Project Settings") {
       return (
         <ProjectSettingsTab
           brand={state.brand}
@@ -1654,7 +1658,7 @@ ${exampleJson}`,
       );
     }
 
-    if (activeTab === "Prompt Hub") {
+    if (tab === "Prompt Hub") {
       return (
         <PromptHubTab
           customPrompts={state.customPrompts}
@@ -1670,7 +1674,7 @@ ${exampleJson}`,
       );
     }
 
-    if (activeTab === "Persona Fan-Out") {
+    if (tab === "Persona Fan-Out") {
       return (
         <FanOutTab
           prompt={state.prompt}
@@ -1689,7 +1693,7 @@ ${exampleJson}`,
       );
     }
 
-    if (activeTab === "Niche Explorer") {
+    if (tab === "Niche Explorer") {
       return (
         <NicheExplorerTab
           niche={state.niche}
@@ -1704,7 +1708,7 @@ ${exampleJson}`,
       );
     }
 
-    if (activeTab === "Automation") {
+    if (tab === "Automation") {
       return (
         <AutomationTab
           scheduleEnabled={state.scheduleEnabled}
@@ -1725,7 +1729,7 @@ ${exampleJson}`,
       );
     }
 
-    if (activeTab === "Competitor Battlecards") {
+    if (tab === "Competitor Battlecards") {
       return (
         <BattlecardsTab
           competitors={state.competitors}
@@ -1738,7 +1742,7 @@ ${exampleJson}`,
       );
     }
 
-    if (activeTab === "Responses") {
+    if (tab === "Responses") {
       return (
         <ReputationSourcesTab
           runs={state.runs}
@@ -1750,13 +1754,13 @@ ${exampleJson}`,
       );
     }
 
-    if (activeTab === "Visibility Analytics") {
+    if (tab === "Visibility Analytics") {
       return (
         <VisibilityAnalyticsTab data={visibilityTrend} runs={state.runs} />
       );
     }
 
-    if (activeTab === "Citations") {
+    if (tab === "Citations") {
       return (
         <PartnerDiscoveryTab
           partnerLeaderboard={partnerLeaderboard}
@@ -1765,7 +1769,7 @@ ${exampleJson}`,
       );
     }
 
-    if (activeTab === "Citation Opportunities") {
+    if (tab === "Citation Opportunities") {
       return (
         <CitationOpportunitiesTab
           runs={state.runs}
@@ -1774,11 +1778,11 @@ ${exampleJson}`,
       );
     }
 
-    if (activeTab === "SRO Analysis") {
+    if (tab === "SRO Analysis") {
       return null; // rendered persistently below to preserve state
     }
 
-    if (activeTab === "Documentation") {
+    if (tab === "Documentation") {
       return <DocumentationTab />;
     }
 
