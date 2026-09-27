@@ -68,6 +68,70 @@ function Icon({ children }: { children: ReactNode }) {
 }
 
 const tabIcons: Record<TabKey, ReactNode> = {
+  "Overview": (
+    <Icon>
+      <rect width="18" height="18" x="3" y="3" rx="2" />
+      <path d="M3 9h18M9 21V9" />
+    </Icon>
+  ),
+  Prompts: (
+    <Icon>
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+    </Icon>
+  ),
+  Responses: (
+    <Icon>
+      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+      <path d="M8 9h8M8 13h6" />
+    </Icon>
+  ),
+  Citations: (
+    <Icon>
+      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+    </Icon>
+  ),
+  Competitors: (
+    <Icon>
+      <rect width="7" height="9" x="3" y="3" rx="1" />
+      <rect width="7" height="5" x="14" y="3" rx="1" />
+      <rect width="7" height="9" x="14" y="12" rx="1" />
+      <rect width="7" height="5" x="3" y="16" rx="1" />
+    </Icon>
+  ),
+  Visibility: (
+    <Icon>
+      <path d="M3 3v18h18" />
+      <path d="m19 9-5 5-4-4-3 3" />
+    </Icon>
+  ),
+  Opportunities: (
+    <Icon>
+      <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
+      <path d="M9 18h6" />
+      <path d="M10 22h4" />
+    </Icon>
+  ),
+  Analytics: (
+    <Icon>
+      <path d="M18 20V10" />
+      <path d="M12 20V4" />
+      <path d="M6 20v-4" />
+    </Icon>
+  ),
+  "Sources & Models": (
+    <Icon>
+      <circle cx="12" cy="12" r="3" />
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+    </Icon>
+  ),
+  Settings: (
+    <Icon>
+      <circle cx="12" cy="12" r="3" />
+      <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+    </Icon>
+  ),
+
   "Project Settings": (
     <Icon>
       <circle cx="12" cy="12" r="3" />
@@ -93,44 +157,9 @@ const tabIcons: Record<TabKey, ReactNode> = {
       <path d="m21 21-4.3-4.3" />
     </Icon>
   ),
-  Automation: (
-    <Icon>
-      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
-    </Icon>
-  ),
-  "Competitor Battlecards": (
-    <Icon>
-      <rect width="7" height="9" x="3" y="3" rx="1" />
-      <rect width="7" height="5" x="14" y="3" rx="1" />
-      <rect width="7" height="9" x="14" y="12" rx="1" />
-      <rect width="7" height="5" x="3" y="16" rx="1" />
-    </Icon>
-  ),
-  Responses: (
-    <Icon>
-      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
-      <path d="M8 9h8M8 13h6" />
-    </Icon>
-  ),
-  "Visibility Analytics": (
-    <Icon>
-      <path d="M3 3v18h18" />
-      <path d="m19 9-5 5-4-4-3 3" />
-    </Icon>
-  ),
-  Citations: (
-    <Icon>
-      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
-      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
-    </Icon>
-  ),
-  "Citation Opportunities": (
-    <Icon>
-      <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5" />
-      <path d="M9 18h6" />
-      <path d="M10 22h4" />
-    </Icon>
-  ),
+  "Visibility Analytics": ("Visibility" as any),
+  "Citation Opportunities": ("Opportunities" as any),
+  "Competitor Battlecards": ("Competitors" as any),
   "AEO Audit": (
     <Icon>
       <path d="M9 11l3 3L22 4" />
@@ -144,6 +173,11 @@ const tabIcons: Record<TabKey, ReactNode> = {
       <path d="M6 20v-4" />
     </Icon>
   ),
+  Automation: (
+    <Icon>
+      <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83" />
+    </Icon>
+  ),
   Documentation: (
     <Icon>
       <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
@@ -153,6 +187,39 @@ const tabIcons: Record<TabKey, ReactNode> = {
   ),
 };
 
+const navSections = [
+  {
+    label: "WORKSPACE",
+    items: ["Overview"],
+  },
+  {
+    label: "INTELLIGENCE",
+    items: ["Prompts", "Responses", "Citations", "Competitors"],
+  },
+  {
+    label: "ANALYSIS",
+    items: ["Visibility", "Opportunities", "Analytics"],
+  },
+  {
+    label: "CONFIGURATION",
+    items: ["Sources & Models", "Settings"],
+  },
+] as const;
+
+/** Map new tab names to legacy component implementations. */
+function resolveComponent(tab: TabKey): TabKey {
+  const map: Record<string, TabKey> = {
+    Overview: "Visibility Analytics",
+    Prompts: "Prompt Hub",
+    Competitors: "Competitor Battlecards",
+    Visibility: "Visibility Analytics",
+    Opportunities: "Citation Opportunities",
+    Analytics: "Visibility Analytics",
+    "Sources & Models": "Project Settings",
+    Settings: "Project Settings",
+  };
+  return map[tab] || tab;
+}
 const STORAGE_KEY = "sovereign-aeo-tracker-v1";
 const WORKSPACES_KEY = "sovereign-workspaces";
 const ACTIVE_WS_KEY = "sovereign-active-workspace";
@@ -288,14 +355,54 @@ const tabMeta: Record<
     tooltip: "Learn about every feature in the tracker.",
     details:
       "A comprehensive guide to all tabs, features, scoring methodology, supported models, and data privacy. Searchable and browsable.",
+  },  Overview: {
+    title: "Overview",
+    tooltip: "Brand visibility overview across AI models",
+    details: "AI visibility at a glance",
   },
+  Prompts: {
+    title: "Prompts",
+    tooltip: "Manage and run tracking prompts",
+    details: "Tracking questions across AI models",
+  },
+  Competitors: {
+    title: "Competitors",
+    tooltip: "Compare brand visibility against competitors",
+    details: "Competitive AI intelligence",
+  },
+  Visibility: {
+    title: "Visibility",
+    tooltip: "Track brand visibility metrics across models",
+    details: "Brand mention and citation analysis",
+  },
+  Opportunities: {
+    title: "Opportunities",
+    tooltip: "Citation opportunities and content gaps",
+    details: "Uncover gaps in AI visibility",
+  },
+  Analytics: {
+    title: "Analytics",
+    tooltip: "Detailed visibility trends and comparisons",
+    details: "Deep investigation layer",
+  },
+  "Sources & Models": {
+    title: "Sources & Models",
+    tooltip: "Connected sources, AEO audit, and model configuration",
+    details: "Manage data sources and AI models",
+  },
+  Settings: {
+    title: "Settings",
+    tooltip: "Brand, prompts, scheduling, and data management",
+    details: "Workspace configuration",
+  },
+
 };
 
 export function SovereignDashboard({
   demoMode = false,
   demoReason = "explicit",
 }: { demoMode?: boolean; demoReason?: "explicit" | "no-key" } = {}) {
-  const [activeTab, setActiveTab] = useState<TabKey>("Visibility Analytics");
+  const [activeTab, setActiveTab] = useState<TabKey>("Overview");
   const [state, setState] = useState<AppState>(
     demoMode ? DEMO_STATE : defaultState,
   );
@@ -1795,60 +1902,47 @@ ${exampleJson}`,
 
         {/* Nav */}
         <nav className="flex-1 overflow-y-auto px-2 py-2">
-          {tabs.map((tab) => {
-            const active = activeTab === tab;
-            const isSettings = tab === "Project Settings";
-            return (
-              <div key={tab}>
-                {isSettings && (
-                  <div className="mb-1 px-2 text-xs font-medium uppercase tracking-wider text-th-text-muted">
-                    Setup
-                  </div>
-                )}
-                <button
-                  title={tabMeta[tab].tooltip}
-                  onClick={() => {
-                    setActiveTab(tab);
-                    setSidebarOpen(false);
-                  }}
-                  className={`group mb-0.5 flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-sm transition-colors ${
-                    active
-                      ? "bg-th-accent-soft text-th-text font-medium"
-                      : "text-th-text-secondary hover:bg-th-card-hover hover:text-th-text"
-                  }`}
-                  style={
-                    active
-                      ? { boxShadow: "inset 3px 0 0 var(--th-accent)" }
-                      : undefined
-                  }
-                >
-                  <span
-                    className={
-                      active
-                        ? "text-th-text-accent"
-                        : "text-th-text-muted group-hover:text-th-text-secondary"
-                    }
-                  >
-                    {tabIcons[tab]}
-                  </span>
-                  {tabMeta[tab].title}
-                  {tab === "Automation" && unreadAlertCount > 0 && (
-                    <span className="ml-auto rounded-full bg-th-danger px-1.5 py-0.5 text-[10px] font-bold leading-none text-white">
-                      {unreadAlertCount}
-                    </span>
-                  )}
-                </button>
-                {isSettings && (
-                  <div className="mb-1 mt-2 border-t border-th-border pt-2 px-2 text-xs font-medium uppercase tracking-wider text-th-text-muted">
-                    Pillars
-                  </div>
-                )}
+          {navSections.map((section) => (
+            <div key={section.label} className="mb-3">
+              <div className="mb-1 px-3 text-[10px] font-semibold uppercase tracking-[0.12em] text-th-text-muted">
+                {section.label}
               </div>
-            );
-          })}
+              {section.items.map((tab) => {
+                const active = activeTab === tab;
+                const compTab = resolveComponent(tab);
+                return (
+                  <button
+                    key={tab}
+                    onClick={() => {
+                      setActiveTab(tab as TabKey);
+                      setSidebarOpen(false);
+                    }}
+                    className={`mb-0.5 flex w-full items-center gap-2.5 rounded-md px-3 py-2 text-left text-sm transition-all ${
+                      active
+                        ? "bg-th-accent-soft text-th-text font-medium shadow-[inset_3px_0_0_var(--th-accent)]"
+                        : "text-th-text-secondary hover:bg-th-card-hover hover:text-th-text"
+                    }`}
+                  >
+                    <span
+                      className={`shrink-0 ${
+                        active ? "text-th-accent" : "text-th-text-muted"
+                      }`}
+                    >
+                      {tabIcons[tab]}
+                    </span>
+                    <span>{tabMeta[tab]?.title || tab}</span>
+                  </button>
+                );
+              })}
+            </div>
+          ))}
+          <div className="mt-auto border-t border-th-border/50 pt-3 px-3 pb-1">
+            <div className="flex items-center gap-2 text-xs text-th-text-muted">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-th-success" />
+              {demoMode ? "Read-only demo" : `${workspaces.length} workspace${workspaces.length > 1 ? "s" : ""}`}
+            </div>
+          </div>{/* Bright Data CTA */}
         </nav>
-
-        {/* Bright Data CTA */}
         <div className="border-t border-th-border px-3 py-3">
           <a
             href="https://brightdata.com/?utm_source=geo-tracker-os"

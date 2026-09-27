@@ -194,13 +194,22 @@ export type AppState = {
 };
 
 export const tabs = [
+  "Overview",
+  "Prompts",
+  "Responses",
+  "Citations",
+  "Competitors",
+  "Visibility",
+  "Opportunities",
+  "Analytics",
+  "Sources & Models",
+  "Settings",
+  // Legacy tab keys — kept for backward compatibility with state/components
   "Project Settings",
   "Prompt Hub",
   "Persona Fan-Out",
   "Niche Explorer",
-  "Responses",
   "Visibility Analytics",
-  "Citations",
   "Citation Opportunities",
   "Competitor Battlecards",
   "AEO Audit",
