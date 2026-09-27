@@ -19,7 +19,7 @@
   --fg-muted: #5c5c57;
   --fg-subtle: #8c8c86;
 
-  --border: rgba(26, 26, 24, 0.10);
+  --border: rgba(26, 26, 24, 0.14);
   --border-subtle: rgba(26, 26, 24, 0.05);
   --border-strong: rgba(26, 26, 24, 0.18);
 
@@ -102,7 +102,7 @@
   --fg-muted: #969690;
   --fg-subtle: #6b6b65;
 
-  --border: rgba(232, 232, 228, 0.10);
+  --border: rgba(232, 232, 228, 0.14);
   --border-subtle: rgba(232, 232, 228, 0.05);
   --border-strong: rgba(232, 232, 228, 0.18);
 
@@ -738,3 +738,21 @@ aside button:hover { background: rgba(232, 232, 228, 0.06) !important; color: #e
 
 /* ─── Thin separator for light/dark variant on sidebar ─── */
 .dark aside.bg-th-sidebar { background: #1b1d1b !important; }
+
+/* ─── Card panel — clear content separation ─── */
+.card-panel {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: var(--space-5);
+}
+.card-panel + .card-panel { margin-top: var(--space-4); }
+.card-panel h3 {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--fg-muted);
+  margin: 0 0 var(--space-3);
+}
